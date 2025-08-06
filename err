@@ -1,0 +1,5 @@
+main.js:611 🎉 Python知识体系文档已加载完成
+search.js:568 🔍 搜索功能已初始化
+search.js:27  GET https://liberalchang.github.io/search.json 404 (Not Found)
+loadSearchIndex @ search.js:27
+

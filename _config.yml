@@ -2,7 +2,7 @@
 title: Python知识体系文档
 description: 系统化整理Python知识体系的开源项目
 baseurl: "/PythonModelBook"
-url: "https://username.github.io"
+url: "https://liberalchang.github.io"
 
 # 构建设置
 markdown: kramdown
