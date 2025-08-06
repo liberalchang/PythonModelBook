@@ -1,0 +1,52 @@
+# Jekyll配置文件
+title: Python知识体系文档
+description: 系统化整理Python知识体系的开源项目
+baseurl: "/PythonModelBook"
+url: "https://username.github.io"
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# 排除文件
+exclude:
+  - .trae/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+
+# 集合配置
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# 默认值
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "doc"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# 搜索功能
+search_enabled: true
+
+# 导航菜单
+header_pages:
+  - index.md
+  - docs/index.md
+  - about.md
