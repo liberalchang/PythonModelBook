@@ -17,30 +17,30 @@ title: Python知识体系文档
 ## 📚 文档目录
 
 ### [基础语法](docs/basics/)
-- [变量与数据类型](docs/basics/variables.md)
-- [控制流程](docs/basics/control-flow.md)
-- [函数定义](docs/basics/functions.md)
-- [类与对象](docs/basics/classes.md)
-- [异常处理](docs/basics/exceptions.md)
+- [变量与数据类型](docs/basics/variables/)
+- [控制流程](docs/basics/control-flow/)
+- [函数定义](docs/basics/functions/)
+- [类与对象](docs/basics/classes/)
+- [异常处理](docs/basics/exceptions/)
 
 ### [内置函数](docs/builtins/)
-- [字符串函数](docs/builtins/string-functions.md)
-- [数学函数](docs/builtins/math-functions.md)
-- [集合函数](docs/builtins/collection-functions.md)
-- [输入输出函数](docs/builtins/io-functions.md)
+- [字符串函数](docs/builtins/string-functions/)
+- [数学函数](docs/builtins/math-functions/)
+- [集合函数](docs/builtins/collection-functions/)
+- [输入输出函数](docs/builtins/io-functions/)
 
 ### [标准库](docs/stdlib/)
-- [文件操作](docs/stdlib/file-operations.md)
-- [日期时间](docs/stdlib/datetime.md)
-- [正则表达式](docs/stdlib/regex.md)
-- [网络编程](docs/stdlib/networking.md)
-- [数据库操作](docs/stdlib/database.md)
+- [文件操作](docs/stdlib/file-operations/)
+- [日期时间](docs/stdlib/datetime/)
+- [正则表达式](docs/stdlib/regex/)
+- [网络编程](docs/stdlib/networking/)
+- [数据库操作](docs/stdlib/database/)
 
 ### [第三方库](docs/thirdparty/)
-- [数据分析](docs/thirdparty/data-analysis.md)
-- [Web开发](docs/thirdparty/web-development.md)
-- [机器学习](docs/thirdparty/machine-learning.md)
-- [图像处理](docs/thirdparty/image-processing.md)
+- [数据分析](docs/thirdparty/data-analysis/)
+- [Web开发](docs/thirdparty/web-development/)
+- [机器学习](docs/thirdparty/machine-learning/)
+- [图像处理](docs/thirdparty/image-processing/)
 
 ## 🔍 搜索功能
 

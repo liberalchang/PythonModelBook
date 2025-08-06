@@ -24,7 +24,7 @@ class SearchManager {
       this.isLoading = true;
       
       // 加载文档数据
-      const response = await fetch('/search.json');
+      const response = await fetch('/PythonModelBook/search.json');
       if (!response.ok) {
         // 如果没有搜索索引文件，创建一个基本的文档列表
         this.documents = this.createBasicDocuments();

@@ -11,33 +11,33 @@ Python基础语法是学习Python编程的起点，本模块涵盖了Python语�
 
 ## 📋 本模块内容
 
-### [变量与数据类型](variables.md)
+### [变量与数据类型](variables/)
 - 变量的定义和命名规则
 - 基本数据类型：数字、字符串、布尔值
 - 复合数据类型：列表、元组、字典、集合
 - 类型转换和类型检查
 
-### [控制流程](control-flow.md)
+### [控制流程](control-flow/)
 - 条件语句：if、elif、else
 - 循环结构：for、while
 - 循环控制：break、continue、pass
 - 条件表达式和循环推导式
 
-### [函数定义](functions.md)
+### [函数定义](functions/)
 - 函数的定义和调用
 - 参数传递：位置参数、关键字参数、默认参数
 - 可变参数：*args、**kwargs
 - 函数作用域和闭包
 - Lambda表达式
 
-### [类与对象](classes.md)
+### [类与对象](classes/)
 - 类的定义和实例化
 - 属性和方法
 - 继承和多态
 - 特殊方法（魔术方法）
 - 属性装饰器
 
-### [异常处理](exceptions.md)
+### [异常处理](exceptions/)
 - 异常的概念和类型
 - try、except、else、finally语句
 - 抛出异常：raise语句

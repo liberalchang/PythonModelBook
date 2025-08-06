@@ -55,33 +55,33 @@ PythonModelBook/
 
 ### 🔤 [基础语法](docs/basics/)
 Python语言的核心语法和基本概念
-- [变量与数据类型](docs/basics/variables.md) - 变量定义、基本数据类型、类型转换
-- [控制流程](docs/basics/control-flow.md) - 条件语句、循环结构、流程控制
-- [函数定义](docs/basics/functions.md) - 函数定义、参数传递、作用域、闭包
-- [类与对象](docs/basics/classes.md) - 面向对象编程、继承、多态
-- [异常处理](docs/basics/exceptions.md) - 异常捕获、处理机制、自定义异常
+- [变量与数据类型](docs/basics/variables/) - 变量定义、基本数据类型、类型转换
+- [控制流程](docs/basics/control-flow/) - 条件语句、循环结构、流程控制
+- [函数定义](docs/basics/functions/) - 函数定义、参数传递、作用域、闭包
+- [类与对象](docs/basics/classes/) - 面向对象编程、继承、多态
+- [异常处理](docs/basics/exceptions/) - 异常捕获、处理机制、自定义异常
 
 ### ⚙️ [内置函数](docs/builtins/)
 Python解释器内置的函数和方法
-- [字符串函数](docs/builtins/string-functions.md) - 字符串操作、格式化、编码
-- [数学函数](docs/builtins/math-functions.md) - 数值计算、类型转换、比较
-- [集合函数](docs/builtins/collection-functions.md) - 列表、字典、集合操作
-- [输入输出函数](docs/builtins/io-functions.md) - 标准输入输出、文件操作
+- [字符串函数](docs/builtins/string-functions/) - 字符串操作、格式化、编码
+- [数学函数](docs/builtins/math-functions/) - 数值计算、类型转换、比较
+- [集合函数](docs/builtins/collection-functions/) - 列表、字典、集合操作
+- [输入输出函数](docs/builtins/io-functions/) - 标准输入输出、文件操作
 
 ### 📦 [标准库](docs/stdlib/)
 Python标准库中的重要模块
-- [文件操作](docs/stdlib/file-operations.md) - os、pathlib、shutil模块
-- [日期时间](docs/stdlib/datetime.md) - datetime、time、calendar模块
-- [正则表达式](docs/stdlib/regex.md) - re模块、模式匹配
-- [网络编程](docs/stdlib/networking.md) - urllib、http、socket模块
-- [数据库操作](docs/stdlib/database.md) - sqlite3模块、数据库设计
+- [文件操作](docs/stdlib/file-operations/) - os、pathlib、shutil模块
+- [日期时间](docs/stdlib/datetime/) - datetime、time、calendar模块
+- [正则表达式](docs/stdlib/regex/) - re模块、模式匹配
+- [网络编程](docs/stdlib/networking/) - urllib、http、socket模块
+- [数据库操作](docs/stdlib/database/) - sqlite3模块、数据库设计
 
 ### 🚀 [第三方库](docs/thirdparty/)
 流行的第三方库和框架
-- [数据分析](docs/thirdparty/data-analysis.md) - NumPy、Pandas、Matplotlib
-- [Web开发](docs/thirdparty/web-development.md) - Django、Flask、FastAPI
-- [机器学习](docs/thirdparty/machine-learning.md) - Scikit-learn、TensorFlow、PyTorch
-- [图像处理](docs/thirdparty/image-processing.md) - Pillow、OpenCV
+- [数据分析](docs/thirdparty/data-analysis/) - NumPy、Pandas、Matplotlib
+- [Web开发](docs/thirdparty/web-development/) - Django、Flask、FastAPI
+- [机器学习](docs/thirdparty/machine-learning/) - Scikit-learn、TensorFlow、PyTorch
+- [图像处理](docs/thirdparty/image-processing/) - Pillow、OpenCV
 
 ## 🎯 项目特色
 

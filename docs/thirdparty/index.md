@@ -11,7 +11,7 @@ Python拥有丰富的第三方库生态系统，这些库极大地扩展了Pytho
 
 ## 📋 本模块内容
 
-### [数据分析](data-analysis.md)
+### [数据分析](data-analysis/)
 - **NumPy**: 数值计算基础库
 - **Pandas**: 数据分析和操作
 - **Matplotlib**: 数据可视化
@@ -19,7 +19,7 @@ Python拥有丰富的第三方库生态系统，这些库极大地扩展了Pytho
 - **SciPy**: 科学计算库
 - **Plotly**: 交互式可视化
 
-### [Web开发](web-development.md)
+### [Web开发](web-development/)
 - **Django**: 全功能Web框架
 - **Flask**: 轻量级Web框架
 - **FastAPI**: 现代高性能API框架
@@ -27,7 +27,7 @@ Python拥有丰富的第三方库生态系统，这些库极大地扩展了Pytho
 - **BeautifulSoup**: HTML/XML解析
 - **Scrapy**: 网络爬虫框架
 
-### [机器学习](machine-learning.md)
+### [机器学习](machine-learning/)
 - **Scikit-learn**: 机器学习库
 - **TensorFlow**: 深度学习框架
 - **PyTorch**: 深度学习框架
@@ -35,7 +35,7 @@ Python拥有丰富的第三方库生态系统，这些库极大地扩展了Pytho
 - **XGBoost**: 梯度提升框架
 - **OpenCV**: 计算机视觉库
 
-### [图像处理](image-processing.md)
+### [图像处理](image-processing/)
 - **Pillow (PIL)**: 图像处理库
 - **OpenCV**: 计算机视觉和图像处理
 - **scikit-image**: 图像处理算法
