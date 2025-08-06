@@ -209,3 +209,5 @@ __marimo__/
 
 # user
 .trae
+image/
+tmp/

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>文档目录 - Python知识体系文档</title>
   <meta name="description" content="系统化整理Python知识体系的开源项目">
-  
+
   <!-- SEO标签 -->
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>文档目录 | Python知识体系文档</title>
@@ -24,21 +25,22 @@
 {"@context":"https://schema.org","@type":"WebPage","description":"系统化整理Python知识体系的开源项目","headline":"文档目录","url":"http://0.0.0.0:4000/PythonModelBook/docs/"}</script>
 <!-- End Jekyll SEO tag -->
 
-  
+
   <!-- 样式文件 -->
   <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
   <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
   <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
-  
+
   <!-- 字体 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- 图标 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
+
   <!-- 搜索功能 -->
   <script src="https://unpkg.com/lunr/lunr.js"></script>
 </head>
+
 <body>
   <!-- 导航栏 -->
   <nav class="navbar">
@@ -49,7 +51,7 @@
           <span>Python知识体系文档</span>
         </a>
       </div>
-      
+
       <!-- 搜索框 -->
       <div class="nav-search">
         <div class="search-container">
@@ -58,7 +60,7 @@
           <div id="search-results" class="search-results"></div>
         </div>
       </div>
-      
+
       <!-- 导航菜单 -->
       <div class="nav-menu">
         <a href="/PythonModelBook/" class="nav-link">首页</a>
@@ -68,7 +70,7 @@
           <i class="fas fa-moon"></i>
         </button>
       </div>
-      
+
       <!-- 移动端菜单按钮 -->
       <button class="mobile-menu-btn" id="mobile-menu-btn">
         <span></span>
@@ -77,7 +79,7 @@
       </button>
     </div>
   </nav>
-  
+
   <!-- 主要内容 -->
   <main class="main-content">
     <div class="page-container">
@@ -102,325 +104,82 @@
   <!-- 页面内容 -->
   <main class="page-content">
     <article class="page-article">
-      <div class="docs-hero">
-  <div class="hero-content">
-    <h1><i class="fas fa-book-open"></i> Python知识体系文档目录</h1>
-    <p class="hero-description">系统化的Python学习资源，从基础语法到高级应用，助力你的编程之旅</p>
-  </div>
-</div>
+      <h1 id="python-文档目录">Python 文档目录</h1>
 
-<!-- 学习路径图 -->
-<div class="learning-path">
-  <h2><i class="fas fa-route"></i> 学习路径图</h2>
-  <div class="path-container">
-    <div class="path-step" data-step="1">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <h3>基础语法</h3>
-        <p>掌握Python基本语法和编程概念</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="2">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <h3>内置函数</h3>
-        <p>熟悉Python内置函数的使用</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="3">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <h3>标准库</h3>
-        <p>学习常用标准库模块</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="4">
-      <div class="step-number">4</div>
-      <div class="step-content">
-        <h3>第三方库</h3>
-        <p>探索流行的第三方库和框架</p>
-      </div>
-    </div>
-  </div>
-</div>
+<p>欢迎来到 Python 知识体系文档。本文档按照学习难度和主题分类，帮助你系统地掌握 Python 编程。</p>
 
-<!-- 难度筛选器 -->
-<div class="difficulty-filter">
-  <h3><i class="fas fa-filter"></i> 按难度筛选</h3>
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-difficulty="all">全部</button>
-    <button class="filter-btn" data-difficulty="beginner">初级</button>
-    <button class="filter-btn" data-difficulty="intermediate">中级</button>
-    <button class="filter-btn" data-difficulty="advanced">高级</button>
-  </div>
-</div>
+<h2 id="-文档分类">📚 文档分类</h2>
 
-<!-- 文档卡片网格 -->
-<div class="docs-grid">
-  <h2><i class="fas fa-th-large"></i> 文档分类</h2>
-  
-  <!-- 基础语法模块 -->
-  <div class="module-section" data-difficulty="beginner">
-    <div class="module-header">
-      <h3><i class="fas fa-code"></i> 基础语法</h3>
-      <p>Python语言的核心语法和基本概念</p>
-      <span class="difficulty-badge beginner">初级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-database"></i></div>
-        <h4><a href="basics/variables.md">变量与数据类型</a></h4>
-        <p>变量定义、基本数据类型</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 30分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-route"></i></div>
-        <h4><a href="basics/control-flow.md">控制流程</a></h4>
-        <p>条件语句、循环结构</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 45分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-function"></i></div>
-        <h4><a href="basics/functions.md">函数定义</a></h4>
-        <p>函数定义、参数传递、作用域</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 60分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-object-group"></i></div>
-        <h4><a href="basics/classes.md">类与对象</a></h4>
-        <p>面向对象编程基础</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 90分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
-        <h4><a href="basics/exceptions.md">异常处理</a></h4>
-        <p>异常捕获和处理机制</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 40分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="basics/" class="view-all-btn">查看全部基础语法文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+<h3 id="-基础语法">🔤 基础语法</h3>
 
-  <!-- 内置函数模块 -->
-  <div class="module-section" data-difficulty="beginner">
-    <div class="module-header">
-      <h3><i class="fas fa-tools"></i> 内置函数</h3>
-      <p>Python解释器内置的函数和方法</p>
-      <span class="difficulty-badge beginner">初级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-font"></i></div>
-        <h4><a href="builtins/string-functions.md">字符串函数</a></h4>
-        <p>字符串操作相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 35分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-calculator"></i></div>
-        <h4><a href="builtins/math-functions.md">数学函数</a></h4>
-        <p>数值计算相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 25分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-list"></i></div>
-        <h4><a href="builtins/collection-functions.md">集合函数</a></h4>
-        <p>列表、字典、集合操作</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 50分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
-        <h4><a href="builtins/io-functions.md">输入输出函数</a></h4>
-        <p>输入输出相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 20分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="builtins/" class="view-all-btn">查看全部内置函数文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+<p>Python语言的核心语法和基本概念</p>
 
-  <!-- 标准库模块 -->
-  <div class="module-section" data-difficulty="intermediate">
-    <div class="module-header">
-      <h3><i class="fas fa-box"></i> 标准库</h3>
-      <p>Python标准库中的重要模块</p>
-      <span class="difficulty-badge intermediate">中级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-file-alt"></i></div>
-        <h4><a href="stdlib/file-operations.md">文件操作</a></h4>
-        <p>文件读写、路径操作</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 45分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h4><a href="stdlib/datetime.md">日期时间</a></h4>
-        <p>日期时间处理</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 35分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-search"></i></div>
-        <h4><a href="stdlib/regex.md">正则表达式</a></h4>
-        <p>文本模式匹配</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 75分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-        <h4><a href="stdlib/networking.md">网络编程</a></h4>
-        <p>网络通信相关模块</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 90分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-database"></i></div>
-        <h4><a href="stdlib/database.md">数据库操作</a></h4>
-        <p>数据库连接和操作</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 60分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="stdlib/" class="view-all-btn">查看全部标准库文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+<ul>
+  <li><strong><a href="basics/variables/">变量与数据类型</a></strong> - 变量定义、基本数据类型</li>
+  <li><strong><a href="basics/control-flow/">控制流程</a></strong> - 条件语句、循环结构</li>
+  <li><strong><a href="basics/functions/">函数定义</a></strong> - 函数定义、参数传递、作用域</li>
+  <li><strong><a href="basics/classes/">类与对象</a></strong> - 面向对象编程基础</li>
+  <li><strong><a href="basics/exceptions/">异常处理</a></strong> - 异常捕获和处理机制</li>
+</ul>
 
-  <!-- 第三方库模块 -->
-  <div class="module-section" data-difficulty="advanced">
-    <div class="module-header">
-      <h3><i class="fas fa-puzzle-piece"></i> 第三方库</h3>
-      <p>流行的第三方库和框架</p>
-      <span class="difficulty-badge advanced">高级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
-        <h4><a href="thirdparty/data-analysis.md">数据分析</a></h4>
-        <p>NumPy、Pandas、Matplotlib等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 120分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-globe"></i></div>
-        <h4><a href="thirdparty/web-development.md">Web开发</a></h4>
-        <p>Django、Flask、FastAPI等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 150分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-brain"></i></div>
-        <h4><a href="thirdparty/machine-learning.md">机器学习</a></h4>
-        <p>Scikit-learn、TensorFlow、PyTorch等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 180分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-image"></i></div>
-        <h4><a href="thirdparty/image-processing.md">图像处理</a></h4>
-        <p>PIL、OpenCV等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 100分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="thirdparty/" class="view-all-btn">查看全部第三方库文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
-</div>
+<p><a href="basics/">查看全部基础语法文档 →</a></p>
 
-<!-- 使用说明和贡献指南 -->
-<div class="usage-guide">
-  <h2><i class="fas fa-info-circle"></i> 使用说明</h2>
-  <div class="guide-grid">
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-book-reader"></i></div>
-      <h3>详细文档</h3>
-      <p>每个文档都包含详细的说明、代码示例和最佳实践</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-search"></i></div>
-      <h3>智能搜索</h3>
-      <p>使用搜索功能快速定位相关内容，支持关键词和模糊匹配</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-list-ul"></i></div>
-      <h3>快速导航</h3>
-      <p>文档右侧显示当前页面的标题结构，支持快速跳转</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-comments"></i></div>
-      <h3>社区互动</h3>
-      <p>页面底部提供评论功能，欢迎交流讨论和反馈建议</p>
-    </div>
-  </div>
-</div>
+<h3 id="️-内置函数">🛠️ 内置函数</h3>
 
-<!-- 贡献指南 -->
-<div class="contribute-section">
-  <div class="contribute-content">
-    <h2><i class="fas fa-hands-helping"></i> 参与贡献</h2>
-    <p>这是一个开源项目，欢迎大家参与贡献！无论是修正错误、完善文档还是添加新内容，都非常欢迎。</p>
-    <div class="contribute-buttons">
-      <a href="/about/" class="btn btn-outline"><i class="fas fa-info"></i> 了解项目</a>
-      <a href="https://github.com/your-username/python-docs" class="btn btn-primary" target="_blank">
-        <i class="fab fa-github"></i> GitHub 仓库
-      </a>
-    </div>
-  </div>
-</div>
+<p>Python解释器内置的函数和方法</p>
+
+<ul>
+  <li><strong><a href="builtins/string-functions/">字符串函数</a></strong> - 字符串操作相关函数</li>
+  <li><strong><a href="builtins/math-functions/">数学函数</a></strong> - 数值计算相关函数</li>
+  <li><strong><a href="builtins/collection-functions/">集合函数</a></strong> - 列表、字典、集合操作</li>
+  <li><strong><a href="builtins/io-functions/">输入输出函数</a></strong> - 输入输出相关函数</li>
+</ul>
+
+<p><a href="builtins/">查看全部内置函数文档 →</a></p>
+
+<h3 id="-标准库">📦 标准库</h3>
+
+<p>Python标准库中的重要模块</p>
+
+<ul>
+  <li><strong><a href="stdlib/file-operations/">文件操作</a></strong> - 文件读写、路径操作</li>
+  <li><strong><a href="stdlib/datetime/">日期时间</a></strong> - 日期时间处理</li>
+  <li><strong><a href="stdlib/regex/">正则表达式</a></strong> - 文本模式匹配</li>
+  <li><strong><a href="stdlib/networking/">网络编程</a></strong> - 网络通信相关模块</li>
+  <li><strong><a href="stdlib/database/">数据库操作</a></strong> - 数据库连接和操作</li>
+</ul>
+
+<p><a href="stdlib/">查看全部标准库文档 →</a></p>
+
+<h3 id="-第三方库">🧩 第三方库</h3>
+
+<p>流行的第三方库和框架</p>
+
+<ul>
+  <li><strong><a href="thirdparty/data-analysis/">数据分析</a></strong> - NumPy、Pandas、Matplotlib等</li>
+  <li><strong><a href="thirdparty/web-development/">Web开发</a></strong> - Django、Flask、FastAPI等</li>
+  <li><strong><a href="thirdparty/machine-learning/">机器学习</a></strong> - Scikit-learn、TensorFlow、PyTorch等</li>
+  <li><strong><a href="thirdparty/image-processing/">图像处理</a></strong> - PIL、OpenCV等</li>
+</ul>
+
+<p><a href="thirdparty/">查看全部第三方库文档 →</a></p>
+
+<h2 id="-使用说明">📖 使用说明</h2>
+
+<ul>
+  <li><strong>详细文档</strong> - 每个文档都包含详细的说明、代码示例和最佳实践</li>
+  <li><strong>智能搜索</strong> - 使用搜索功能快速定位相关内容，支持关键词和模糊匹配</li>
+  <li><strong>快速导航</strong> - 文档右侧显示当前页面的标题结构，支持快速跳转</li>
+</ul>
+
+<h2 id="-参与贡献">🤝 参与贡献</h2>
+
+<p>这是一个开源项目，欢迎大家参与贡献！无论是修正错误、完善文档还是添加新内容，都非常欢迎。</p>
+
+<ul>
+  <li><a href="/about/">了解项目</a></li>
+  <li><a href="https://github.com/liberalchang/PythonModelBook">GitHub 仓库</a></li>
+</ul>
 
     </article>
     
@@ -680,12 +439,12 @@ document.getElementById('share-page')?.addEventListener('click', function() {
 });
 </script>
   </main>
-  
+
   <!-- 返回顶部按钮 -->
   <button id="back-to-top" class="back-to-top" title="返回顶部">
     <i class="fas fa-chevron-up"></i>
   </button>
-  
+
   <!-- 页脚 -->
   <footer class="footer">
     <div class="footer-container">
@@ -706,7 +465,7 @@ document.getElementById('share-page')?.addEventListener('click', function() {
         <div class="footer-section">
           <h4>社区</h4>
           <ul>
-            <li><a href="https://github.com/username/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
             <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
             <li><a href="/PythonModelBook/about/">关于项目</a></li>
           </ul>
@@ -717,7 +476,7 @@ document.getElementById('share-page')?.addEventListener('click', function() {
       </div>
     </div>
   </footer>
-  
+
   <!-- JavaScript -->
   <script src="/PythonModelBook/assets/js/main.js"></script>
   <script src="/PythonModelBook/assets/js/search.js"></script>
@@ -725,4 +484,5 @@ document.getElementById('share-page')?.addEventListener('click', function() {
   <script src="/PythonModelBook/assets/js/docs.js"></script>
   
 </body>
+
 </html>

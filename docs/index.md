@@ -5,322 +5,67 @@ permalink: /docs/
 show_sidebar: true
 ---
 
-<div class="docs-hero">
-  <div class="hero-content">
-    <h1><i class="fas fa-book-open"></i> Python知识体系文档目录</h1>
-    <p class="hero-description">系统化的Python学习资源，从基础语法到高级应用，助力你的编程之旅</p>
-  </div>
-</div>
+# Python 文档目录
 
-<!-- 学习路径图 -->
-<div class="learning-path">
-  <h2><i class="fas fa-route"></i> 学习路径图</h2>
-  <div class="path-container">
-    <div class="path-step" data-step="1">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <h3>基础语法</h3>
-        <p>掌握Python基本语法和编程概念</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="2">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <h3>内置函数</h3>
-        <p>熟悉Python内置函数的使用</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="3">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <h3>标准库</h3>
-        <p>学习常用标准库模块</p>
-      </div>
-    </div>
-    <div class="path-arrow"><i class="fas fa-arrow-right"></i></div>
-    <div class="path-step" data-step="4">
-      <div class="step-number">4</div>
-      <div class="step-content">
-        <h3>第三方库</h3>
-        <p>探索流行的第三方库和框架</p>
-      </div>
-    </div>
-  </div>
-</div>
+欢迎来到 Python 知识体系文档。本文档按照学习难度和主题分类，帮助你系统地掌握 Python 编程。
 
-<!-- 难度筛选器 -->
-<div class="difficulty-filter">
-  <h3><i class="fas fa-filter"></i> 按难度筛选</h3>
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-difficulty="all">全部</button>
-    <button class="filter-btn" data-difficulty="beginner">初级</button>
-    <button class="filter-btn" data-difficulty="intermediate">中级</button>
-    <button class="filter-btn" data-difficulty="advanced">高级</button>
-  </div>
-</div>
-
-<!-- 文档卡片网格 -->
-<div class="docs-grid">
-  <h2><i class="fas fa-th-large"></i> 文档分类</h2>
+## 📚 文档分类
   
-  <!-- 基础语法模块 -->
-  <div class="module-section" data-difficulty="beginner">
-    <div class="module-header">
-      <h3><i class="fas fa-code"></i> 基础语法</h3>
-      <p>Python语言的核心语法和基本概念</p>
-      <span class="difficulty-badge beginner">初级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-database"></i></div>
-        <h4><a href="basics/variables.md">变量与数据类型</a></h4>
-        <p>变量定义、基本数据类型</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 30分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-route"></i></div>
-        <h4><a href="basics/control-flow.md">控制流程</a></h4>
-        <p>条件语句、循环结构</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 45分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-function"></i></div>
-        <h4><a href="basics/functions.md">函数定义</a></h4>
-        <p>函数定义、参数传递、作用域</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 60分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-object-group"></i></div>
-        <h4><a href="basics/classes.md">类与对象</a></h4>
-        <p>面向对象编程基础</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 90分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
-        <h4><a href="basics/exceptions.md">异常处理</a></h4>
-        <p>异常捕获和处理机制</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 40分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="basics/" class="view-all-btn">查看全部基础语法文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+### 🔤 基础语法
 
-  <!-- 内置函数模块 -->
-  <div class="module-section" data-difficulty="beginner">
-    <div class="module-header">
-      <h3><i class="fas fa-tools"></i> 内置函数</h3>
-      <p>Python解释器内置的函数和方法</p>
-      <span class="difficulty-badge beginner">初级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-font"></i></div>
-        <h4><a href="builtins/string-functions.md">字符串函数</a></h4>
-        <p>字符串操作相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 35分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-calculator"></i></div>
-        <h4><a href="builtins/math-functions.md">数学函数</a></h4>
-        <p>数值计算相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 25分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-list"></i></div>
-        <h4><a href="builtins/collection-functions.md">集合函数</a></h4>
-        <p>列表、字典、集合操作</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 50分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="beginner">
-        <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
-        <h4><a href="builtins/io-functions.md">输入输出函数</a></h4>
-        <p>输入输出相关函数</p>
-        <div class="card-meta">
-          <span class="difficulty beginner">初级</span>
-          <span class="time"><i class="fas fa-clock"></i> 20分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="builtins/" class="view-all-btn">查看全部内置函数文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+Python语言的核心语法和基本概念
 
-  <!-- 标准库模块 -->
-  <div class="module-section" data-difficulty="intermediate">
-    <div class="module-header">
-      <h3><i class="fas fa-box"></i> 标准库</h3>
-      <p>Python标准库中的重要模块</p>
-      <span class="difficulty-badge intermediate">中级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-file-alt"></i></div>
-        <h4><a href="stdlib/file-operations.md">文件操作</a></h4>
-        <p>文件读写、路径操作</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 45分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="intermediate">
-        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h4><a href="stdlib/datetime.md">日期时间</a></h4>
-        <p>日期时间处理</p>
-        <div class="card-meta">
-          <span class="difficulty intermediate">中级</span>
-          <span class="time"><i class="fas fa-clock"></i> 35分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-search"></i></div>
-        <h4><a href="stdlib/regex.md">正则表达式</a></h4>
-        <p>文本模式匹配</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 75分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-        <h4><a href="stdlib/networking.md">网络编程</a></h4>
-        <p>网络通信相关模块</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 90分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-database"></i></div>
-        <h4><a href="stdlib/database.md">数据库操作</a></h4>
-        <p>数据库连接和操作</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 60分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="stdlib/" class="view-all-btn">查看全部标准库文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
+- **[变量与数据类型](basics/variables/)** - 变量定义、基本数据类型
+- **[控制流程](basics/control-flow/)** - 条件语句、循环结构  
+- **[函数定义](basics/functions/)** - 函数定义、参数传递、作用域
+- **[类与对象](basics/classes/)** - 面向对象编程基础
+- **[异常处理](basics/exceptions/)** - 异常捕获和处理机制
 
-  <!-- 第三方库模块 -->
-  <div class="module-section" data-difficulty="advanced">
-    <div class="module-header">
-      <h3><i class="fas fa-puzzle-piece"></i> 第三方库</h3>
-      <p>流行的第三方库和框架</p>
-      <span class="difficulty-badge advanced">高级</span>
-    </div>
-    <div class="docs-cards">
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
-        <h4><a href="thirdparty/data-analysis.md">数据分析</a></h4>
-        <p>NumPy、Pandas、Matplotlib等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 120分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-globe"></i></div>
-        <h4><a href="thirdparty/web-development.md">Web开发</a></h4>
-        <p>Django、Flask、FastAPI等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 150分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-brain"></i></div>
-        <h4><a href="thirdparty/machine-learning.md">机器学习</a></h4>
-        <p>Scikit-learn、TensorFlow、PyTorch等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 180分钟</span>
-        </div>
-      </div>
-      <div class="doc-card" data-difficulty="advanced">
-        <div class="card-icon"><i class="fas fa-image"></i></div>
-        <h4><a href="thirdparty/image-processing.md">图像处理</a></h4>
-        <p>PIL、OpenCV等</p>
-        <div class="card-meta">
-          <span class="difficulty advanced">高级</span>
-          <span class="time"><i class="fas fa-clock"></i> 100分钟</span>
-        </div>
-      </div>
-    </div>
-    <div class="module-footer">
-      <a href="thirdparty/" class="view-all-btn">查看全部第三方库文档 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
-</div>
+[查看全部基础语法文档 →](basics/)
 
-<!-- 使用说明和贡献指南 -->
-<div class="usage-guide">
-  <h2><i class="fas fa-info-circle"></i> 使用说明</h2>
-  <div class="guide-grid">
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-book-reader"></i></div>
-      <h3>详细文档</h3>
-      <p>每个文档都包含详细的说明、代码示例和最佳实践</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-search"></i></div>
-      <h3>智能搜索</h3>
-      <p>使用搜索功能快速定位相关内容，支持关键词和模糊匹配</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-list-ul"></i></div>
-      <h3>快速导航</h3>
-      <p>文档右侧显示当前页面的标题结构，支持快速跳转</p>
-    </div>
-    <div class="guide-item">
-      <div class="guide-icon"><i class="fas fa-comments"></i></div>
-      <h3>社区互动</h3>
-      <p>页面底部提供评论功能，欢迎交流讨论和反馈建议</p>
-    </div>
-  </div>
-</div>
+### 🛠️ 内置函数
 
-<!-- 贡献指南 -->
-<div class="contribute-section">
-  <div class="contribute-content">
-    <h2><i class="fas fa-hands-helping"></i> 参与贡献</h2>
-    <p>这是一个开源项目，欢迎大家参与贡献！无论是修正错误、完善文档还是添加新内容，都非常欢迎。</p>
-    <div class="contribute-buttons">
-      <a href="/about/" class="btn btn-outline"><i class="fas fa-info"></i> 了解项目</a>
-      <a href="https://github.com/your-username/python-docs" class="btn btn-primary" target="_blank">
-        <i class="fab fa-github"></i> GitHub 仓库
-      </a>
-    </div>
-  </div>
-</div>
+Python解释器内置的函数和方法
+
+- **[字符串函数](builtins/string-functions/)** - 字符串操作相关函数
+- **[数学函数](builtins/math-functions/)** - 数值计算相关函数
+- **[集合函数](builtins/collection-functions/)** - 列表、字典、集合操作
+- **[输入输出函数](builtins/io-functions/)** - 输入输出相关函数
+
+[查看全部内置函数文档 →](builtins/)
+
+### 📦 标准库
+
+Python标准库中的重要模块
+
+- **[文件操作](stdlib/file-operations/)** - 文件读写、路径操作
+- **[日期时间](stdlib/datetime/)** - 日期时间处理
+- **[正则表达式](stdlib/regex/)** - 文本模式匹配
+- **[网络编程](stdlib/networking/)** - 网络通信相关模块
+- **[数据库操作](stdlib/database/)** - 数据库连接和操作
+
+[查看全部标准库文档 →](stdlib/)
+
+### 🧩 第三方库
+
+流行的第三方库和框架
+
+- **[数据分析](thirdparty/data-analysis/)** - NumPy、Pandas、Matplotlib等
+- **[Web开发](thirdparty/web-development/)** - Django、Flask、FastAPI等
+- **[机器学习](thirdparty/machine-learning/)** - Scikit-learn、TensorFlow、PyTorch等
+- **[图像处理](thirdparty/image-processing/)** - PIL、OpenCV等
+
+[查看全部第三方库文档 →](thirdparty/)
+
+## 📖 使用说明
+
+- **详细文档** - 每个文档都包含详细的说明、代码示例和最佳实践
+- **智能搜索** - 使用搜索功能快速定位相关内容，支持关键词和模糊匹配
+- **快速导航** - 文档右侧显示当前页面的标题结构，支持快速跳转
+
+## 🤝 参与贡献
+
+这是一个开源项目，欢迎大家参与贡献！无论是修正错误、完善文档还是添加新内容，都非常欢迎。
+
+- [了解项目](/about/)
+- [GitHub 仓库](https://github.com/liberalchang/PythonModelBook)
