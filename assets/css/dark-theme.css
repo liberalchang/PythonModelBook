@@ -1,0 +1,219 @@
+/* 暗色主题样式文件 */
+
+/* 暗色主题CSS变量 */
+[data-theme="dark"] {
+  /* 颜色系统 */
+  --primary-color: #60a5fa;
+  --primary-hover: #3b82f6;
+  --secondary-color: #94a3b8;
+  --accent-color: #fbbf24;
+  
+  /* 文本颜色 */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+  
+  /* 背景颜色 */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  
+  /* 边框颜色 */
+  --border-color: #334155;
+  --border-hover: #475569;
+  
+  /* 代码块颜色 */
+  --code-bg: #1e293b;
+  --code-border: #334155;
+  --code-text: #f0f6fc;
+}
+
+/* 暗色主题语法高亮 */
+[data-theme="dark"] .highlight .c { color: #8b949e; font-style: italic; } /* 注释 */
+[data-theme="dark"] .highlight .k { color: #ff7b72; font-weight: bold; } /* 关键字 */
+[data-theme="dark"] .highlight .kd { color: #ff7b72; font-weight: bold; }
+[data-theme="dark"] .highlight .kn { color: #ff7b72; font-weight: bold; }
+[data-theme="dark"] .highlight .kp { color: #ff7b72; font-weight: bold; }
+[data-theme="dark"] .highlight .kr { color: #ff7b72; font-weight: bold; }
+[data-theme="dark"] .highlight .kt { color: #ff7b72; font-weight: bold; }
+[data-theme="dark"] .highlight .s { color: #a5d6ff; } /* 字符串 */
+[data-theme="dark"] .highlight .s1 { color: #a5d6ff; }
+[data-theme="dark"] .highlight .s2 { color: #a5d6ff; }
+[data-theme="dark"] .highlight .se { color: #a5d6ff; }
+[data-theme="dark"] .highlight .sh { color: #a5d6ff; }
+[data-theme="dark"] .highlight .si { color: #a5d6ff; }
+[data-theme="dark"] .highlight .sx { color: #a5d6ff; }
+[data-theme="dark"] .highlight .sr { color: #a5d6ff; }
+[data-theme="dark"] .highlight .ss { color: #a5d6ff; }
+[data-theme="dark"] .highlight .m { color: #79c0ff; } /* 数字 */
+[data-theme="dark"] .highlight .mi { color: #79c0ff; }
+[data-theme="dark"] .highlight .mf { color: #79c0ff; }
+[data-theme="dark"] .highlight .mh { color: #79c0ff; }
+[data-theme="dark"] .highlight .mo { color: #79c0ff; }
+[data-theme="dark"] .highlight .n { color: #f0f6fc; } /* 名称 */
+[data-theme="dark"] .highlight .na { color: #d2a8ff; } /* 名称属性 */
+[data-theme="dark"] .highlight .nb { color: #79c0ff; } /* 名称内置 */
+[data-theme="dark"] .highlight .nc { color: #d2a8ff; } /* 名称类 */
+[data-theme="dark"] .highlight .nd { color: #d2a8ff; } /* 名称装饰器 */
+[data-theme="dark"] .highlight .ne { color: #d2a8ff; } /* 名称异常 */
+[data-theme="dark"] .highlight .nf { color: #d2a8ff; } /* 名称函数 */
+[data-theme="dark"] .highlight .nn { color: #d2a8ff; } /* 名称命名空间 */
+[data-theme="dark"] .highlight .nt { color: #7ee787; } /* 名称标签 */
+[data-theme="dark"] .highlight .nv { color: #ffa657; } /* 名称变量 */
+[data-theme="dark"] .highlight .o { color: #ff7b72; } /* 操作符 */
+[data-theme="dark"] .highlight .ow { color: #ff7b72; font-weight: bold; } /* 操作符单词 */
+[data-theme="dark"] .highlight .p { color: #f0f6fc; } /* 标点 */
+[data-theme="dark"] .highlight .fm { color: #d2a8ff; } /* 函数魔术方法 */
+[data-theme="dark"] .highlight .vc { color: #ffa657; } /* 变量类 */
+[data-theme="dark"] .highlight .vg { color: #ffa657; } /* 变量全局 */
+[data-theme="dark"] .highlight .vi { color: #ffa657; } /* 变量实例 */
+[data-theme="dark"] .highlight .bp { color: #79c0ff; } /* 内置伪 */
+
+/* 暗色主题代码块样式 */
+[data-theme="dark"] .highlight {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+[data-theme="dark"] pre {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+[data-theme="dark"] code {
+  background: #334155;
+  border: 1px solid #475569;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: var(--code-text);
+  font-weight: 500;
+}
+
+[data-theme="dark"] pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--code-text);
+}
+
+/* 暗色主题导航栏 */
+[data-theme="dark"] .navbar {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 暗色主题滚动条 */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* 暗色主题文档标题和内容 */
+[data-theme="dark"] .doc-title {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .doc-description {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .doc-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .doc-meta span {
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .doc-category {
+  color: var(--text-secondary) !important;
+}
+
+/* 暗色主题表格样式 */
+[data-theme="dark"] table {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] th {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] td {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] tr:hover {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .table-wrapper {
+  border: 1px solid var(--border-color);
+}
+
+/* 暗色主题复制按钮 */
+[data-theme="dark"] .copy-button {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .copy-button:hover {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-hover) !important;
+}
+
+/* 暗色主题标签样式 */
+[data-theme="dark"] .tag {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .doc-tags .tag {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* 暗色主题标题样式 */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] p {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] span {
+  color: var(--text-secondary);
+}

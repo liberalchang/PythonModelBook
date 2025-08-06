@@ -1,0 +1,27 @@
+---
+layout: null
+---
+[
+  {% for page in site.pages %}
+    {% if page.title and page.url != "/404.html" %}
+    {
+      "title": {{ page.title | jsonify }},
+      "content": {{ page.content | strip_html | strip_newlines | jsonify }},
+      "url": {{ page.url | jsonify }},
+      "category": {% if page.category %}{{ page.category | jsonify }}{% else %}"页面"{% endif %},
+      "tags": {% if page.tags %}{{ page.tags | jsonify }}{% else %}[]{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% for doc in site.docs %}
+    {% if doc.title %}
+    ,{
+      "title": {{ doc.title | jsonify }},
+      "content": {{ doc.content | strip_html | strip_newlines | jsonify }},
+      "url": {{ doc.url | jsonify }},
+      "category": {% if doc.category %}{{ doc.category | jsonify }}{% else %}"文档"{% endif %},
+      "tags": {% if doc.tags %}{{ doc.tags | jsonify }}{% else %}[]{% endif %}
+    }
+    {% endif %}
+  {% endfor %}
+]

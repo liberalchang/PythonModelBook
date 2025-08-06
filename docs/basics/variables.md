@@ -1,6 +1,7 @@
 ---
 layout: doc
 title: 变量与数据类型
+permalink: /docs/basics/variables/
 category: basics
 tags: [变量, 数据类型, 基础语法]
 description: Python变量定义、基本数据类型和类型转换的完整指南

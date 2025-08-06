@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标准库 - Python知识体系文档</title>
+  <meta name="description" content="系统化整理Python知识体系的开源项目">
+  
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>标准库 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="标准库" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="系统化整理Python知识体系的开源项目" />
+<meta property="og:description" content="系统化整理Python知识体系的开源项目" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="标准库" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"系统化整理Python知识体系的开源项目","headline":"标准库","url":"http://0.0.0.0:4000/PythonModelBook/docs/stdlib/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+  
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+      
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+      
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="page-container">
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">标准库</h1>
+      
+      
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb">
+        <a href="/PythonModelBook/" class="breadcrumb-item">
+          <i class="fas fa-home"></i>
+          首页
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">标准库</span>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- 页面内容 -->
+  <main class="page-content">
+    <article class="page-article">
+      <h1 id="python标准库">Python标准库</h1>
+
+<p>Python标准库是Python安装包自带的模块集合，提供了丰富的功能，从文件操作到网络编程，从数据处理到系统管理。</p>
+
+<h2 id="-本模块内容">📋 本模块内容</h2>
+
+<h3 id="文件操作"><a href="file-operations.md">文件操作</a></h3>
+<ul>
+  <li>os模块：操作系统接口</li>
+  <li>pathlib模块：面向对象的路径操作</li>
+  <li>shutil模块：高级文件操作</li>
+  <li>glob模块：文件名模式匹配</li>
+  <li>tempfile模块：临时文件和目录</li>
+</ul>
+
+<h3 id="日期时间"><a href="datetime.md">日期时间</a></h3>
+<ul>
+  <li>datetime模块：日期和时间处理</li>
+  <li>time模块：时间相关函数</li>
+  <li>calendar模块：日历相关功能</li>
+  <li>时区处理和格式化</li>
+  <li>时间计算和比较</li>
+</ul>
+
+<h3 id="正则表达式"><a href="regex.md">正则表达式</a></h3>
+<ul>
+  <li>re模块：正则表达式操作</li>
+  <li>模式匹配和搜索</li>
+  <li>文本替换和分割</li>
+  <li>正则表达式编译和优化</li>
+  <li>常用正则表达式模式</li>
+</ul>
+
+<h3 id="网络编程"><a href="networking.md">网络编程</a></h3>
+<ul>
+  <li>urllib模块：URL处理</li>
+  <li>http模块：HTTP客户端和服务器</li>
+  <li>socket模块：底层网络接口</li>
+  <li>email模块：邮件处理</li>
+  <li>json模块：JSON数据处理</li>
+</ul>
+
+<h3 id="数据库操作"><a href="database.md">数据库操作</a></h3>
+<ul>
+  <li>sqlite3模块：SQLite数据库</li>
+  <li>数据库连接和事务</li>
+  <li>SQL查询和数据操作</li>
+  <li>数据库设计最佳实践</li>
+  <li>ORM概念介绍</li>
+</ul>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<p>完成本模块学习后，你将能够：</p>
+
+<ul>
+  <li>熟练使用Python标准库进行开发</li>
+  <li>掌握文件和目录操作技巧</li>
+  <li>能够处理日期时间相关任务</li>
+  <li>使用正则表达式进行文本处理</li>
+  <li>进行基本的网络编程</li>
+  <li>操作SQLite数据库</li>
+</ul>
+
+<h2 id="-标准库分类">📊 标准库分类</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>分类</th>
+      <th>主要模块</th>
+      <th>功能描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>文件系统</td>
+      <td>os, pathlib, shutil</td>
+      <td>文件和目录操作</td>
+    </tr>
+    <tr>
+      <td>数据格式</td>
+      <td>json, csv, xml</td>
+      <td>数据序列化和解析</td>
+    </tr>
+    <tr>
+      <td>网络通信</td>
+      <td>urllib, http, socket</td>
+      <td>网络编程和通信</td>
+    </tr>
+    <tr>
+      <td>数据库</td>
+      <td>sqlite3, dbm</td>
+      <td>数据存储和查询</td>
+    </tr>
+    <tr>
+      <td>文本处理</td>
+      <td>re, string, textwrap</td>
+      <td>文本操作和格式化</td>
+    </tr>
+    <tr>
+      <td>时间日期</td>
+      <td>datetime, time, calendar</td>
+      <td>时间处理和计算</td>
+    </tr>
+    <tr>
+      <td>系统服务</td>
+      <td>sys, os, platform</td>
+      <td>系统信息和服务</td>
+    </tr>
+    <tr>
+      <td>并发编程</td>
+      <td>threading, multiprocessing</td>
+      <td>多线程和多进程</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-使用建议">💡 使用建议</h2>
+
+<ol>
+  <li><strong>优先使用标准库</strong>：避免重复造轮子</li>
+  <li><strong>了解模块结构</strong>：理解每个模块的主要功能和类</li>
+  <li><strong>查阅文档</strong>：标准库文档详细且权威</li>
+  <li><strong>注意版本差异</strong>：不同Python版本的标准库可能有差异</li>
+  <li><strong>性能考虑</strong>：了解不同模块的性能特点</li>
+</ol>
+
+<h2 id="-常用模块速查">🔍 常用模块速查</h2>
+
+<h3 id="必备模块">必备模块</h3>
+<ul>
+  <li><strong>os</strong>: 操作系统接口</li>
+  <li><strong>sys</strong>: 系统特定参数和函数</li>
+  <li><strong>datetime</strong>: 日期和时间</li>
+  <li><strong>json</strong>: JSON编码器和解码器</li>
+  <li><strong>re</strong>: 正则表达式</li>
+</ul>
+
+<h3 id="实用模块">实用模块</h3>
+<ul>
+  <li><strong>collections</strong>: 专用容器数据类型</li>
+  <li><strong>itertools</strong>: 创建迭代器的函数</li>
+  <li><strong>functools</strong>: 高阶函数和可调用对象操作</li>
+  <li><strong>pathlib</strong>: 面向对象的文件系统路径</li>
+  <li><strong>urllib</strong>: URL处理模块</li>
+</ul>
+
+<h2 id="-相关资源">🔗 相关资源</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/">Python标准库官方文档</a></li>
+  <li><a href="https://docs.python.org/3/py-modindex.html">Python模块索引</a></li>
+  <li><a href="https://docs.python.org/3/howto/index.html">Python HOWTOs</a></li>
+</ul>
+
+    </article>
+    
+    <!-- 页面侧边栏 -->
+    
+    <aside class="page-sidebar">
+      <!-- 目录导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-list"></i>
+          页面目录
+        </h3>
+        <div id="page-toc" class="page-toc">
+          <!-- 目录将通过JavaScript自动生成 -->
+        </div>
+      </div>
+      
+      <!-- 相关链接 -->
+      
+      
+      <!-- 快速导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-compass"></i>
+          快速导航
+        </h3>
+        <ul class="quick-nav">
+          <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+          <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+          <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+          <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+  </main>
+  
+  <!-- 页面底部操作 -->
+  <footer class="page-footer">
+    <div class="page-actions">
+      
+      
+      <a href="https://github.com/username/PythonModelBook/issues/new" class="btn btn-outline" target="_blank">
+        <i class="fas fa-bug"></i>
+        报告问题
+      </a>
+      
+      <button id="share-page" class="btn btn-outline">
+        <i class="fas fa-share"></i>
+        分享页面
+      </button>
+    </div>
+    
+    <!-- 页面信息 -->
+    <div class="page-meta">
+      
+      
+      
+      
+      
+    </div>
+  </footer>
+</div>
+
+<!-- 页面特定的样式 -->
+<style>
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-item:hover {
+  color: var(--primary-color);
+}
+
+.breadcrumb-item.current {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.page-article {
+  min-width: 0;
+}
+
+.page-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+.sidebar-section {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.page-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.page-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+  
+  .page-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .page-sidebar {
+    position: static;
+    order: -1;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-actions {
+    justify-content: center;
+  }
+  
+  .page-meta {
+    justify-content: center;
+    text-align: center;
+  }
+}
+</style>
+
+<!-- 页面特定的JavaScript -->
+<script>
+// 自动生成页面目录
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('page-toc');
+  if (!tocContainer) return;
+  
+  const headings = document.querySelectorAll('.page-article h2, .page-article h3, .page-article h4');
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="no-toc">此页面没有标题</p>';
+    return;
+  }
+  
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  
+  headings.forEach((heading, index) => {
+    const id = heading.id || `heading-${index}`;
+    heading.id = id;
+    
+    const li = document.createElement('li');
+    li.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
+    
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = heading.textContent;
+    link.className = 'toc-link';
+    
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+  
+  tocContainer.appendChild(tocList);
+});
+
+// 分享功能
+document.getElementById('share-page')?.addEventListener('click', function() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    });
+  } else {
+    // 复制链接到剪贴板
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('页面链接已复制到剪贴板');
+    });
+  }
+});
+</script>
+  </main>
+  
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/username/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+  <script src="/PythonModelBook/assets/js/docs.js"></script>
+  
+</body>
+</html>

@@ -77,10 +77,26 @@ layout: default
   </aside>
 </div>
 
-<!-- 评论系统 -->
+<!-- utterances评论系统 -->
 <div class="comments-section">
-  <h3>评论</h3>
-  <div id="disqus_thread"></div>
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
 </div>
 
 <style>
@@ -216,8 +232,78 @@ layout: default
 .comments-section {
   max-width: 1200px;
   margin: 2rem auto;
-  padding-top: 2rem;
-  border-top: 1px solid #e1e4e8;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
 }
 
 @media (max-width: 768px) {
@@ -259,16 +345,17 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Disqus评论系统配置
-var disqus_config = function () {
-  this.page.url = '{{ page.url | absolute_url }}';
-  this.page.identifier = '{{ page.url }}';
-};
-
-(function() {
-  var d = document, s = d.createElement('script');
-  s.src = 'https://your-disqus-shortname.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
 </script>
