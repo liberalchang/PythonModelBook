@@ -314,7 +314,9 @@ def generate_data_class(class_name, fields):
     generator.add_line("def __str__(self):")
     generator.indent()
     
-    field_strs = [f"'{field}: {{{field}}}'".replace('{field}', f'self.{field}') for field in fields]
+    {% raw %}
+field_strs = [f"'{field}: {{{field}}}'"replace('{field}', f'self.{field}') for field in fields]
+{% endraw %}
     fields_format = ' + ", " + '.join(field_strs)
     generator.add_line(f"return f'{class_name}(' + {fields_format} + ')'")
     
@@ -979,9 +981,11 @@ template_engine = TemplateEngine()
 
 # 简单变量模板
 simple_template = """
+{% raw %}
 欢迎 {{ name }}!
 您的年龄是 {{ age }} 岁。
 您的分数是 {{ score }}，等级是 {{ 'A' if score >= 90 else 'B' if score >= 80 else 'C' }}。
+{% endraw %}
 """
 
 simple_context = {
@@ -1004,10 +1008,12 @@ for i, student in enumerate(students):
 %}
 
 统计信息:
+{% raw %}
 - 总人数: {{ len(students) }}
 - 平均分: {{ sum(s['score'] for s in students) / len(students) }}
 - 最高分: {{ max(s['score'] for s in students) }}
 - 最低分: {{ min(s['score'] for s in students) }}
+{% endraw %}
 """
 
 loop_context = {

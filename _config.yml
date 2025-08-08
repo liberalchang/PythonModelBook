@@ -7,9 +7,8 @@ url: "https://liberalchang.github.io"
 # 构建设置
 markdown: kramdown
 highlighter: rouge
-theme: minima
 
-# 插件
+# 插件（GitHub Pages兼容）
 plugins:
   - jekyll-feed
   - jekyll-sitemap

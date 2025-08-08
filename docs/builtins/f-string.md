@@ -704,7 +704,7 @@ value = 42
 print(f"The value is {value}")
 {% raw %}
 print(f"To display braces: {{value}} = {value}")
-print(f"JSON format: {{\"key\": {value}}}")
+print(f"JSON format: {{\"key\": {value}}")
 {% endraw %}
 
 # 3. 表达式限制

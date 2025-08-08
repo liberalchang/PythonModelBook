@@ -1,12 +1,9 @@
 source "https://rubygems.org"
 
-# Jekyll版本
-gem "jekyll", "~> 4.3.0"
+# GitHub Pages兼容配置
+gem "github-pages", group: :jekyll_plugins
 
-# Jekyll主题
-gem "minima", "~> 2.5"
-
-# Jekyll插件
+# Jekyll插件（GitHub Pages已包含这些插件）
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
   gem "jekyll-sitemap"

@@ -92,7 +92,7 @@ print(f"bool([0]): {bool([0])}")         # 输出: bool([0]): True (包含元素
 # 字典
 {% raw %}
 print(f"bool({{}}): {bool({})}")         # 输出: bool({}): False (空字典)
-print(f"bool({{'a': 1}}): {bool({'a': 1})}") # 输出: bool({'a': 1}): True (非空字典)
+print(f"bool({{'a': 1}}): {bool({'a': 1})})") # 输出: bool({'a': 1}): True (非空字典)
 {% endraw %}
 
 # 元组
@@ -102,7 +102,7 @@ print(f"bool((1,)): {bool((1,))}")       # 输出: bool((1,)): True (非空元�
 # 集合
 print(f"bool(set()): {bool(set())}")     # 输出: bool(set()): False (空集合)
 {% raw %}
-print(f"bool({{1, 2}}): {bool({1, 2})}") # 输出: bool({1, 2}): True (非空集合)
+print(f"bool({{1, 2}}): {bool({1, 2})})") # 输出: bool({1, 2}): True (非空集合)
 {% endraw %}
 ```
 
