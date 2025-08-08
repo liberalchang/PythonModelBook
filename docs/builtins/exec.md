@@ -961,7 +961,9 @@ class TemplateEngine:
                 # 返回输出
                 return '\n'.join(output_buffer)
             except Exception as e:
-                return f"{% raw %}{% ERROR: {e} %}{% endraw %}"
+                {% raw %}
+                return f"{% ERROR: {e} %}"
+{% endraw %}
         
         return self.code_block_pattern.sub(replace_code_block, template)
     
