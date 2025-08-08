@@ -513,6 +513,7 @@ class ConfigGenerator:
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;" if ssl else ""
         
+{% raw %}
         config = f"""
 server {{
     listen {port}{'ssl' if ssl else ''};
@@ -528,6 +529,7 @@ server {{
         expires 1y;
         add_header Cache-Control "public, immutable";
     }}
+{% endraw %}
 }}
 """
         return config
@@ -700,8 +702,10 @@ print("\n2. 花括号转义:")
 # 显示字面量花括号
 value = 42
 print(f"The value is {value}")
+{% raw %}
 print(f"To display braces: {{value}} = {value}")
 print(f"JSON format: {{\"key\": {value}}}")
+{% endraw %}
 
 # 3. 表达式限制
 print("\n3. 表达式限制:")
@@ -870,9 +874,10 @@ class FStringBestPractices:
         
         if isinstance(data, dict):
             if current_depth >= max_depth:
+{% raw %}
                 return f"{indent}{{...}}"
             
-            lines = [f"{indent}{{"]
+            lines = [f"{indent}{{"]{% endraw %}
             for key, value in data.items():
                 formatted_value = FStringBestPractices.nested_format(
                     value, max_depth, current_depth + 1

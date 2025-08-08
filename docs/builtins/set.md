@@ -744,7 +744,7 @@ print("空集合创建陷阱:")
 
 # 错误方式
 empty_dict = {}  # 这是字典，不是集合
-print(f"{{}} 的类型: {type(empty_dict)}")
+{% raw %}print(f"{{}} 的类型: {type(empty_dict)}"){% endraw %}
 
 # 正确方式
 empty_set = set()

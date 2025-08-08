@@ -1185,7 +1185,7 @@ class SafeVarsProcessor:
             try:
                 return json.dumps(obj_vars, default=str, indent=2, ensure_ascii=False)
             except Exception as e:
-                return f'{{"error": "JSON序列化失败: {e}"}}'
+                {% raw %}return f'{{"error": "JSON序列化失败: {e}"}}'{% endraw %}
         
         elif format_type.lower() == 'yaml':
             try:

@@ -412,7 +412,7 @@ class DynamicCodeGenerator:
         
         # __str__ 方法
         lines.append("    def __str__(self):")
-        {% raw %}field_strs = [f"'{field}: {{self._{field}}}''.replace('{field}', field) for field in fields]{% endraw %}
+        {% raw %}field_strs = [f"'{field}: {{self._{field}}}'".replace('{field}', field) for field in fields]{% endraw %}
         lines.append(f"        return f'{class_name}(' + ', '.join([{', '.join(field_strs)}]) + ')'")
         
         return "\n".join(lines)
