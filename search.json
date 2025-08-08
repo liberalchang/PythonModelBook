@@ -9,7 +9,7 @@ layout: null
       {
         "title": {{ page.title | jsonify }},
         "content": {{ page.content | strip_html | strip_newlines | jsonify }},
-        "url": {{ page.url | jsonify }},
+        "url": {{ page.url | relative_url | jsonify }},
         "category": {% if page.category %}{{ page.category | jsonify }}{% else %}"页面"{% endif %},
         "tags": {% if page.tags %}{{ page.tags | jsonify }}{% else %}[]{% endif %}
       }
@@ -21,7 +21,7 @@ layout: null
     {
       "title": {{ doc.title | default: "无标题" | jsonify }},
       "content": {{ doc.content | strip_html | strip_newlines | jsonify }},
-      "url": {{ doc.url | jsonify }},
+      "url": {{ doc.url | relative_url | jsonify }},
       "category": {% if doc.category %}{{ doc.category | jsonify }}{% else %}"文档"{% endif %},
       "tags": {% if doc.tags %}{{ doc.tags | jsonify }}{% else %}[]{% endif %}
     }
