@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>魔术方法 - Python知识体系文档</title>
+  <meta name="description" content="系统化整理Python知识体系的开源项目">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>魔术方法 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="魔术方法" />
+<meta name="author" content="Python学习指南" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="系统化整理Python知识体系的开源项目" />
+<meta property="og:description" content="系统化整理Python知识体系的开源项目" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/basics/magic-methods/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/basics/magic-methods/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="魔术方法" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python学习指南"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"系统化整理Python知识体系的开源项目","headline":"魔术方法","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/basics/magic-methods/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/basics/magic-methods/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="page-container">
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">魔术方法</h1>
+      
+      
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb">
+        <a href="/PythonModelBook/" class="breadcrumb-item">
+          <i class="fas fa-home"></i>
+          首页
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">魔术方法</span>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- 页面内容 -->
+  <main class="page-content">
+    <article class="page-article">
+      <h1 id="python魔术方法详解">Python魔术方法详解</h1>
+
+<p>魔术方法（Magic Methods），也称为特殊方法（Special Methods）或双下划线方法（Dunder Methods），是Python中以双下划线开头和结尾的特殊方法。这些方法定义了对象在特定操作下的行为，是Python面向对象编程的核心机制之一。</p>
+
+<h2 id="-学习目标">📚 学习目标</h2>
+
+<p>通过本章学习，你将能够：</p>
+
+<ul>
+  <li>理解魔术方法的概念和作用机制</li>
+  <li>掌握常用魔术方法的使用方法</li>
+  <li>学会自定义对象的特殊行为</li>
+  <li>实现对象的运算符重载</li>
+  <li>控制对象的生命周期和表示形式</li>
+</ul>
+
+<h2 id="-魔术方法概述">🔍 魔术方法概述</h2>
+
+<h3 id="什么是魔术方法">什么是魔术方法</h3>
+
+<p>魔术方法是Python中以双下划线<code class="language-plaintext highlighter-rouge">__</code>包裹的特殊方法，它们定义了对象在特定操作下的行为。当我们对对象执行某些操作时，Python会自动调用相应的魔术方法。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Point(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># 创建对象时自动调用 __init__
+</span><span class="n">p1</span> <span class="o">=</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 打印对象时自动调用 __str__
+</span><span class="nf">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>  <span class="c1"># 输出: Point(1, 2)
+</span>
+<span class="c1"># 对象相加时自动调用 __add__
+</span><span class="n">p2</span> <span class="o">=</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span>  <span class="c1"># 自动调用 p1.__add__(p2)
+</span><span class="nf">print</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>  <span class="c1"># 输出: Point(4, 6)
+</span></code></pre></div></div>
+
+<h2 id="️-对象创建和销毁">🏗️ 对象创建和销毁</h2>
+
+<h3 id="__new__---对象构造"><code class="language-plaintext highlighter-rouge">__new__</code> - 对象构造</h3>
+
+<p><code class="language-plaintext highlighter-rouge">__new__</code>方法负责创建对象实例，在<code class="language-plaintext highlighter-rouge">__init__</code>之前调用。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">创建 </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> 的实例</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># 必须返回实例对象
+</span>        <span class="k">return</span> <span class="nf">super</span><span class="p">().</span><span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始化 </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="c1"># 创建对象
+</span><span class="n">p</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 输出:
+# 创建 张三 的实例
+# 初始化 张三
+</span></code></pre></div></div>
+
+<h3 id="__init__---对象初始化"><code class="language-plaintext highlighter-rouge">__init__</code> - 对象初始化</h3>
+
+<p><code class="language-plaintext highlighter-rouge">__init__</code>方法在对象创建后立即调用，用于初始化对象属性。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">初始化学生对象</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">学生 </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> 初始化完成</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建学生对象
+</span><span class="n">student</span> <span class="o">=</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sh">"</span><span class="s">高三</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="__del__---对象销毁"><code class="language-plaintext highlighter-rouge">__del__</code> - 对象销毁</h3>
+
+<p><code class="language-plaintext highlighter-rouge">__del__</code>方法在对象被垃圾回收时调用，用于清理资源。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FileManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="n">self</span><span class="p">.</span><span class="nb">file</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">打开文件: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="sh">'</span><span class="s">file</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="nb">file</span><span class="p">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="nb">file</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">关闭文件: </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">fm</span> <span class="o">=</span> <span class="nc">FileManager</span><span class="p">(</span><span class="sh">"</span><span class="s">test.txt</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">fm</span>  <span class="c1"># 手动删除，触发 __del__
+</span></code></pre></div></div>
+
+<h2 id="-对象表示">🎭 对象表示</h2>
+
+<h3 id="__str__---用户友好的字符串表示"><code class="language-plaintext highlighter-rouge">__str__</code> - 用户友好的字符串表示</h3>
+
+<p><code class="language-plaintext highlighter-rouge">__str__</code>方法定义对象的字符串表示，主要面向最终用户。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Book</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">《</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">title</span><span class="si">}</span><span class="s">》 - </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">author</span><span class="si">}</span><span class="s"> (¥</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">price</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="nc">Book</span><span class="p">(</span><span class="sh">"</span><span class="s">Python编程</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mf">89.9</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>  <span class="c1"># 输出: 《Python编程》 - 张三 (¥89.9)
+</span></code></pre></div></div>
+
+<h3 id="__repr__---开发者友好的字符串表示"><code class="language-plaintext highlighter-rouge">__repr__</code> - 开发者友好的字符串表示</h3>
+
+<p><code class="language-plaintext highlighter-rouge">__repr__</code>方法定义对象的”官方”字符串表示，主要面向开发者。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s"> years old</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Person(</span><span class="sh">'</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="sh">'</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">Alice</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>   <span class="c1"># 输出: Alice is 25 years old
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">repr</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>  <span class="c1"># 输出: Person('Alice', 25)
+</span></code></pre></div></div>
+
+<h2 id="-数值运算">🔢 数值运算</h2>
+
+<h3 id="算术运算符重载">算术运算符重载</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vector</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Vector(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">加法运算</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">Vector</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">减法运算</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">Vector</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">标量乘法</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">Vector</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">标量除法</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">Vector</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">scalar</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">/</span> <span class="n">scalar</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">v1</span> <span class="o">=</span> <span class="nc">Vector</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="nc">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span><span class="p">)</span>  <span class="c1"># 输出: Vector(4, 6)
+</span><span class="nf">print</span><span class="p">(</span><span class="n">v1</span> <span class="o">-</span> <span class="n">v2</span><span class="p">)</span>  <span class="c1"># 输出: Vector(2, 2)
+</span><span class="nf">print</span><span class="p">(</span><span class="n">v1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># 输出: Vector(6, 8)
+</span><span class="nf">print</span><span class="p">(</span><span class="n">v1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># 输出: Vector(1.5, 2.0)
+</span></code></pre></div></div>
+
+<h2 id="-比较运算">🔍 比较运算</h2>
+
+<h3 id="比较运算符重载">比较运算符重载</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">score</span><span class="si">}</span><span class="s">分)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">等于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">score</span>
+    
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">小于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">score</span>
+    
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">小于等于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="p">.</span><span class="n">score</span>
+    
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">大于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">.</span><span class="n">score</span>
+    
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">大于等于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="p">.</span><span class="n">score</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">s1</span> <span class="o">=</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span><span class="p">)</span>   <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">&gt;</span> <span class="n">s1</span><span class="p">)</span>   <span class="c1"># True
+</span>
+<span class="c1"># 可以直接排序
+</span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">,</span> <span class="mi">78</span><span class="p">)]</span>
+<span class="n">students</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">students</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-容器行为">📦 容器行为</h2>
+
+<h3 id="__len__---长度获取"><code class="language-plaintext highlighter-rouge">__len__</code> - 长度获取</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Playlist</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">songs</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">add_song</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">song</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">songs</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">song</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">songs</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">播放列表(</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="si">}</span><span class="s">首歌曲)</span><span class="sh">"</span>
+
+<span class="n">playlist</span> <span class="o">=</span> <span class="nc">Playlist</span><span class="p">()</span>
+<span class="n">playlist</span><span class="p">.</span><span class="nf">add_song</span><span class="p">(</span><span class="sh">"</span><span class="s">歌曲1</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">playlist</span><span class="p">.</span><span class="nf">add_song</span><span class="p">(</span><span class="sh">"</span><span class="s">歌曲2</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">playlist</span><span class="p">))</span>  <span class="c1"># 输出: 2
+</span><span class="nf">print</span><span class="p">(</span><span class="n">playlist</span><span class="p">)</span>       <span class="c1"># 输出: 播放列表(2首歌曲)
+</span></code></pre></div></div>
+
+<h3 id="__getitem__-和-__setitem__---索引访问"><code class="language-plaintext highlighter-rouge">__getitem__</code> 和 <code class="language-plaintext highlighter-rouge">__setitem__</code> - 索引访问</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Matrix</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">rows</span> <span class="o">=</span> <span class="n">rows</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cols</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)]</span>
+    
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取元素</span><span class="sh">"""</span>
+        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置元素</span><span class="sh">"""</span>
+        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">])</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">matrix</span> <span class="o">=</span> <span class="nc">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出: 1
+</span><span class="nf">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<span class="c1"># 输出:
+# 1 0 0
+# 0 2 0
+# 0 0 3
+</span></code></pre></div></div>
+
+<h2 id="-其他重要魔术方法">🎯 其他重要魔术方法</h2>
+
+<h3 id="__call__---可调用对象"><code class="language-plaintext highlighter-rouge">__call__</code> - 可调用对象</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Multiplier</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">factor</span> <span class="o">=</span> <span class="n">factor</span>
+    
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">factor</span>
+
+<span class="c1"># 创建乘法器
+</span><span class="n">double</span> <span class="o">=</span> <span class="nc">Multiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">triple</span> <span class="o">=</span> <span class="nc">Multiplier</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 像函数一样调用对象
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># 输出: 10
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">triple</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>  <span class="c1"># 输出: 12
+</span></code></pre></div></div>
+
+<h3 id="__bool__---布尔值转换"><code class="language-plaintext highlighter-rouge">__bool__</code> - 布尔值转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">账户有余额时返回True</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">账户余额: ¥</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">balance</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">account1</span> <span class="o">=</span> <span class="nc">BankAccount</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">account2</span> <span class="o">=</span> <span class="nc">BankAccount</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">account1</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">账户1有余额</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">account2</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">账户2没有余额</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="__hash__---哈希值计算"><code class="language-plaintext highlighter-rouge">__hash__</code> - 哈希值计算</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">hash</span><span class="p">((</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Person</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">岁)</span><span class="sh">"</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">p1</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># 可以作为字典键或集合元素
+</span><span class="n">people_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">}</span>  <span class="c1"># p1和p2被认为是同一个人
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合中有 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">people_set</span><span class="p">)</span><span class="si">}</span><span class="s"> 个不同的人</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 2
+</span></code></pre></div></div>
+
+<h2 id="-实际应用案例">🎨 实际应用案例</h2>
+
+<h3 id="案例1自定义数字类">案例1：自定义数字类</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Money</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">货币类，支持各种运算</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="sh">"</span><span class="s">CNY</span><span class="sh">"</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">currency</span> <span class="o">=</span> <span class="n">currency</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">CNY</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">¥</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">USD</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">$</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">EUR</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">€</span><span class="sh">"</span><span class="p">}</span>
+        <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">symbol</span><span class="si">}{</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Money(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span><span class="si">}</span><span class="s">, </span><span class="sh">'</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="si">}</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Money</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">currency</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不能直接相加不同货币</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">+</span> <span class="n">other</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Money</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">currency</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不能直接相减不同货币</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">-</span> <span class="n">other</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nc">Money</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">/</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="nf">return </span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Money</span><span class="p">)</span> <span class="ow">and</span> 
+                <span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">amount</span> <span class="ow">and</span> 
+                <span class="n">self</span><span class="p">.</span><span class="n">currency</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Money</span><span class="p">)</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">currency</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">currency</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">amount</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">无法比较不同货币</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">price1</span> <span class="o">=</span> <span class="nc">Money</span><span class="p">(</span><span class="mf">99.99</span><span class="p">)</span>
+<span class="n">price2</span> <span class="o">=</span> <span class="nc">Money</span><span class="p">(</span><span class="mf">50.00</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">商品1: </span><span class="si">{</span><span class="n">price1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 商品1: ¥99.99
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">商品2: </span><span class="si">{</span><span class="n">price2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 商品2: ¥50.00
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总价: </span><span class="si">{</span><span class="n">price1</span> <span class="o">+</span> <span class="n">price2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 总价: ¥149.99
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">差价: </span><span class="si">{</span><span class="n">price1</span> <span class="o">-</span> <span class="n">price2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 差价: ¥49.99
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">打8折: </span><span class="si">{</span><span class="n">price1</span> <span class="o">*</span> <span class="mf">0.8</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 打8折: ¥79.99
+</span></code></pre></div></div>
+
+<h3 id="案例2智能列表类">案例2：智能列表类</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SmartList</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">智能列表，提供额外功能</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">SmartList(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">items</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">iter</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SmartList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nc">SmartList</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nc">SmartList</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span> <span class="o">+</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nc">SmartList</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span> <span class="o">+</span> <span class="p">[</span><span class="n">other</span><span class="p">])</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取去重后的列表</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">SmartList</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)))</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reversed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取反转后的列表</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nc">SmartList</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">smart_list</span> <span class="o">=</span> <span class="nc">SmartList</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原列表: </span><span class="si">{</span><span class="n">smart_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">smart_list</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">包含2: </span><span class="si">{</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">smart_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去重: </span><span class="si">{</span><span class="n">smart_list</span><span class="p">.</span><span class="n">unique</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">反转: </span><span class="si">{</span><span class="n">smart_list</span><span class="p">.</span><span class="nb">reversed</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 列表操作
+</span><span class="n">smart_list</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">添加后: </span><span class="si">{</span><span class="n">smart_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-最佳实践">📝 最佳实践</h2>
+
+<h3 id="1-魔术方法的一致性">1. 魔术方法的一致性</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 如果实现了__eq__，通常也要实现__hash__
+</span>        <span class="k">return</span> <span class="nf">hash</span><span class="p">((</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Point(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># __repr__应该返回可以重新创建对象的字符串
+</span>        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Point(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<h3 id="2-错误处理">2. 错误处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SafeList</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>  <span class="c1"># 返回None而不是抛出异常
+</span>    
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># 自动扩展列表
+</span>        <span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">index</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</code></pre></div></div>
+
+<h3 id="3-性能考虑">3. 性能考虑</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EfficientContainer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_length</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 缓存长度
+</span>    
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_length</span>  <span class="c1"># 直接返回缓存的长度
+</span>    
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_length</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># 更新缓存
+</span>    
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_length</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># 更新缓存
+</span></code></pre></div></div>
+
+<h2 id="-扩展阅读">🔗 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Python官方文档 - 特殊方法</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html">Python魔术方法完整列表</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types">运算符重载最佳实践</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#emulating-container-types">容器类型的实现</a></li>
+</ul>
+
+<hr />
+
+<p>魔术方法是Python面向对象编程的强大工具，通过合理使用这些方法，可以让自定义类的行为更加自然和直观。记住要保持方法之间的一致性，并考虑性能和错误处理。</p>
+
+    </article>
+    
+    <!-- 页面侧边栏 -->
+    
+    <aside class="page-sidebar">
+      <!-- 目录导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-list"></i>
+          页面目录
+        </h3>
+        <div id="page-toc" class="page-toc">
+          <!-- 目录将通过JavaScript自动生成 -->
+        </div>
+      </div>
+      
+      <!-- 相关链接 -->
+      
+      
+      <!-- 快速导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-compass"></i>
+          快速导航
+        </h3>
+        <ul class="quick-nav">
+          <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+          <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+          <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+          <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+  </main>
+  
+  <!-- 页面底部操作 -->
+  <footer class="page-footer">
+    <div class="page-actions">
+      
+      
+      <a href="https://github.com/username/PythonModelBook/issues/new" class="btn btn-outline" target="_blank">
+        <i class="fas fa-bug"></i>
+        报告问题
+      </a>
+      
+      <button id="share-page" class="btn btn-outline">
+        <i class="fas fa-share"></i>
+        分享页面
+      </button>
+    </div>
+    
+    <!-- 页面信息 -->
+    <div class="page-meta">
+      
+      <span class="meta-item">
+        <i class="fas fa-calendar"></i>
+        发布时间：2024年01月01日
+      </span>
+      
+      
+      
+      
+      
+      <span class="meta-item">
+        <i class="fas fa-user"></i>
+        作者：Python学习指南
+      </span>
+      
+    </div>
+  </footer>
+</div>
+
+<!-- 页面特定的样式 -->
+<style>
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-item:hover {
+  color: var(--primary-color);
+}
+
+.breadcrumb-item.current {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.page-article {
+  min-width: 0;
+}
+
+.page-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+.sidebar-section {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.page-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.page-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+  
+  .page-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .page-sidebar {
+    position: static;
+    order: -1;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-actions {
+    justify-content: center;
+  }
+  
+  .page-meta {
+    justify-content: center;
+    text-align: center;
+  }
+}
+</style>
+
+<!-- 页面特定的JavaScript -->
+<script>
+// 自动生成页面目录
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('page-toc');
+  if (!tocContainer) return;
+  
+  const headings = document.querySelectorAll('.page-article h2, .page-article h3, .page-article h4');
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="no-toc">此页面没有标题</p>';
+    return;
+  }
+  
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  
+  headings.forEach((heading, index) => {
+    const id = heading.id || `heading-${index}`;
+    heading.id = id;
+    
+    const li = document.createElement('li');
+    li.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
+    
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = heading.textContent;
+    link.className = 'toc-link';
+    
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+  
+  tocContainer.appendChild(tocList);
+});
+
+// 分享功能
+document.getElementById('share-page')?.addEventListener('click', function() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    });
+  } else {
+    // 复制链接到剪贴板
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('页面链接已复制到剪贴板');
+    });
+  }
+});
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+  <script src="/PythonModelBook/assets/js/docs.js"></script>
+  
+</body>
+
+</html>

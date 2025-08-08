@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zip() - 打包函数 - Python知识体系文档</title>
+  <meta name="description" content="将多个可迭代对象打包成元组的迭代器">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>zip() - 打包函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="zip() - 打包函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="将多个可迭代对象打包成元组的迭代器" />
+<meta property="og:description" content="将多个可迭代对象打包成元组的迭代器" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/zip/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/zip/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="zip() - 打包函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"将多个可迭代对象打包成元组的迭代器","headline":"zip() - 打包函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/zip/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/zip/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">zip() - 打包函数</h1>
+        
+        
+        <p class="doc-description">将多个可迭代对象打包成元组的迭代器</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">迭代</span>
+          
+          <span class="tag">打包</span>
+          
+          <span class="tag">并行</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="zip---打包函数">zip() - 打包函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">zip()</code> 是Python中的内置函数，用于将多个可迭代对象的对应元素打包成元组。它返回一个迭代器，可以同时遍历多个序列，在数据处理和并行迭代中非常有用。<mcreference link="https://docs.python.org/3/library/functions.html" index="1">1</mcreference></p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握zip()函数的基本用法</li>
+  <li>理解zip()的行为特点和限制</li>
+  <li>学会使用zip()进行数据组合和转换</li>
+  <li>了解zip()在实际编程中的应用场景</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>可迭代对象的概念</li>
+  <li>元组和列表的基本操作</li>
+  <li>for循环和元组解包</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">zip()</code> 函数接受多个可迭代对象作为参数，返回一个迭代器。该迭代器生成元组，每个元组包含来自各个可迭代对象的对应位置的元素。当最短的可迭代对象耗尽时，迭代停止。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">zip</span><span class="p">(</span><span class="o">*</span><span class="n">iterables</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*iterables</td>
+      <td>iterable</td>
+      <td>否</td>
+      <td>无</td>
+      <td>零个或多个可迭代对象</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>zip</td>
+      <td>迭代器，产生元组序列</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本打包
+</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">今年</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">岁</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 输出:
+# 张三今年25岁
+# 李四今年30岁
+# 王五今年35岁
+</span>
+<span class="c1"># 转换为列表查看结果
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">)))</span>  <span class="c1"># [('张三', 25), ('李四', 30), ('王五', 35)]
+</span>
+<span class="c1"># 三个列表的组合
+</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">北京</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">上海</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">广州</span><span class="sh">"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">,</span> <span class="n">cities</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">，</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">岁，来自</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 空参数调用
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">()))</span>  <span class="c1"># []
+</span>
+<span class="c1"># 单个参数
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">numbers</span><span class="p">)))</span>  <span class="c1"># [(1,), (2,), (3,)]
+</span></code></pre></div></div>
+
+<h3 id="高级用法">高级用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 长度不同的序列
+</span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)))</span>  <span class="c1"># [(1, 'a'), (2, 'b'), (3, 'c')]
+# 注意：较长的序列中的额外元素被忽略
+</span>
+<span class="c1"># 字符串的zip
+</span><span class="n">word1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span>
+<span class="k">for</span> <span class="n">char1</span><span class="p">,</span> <span class="n">char2</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">char1</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">char2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 输出: h-w, e-o, l-r, l-l, o-d
+</span>
+<span class="c1"># 解包操作（转置）
+</span><span class="n">matrix</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="o">*</span><span class="n">matrix</span><span class="p">)))</span>  <span class="c1"># [(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+</span>
+<span class="c1"># 创建字典
+</span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">city</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">张三</span><span class="sh">'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="sh">'</span><span class="s">北京</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">person</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>  <span class="c1"># {'name': '张三', 'age': 25, 'city': '北京'}
+</span>
+<span class="c1"># 并行处理多个列表
+</span><span class="n">numbers1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">numbers2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">numbers1</span><span class="p">,</span> <span class="n">numbers2</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>  <span class="c1"># [11, 22, 33, 44]
+</span></code></pre></div></div>
+
+<h3 id="实际案例">实际案例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 数据表格处理
+</span><span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="o">*</span><span class="n">rows</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建简单的数据表格</span><span class="sh">"""</span>
+    <span class="c1"># 打印表头
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">|</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s"> </span><span class="si">{</span><span class="n">header</span><span class="si">:</span><span class="o">^</span><span class="mi">10</span><span class="si">}</span><span class="s"> |</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+    
+    <span class="c1"># 打印分隔线
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">|</span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="nf">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="sh">"</span><span class="s">|</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 打印数据行
+</span>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">|</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s"> </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="si">:</span><span class="o">^</span><span class="mi">10</span><span class="si">}</span><span class="s"> |</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">()</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">姓名</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">年龄</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">城市</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">row1</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="sh">"</span><span class="s">北京</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">row2</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="sh">"</span><span class="s">上海</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">row3</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="sh">"</span><span class="s">广州</span><span class="sh">"</span><span class="p">]</span>
+<span class="nf">create_table</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">row3</span><span class="p">)</span>
+
+<span class="c1"># 数据统计分析
+</span><span class="k">def</span> <span class="nf">analyze_scores</span><span class="p">(</span><span class="n">subjects</span><span class="p">,</span> <span class="n">scores</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">分析各科成绩</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">成绩分析报告:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">subject</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">subjects</span><span class="p">,</span> <span class="n">scores</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s">分</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">total_score</span> <span class="o">+=</span> <span class="n">score</span>
+    
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total_score</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总分: </span><span class="si">{</span><span class="n">total_score</span><span class="si">}</span><span class="s">分</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平均分: </span><span class="si">{</span><span class="n">average</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">分</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">total_score</span><span class="p">,</span> <span class="n">average</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">subjects</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">语文</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">数学</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">英语</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">物理</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">化学</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+<span class="nf">analyze_scores</span><span class="p">(</span><span class="n">subjects</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+
+<span class="c1"># 文件对比
+</span><span class="k">def</span> <span class="nf">compare_files</span><span class="p">(</span><span class="n">file1_lines</span><span class="p">,</span> <span class="n">file2_lines</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">逐行对比两个文件</span><span class="sh">"""</span>
+    <span class="n">differences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line_num</span><span class="p">,</span> <span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">file1_lines</span><span class="p">,</span> <span class="n">file2_lines</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">line1</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">line2</span><span class="p">.</span><span class="nf">strip</span><span class="p">():</span>
+            <span class="n">differences</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                <span class="sh">'</span><span class="s">line</span><span class="sh">'</span><span class="p">:</span> <span class="n">line_num</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">file1</span><span class="sh">'</span><span class="p">:</span> <span class="n">line1</span><span class="p">.</span><span class="nf">strip</span><span class="p">(),</span>
+                <span class="sh">'</span><span class="s">file2</span><span class="sh">'</span><span class="p">:</span> <span class="n">line2</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span>
+            <span class="p">})</span>
+    
+    <span class="k">if</span> <span class="n">differences</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">发现 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">differences</span><span class="p">)</span><span class="si">}</span><span class="s"> 处差异:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">diff</span> <span class="ow">in</span> <span class="n">differences</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第</span><span class="si">{</span><span class="n">diff</span><span class="p">[</span><span class="sh">'</span><span class="s">line</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">行:</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  文件1: </span><span class="si">{</span><span class="n">diff</span><span class="p">[</span><span class="sh">'</span><span class="s">file1</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  文件2: </span><span class="si">{</span><span class="n">diff</span><span class="p">[</span><span class="sh">'</span><span class="s">file2</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">两个文件内容相同</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">differences</span>
+
+<span class="c1"># 坐标变换
+</span><span class="k">def</span> <span class="nf">transform_coordinates</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">坐标平移变换</span><span class="sh">"""</span>
+    <span class="n">transformed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">):</span>
+        <span class="n">new_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
+        <span class="n">new_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
+        <span class="n">transformed</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">transformed</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">original_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">original_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">transformed_coords</span> <span class="o">=</span> <span class="nf">transform_coordinates</span><span class="p">(</span><span class="n">original_x</span><span class="p">,</span> <span class="n">original_y</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原坐标: </span><span class="si">{</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">original_x</span><span class="p">,</span> <span class="n">original_y</span><span class="p">))</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">变换后: </span><span class="si">{</span><span class="n">transformed_coords</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数据验证
+</span><span class="k">def</span> <span class="nf">validate_user_data</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">emails</span><span class="p">,</span> <span class="n">ages</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">验证用户数据</span><span class="sh">"""</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">emails</span><span class="p">,</span> <span class="n">ages</span><span class="p">)):</span>
+        <span class="c1"># 验证姓名
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="nf">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">行: 姓名不能为空</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 验证邮箱
+</span>        <span class="k">if</span> <span class="sh">'</span><span class="s">@</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">行: 邮箱格式不正确</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 验证年龄
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">行: 年龄必须是0-150之间的整数</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">数据验证失败:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  - </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">数据验证通过</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># 测试数据
+</span><span class="n">test_names</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">,</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">test_emails</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">zhangsan@email.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">lisi.email.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">wangwu@email.com</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">test_ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="nf">validate_user_data</span><span class="p">(</span><span class="n">test_names</span><span class="p">,</span> <span class="n">test_emails</span><span class="p">,</span> <span class="n">test_ages</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">zip()</code> 以最短的可迭代对象为准，较长对象的多余元素会被忽略</li>
+  <li><code class="language-plaintext highlighter-rouge">zip()</code> 返回的是迭代器，只能遍历一次</li>
+  <li>如果需要处理不同长度的序列，考虑使用 <code class="language-plaintext highlighter-rouge">itertools.zip_longest()</code></li>
+  <li>空的zip()调用返回空迭代器</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 长度不同的处理
+</span><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">]</span>
+
+<span class="c1"># 标准zip()会截断
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)))</span>  <span class="c1"># [(1, 'a'), (2, 'b'), (3, 'c')]
+</span>
+<span class="c1"># zip_longest()会填充缺失值
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">zip_longest</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">)))</span>
+<span class="c1"># [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'X'), (5, 'X')]
+</span>
+<span class="c1"># 迭代器特性
+</span><span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">zip_obj</span> <span class="o">=</span> <span class="nf">zip</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span>
+
+<span class="c1"># 第一次遍历
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">第一次:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">zip_obj</span><span class="p">))</span>  <span class="c1"># [(1, 'a'), (2, 'b'), (3, 'c')]
+# 第二次遍历（空结果）
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">第二次:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">zip_obj</span><span class="p">))</span>  <span class="c1"># []
+</span></code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="../enumerate.md">enumerate() - 枚举函数</a></li>
+  <li><a href="../map.md">map() - 映射函数</a></li>
+  <li><a href="../../stdlib/itertools.md">itertools模块 - 迭代工具</a></li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#zip">Python官方文档 - zip()</a></li>
+  <li><a href="https://docs.python.org/3/library/itertools.html#itertools.zip_longest">itertools.zip_longest()</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/datastructures.html#looping-techniques">Python循环技巧</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">迭代</code> <code class="language-plaintext highlighter-rouge">打包</code> <code class="language-plaintext highlighter-rouge">并行</code> <code class="language-plaintext highlighter-rouge">数据组合</code> <code class="language-plaintext highlighter-rouge">转置</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

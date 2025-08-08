@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>type() - 类型函数 - Python知识体系文档</title>
+  <meta name="description" content="返回对象的类型或创建新的类型对象">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>type() - 类型函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="type() - 类型函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="返回对象的类型或创建新的类型对象" />
+<meta property="og:description" content="返回对象的类型或创建新的类型对象" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/type/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/type/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="type() - 类型函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"返回对象的类型或创建新的类型对象","headline":"type() - 类型函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/type/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/type/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">type() - 类型函数</h1>
+        
+        
+        <p class="doc-description">返回对象的类型或创建新的类型对象</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">类型检查</span>
+          
+          <span class="tag">对象</span>
+          
+          <span class="tag">元类</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="type---类型函数">type() - 类型函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">type()</code> 是Python中的内置函数，具有两种主要用法：作为单参数函数时返回对象的类型，作为三参数函数时可以动态创建新的类型对象。它是Python类型系统和元编程的重要工具。<mcreference link="https://docs.python.org/3/library/functions.html" index="1">1</mcreference></p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握type()函数的两种用法</li>
+  <li>理解type()与isinstance()的区别</li>
+  <li>学会使用type()进行类型检查</li>
+  <li>了解动态创建类的方法</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型</li>
+  <li>类和对象的概念</li>
+  <li>继承的基本理解</li>
+  <li>元类的初步概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">type()</code> 函数有两种形式：</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">type(object)</code> - 返回对象的类型</li>
+  <li><code class="language-plaintext highlighter-rouge">type(name, bases, dict)</code> - 创建新的类型对象</li>
+</ol>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 获取对象类型
+</span><span class="nf">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+
+<span class="c1"># 创建新类型
+</span><span class="nf">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<h4 id="单参数形式">单参数形式</h4>
+<p>| 参数名 | 类型 | 必需 | 默认值 | 说明 |
+|——–|——|——|——–|———|
+| object | any | 是 | 无 | 要检查类型的对象 |</p>
+
+<h4 id="三参数形式">三参数形式</h4>
+<p>| 参数名 | 类型 | 必需 | 默认值 | 说明 |
+|——–|——|——|——–|———|
+| name | str | 是 | 无 | 类的名称 |
+| bases | tuple | 是 | 无 | 基类元组 |
+| dict | dict | 是 | 无 | 类的命名空间字典 |
+| **kwds | any | 否 | 无 | 传递给元类的关键字参数 |</p>
+
+<h3 id="返回值">返回值</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>type</td>
+      <td>对象的类型或新创建的类型对象</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 获取基本数据类型
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>          <span class="c1"># &lt;class 'int'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>        <span class="c1"># &lt;class 'float'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">))</span>     <span class="c1"># &lt;class 'str'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>   <span class="c1"># &lt;class 'list'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">({</span><span class="sh">"</span><span class="s">a</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}))</span>    <span class="c1"># &lt;class 'dict'&gt;
+</span>
+<span class="c1"># 获取自定义类的类型
+</span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="n">person</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>      <span class="c1"># &lt;class '__main__.Person'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">Person</span><span class="p">))</span>      <span class="c1"># &lt;class 'type'&gt;
+</span>
+<span class="c1"># 类型比较
+</span><span class="k">if</span> <span class="nf">type</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="o">==</span> <span class="n">Person</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">person是Person类的实例</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级用法">高级用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># type()与isinstance()的区别
+</span><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">dog</span> <span class="o">=</span> <span class="nc">Dog</span><span class="p">()</span>
+
+<span class="c1"># type()不考虑继承关系
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span> <span class="o">==</span> <span class="n">Dog</span><span class="p">)</span>     <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span> <span class="o">==</span> <span class="n">Animal</span><span class="p">)</span>  <span class="c1"># False
+</span>
+<span class="c1"># isinstance()考虑继承关系
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span> <span class="n">Dog</span><span class="p">))</span>     <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">))</span>  <span class="c1"># True
+</span>
+<span class="c1"># 动态创建类
+</span><span class="k">def</span> <span class="nf">init_method</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Hello, I</span><span class="sh">'</span><span class="s">m </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 使用type()创建类
+</span><span class="n">Student</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="sh">'</span><span class="s">Student</span><span class="sh">'</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">__init__</span><span class="sh">'</span><span class="p">:</span> <span class="n">init_method</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">say_hello</span><span class="sh">'</span><span class="p">:</span> <span class="n">say_hello</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">school</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">清华大学</span><span class="sh">'</span>  <span class="c1"># 类属性
+</span><span class="p">})</span>
+
+<span class="c1"># 使用动态创建的类
+</span><span class="n">student</span> <span class="o">=</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="nf">say_hello</span><span class="p">())</span>  <span class="c1"># Hello, I'm 李四
+</span><span class="nf">print</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">school</span><span class="p">)</span>       <span class="c1"># 清华大学
+</span></code></pre></div></div>
+
+<h3 id="实际案例">实际案例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 类型检查装饰器
+</span><span class="k">def</span> <span class="nf">type_check</span><span class="p">(</span><span class="o">*</span><span class="n">expected_types</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">类型检查装饰器</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">expected_types</span><span class="p">):</span>
+                    <span class="n">expected_type</span> <span class="o">=</span> <span class="n">expected_types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nf">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected_type</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">参数 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s"> 期望类型 </span><span class="si">{</span><span class="n">expected_type</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s">, </span><span class="sh">"</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">实际类型 </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">arg</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                        <span class="p">)</span>
+            <span class="k">return</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="c1"># 使用类型检查装饰器
+</span><span class="nd">@type_check</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">你好，</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">，你今年</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">岁</span><span class="sh">"</span>
+
+<span class="c1"># 正确调用
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">greet</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>  <span class="c1"># 你好，张三，你今年25岁
+</span>
+<span class="c1"># 错误调用会抛出异常
+# greet(123, "25")  # TypeError
+</span>
+<span class="c1"># 动态工厂模式
+</span><span class="k">def</span> <span class="nf">create_data_class</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">动态创建数据类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="nf">setattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">field_strs</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s">=</span><span class="si">{</span><span class="nf">getattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span> 
+                     <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">]</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s">(</span><span class="si">{</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">field_strs</span><span class="p">)</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+    
+    <span class="c1"># 动态创建类
+</span>    <span class="k">return</span> <span class="nf">type</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">__init__</span><span class="sh">'</span><span class="p">:</span> <span class="n">__init__</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">__repr__</span><span class="sh">'</span><span class="p">:</span> <span class="n">__repr__</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">to_dict</span><span class="sh">'</span><span class="p">:</span> <span class="n">to_dict</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">_fields</span><span class="sh">'</span><span class="p">:</span> <span class="n">fields</span>
+    <span class="p">})</span>
+
+<span class="c1"># 使用动态工厂
+</span><span class="n">Book</span> <span class="o">=</span> <span class="nf">create_data_class</span><span class="p">(</span><span class="sh">'</span><span class="s">Book</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">author</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">price</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">book</span> <span class="o">=</span> <span class="nc">Book</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Python编程</span><span class="sh">"</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mf">59.9</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>  <span class="c1"># Book(title=Python编程, author=张三, price=59.9)
+</span><span class="nf">print</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">to_dict</span><span class="p">())</span>  <span class="c1"># {'title': 'Python编程', 'author': '张三', 'price': 59.9}
+</span></code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">type()</code> 进行严格的类型检查，不考虑继承关系</li>
+  <li>对于类型检查，通常推荐使用 <code class="language-plaintext highlighter-rouge">isinstance()</code> 而不是 <code class="language-plaintext highlighter-rouge">type()</code></li>
+  <li>动态创建类时要注意命名空间和作用域问题</li>
+  <li><code class="language-plaintext highlighter-rouge">type()</code> 返回的是类型对象本身，而不是类型名称字符串</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 常见误区
+</span><span class="k">class</span> <span class="nc">Parent</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">child</span> <span class="o">=</span> <span class="nc">Child</span><span class="p">()</span>
+
+<span class="c1"># 错误的类型检查方式（不推荐）
+</span><span class="k">if</span> <span class="nf">type</span><span class="p">(</span><span class="n">child</span><span class="p">)</span> <span class="o">==</span> <span class="n">Parent</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">是Parent类型</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 这不会执行
+</span>
+<span class="c1"># 正确的类型检查方式（推荐）
+</span><span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Parent</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">是Parent类型或其子类</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 这会执行
+</span>
+<span class="c1"># 获取类型名称
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">child</span><span class="p">).</span><span class="n">__name__</span><span class="p">)</span>  <span class="c1"># 'Child'
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">child</span><span class="p">)))</span>      <span class="c1"># "&lt;class '__main__.Child'&gt;"
+</span></code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="../isinstance.md">isinstance() - 实例检查函数</a></li>
+  <li><a href="../issubclass.md">issubclass() - 子类检查函数</a></li>
+  <li><a href="../hasattr.md">hasattr() - 属性检查函数</a></li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#type">Python官方文档 - type()</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#metaclasses">Python数据模型 - 元类</a></li>
+  <li><a href="https://docs.python.org/3/library/typing.html">Python类型系统详解</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">类型检查</code> <code class="language-plaintext highlighter-rouge">对象</code> <code class="language-plaintext highlighter-rouge">元类</code> <code class="language-plaintext highlighter-rouge">动态创建</code> <code class="language-plaintext highlighter-rouge">反射</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

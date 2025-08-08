@@ -11,47 +11,22 @@ Python标准库是Python安装包自带的模块集合，提供了丰富的功�
 
 ## 📋 本模块内容
 
-### [文件操作](file-operations/)
-- os模块：操作系统接口
-- pathlib模块：面向对象的路径操作
-- shutil模块：高级文件操作
-- glob模块：文件名模式匹配
-- tempfile模块：临时文件和目录
+### [文件操作]
 
-### [日期时间](datetime/)
-- datetime模块：日期和时间处理
-- time模块：时间相关函数
-- calendar模块：日历相关功能
-- 时区处理和格式化
-- 时间计算和比较
 
-### [正则表达式](regex/)
-- re模块：正则表达式操作
-- 模式匹配和搜索
-- 文本替换和分割
-- 正则表达式编译和优化
-- 常用正则表达式模式
+### 日期时间
+- [time模块](time/)：基础时间处理功能
+- [calendar模块](calendar/)：日历相关功能
+- [datetime模块](datetime/)：高级日期时间处理
 
-### [网络编程](networking/)
-- urllib模块：URL处理
-- http模块：HTTP客户端和服务器
-- socket模块：底层网络接口
-- email模块：邮件处理
-- json模块：JSON数据处理
 
-### [数据库操作](database/)
-- sqlite3模块：SQLite数据库
-- 数据库连接和事务
-- SQL查询和数据操作
-- 数据库设计最佳实践
-- ORM概念介绍
+### 函数式编程
+- [operator模块](operator/)：运算符函数映射
+- [copy模块](copy/)：对象拷贝功能
+- [inspect模块](inspect/)：对象检查和反射功能
+- [enum模块](enum/)：枚举类型和常量定义
+- [typing模块](typing/)：类型提示和静态类型检查
 
-### [operator模块](operator/)
-- 运算符函数映射
-- attrgetter：属性获取器
-- itemgetter：项获取器
-- methodcaller：方法调用器
-- 函数式编程和性能优化
 
 ## 🎯 学习目标
 

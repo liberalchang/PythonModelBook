@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>list() - 列表构造函数 - Python知识体系文档</title>
+  <meta name="description" content="创建列表对象或将可迭代对象转换为列表">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>list() - 列表构造函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="list() - 列表构造函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="创建列表对象或将可迭代对象转换为列表" />
+<meta property="og:description" content="创建列表对象或将可迭代对象转换为列表" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/list/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/list/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="list() - 列表构造函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"创建列表对象或将可迭代对象转换为列表","headline":"list() - 列表构造函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/list/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/list/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">list() - 列表构造函数</h1>
+        
+        
+        <p class="doc-description">创建列表对象或将可迭代对象转换为列表</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">类型转换</span>
+          
+          <span class="tag">容器</span>
+          
+          <span class="tag">序列</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="list---列表构造函数">list() - 列表构造函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">list()</code> 是Python中的内置函数，用于创建列表对象或将可迭代对象转换为列表。列表是Python中最常用的数据结构之一，具有有序、可变、允许重复元素的特性，广泛应用于数据存储和处理。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握list()函数的基本用法</li>
+  <li>理解列表的特性和应用场景</li>
+  <li>学会不同类型到列表的转换</li>
+  <li>了解列表的性能特点</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型</li>
+  <li>可迭代对象概念</li>
+  <li>序列类型基础</li>
+  <li>索引和切片操作</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>列表（list）是Python中的可变序列类型，可以存储任意类型的对象。<code class="language-plaintext highlighter-rouge">list()</code> 函数可以创建空列表或将其他可迭代对象转换为列表，是数据处理中的基础工具。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空列表
+</span><span class="nf">list</span><span class="p">()</span>
+
+<span class="c1"># 从可迭代对象创建列表
+</span><span class="nf">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>iterable</td>
+      <td>iterable</td>
+      <td>否</td>
+      <td>无</td>
+      <td>可迭代对象（字符串、元组、集合等）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: list</li>
+  <li><strong>说明</strong>: 新创建的列表对象</li>
+</ul>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空列表
+</span><span class="n">empty_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">空列表: </span><span class="si">{</span><span class="n">empty_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 空列表: []
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_list</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 类型: &lt;class 'list'&gt;
+</span>
+<span class="c1"># 等价的创建方式
+</span><span class="n">empty_list2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字面量创建: </span><span class="si">{</span><span class="n">empty_list2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字面量创建: []
+</span>
+<span class="c1"># 从字符串创建列表
+</span><span class="n">string_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串转列表: </span><span class="si">{</span><span class="n">string_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字符串转列表: ['h', 'e', 'l', 'l', 'o']
+</span>
+<span class="c1"># 从元组创建列表
+</span><span class="n">tuple_data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">tuple_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组转列表: </span><span class="si">{</span><span class="n">tuple_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 元组转列表: [1, 2, 3, 4, 5]
+</span>
+<span class="c1"># 从集合创建列表
+</span><span class="n">set_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">set_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">set_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合转列表: </span><span class="si">{</span><span class="n">set_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 集合转列表: [1, 2, 3, 4, 5, 6, 9] (顺序可能不同)
+</span>
+<span class="c1"># 从range对象创建列表
+</span><span class="n">range_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">range转列表: </span><span class="si">{</span><span class="n">range_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: range转列表: [0, 1, 2, 3, 4]
+</span>
+<span class="c1"># 从字典创建列表（默认是键）
+</span><span class="n">dict_data</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">dict_keys_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">dict_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典键转列表: </span><span class="si">{</span><span class="n">dict_keys_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典键转列表: ['a', 'b', 'c']
+</span>
+<span class="c1"># 字典值转列表
+</span><span class="n">dict_values_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">dict_data</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典值转列表: </span><span class="si">{</span><span class="n">dict_values_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典值转列表: [1, 2, 3]
+</span>
+<span class="c1"># 字典项转列表
+</span><span class="n">dict_items_to_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">dict_data</span><span class="p">.</span><span class="nf">items</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典项转列表: </span><span class="si">{</span><span class="n">dict_items_to_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典项转列表: [('a', 1), ('b', 2), ('c', 3)]
+</span></code></pre></div></div>
+
+<h3 id="生成器和迭代器转换">生成器和迭代器转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 生成器表达式转列表
+</span><span class="n">squares_gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">squares_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">squares_gen</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平方数列表: </span><span class="si">{</span><span class="n">squares_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 平方数列表: [0, 1, 4, 9, 16]
+</span>
+<span class="c1"># 过滤器转列表
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">even_filter</span> <span class="o">=</span> <span class="nf">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="n">even_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">even_filter</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">偶数列表: </span><span class="si">{</span><span class="n">even_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 偶数列表: [2, 4, 6, 8, 10]
+</span>
+<span class="c1"># 映射器转列表
+</span><span class="n">map_result</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">map_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">map_result</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">映射结果: </span><span class="si">{</span><span class="n">map_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 映射结果: [0, 2, 4, 6, 8]
+</span>
+<span class="c1"># 枚举器转列表
+</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">apple</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">banana</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">cherry</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">enum_result</span> <span class="o">=</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="n">enum_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">enum_result</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">枚举结果: </span><span class="si">{</span><span class="n">enum_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 枚举结果: [(0, 'apple'), (1, 'banana'), (2, 'cherry')]
+</span>
+<span class="c1"># zip对象转列表
+</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">Alice</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Bob</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Charlie</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
+<span class="n">zip_result</span> <span class="o">=</span> <span class="nf">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">)</span>
+<span class="n">zip_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">zip_result</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">zip结果: </span><span class="si">{</span><span class="n">zip_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: zip结果: [('Alice', 25), ('Bob', 30), ('Charlie', 35)]
+</span>
+<span class="c1"># 自定义迭代器转列表
+</span><span class="k">class</span> <span class="nc">CountDown</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span>
+    
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">StopIteration</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">start</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">countdown</span> <span class="o">=</span> <span class="nc">CountDown</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">countdown_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">countdown</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">倒计时列表: </span><span class="si">{</span><span class="n">countdown_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 倒计时列表: [5, 4, 3, 2, 1]
+</span></code></pre></div></div>
+
+<h3 id="文件和数据处理">文件和数据处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 读取文件行到列表
+</span><span class="k">def</span> <span class="nf">read_file_to_list</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">读取文件内容到列表</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>  <span class="c1"># 每行作为一个元素
+</span>            <span class="c1"># 去除换行符
+</span>            <span class="n">clean_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">clean_lines</span>
+    <span class="k">except</span> <span class="nb">FileNotFoundError</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">文件 </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s"> 不存在</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+<span class="c1"># 模拟文件内容
+</span><span class="n">sample_content</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">第一行内容
+第二行内容
+第三行内容
+第四行内容</span><span class="sh">"""</span>
+
+<span class="c1"># 创建临时文件进行测试
+</span><span class="kn">import</span> <span class="n">tempfile</span>
+<span class="kn">import</span> <span class="n">os</span>
+
+<span class="k">with</span> <span class="n">tempfile</span><span class="p">.</span><span class="nc">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp_file</span><span class="p">:</span>
+    <span class="n">temp_file</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">sample_content</span><span class="p">)</span>
+    <span class="n">temp_filename</span> <span class="o">=</span> <span class="n">temp_file</span><span class="p">.</span><span class="n">name</span>
+
+<span class="c1"># 读取文件到列表
+</span><span class="n">file_lines</span> <span class="o">=</span> <span class="nf">read_file_to_list</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">文件行列表: </span><span class="si">{</span><span class="n">file_lines</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 清理临时文件
+</span><span class="n">os</span><span class="p">.</span><span class="nf">unlink</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">)</span>
+
+<span class="c1"># CSV数据处理
+</span><span class="n">csv_data</span> <span class="o">=</span> <span class="sh">"</span><span class="s">name,age,city</span><span class="se">\n</span><span class="s">Alice,25,New York</span><span class="se">\n</span><span class="s">Bob,30,London</span><span class="se">\n</span><span class="s">Charlie,35,Tokyo</span><span class="sh">"</span>
+<span class="n">csv_lines</span> <span class="o">=</span> <span class="n">csv_data</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">csv_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">csv_lines</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">CSV行列表: </span><span class="si">{</span><span class="n">csv_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解析CSV数据
+</span><span class="n">header</span> <span class="o">=</span> <span class="n">csv_list</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">data_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">CSV头部: </span><span class="si">{</span><span class="n">header</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">CSV数据: </span><span class="si">{</span><span class="n">data_rows</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 转换为字典列表
+</span><span class="n">csv_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data_rows</span><span class="p">:</span>
+    <span class="n">row_dict</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+    <span class="n">csv_dicts</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row_dict</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">CSV字典列表: </span><span class="si">{</span><span class="n">csv_dicts</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="数据结构转换和操作">数据结构转换和操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 嵌套结构展平
+</span><span class="k">def</span> <span class="nf">flatten_list</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">展平嵌套列表</span><span class="sh">"""</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">nested_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="nf">flatten_list</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>  <span class="c1"># 递归处理
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 测试嵌套列表
+</span><span class="n">nested</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="mi">7</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]]]]</span>
+<span class="n">flattened</span> <span class="o">=</span> <span class="nf">flatten_list</span><span class="p">(</span><span class="n">nested</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始嵌套: </span><span class="si">{</span><span class="n">nested</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">展平结果: </span><span class="si">{</span><span class="n">flattened</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用itertools.chain展平（更高效）
+</span><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="n">simple_nested</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">chain_flattened</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">chain</span><span class="p">.</span><span class="nf">from_iterable</span><span class="p">(</span><span class="n">simple_nested</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">chain展平: </span><span class="si">{</span><span class="n">chain_flattened</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 矩阵转置
+</span><span class="k">def</span> <span class="nf">transpose_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">矩阵转置</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="o">*</span><span class="n">matrix</span><span class="p">))</span>
+
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+<span class="n">transposed</span> <span class="o">=</span> <span class="nf">transpose_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原矩阵: </span><span class="si">{</span><span class="n">matrix</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转置矩阵: </span><span class="si">{</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">transposed</span><span class="p">))</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 列表去重（保持顺序）
+</span><span class="k">def</span> <span class="nf">remove_duplicates_ordered</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">去重并保持顺序</span><span class="sh">"""</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">with_duplicates</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">unique_ordered</span> <span class="o">=</span> <span class="nf">remove_duplicates_ordered</span><span class="p">(</span><span class="n">with_duplicates</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原列表: </span><span class="si">{</span><span class="n">with_duplicates</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去重后: </span><span class="si">{</span><span class="n">unique_ordered</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用dict.fromkeys去重（Python 3.7+保持顺序）
+</span><span class="n">unique_dict_method</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nb">dict</span><span class="p">.</span><span class="nf">fromkeys</span><span class="p">(</span><span class="n">with_duplicates</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">dict方法去重: </span><span class="si">{</span><span class="n">unique_dict_method</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 列表分组
+</span><span class="k">def</span> <span class="nf">group_by_key</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">key_func</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">按键函数分组</span><span class="sh">"""</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nf">key_func</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">groups</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">groups</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">groups</span>
+
+<span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Alice</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">grade</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Bob</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">grade</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">19</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Charlie</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">grade</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">21</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Diana</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">grade</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># 按成绩分组
+</span><span class="n">by_grade</span> <span class="o">=</span> <span class="nf">group_by_key</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">grade</span><span class="sh">'</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">按成绩分组:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">grade</span><span class="p">,</span> <span class="n">student_list</span> <span class="ow">in</span> <span class="n">by_grade</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">student_list</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s">级: </span><span class="si">{</span><span class="n">names</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按年龄分组
+</span><span class="n">by_age</span> <span class="o">=</span> <span class="nf">group_by_key</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">按年龄分组:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">student_list</span> <span class="ow">in</span> <span class="n">by_age</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">student_list</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">岁: </span><span class="si">{</span><span class="n">names</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例数据分析">实际案例：数据分析</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">analyze_sales_data</span><span class="p">(</span><span class="n">sales_records</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">分析销售数据</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    
+    <span class="c1"># 提取各种数据列表
+</span>    <span class="n">products</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">))</span>
+    <span class="n">sales_amounts</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">]</span>
+    <span class="n">sales_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">]</span>
+    
+    <span class="c1"># 按产品分组
+</span>    <span class="n">product_sales</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">product</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">product_sales</span><span class="p">:</span>
+            <span class="n">product_sales</span><span class="p">[</span><span class="n">product</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">product_sales</span><span class="p">[</span><span class="n">product</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">])</span>
+    
+    <span class="c1"># 计算统计信息
+</span>    <span class="n">product_stats</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">amounts</span> <span class="ow">in</span> <span class="n">product_sales</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">product_stats</span><span class="p">[</span><span class="n">product</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">total</span><span class="sh">'</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amounts</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">average</span><span class="sh">'</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amounts</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">amounts</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">count</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">amounts</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nf">max</span><span class="p">(</span><span class="n">amounts</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nf">min</span><span class="p">(</span><span class="n">amounts</span><span class="p">)</span>
+        <span class="p">}</span>
+    
+    <span class="c1"># 按月份统计
+</span>    <span class="n">monthly_sales</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">][:</span><span class="mi">7</span><span class="p">]</span>  <span class="c1"># YYYY-MM格式
+</span>        <span class="k">if</span> <span class="n">month</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">monthly_sales</span><span class="p">:</span>
+            <span class="n">monthly_sales</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">monthly_sales</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">+=</span> <span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">]</span>
+    
+    <span class="c1"># 排序结果
+</span>    <span class="n">top_products</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">product_stats</span><span class="p">.</span><span class="nf">items</span><span class="p">(),</span> 
+                         <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="sh">'</span><span class="s">total</span><span class="sh">'</span><span class="p">],</span> 
+                         <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">products</span><span class="sh">'</span><span class="p">:</span> <span class="n">products</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">total_sales</span><span class="sh">'</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">sales_amounts</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">total_transactions</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">sales_records</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">average_transaction</span><span class="sh">'</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">sales_amounts</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">sales_records</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">product_stats</span><span class="sh">'</span><span class="p">:</span> <span class="n">product_stats</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">monthly_sales</span><span class="sh">'</span><span class="p">:</span> <span class="n">monthly_sales</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">top_products</span><span class="sh">'</span><span class="p">:</span> <span class="n">top_products</span>
+    <span class="p">}</span>
+
+<span class="c1"># 测试销售数据
+</span><span class="n">sales_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-15</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Alice</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-16</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">MacBook</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1999</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Bob</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-17</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Charlie</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-18</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPad</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">599</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Diana</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-02-01</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">MacBook</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1999</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Eve</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-02-02</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Frank</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-02-03</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPad</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">599</span><span class="p">,</span> <span class="sh">'</span><span class="s">customer</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Grace</span><span class="sh">'</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">analysis</span> <span class="o">=</span> <span class="nf">analyze_sales_data</span><span class="p">(</span><span class="n">sales_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">销售数据分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">产品列表: </span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">products</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总销售额: $</span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">total_sales</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总交易数: </span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">total_transactions</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平均交易额: $</span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">average_transaction</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">产品统计:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">product_stats</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">product</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    总销售: $</span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">total</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    平均价格: $</span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">average</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    销售次数: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">count</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">月度销售:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">month</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">monthly_sales</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s">: $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">销售排行:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">top_products</span><span class="sh">'</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">. </span><span class="si">{</span><span class="n">product</span><span class="si">}</span><span class="s">: $</span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">total</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级列表操作">高级列表操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 列表推导式与list()结合
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 条件过滤
+</span><span class="n">even_squares</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">偶数平方: </span><span class="si">{</span><span class="n">even_squares</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 嵌套推导
+</span><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">乘法表矩阵: </span><span class="si">{</span><span class="n">matrix</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 展平嵌套推导
+</span><span class="n">flattened_matrix</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">展平矩阵: </span><span class="si">{</span><span class="n">flattened_matrix</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 条件表达式
+</span><span class="n">processed</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="sh">'</span><span class="s">positive</span><span class="sh">'</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="sh">'</span><span class="s">negative</span><span class="sh">'</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="sh">'</span><span class="s">zero</span><span class="sh">'</span> 
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数值分类: </span><span class="si">{</span><span class="n">processed</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 多重迭代
+</span><span class="n">combinations</span> <span class="o">=</span> <span class="nf">list</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">条件组合: </span><span class="si">{</span><span class="n">combinations</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 函数式编程结合
+</span><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<span class="kn">from</span> <span class="n">operator</span> <span class="kn">import</span> <span class="n">add</span>
+
+<span class="c1"># 累积操作
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">cumulative</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">cumulative</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">numbers</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">累积和: </span><span class="si">{</span><span class="n">cumulative</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 更简洁的累积和
+</span><span class="kn">import</span> <span class="n">itertools</span>
+<span class="n">cumsum</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="nf">accumulate</span><span class="p">(</span><span class="n">numbers</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">itertools累积和: </span><span class="si">{</span><span class="n">cumsum</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 滑动窗口
+</span><span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">滑动窗口</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">window_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">-</span><span class="n">window_size</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">滑动窗口(大小3): </span><span class="si">{</span><span class="n">windows</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 分块处理
+</span><span class="k">def</span> <span class="nf">chunk_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">将列表分块</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="n">chunk_size</span><span class="p">)]</span>
+
+<span class="n">chunks</span> <span class="o">=</span> <span class="nf">chunk_list</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">分块处理(大小3): </span><span class="si">{</span><span class="n">chunks</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="性能考虑">性能考虑</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="c1"># 创建方式性能比较
+</span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="c1"># 方法1: list()构造
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法2: 列表推导式
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法3: 预分配+循环
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">list3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<span class="n">time3</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能比较（</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">个元素）:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list(range()): </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表推导式: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">预分配+循环: </span><span class="si">{</span><span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 内存使用比较
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">内存使用:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list对象大小: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">range对象大小: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">生成器大小: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="浅拷贝与深拷贝">浅拷贝与深拷贝</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">copy</span>
+
+<span class="c1"># 原始数据
+</span><span class="n">original</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+
+<span class="c1"># 直接赋值（引用）
+</span><span class="n">reference</span> <span class="o">=</span> <span class="n">original</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">original</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">引用: </span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否同一对象: </span><span class="si">{</span><span class="n">original</span> <span class="ow">is</span> <span class="n">reference</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># list()创建浅拷贝
+</span><span class="n">shallow_copy</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">浅拷贝: </span><span class="si">{</span><span class="n">shallow_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否同一对象: </span><span class="si">{</span><span class="n">original</span> <span class="ow">is</span> <span class="n">shallow_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内部列表是否同一对象: </span><span class="si">{</span><span class="n">original</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">shallow_copy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 修改测试
+</span><span class="n">original</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">修改原始数据后:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">original</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">引用: </span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">浅拷贝: </span><span class="si">{</span><span class="n">shallow_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 深拷贝
+</span><span class="n">original2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">deep_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="nf">deepcopy</span><span class="p">(</span><span class="n">original2</span><span class="p">)</span>
+<span class="n">original2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">888</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">深拷贝测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">original2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">深拷贝: </span><span class="si">{</span><span class="n">deep_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用列表推导式创建深拷贝
+</span><span class="n">original3</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">deep_copy_manual</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">original3</span><span class="p">]</span>  <span class="c1"># 对于二维列表
+</span><span class="n">original3</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">777</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">手动深拷贝:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">original3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">手动深拷贝: </span><span class="si">{</span><span class="n">deep_copy_manual</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="类型转换注意事项">类型转换注意事项</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 字符串转换
+</span><span class="n">string_data</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">char_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">string_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串转列表: </span><span class="si">{</span><span class="n">char_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数字字符串
+</span><span class="n">number_string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">12345</span><span class="sh">"</span>
+<span class="n">digit_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">number_string</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数字字符串转列表: </span><span class="si">{</span><span class="n">digit_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 如果想要数字列表
+</span><span class="n">number_list</span> <span class="o">=</span> <span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span> <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">number_string</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数字列表: </span><span class="si">{</span><span class="n">number_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 字节串转换
+</span><span class="n">byte_data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">byte_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">byte_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字节串转列表: </span><span class="si">{</span><span class="n">byte_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出ASCII码值
+</span>
+<span class="c1"># 字节串转字符列表
+</span><span class="n">char_from_bytes</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">byte_data</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字节串转字符列表: </span><span class="si">{</span><span class="n">char_from_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># None值处理
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">none_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">None转换错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 处理可能为None的情况
+</span><span class="k">def</span> <span class="nf">safe_list_conversion</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的列表转换</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">obj</span><span class="p">]</span>  <span class="c1"># 如果不可迭代，包装成单元素列表
+</span>
+<span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">42</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">safe_list_conversion</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="大数据处理">大数据处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 处理大型数据集时的内存优化
+</span><span class="k">def</span> <span class="nf">process_large_dataset</span><span class="p">(</span><span class="n">data_source</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">批量处理大型数据集</span><span class="sh">"""</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_source</span><span class="p">:</span>
+        <span class="n">batch</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">batch_size</span><span class="p">:</span>
+            <span class="c1"># 处理批次
+</span>            <span class="n">processed_batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>  <span class="c1"># 示例处理
+</span>            <span class="n">results</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">processed_batch</span><span class="p">)</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 清空批次
+</span>    
+    <span class="c1"># 处理剩余数据
+</span>    <span class="k">if</span> <span class="n">batch</span><span class="p">:</span>
+        <span class="n">processed_batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+        <span class="n">results</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">processed_batch</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># 模拟大型数据源
+</span><span class="k">def</span> <span class="nf">large_data_generator</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">生成大型数据的生成器</span><span class="sh">"""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span>
+
+<span class="c1"># 测试批量处理
+</span><span class="n">large_data</span> <span class="o">=</span> <span class="nf">large_data_generator</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">processed_results</span> <span class="o">=</span> <span class="nf">process_large_dataset</span><span class="p">(</span><span class="n">large_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">处理了 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">processed_results</span><span class="p">)</span><span class="si">}</span><span class="s"> 个数据项</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">前10个结果: </span><span class="si">{</span><span class="n">processed_results</span><span class="p">[</span><span class="si">:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">后10个结果: </span><span class="si">{</span><span class="n">processed_results</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="si">:</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 内存友好的数据转换
+</span><span class="k">def</span> <span class="nf">memory_efficient_conversion</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">内存友好的大型可迭代对象转换</span><span class="sh">"""</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">chunk</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">chunk_size</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 释放内存
+</span>    
+    <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 比较内存使用
+</span><span class="kn">import</span> <span class="n">tracemalloc</span>
+
+<span class="c1"># 开始内存跟踪
+</span><span class="n">tracemalloc</span><span class="p">.</span><span class="nf">start</span><span class="p">()</span>
+
+<span class="c1"># 直接转换大型range
+</span><span class="n">large_range</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">direct_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">large_range</span><span class="p">)</span>
+
+<span class="n">current</span><span class="p">,</span> <span class="n">peak</span> <span class="o">=</span> <span class="n">tracemalloc</span><span class="p">.</span><span class="nf">get_traced_memory</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">直接转换内存使用: 当前 </span><span class="si">{</span><span class="n">current</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> MB, 峰值 </span><span class="si">{</span><span class="n">peak</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> MB</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">tracemalloc</span><span class="p">.</span><span class="nf">stop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<h3 id="相关函数">相关函数</h3>
+<ul>
+  <li><a href="tuple.md">tuple() - 元组构造函数</a> - 创建元组</li>
+  <li><a href="set.md">set() - 集合构造函数</a> - 创建集合</li>
+  <li><a href="dict.md">dict() - 字典构造函数</a> - 创建字典</li>
+  <li><a href="str.md">str() - 字符串构造函数</a> - 创建字符串</li>
+  <li><a href="range.md">range() - 范围函数</a> - 生成数字序列</li>
+  <li><a href="enumerate.md">enumerate() - 枚举函数</a> - 枚举索引</li>
+</ul>
+
+<h3 id="相关模块">相关模块</h3>
+<ul>
+  <li><a href="../stdlib/copy.md">copy模块</a> - 拷贝操作</li>
+  <li><a href="../stdlib/itertools.md">itertools模块</a> - 迭代工具</li>
+  <li><a href="../stdlib/collections.md">collections模块</a> - 容器数据类型</li>
+  <li><a href="../stdlib/array.md">array模块</a> - 数组类型</li>
+</ul>
+
+<h3 id="相关概念">相关概念</h3>
+<ul>
+  <li><a href="../basics/list-comprehensions.md">列表推导式</a> - 列表生成</li>
+  <li><a href="../basics/sequence-types.md">序列类型</a> - 序列操作</li>
+  <li><a href="../advanced/iterators-generators.md">迭代器和生成器</a> - 迭代协议</li>
+  <li><a href="../advanced/memory-management.md">内存管理</a> - 内存优化</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#func-list">Python官方文档 - list()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#list">Python官方文档 - 列表类型</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">列表推导式</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">序列类型操作</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">类型转换</code> <code class="language-plaintext highlighter-rouge">容器</code> <code class="language-plaintext highlighter-rouge">序列</code> <code class="language-plaintext highlighter-rouge">数据结构</code> <code class="language-plaintext highlighter-rouge">可变类型</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

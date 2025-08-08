@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typing模块：类型提示 - Python知识体系文档</title>
+  <meta name="description" content="Python typing模块提供类型提示支持，增强代码可读性和静态类型检查">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>typing模块：类型提示 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="typing模块：类型提示" />
+<meta name="author" content="Python文档团队" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Python typing模块提供类型提示支持，增强代码可读性和静态类型检查" />
+<meta property="og:description" content="Python typing模块提供类型提示支持，增强代码可读性和静态类型检查" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/typing/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/typing/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="typing模块：类型提示" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档团队"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"Python typing模块提供类型提示支持，增强代码可读性和静态类型检查","headline":"typing模块：类型提示","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/stdlib/typing/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/stdlib/typing/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">typing模块：类型提示</h1>
+        
+        
+        <p class="doc-description">Python typing模块提供类型提示支持，增强代码可读性和静态类型检查</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: stdlib</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">typing</span>
+          
+          <span class="tag">类型提示</span>
+          
+          <span class="tag">类型检查</span>
+          
+          <span class="tag">泛型</span>
+          
+          <span class="tag">静态分析</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="typing模块类型提示">typing模块：类型提示</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p>Python的<code class="language-plaintext highlighter-rouge">typing</code>模块为类型提示(Type Hints)提供运行时支持。从Python 3.5版本开始，typing作为标准库引入，支持函数注解功能，可以配合类型检查工具如mypy实现静态类型检查。</p>
+
+<p><strong>重要提示</strong>：类型提示对程序运行没有任何影响，仅用于静态分析和代码文档化。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>理解类型提示的概念和作用</li>
+  <li>掌握基本类型注解的使用方法</li>
+  <li>学会使用泛型类型和类型变量</li>
+  <li>了解联合类型和可选类型</li>
+  <li>掌握复杂类型的定义和使用</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基础语法</li>
+  <li>函数定义和调用</li>
+  <li>面向对象编程基础</li>
+  <li>装饰器的基本概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>类型提示是一种为Python代码添加类型信息的方式，主要优势：</p>
+
+<ul>
+  <li><strong>代码可读性</strong>：明确函数参数和返回值的类型</li>
+  <li><strong>静态检查</strong>：配合工具进行类型检查，提前发现错误</li>
+  <li><strong>IDE支持</strong>：提供更好的代码补全和错误提示</li>
+  <li><strong>文档化</strong>：类型信息本身就是很好的文档</li>
+</ul>
+
+<h3 id="核心类型和工具">核心类型和工具</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型/工具</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Any</td>
+      <td>任意类型</td>
+    </tr>
+    <tr>
+      <td>Union</td>
+      <td>联合类型</td>
+    </tr>
+    <tr>
+      <td>Optional</td>
+      <td>可选类型</td>
+    </tr>
+    <tr>
+      <td>List, Dict, Tuple</td>
+      <td>容器类型</td>
+    </tr>
+    <tr>
+      <td>Callable</td>
+      <td>可调用类型</td>
+    </tr>
+    <tr>
+      <td>TypeVar</td>
+      <td>类型变量</td>
+    </tr>
+    <tr>
+      <td>Generic</td>
+      <td>泛型基类</td>
+    </tr>
+    <tr>
+      <td>Literal</td>
+      <td>字面量类型</td>
+    </tr>
+    <tr>
+      <td>TypedDict</td>
+      <td>类型化字典</td>
+    </tr>
+    <tr>
+      <td>NewType</td>
+      <td>新类型定义</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础类型注解">基础类型注解</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># 基本类型注解
+</span><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">问候函数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">!</span><span class="sh">"</span>
+
+<span class="c1"># 容器类型注解
+</span><span class="k">def</span> <span class="nf">process_numbers</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">处理数字列表，返回统计信息</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">count</span><span class="sh">"</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">),</span>
+        <span class="sh">"</span><span class="s">sum</span><span class="sh">"</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">),</span>
+        <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span> <span class="nf">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="k">if</span> <span class="n">numbers</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span> <span class="nf">min</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="k">if</span> <span class="n">numbers</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+<span class="c1"># 元组类型注解
+</span><span class="k">def</span> <span class="nf">get_coordinates</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">获取坐标点</span><span class="sh">"""</span>
+    <span class="nf">return </span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="mf">2.71</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">result</span> <span class="o">=</span> <span class="nf">greet</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Hello, 张三!
+</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="nf">process_numbers</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>  <span class="c1"># {'count': 5, 'sum': 15, 'max': 5, 'min': 1}
+</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="nf">get_coordinates</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">坐标: (</span><span class="si">{</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 坐标: (3.14, 2.71)
+</span></code></pre></div></div>
+
+<h3 id="类型别名">类型别名</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="c1"># 定义类型别名
+</span><span class="n">Vector</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+<span class="n">Matrix</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">Vector</span><span class="p">]</span>
+<span class="n">StudentGrades</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">scale_vector</span><span class="p">(</span><span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">向量缩放</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">scalar</span> <span class="o">*</span> <span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">矩阵乘法（简化版）</span><span class="sh">"""</span>
+    <span class="c1"># 简化实现，仅作示例
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">b</span> <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="nf">len</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">sum_val</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+            <span class="n">row</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">sum_val</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">calculate_average_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">:</span> <span class="n">StudentGrades</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">计算学生平均成绩</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">student</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="k">if</span> <span class="n">scores</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">student</span><span class="p">,</span> <span class="n">scores</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">.</span><span class="nf">items</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
+<span class="n">scaled</span> <span class="o">=</span> <span class="nf">scale_vector</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">vec</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缩放后的向量: </span><span class="si">{</span><span class="n">scaled</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 缩放后的向量: [2.0, 4.0, 6.0]
+</span>
+<span class="n">student_data</span><span class="p">:</span> <span class="n">StudentGrades</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">78</span><span class="p">],</span>
+    <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span>
+    <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">76</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">89</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">averages</span> <span class="o">=</span> <span class="nf">calculate_average_grade</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">student</span><span class="p">,</span> <span class="n">avg</span> <span class="ow">in</span> <span class="n">averages</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="s">的平均成绩: </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="newtype的使用">NewType的使用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
+
+<span class="c1"># 创建新类型
+</span><span class="n">UserId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">'</span><span class="s">UserId</span><span class="sh">'</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">ProductId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">'</span><span class="s">ProductId</span><span class="sh">'</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">Price</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">'</span><span class="s">Price</span><span class="sh">'</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_user_info</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">获取用户信息</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">用户ID: </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">get_product_price</span><span class="p">(</span><span class="n">product_id</span><span class="p">:</span> <span class="n">ProductId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Price</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">获取产品价格</span><span class="sh">"""</span>
+    <span class="c1"># 模拟数据库查询
+</span>    <span class="n">prices</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1001</span><span class="p">:</span> <span class="mf">99.99</span><span class="p">,</span> <span class="mi">1002</span><span class="p">:</span> <span class="mf">149.99</span><span class="p">,</span> <span class="mi">1003</span><span class="p">:</span> <span class="mf">79.99</span><span class="p">}</span>
+    <span class="k">return</span> <span class="nc">Price</span><span class="p">(</span><span class="n">prices</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">calculate_total</span><span class="p">(</span><span class="n">price</span><span class="p">:</span> <span class="n">Price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Price</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">计算总价</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nc">Price</span><span class="p">(</span><span class="n">price</span> <span class="o">*</span> <span class="n">quantity</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">user</span> <span class="o">=</span> <span class="nc">UserId</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="n">product</span> <span class="o">=</span> <span class="nc">ProductId</span><span class="p">(</span><span class="mi">1001</span><span class="p">)</span>
+
+<span class="n">user_info</span> <span class="o">=</span> <span class="nf">get_user_info</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>  <span class="c1"># 用户ID: 12345
+</span>
+<span class="n">unit_price</span> <span class="o">=</span> <span class="nf">get_product_price</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<span class="n">total_price</span> <span class="o">=</span> <span class="nf">calculate_total</span><span class="p">(</span><span class="n">unit_price</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">单价: </span><span class="si">{</span><span class="n">unit_price</span><span class="si">}</span><span class="s">, 总价: </span><span class="si">{</span><span class="n">total_price</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 单价: 99.99, 总价: 299.97
+</span>
+<span class="c1"># NewType提供类型安全
+# get_user_info(product)  # 类型检查器会报错
+</span></code></pre></div></div>
+
+<h3 id="any类型">Any类型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">处理任意类型的数据</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">字符串: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">数字: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">列表，长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">其他类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">data</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">flexible_function</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">灵活的函数，可以处理任何类型</span><span class="sh">"""</span>
+    <span class="c1"># Any类型可以赋值给任何其他类型
+</span>    <span class="n">result</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># 不会有类型检查错误
+</span>    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">process_data</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello</span><span class="sh">"</span><span class="p">))</span>      <span class="c1"># 字符串: Hello
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">process_data</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>           <span class="c1"># 数字: 42
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">process_data</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>    <span class="c1"># 列表，长度: 3
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">process_data</span><span class="p">({</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">}))</span>  <span class="c1"># 其他类型: dict
+</span></code></pre></div></div>
+
+<h3 id="union和optional">Union和Optional</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="c1"># Union类型：可以是多种类型之一
+</span><span class="k">def</span> <span class="nf">format_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">格式化不同类型的值</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">数值: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">文本: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># Optional类型：可以是指定类型或None
+</span><span class="k">def</span> <span class="nf">find_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">查找用户，可能返回None</span><span class="sh">"""</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">users</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">safe_divide</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">安全除法，除零时返回None</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">process_optional_list</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">处理可选的列表</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">format_value</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">))</span>    <span class="c1"># 数值: 3.14
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">format_value</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello</span><span class="sh">"</span><span class="p">))</span>    <span class="c1"># 文本: Hello
+</span>
+<span class="n">user</span> <span class="o">=</span> <span class="nf">find_user</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">找到用户: </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>   <span class="c1"># 找到用户: 张三
+</span><span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">用户不存在</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="nf">safe_divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">除法结果: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 除法结果: 5.0
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">process_optional_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 6
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">process_optional_list</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>       <span class="c1"># 0
+</span></code></pre></div></div>
+
+<h3 id="callable类型">Callable类型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="c1"># 定义函数类型
+</span><span class="n">MathOperation</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
+<span class="n">Validator</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span>
+<span class="n">Transformer</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">加法运算</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">乘法运算</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">apply_operation</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">operation</span><span class="p">:</span> <span class="n">MathOperation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">应用数学运算</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">operation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_email</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">简单的邮箱验证</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="s">@</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="sh">"</span><span class="s">.</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">text</span>
+
+<span class="k">def</span> <span class="nf">is_phone</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">简单的电话验证</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">text</span><span class="p">.</span><span class="nf">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">validate_input</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Validator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">验证输入</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">validator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">double_values</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">将所有数字翻倍</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">filter_even</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">过滤偶数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">transform_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">transformer</span><span class="p">:</span> <span class="n">Transformer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">转换列表</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">transformer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">apply_operation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">add</span><span class="p">))</span>       <span class="c1"># 8.0
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">apply_operation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">multiply</span><span class="p">))</span>  <span class="c1"># 15.0
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">validate_input</span><span class="p">(</span><span class="sh">"</span><span class="s">test@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="n">is_email</span><span class="p">))</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">validate_input</span><span class="p">(</span><span class="sh">"</span><span class="s">1234567890</span><span class="sh">"</span><span class="p">,</span> <span class="n">is_phone</span><span class="p">))</span>        <span class="c1"># True
+</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">transform_list</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">double_values</span><span class="p">))</span>  <span class="c1"># [2, 4, 6, 8, 10]
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">transform_list</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">filter_even</span><span class="p">))</span>    <span class="c1"># [2, 4]
+</span></code></pre></div></div>
+
+<h3 id="typevar和泛型">TypeVar和泛型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># 定义类型变量
+</span><span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">K</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># 泛型函数
+</span><span class="k">def</span> <span class="nf">first_element</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">获取列表的第一个元素</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">last_element</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">获取列表的最后一个元素</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">swap_pair</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">交换两个相同类型的值</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+
+<span class="c1"># 泛型类
+</span><span class="k">class</span> <span class="nc">Stack</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="sh">"""</span><span class="s">泛型栈实现</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">入栈</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">出栈</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span> <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">_items</span> <span class="k">else</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">查看栈顶元素</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">_items</span> <span class="k">else</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">检查栈是否为空</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取栈的大小</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">KeyValueStore</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]):</span>
+    <span class="sh">"""</span><span class="s">泛型键值存储</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">设置键值对</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">V</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取值</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">K</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取所有键</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_data</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">V</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取所有值</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_data</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">first_element</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>      <span class="c1"># 1
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">first_element</span><span class="p">([</span><span class="sh">"</span><span class="s">a</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">b</span><span class="sh">"</span><span class="p">]))</span>     <span class="c1"># a
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">last_element</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]))</span>      <span class="c1"># 2.2
+</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">swap_pair</span><span class="p">(</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">交换后: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 交换后: world, hello
+</span>
+<span class="c1"># 使用泛型栈
+</span><span class="n">int_stack</span><span class="p">:</span> <span class="n">Stack</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nc">Stack</span><span class="p">()</span>
+<span class="n">int_stack</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">int_stack</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">int_stack</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">栈顶元素: </span><span class="si">{</span><span class="n">int_stack</span><span class="p">.</span><span class="nf">peek</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 栈顶元素: 3
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">出栈: </span><span class="si">{</span><span class="n">int_stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>       <span class="c1"># 出栈: 3
+</span>
+<span class="n">str_stack</span><span class="p">:</span> <span class="n">Stack</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nc">Stack</span><span class="p">()</span>
+<span class="n">str_stack</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="sh">"</span><span class="s">Python</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">str_stack</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="sh">"</span><span class="s">typing</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串栈大小: </span><span class="si">{</span><span class="n">str_stack</span><span class="p">.</span><span class="nf">size</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 字符串栈大小: 2
+</span>
+<span class="c1"># 使用泛型键值存储
+</span><span class="n">user_store</span><span class="p">:</span> <span class="n">KeyValueStore</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nc">KeyValueStore</span><span class="p">()</span>
+<span class="n">user_store</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">user_store</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户1: </span><span class="si">{</span><span class="n">user_store</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 用户1: 张三
+</span>
+<span class="n">config_store</span><span class="p">:</span> <span class="n">KeyValueStore</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="nc">KeyValueStore</span><span class="p">()</span>
+<span class="n">config_store</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">config_store</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="sh">"</span><span class="s">production</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">配置项: </span><span class="si">{</span><span class="n">config_store</span><span class="p">.</span><span class="nf">keys</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 配置项: ['debug', 'production']
+</span></code></pre></div></div>
+
+<h3 id="literal类型">Literal类型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="c1"># 字面量类型
+</span><span class="n">Mode</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">read</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">write</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">append</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">LogLevel</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">DEBUG</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">WARNING</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ERROR</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">Direction</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">up</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">down</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Mode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">打开文件</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">以</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s">模式打开文件: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="n">LogLevel</span> <span class="o">=</span> <span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">记录日志</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s">] </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">move_character</span><span class="p">(</span><span class="n">direction</span><span class="p">:</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">移动角色</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">向</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s">移动</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s">步</span><span class="sh">"</span>
+
+<span class="c1"># 布尔字面量
+</span><span class="k">def</span> <span class="nf">validate_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="bp">True</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">严格验证模式</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">data</span><span class="p">.</span><span class="nf">isalnum</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">validate_data_flexible</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="bp">False</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">宽松验证模式</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="c1"># 数字字面量
+</span><span class="n">HttpStatus</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">404</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">HttpStatus</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">处理HTTP响应</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">请求成功</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">资源未找到</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">服务器错误</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">未知状态</span><span class="sh">"</span>  <span class="c1"># 这行代码永远不会执行
+</span>
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">open_file</span><span class="p">(</span><span class="sh">"</span><span class="s">data.txt</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">read</span><span class="sh">"</span><span class="p">))</span>     <span class="c1"># 以read模式打开文件: data.txt
+</span><span class="nf">log_message</span><span class="p">(</span><span class="sh">"</span><span class="s">系统启动</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span><span class="p">)</span>           <span class="c1"># [INFO] 系统启动
+</span><span class="nf">log_message</span><span class="p">(</span><span class="sh">"</span><span class="s">发生错误</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ERROR</span><span class="sh">"</span><span class="p">)</span>          <span class="c1"># [ERROR] 发生错误
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">move_character</span><span class="p">(</span><span class="sh">"</span><span class="s">up</span><span class="sh">"</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>           <span class="c1"># 向up移动3步
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">move_character</span><span class="p">(</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">))</span>            <span class="c1"># 向left移动1步
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">validate_data</span><span class="p">(</span><span class="sh">"</span><span class="s">abc123</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>     <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">validate_data_flexible</span><span class="p">(</span><span class="sh">"</span><span class="s">hello!</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>  <span class="c1"># True
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">handle_response</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>              <span class="c1"># 请求成功
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">handle_response</span><span class="p">(</span><span class="mi">404</span><span class="p">))</span>              <span class="c1"># 资源未找到
+</span></code></pre></div></div>
+
+<h3 id="typeddict">TypedDict</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># 定义类型化字典
+</span><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">in_stock</span><span class="p">:</span> <span class="nb">bool</span>
+
+<span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">customer</span><span class="p">:</span> <span class="n">Person</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Product</span><span class="p">]</span>
+    <span class="n">total</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">pending</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">processing</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">shipped</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">delivered</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="c1"># 可选字段的TypedDict
+</span><span class="k">class</span> <span class="nc">UserProfile</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>      <span class="c1"># 必需字段
+</span>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>         <span class="c1"># 必需字段
+</span>    <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>     <span class="c1"># 可选字段
+</span>    <span class="n">address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>   <span class="c1"># 可选字段
+</span>    <span class="n">bio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>       <span class="c1"># 可选字段
+</span>
+<span class="k">def</span> <span class="nf">create_person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Person</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">创建人员信息</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="n">email</span>
+    <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">calculate_order_total</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Product</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">计算订单总额</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="sh">"</span><span class="s">price</span><span class="sh">"</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="sh">"</span><span class="s">in_stock</span><span class="sh">"</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">process_order</span><span class="p">(</span><span class="n">order</span><span class="p">:</span> <span class="n">Order</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">处理订单</span><span class="sh">"""</span>
+    <span class="n">customer_name</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="sh">"</span><span class="s">customer</span><span class="sh">"</span><span class="p">][</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">item_count</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">order</span><span class="p">[</span><span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">])</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="sh">"</span><span class="s">total</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">客户</span><span class="si">{</span><span class="n">customer_name</span><span class="si">}</span><span class="s">的订单包含</span><span class="si">{</span><span class="n">item_count</span><span class="si">}</span><span class="s">件商品，总额</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">元，状态：</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">update_user_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">:</span> <span class="n">UserProfile</span><span class="p">,</span> <span class="o">**</span><span class="n">updates</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserProfile</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">更新用户资料</span><span class="sh">"""</span>
+    <span class="n">updated_profile</span> <span class="o">=</span> <span class="n">profile</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">updates</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">UserProfile</span><span class="p">.</span><span class="n">__annotations__</span><span class="p">:</span>
+            <span class="n">updated_profile</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">updated_profile</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">person1</span> <span class="o">=</span> <span class="nf">create_person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="sh">"</span><span class="s">zhangsan@example.com</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">创建用户: </span><span class="si">{</span><span class="n">person1</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">, 年龄: </span><span class="si">{</span><span class="n">person1</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Product</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">笔记本电脑</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">price</span><span class="sh">"</span><span class="p">:</span> <span class="mf">5999.99</span><span class="p">,</span> <span class="sh">"</span><span class="s">in_stock</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">无线鼠标</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">price</span><span class="sh">"</span><span class="p">:</span> <span class="mf">199.99</span><span class="p">,</span> <span class="sh">"</span><span class="s">in_stock</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">机械键盘</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">price</span><span class="sh">"</span><span class="p">:</span> <span class="mf">899.99</span><span class="p">,</span> <span class="sh">"</span><span class="s">in_stock</span><span class="sh">"</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">total_amount</span> <span class="o">=</span> <span class="nf">calculate_order_total</span><span class="p">(</span><span class="n">products</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">可购买商品总额: </span><span class="si">{</span><span class="n">total_amount</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">元</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">order</span><span class="p">:</span> <span class="n">Order</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">order_id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ORD-2024-001</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">customer</span><span class="sh">"</span><span class="p">:</span> <span class="n">person1</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">:</span> <span class="n">products</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span>  <span class="c1"># 只包含有库存的商品
+</span>    <span class="sh">"</span><span class="s">total</span><span class="sh">"</span><span class="p">:</span> <span class="mf">6199.98</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">pending</span><span class="sh">"</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">process_order</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+
+<span class="c1"># 用户资料示例
+</span><span class="n">user_profile</span><span class="p">:</span> <span class="n">UserProfile</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">zhangsan</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">zhangsan@example.com</span><span class="sh">"</span>
+<span class="p">}</span>
+
+<span class="n">updated_profile</span> <span class="o">=</span> <span class="nf">update_user_profile</span><span class="p">(</span>
+    <span class="n">user_profile</span><span class="p">,</span> 
+    <span class="n">phone</span><span class="o">=</span><span class="sh">"</span><span class="s">13800138000</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">bio</span><span class="o">=</span><span class="sh">"</span><span class="s">Python开发者</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">更新后的资料: </span><span class="si">{</span><span class="n">updated_profile</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例api响应处理">实际案例：API响应处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Literal</span>
+<span class="kn">import</span> <span class="n">json</span>
+
+<span class="c1"># 定义API响应类型
+</span><span class="k">class</span> <span class="nc">ApiResponse</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span>
+    <span class="n">errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+
+<span class="k">class</span> <span class="nc">UserData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span>
+
+<span class="k">class</span> <span class="nc">PaginationInfo</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">page</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">pages</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="k">class</span> <span class="nc">UserListResponse</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">UserData</span><span class="p">]</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="n">PaginationInfo</span>
+
+<span class="c1"># API状态类型
+</span><span class="n">ApiStatus</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">error</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">loading</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">HttpMethod</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">GET</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POST</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">PUT</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DELETE</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">ApiClient</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">API客户端类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="n">base_url</span>
+    
+    <span class="k">def</span> <span class="nf">make_request</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> 
+                    <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                    <span class="n">method</span><span class="p">:</span> <span class="n">HttpMethod</span> <span class="o">=</span> <span class="sh">"</span><span class="s">GET</span><span class="sh">"</span><span class="p">,</span> 
+                    <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ApiResponse</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">发送API请求</span><span class="sh">"""</span>
+        <span class="c1"># 模拟API请求
+</span>        <span class="k">if</span> <span class="n">endpoint</span> <span class="o">==</span> <span class="sh">"</span><span class="s">/users</span><span class="sh">"</span> <span class="ow">and</span> <span class="n">method</span> <span class="o">==</span> <span class="sh">"</span><span class="s">GET</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">用户列表获取成功</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">users</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">zhangsan</span><span class="sh">"</span><span class="p">,</span>
+                            <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">zhangsan@example.com</span><span class="sh">"</span><span class="p">,</span>
+                            <span class="sh">"</span><span class="s">created_at</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">2024-01-01T00:00:00Z</span><span class="sh">"</span><span class="p">,</span>
+                            <span class="sh">"</span><span class="s">is_active</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span>
+                        <span class="p">}</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="sh">"</span><span class="s">errors</span><span class="sh">"</span><span class="p">:</span> <span class="bp">None</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">请求失败</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">errors</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">端点不存在</span><span class="sh">"</span><span class="p">]</span>
+            <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserListResponse</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取用户列表</span><span class="sh">"""</span>
+        <span class="c1"># 模拟分页用户数据
+</span>        <span class="n">users</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">UserData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="s">user</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="s">user</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">@example.com</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">created_at</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">2024-01-01T00:00:00Z</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">is_active</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">per_page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">]</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">users</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">pagination</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">page</span><span class="sh">"</span><span class="p">:</span> <span class="n">page</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">per_page</span><span class="sh">"</span><span class="p">:</span> <span class="n">per_page</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">total</span><span class="sh">"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">pages</span><span class="sh">"</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">handle_api_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">ApiResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">处理API响应</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">请求成功: </span><span class="si">{</span><span class="n">response</span><span class="p">[</span><span class="sh">'</span><span class="s">message</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">errors</span><span class="sh">"</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="k">if</span> <span class="n">errors</span> <span class="k">else</span> <span class="sh">"</span><span class="s">未知错误</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">请求失败: </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">format_user_info</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">格式化用户信息</span><span class="sh">"""</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="sh">"</span><span class="s">活跃</span><span class="sh">"</span> <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="sh">"</span><span class="s">is_active</span><span class="sh">"</span><span class="p">]</span> <span class="k">else</span> <span class="sh">"</span><span class="s">非活跃</span><span class="sh">"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">用户 </span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="sh">'</span><span class="s">username</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="sh">'</span><span class="s">email</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">) - </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">client</span> <span class="o">=</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="sh">"</span><span class="s">https://api.example.com</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取用户列表
+</span><span class="n">user_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">get_users</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">user_response</span><span class="p">[</span><span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">]:</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">user_response</span><span class="p">[</span><span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">pagination</span> <span class="o">=</span> <span class="n">user_response</span><span class="p">[</span><span class="sh">"</span><span class="s">pagination</span><span class="sh">"</span><span class="p">]</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">获取到 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span><span class="si">}</span><span class="s"> 个用户 (第</span><span class="si">{</span><span class="n">pagination</span><span class="p">[</span><span class="sh">'</span><span class="s">page</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">页，共</span><span class="si">{</span><span class="n">pagination</span><span class="p">[</span><span class="sh">'</span><span class="s">pages</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">页)</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  - </span><span class="si">{</span><span class="nf">format_user_info</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">获取用户列表失败</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试API请求
+</span><span class="n">api_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">make_request</span><span class="p">(</span><span class="sh">"</span><span class="s">/users</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">GET</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">handle_api_response</span><span class="p">(</span><span class="n">api_response</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><strong>运行时无影响</strong>：类型提示不会影响程序的实际运行</li>
+  <li><strong>工具支持</strong>：需要配合mypy、PyCharm等工具才能发挥作用</li>
+  <li><strong>渐进式采用</strong>：可以逐步为现有代码添加类型提示</li>
+  <li><strong>性能考虑</strong>：复杂的类型检查可能影响导入时间</li>
+  <li><strong>版本兼容性</strong>：某些特性需要较新的Python版本</li>
+  <li><strong>泛型限制</strong>：过度使用泛型可能使代码复杂化</li>
+</ul>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="../dataclasses.md">dataclasses模块</a> - 数据类与类型提示</li>
+  <li><a href="../abc.md">abc模块</a> - 抽象基类</li>
+  <li><a href="../functools.md">functools模块</a> - 函数工具</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/typing.html">Python官方文档 - typing模块</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0484/">PEP 484 - Type Hints</a></li>
+  <li><a href="https://mypy.readthedocs.io/">mypy官方文档</a></li>
+  <li><a href="https://realpython.com/python-type-checking/">Real Python - Python Type Checking Guide</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">typing</code> <code class="language-plaintext highlighter-rouge">类型提示</code> <code class="language-plaintext highlighter-rouge">类型检查</code> <code class="language-plaintext highlighter-rouge">泛型</code> <code class="language-plaintext highlighter-rouge">静态分析</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档团队<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档团队</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

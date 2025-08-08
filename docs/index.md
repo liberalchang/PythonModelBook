@@ -1,71 +1,299 @@
 ---
 layout: page
-title: 文档目录
+title: Python知识体系文档
 permalink: /docs/
-show_sidebar: true
 ---
 
-# Python 文档目录
+# Python知识体系文档
 
-欢迎来到 Python 知识体系文档。本文档按照学习难度和主题分类，帮助你系统地掌握 Python 编程。
+欢迎来到Python知识体系文档！这里包含了从基础语法到高级应用的完整Python学习资源。
 
-## 📚 文档分类
-  
-### 🔤 基础语法
+<div class="docs-grid">
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">📚</span>
+                <h3>基础语法</h3>
+            </div>
+            <p class="category-description">Python基础语法和核心概念</p>
+            <div class="doc-links">
+                    <div class="section-title">变量与数据类型</div>
+                    <a href="basics/variables/" class="doc-link section-link">变量与数据类型</a>
+                    <div class="section-title">控制流程</div>
+                    <a href="basics/control-flow/" class="doc-link section-link">判断语句与循环语句</a>
+                    <a href="basics/match-case/" class="doc-link section-link">match-case语句 - 结构化模式匹配</a>
+                    <a href="basics/with/" class="doc-link section-link">with语句 - 上下文管理器</a>
+                    <a href="basics/raise-assert/" class="doc-link section-link">raise/assert - 异常抛出和断言</a>
+                    <a href="basics/yield/" class="doc-link section-link">yield - 生成器和协程</a>
+                    <div class="section-title">函数</div>
+                    <a href="basics/functions/" class="doc-link section-link">函数定义与调用</a>
+                    <a href="basics/function-scope/" class="doc-link section-link">函数作用域与闭包</a>
+                    <div class="section-title">模块与包</div>
+                    <a href="basics/packages/" class="doc-link section-link">Python包和__init__.py文件</a>
+                    <div class="section-title">类与对象</div>
+                    <a href="basics/class-definition/" class="doc-link section-link">类的定义与使用</a>
+                    <a href="basics/class-inheritance/" class="doc-link section-link">类的继承</a>
+                    <a href="basics/polymorphism/" class="doc-link section-link">多态性</a>
+                    <a href="basics/encapsulation/" class="doc-link section-link">封装</a>
+                    <a href="basics/magic-methods/" class="doc-link section-link">魔术方法</a>
+                    <a href="basics/abstract-classes/" class="doc-link section-link">抽象基类</a>
+                    <a href="basics/dataclasses/" class="doc-link section-link">数据类 (dataclass)</a>
+            </div>
+        </div>
 
-Python语言的核心语法和基本概念
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">🔧</span>
+                <h3>内置函数</h3>
+            </div>
+            <p class="category-description">Python内置函数详解</p>
+            <div class="doc-links">
+                    <div class="section-title">🔤 类型转换</div>
+                    <a href="builtins/int/" class="doc-link section-link">int() - 整数转换函数</a>
+                    <a href="builtins/float/" class="doc-link section-link">float() - 浮点数转换函数</a>
+                    <a href="builtins/str/" class="doc-link section-link">str() - 字符串转换函数</a>
+                    <a href="builtins/bool/" class="doc-link section-link">bool() - 布尔值转换函数</a>
+                    <a href="builtins/list/" class="doc-link section-link">list() - 列表构造函数</a>
+                    <a href="builtins/tuple/" class="doc-link section-link">tuple() - 元组构造函数</a>
+                    <a href="builtins/dict/" class="doc-link section-link">dict() - 字典构造函数</a>
+                    <a href="builtins/set/" class="doc-link section-link">set() - 集合构造函数</a>
+                    <a href="builtins/frozenset/" class="doc-link section-link">frozenset() - 不可变集合构造函数</a>
+                    <a href="builtins/complex/" class="doc-link section-link">complex() - 复数构造函数</a>
+                    <a href="builtins/bytes/" class="doc-link section-link">bytes() - 字节对象构造函数</a>
+                    <a href="builtins/bytearray/" class="doc-link section-link">bytearray() - 可变字节数组构造函数</a>
+                    <div class="section-title">🔢 数学运算</div>
+                    <a href="builtins/abs/" class="doc-link section-link">abs() - 绝对值函数</a>
+                    <a href="builtins/round/" class="doc-link section-link">round() - 数字四舍五入函数</a>
+                    <a href="builtins/min/" class="doc-link section-link">min() - 最小值函数</a>
+                    <a href="builtins/max/" class="doc-link section-link">max() - 最大值函数</a>
+                    <a href="builtins/sum/" class="doc-link section-link">sum() - 求和函数</a>
+                    <a href="builtins/pow/" class="doc-link section-link">pow() - 幂运算函数</a>
+                    <a href="builtins/divmod/" class="doc-link section-link">divmod() - 除法和取模运算函数</a>
+                    <a href="builtins/round/" class="doc-link section-link">round() - 数字四舍五入函数</a>
+                    <div class="section-title">📊 序列操作</div>
+                    <a href="builtins/len/" class="doc-link section-link">len() - 长度函数</a>
+                    <a href="builtins/sorted/" class="doc-link section-link">sorted() - 排序函数</a>
+                    <a href="builtins/reversed/" class="doc-link section-link">reversed() - 反转函数</a>
+                    <a href="builtins/range/" class="doc-link section-link">range() - 范围函数</a>
+                    <a href="builtins/slice/" class="doc-link section-link">slice() - 切片对象创建函数</a>
+                    <div class="section-title">🔄 迭代工具</div>
+                    <a href="builtins/enumerate/" class="doc-link section-link">enumerate() - 枚举函数</a>
+                    <a href="builtins/zip/" class="doc-link section-link">zip() - 打包函数</a>
+                    <a href="builtins/map/" class="doc-link section-link">map() - 映射函数</a>
+                    <a href="builtins/filter/" class="doc-link section-link">filter() - 过滤函数</a>
+                    <a href="builtins/iter/" class="doc-link section-link">iter() - 迭代器创建函数</a>
+                    <a href="builtins/next/" class="doc-link section-link">next() - 迭代器元素获取函数</a>
+                    <div class="section-title">🧠 逻辑判断</div>
+                    <a href="builtins/any/" class="doc-link section-link">any() - 逻辑或函数</a>
+                    <a href="builtins/all/" class="doc-link section-link">all() - 逻辑与函数</a>
+                    <div class="section-title">🔍 对象检查</div>
+                    <a href="builtins/type/" class="doc-link section-link">type() - 类型函数</a>
+                    <a href="builtins/isinstance/" class="doc-link section-link">isinstance() - 实例检查函数</a>
+                    <a href="builtins/issubclass/" class="doc-link section-link">issubclass() - 子类检查函数</a>
+                    <a href="builtins/hasattr/" class="doc-link section-link">hasattr() - 属性检查函数</a>
+                    <div class="section-title">📥📤 输入输出</div>
+                    <a href="builtins/print/" class="doc-link section-link">print() - 输出函数</a>
+                    <a href="builtins/input/" class="doc-link section-link">input() - 输入函数</a>
+                    <a href="builtins/open/" class="doc-link section-link">open() - 文件操作函数</a>
+                    <div class="section-title">🔧 高级功能</div>
+                    <a href="builtins/eval/" class="doc-link section-link">eval() - 表达式求值函数</a>
+                    <a href="builtins/exec/" class="doc-link section-link">exec() - 代码执行函数</a>
+                    <a href="builtins/compile/" class="doc-link section-link">compile() - 代码编译函数</a>
+                    <a href="builtins/globals/" class="doc-link section-link">globals() - 全局命名空间函数</a>
+                    <a href="builtins/locals/" class="doc-link section-link">locals() - 局部命名空间函数</a>
+                    <a href="builtins/vars/" class="doc-link section-link">vars() - 对象属性字典获取函数</a>
+                    <a href="builtins/memoryview/" class="doc-link section-link">memoryview() - 内存视图对象构造函数</a>
+                    <a href="builtins/help/" class="doc-link section-link">help() - 帮助系统函数</a>
+                    <a href="builtins/format/" class="doc-link section-link">format() - 格式化函数</a>
+                    <a href="builtins/f-string/" class="doc-link section-link">f-string - 格式化字符串字面量</a>
+                    <a href="builtins/repr/" class="doc-link section-link">repr() - 对象字符串表示函数</a>
+                    <a href="builtins/ascii/" class="doc-link section-link">ascii() - ASCII字符串表示函数</a>
+                    <div class="section-title">🔢 进制转换</div>
+                    <a href="builtins/bin/" class="doc-link section-link">bin() - 二进制转换函数</a>
+                    <a href="builtins/oct/" class="doc-link section-link">oct() - 八进制转换函数</a>
+                    <a href="builtins/hex/" class="doc-link section-link">hex() - 十六进制转换函数</a>
+                    <a href="builtins/ord/" class="doc-link section-link">ord() - Unicode码点获取函数</a>
+                    <a href="builtins/chr/" class="doc-link section-link">chr() - Unicode字符生成函数</a>
+                    <div class="section-title">最佳实践</div>
+                    <a href="builtins/../basics/index/" class="doc-link section-link">Python基础语法</a>
+                    <a href="builtins/../stdlib/index/" class="doc-link section-link">Python标准库</a>
+                    <a href="builtins/../thirdparty/index/" class="doc-link section-link">第三方库</a>
+            </div>
+        </div>
 
-- **[变量与数据类型](basics/variables/)** - 变量定义、基本数据类型
-- **[控制流程](basics/control-flow/)** - 条件语句、循环结构  
-- **[函数定义](basics/functions/)** - 函数定义、参数传递、作用域
-- **[类与对象](basics/classes/)** - 面向对象编程基础
-- **[异常处理](basics/exceptions/)** - 异常捕获和处理机制
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">📦</span>
+                <h3>标准库</h3>
+            </div>
+            <p class="category-description">Python标准库模块</p>
+            <div class="doc-links">
+                    <div class="section-title">日期时间</div>
+                    <a href="stdlib/time/" class="doc-link section-link">time模块</a>
+                    <a href="stdlib/calendar/" class="doc-link section-link">calendar模块</a>
+                    <a href="stdlib/datetime/" class="doc-link section-link">datetime模块</a>
+                    <div class="section-title">函数式编程</div>
+                    <a href="stdlib/operator/" class="doc-link section-link">operator模块</a>
+                    <a href="stdlib/copy/" class="doc-link section-link">copy模块</a>
+                    <a href="stdlib/inspect/" class="doc-link section-link">inspect模块</a>
+                    <a href="stdlib/enum/" class="doc-link section-link">enum模块</a>
+                    <a href="stdlib/typing/" class="doc-link section-link">typing模块</a>
+            </div>
+        </div>
 
-[查看全部基础语法文档 →](basics/)
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">🌟</span>
+                <h3>第三方库</h3>
+            </div>
+            <p class="category-description">常用第三方库和框架</p>
+            <div class="doc-links">
+                    <a href="thirdparty/pendulum/" class="doc-link">Pendulum</a>
+            </div>
+        </div>
 
-### 🛠️ 内置函数
+</div>
 
-Python解释器内置的函数和方法
+## 使用指南
 
-- **[字符串函数](builtins/string-functions/)** - 字符串操作相关函数
-- **[数学函数](builtins/math-functions/)** - 数值计算相关函数
-- **[集合函数](builtins/collection-functions/)** - 列表、字典、集合操作
-- **[输入输出函数](builtins/io-functions/)** - 输入输出相关函数
+- **基础语法**: 适合Python初学者，涵盖变量、控制流、函数等核心概念
+- **内置函数**: 详细介绍Python内置函数的用法和示例
+- **标准库**: 深入了解Python标准库的各个模块
+- **第三方库**: 探索流行的第三方库和框架
 
-[查看全部内置函数文档 →](builtins/)
+## 学习建议
 
-### 📦 标准库
+1. **循序渐进**: 建议按照基础语法 → 内置函数 → 标准库 → 第三方库的顺序学习
+2. **实践为主**: 每个概念都配有实际代码示例，建议动手实践
+3. **查漏补缺**: 可以根据需要跳转到特定主题进行学习
 
-Python标准库中的重要模块
+## 参考资源
 
-- **[文件操作](stdlib/file-operations/)** - 文件读写、路径操作
-- **[日期时间](stdlib/datetime/)** - 日期时间处理
-- **[正则表达式](stdlib/regex/)** - 文本模式匹配
-- **[网络编程](stdlib/networking/)** - 网络通信相关模块
-- **[数据库操作](stdlib/database/)** - 数据库连接和操作
+- [Python官方文档](https://docs.python.org/3/)
+- [PEP 8 代码风格指南](https://pep8.org/)
+- [Python增强提案(PEPs)](https://www.python.org/dev/peps/)
 
-[查看全部标准库文档 →](stdlib/)
+<style>
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
 
-### 🧩 第三方库
+.category-card {
+    background: var(--background-color, #ffffff);
+    border: 1px solid var(--border-color, #e1e4e8);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-流行的第三方库和框架
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: var(--link-color, #0366d6);
+}
 
-- **[数据分析](thirdparty/data-analysis/)** - NumPy、Pandas、Matplotlib等
-- **[Web开发](thirdparty/web-development/)** - Django、Flask、FastAPI等
-- **[机器学习](thirdparty/machine-learning/)** - Scikit-learn、TensorFlow、PyTorch等
-- **[图像处理](thirdparty/image-processing/)** - PIL、OpenCV等
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
-[查看全部第三方库文档 →](thirdparty/)
+.category-icon {
+    font-size: 2rem;
+    margin-right: 0.75rem;
+}
 
-## 📖 使用说明
+.category-header h3 {
+    margin: 0;
+    color: var(--heading-color, #24292e);
+    font-size: 1.25rem;
+}
 
-- **详细文档** - 每个文档都包含详细的说明、代码示例和最佳实践
-- **智能搜索** - 使用搜索功能快速定位相关内容，支持关键词和模糊匹配
-- **快速导航** - 文档右侧显示当前页面的标题结构，支持快速跳转
+.category-description {
+    color: var(--text-color, #586069);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
 
-## 🤝 参与贡献
+.doc-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
-这是一个开源项目，欢迎大家参与贡献！无论是修正错误、完善文档还是添加新内容，都非常欢迎。
+.doc-link {
+    color: var(--link-color, #0366d6);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
 
-- [了解项目](/about/)
-- [GitHub 仓库](https://github.com/liberalchang/PythonModelBook)
+.doc-link:hover {
+    background-color: var(--hover-background, #f6f8fa);
+    border-left-color: var(--link-color, #0366d6);
+    text-decoration: none;
+    transform: translateX(4px);
+}
+
+.section-title {
+    font-weight: 600;
+    color: var(--heading-color, #24292e);
+    margin: 1rem 0 0.5rem 0;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color, #e1e4e8);
+}
+
+.section-link {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+    .category-card {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+    
+    .category-header h3 {
+        color: #ffffff;
+    }
+    
+    .category-description {
+        color: #cccccc;
+    }
+    
+    .doc-link:hover {
+        background-color: #2a2a2a;
+    }
+    
+    .section-title {
+        color: #ffffff;
+        border-bottom-color: #444;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .docs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .category-card {
+        padding: 1rem;
+    }
+    
+    .category-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+}
+</style>

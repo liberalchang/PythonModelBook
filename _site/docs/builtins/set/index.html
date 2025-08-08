@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>set() - 集合构造函数 - Python知识体系文档</title>
+  <meta name="description" content="创建集合对象或将可迭代对象转换为集合">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>set() - 集合构造函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="set() - 集合构造函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="创建集合对象或将可迭代对象转换为集合" />
+<meta property="og:description" content="创建集合对象或将可迭代对象转换为集合" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/set/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/set/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="set() - 集合构造函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"创建集合对象或将可迭代对象转换为集合","headline":"set() - 集合构造函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/set/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/set/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">set() - 集合构造函数</h1>
+        
+        
+        <p class="doc-description">创建集合对象或将可迭代对象转换为集合</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">类型转换</span>
+          
+          <span class="tag">容器</span>
+          
+          <span class="tag">集合</span>
+          
+          <span class="tag">可变</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="set---集合构造函数">set() - 集合构造函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">set()</code> 是Python中的内置函数，用于创建集合对象或将其他可迭代对象转换为集合。集合是Python中的可变容器类型，存储唯一的、无序的元素，支持高效的成员测试、去重和集合运算操作，是数据处理中重要的数据结构。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握set()函数的基本用法</li>
+  <li>理解集合的特性和应用场景</li>
+  <li>学会使用集合进行去重和集合运算</li>
+  <li>了解集合的性能特点和最佳实践</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型</li>
+  <li>可迭代对象概念</li>
+  <li>哈希表基础</li>
+  <li>集合论基础概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>集合（set）是Python中的可变容器类型，存储唯一的、无序的可哈希元素。<code class="language-plaintext highlighter-rouge">set()</code> 函数提供了创建集合的标准方式，支持从各种可迭代对象构建集合，具有自动去重的特性。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空集合
+</span><span class="nf">set</span><span class="p">()</span>
+
+<span class="c1"># 从可迭代对象创建
+</span><span class="nf">set</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>iterable</td>
+      <td>iterable</td>
+      <td>否</td>
+      <td>无</td>
+      <td>可迭代对象，如列表、元组、字符串等</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: set</li>
+  <li><strong>说明</strong>: 新创建的集合对象，包含可迭代对象中的唯一元素</li>
+</ul>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空集合
+</span><span class="n">empty_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">空集合: </span><span class="si">{</span><span class="n">empty_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 空集合: set()
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 类型: &lt;class 'set'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">empty_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 长度: 0
+</span>
+<span class="c1"># 注意：不能用{}创建空集合，{}创建的是空字典
+</span><span class="n">empty_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">空字典类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_dict</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 空字典类型: &lt;class 'dict'&gt;
+</span>
+<span class="c1"># 从列表创建集合（自动去重）
+</span><span class="n">list_with_duplicates</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">set_from_list</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">list_with_duplicates</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原列表: </span><span class="si">{</span><span class="n">list_with_duplicates</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换后集合: </span><span class="si">{</span><span class="n">set_from_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 转换后集合: {1, 2, 3, 4, 5}
+</span>
+<span class="c1"># 从字符串创建集合
+</span><span class="n">string_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="sh">"</span><span class="s">hello world</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串集合: </span><span class="si">{</span><span class="n">string_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字符串集合: {'h', 'e', 'l', 'o', ' ', 'w', 'r', 'd'}
+</span>
+<span class="c1"># 从元组创建集合
+</span><span class="n">tuple_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组集合: </span><span class="si">{</span><span class="n">tuple_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 元组集合: {1, 2, 3, 4, 5}
+</span>
+<span class="c1"># 从range创建集合
+</span><span class="n">range_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">range集合: </span><span class="si">{</span><span class="n">range_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: range集合: {0, 1, 2, 3, 4}
+</span>
+<span class="c1"># 从字典创建集合（只包含键）
+</span><span class="n">dict_keys</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">keys_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">dict_keys</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典键集合: </span><span class="si">{</span><span class="n">keys_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典键集合: {'a', 'b', 'c'}
+</span>
+<span class="c1"># 从字典值创建集合
+</span><span class="n">values_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">dict_keys</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典值集合: </span><span class="si">{</span><span class="n">values_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典值集合: {1, 2, 3}
+</span>
+<span class="c1"># 集合字面量语法
+</span><span class="n">literal_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字面量集合: </span><span class="si">{</span><span class="n">literal_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字面量集合: {1, 2, 3, 4, 5}
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">与set()等价: </span><span class="si">{</span><span class="n">literal_set</span> <span class="o">==</span> <span class="nf">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 与set()等价: True
+</span>
+<span class="c1"># 嵌套可迭代对象
+</span><span class="n">nested_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="c1"># 注意：不能直接从嵌套列表创建集合，因为列表不可哈希
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">nested_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">nested_list</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">嵌套列表错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确方式：转换为元组
+</span><span class="n">nested_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="nf">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">nested_list</span><span class="p">]</span>
+<span class="n">nested_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">nested_tuples</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">嵌套元组集合: </span><span class="si">{</span><span class="n">nested_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 嵌套元组集合: {(1, 2), (3, 4), (5, 6)}
+</span></code></pre></div></div>
+
+<h3 id="数据去重">数据去重</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本去重
+</span><span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">移除重复元素</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="c1"># 测试数据去重
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">test_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去重后: </span><span class="si">{</span><span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 保持顺序的去重
+</span><span class="k">def</span> <span class="nf">remove_duplicates_ordered</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">保持原始顺序的去重</span><span class="sh">"""</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">保持顺序去重: </span><span class="si">{</span><span class="nf">remove_duplicates_ordered</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 字符串去重
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello world programming</span><span class="sh">"</span>
+<span class="n">unique_chars</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原文本: </span><span class="sh">'</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">唯一字符: </span><span class="si">{</span><span class="nf">sorted</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符数量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 单词去重
+</span><span class="n">sentence</span> <span class="o">=</span> <span class="sh">"</span><span class="s">the quick brown fox jumps over the lazy dog the fox is quick</span><span class="sh">"</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">.</span><span class="nf">split</span><span class="p">()</span>
+<span class="n">unique_words</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">原句子: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有单词: </span><span class="si">{</span><span class="n">words</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">唯一单词: </span><span class="si">{</span><span class="nf">sorted</span><span class="p">(</span><span class="n">unique_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">单词总数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="si">}</span><span class="s">, 唯一单词数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">unique_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 复杂数据结构去重
+</span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Alice</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="sh">'</span><span class="s">major</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">CS</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Bob</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="sh">'</span><span class="s">major</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Math</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Alice</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="sh">'</span><span class="s">major</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">CS</span><span class="sh">'</span><span class="p">},</span>  <span class="c1"># 重复
+</span>    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Charlie</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="sh">'</span><span class="s">major</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Physics</span><span class="sh">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Bob</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="sh">'</span><span class="s">major</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Math</span><span class="sh">'</span><span class="p">},</span>  <span class="c1"># 重复
+</span><span class="p">]</span>
+
+<span class="c1"># 字典不能直接放入集合，需要转换
+</span><span class="k">def</span> <span class="nf">deduplicate_dicts</span><span class="p">(</span><span class="n">dict_list</span><span class="p">,</span> <span class="n">key_func</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">字典列表去重</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">key_func</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># 使用所有键值对作为标识
+</span>        <span class="n">key_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="nf">items</span><span class="p">()))</span>
+    
+    <span class="n">seen_keys</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dict_list</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nf">key_func</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_keys</span><span class="p">:</span>
+            <span class="n">seen_keys</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">unique_students</span> <span class="o">=</span> <span class="nf">deduplicate_dicts</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">学生总数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">students</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去重后学生数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">unique_students</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">unique_students</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按特定字段去重
+</span><span class="n">unique_by_name</span> <span class="o">=</span> <span class="nf">deduplicate_dicts</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">按姓名去重:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">unique_by_name</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 文件内容去重
+</span><span class="k">def</span> <span class="nf">deduplicate_lines</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">文本行去重</span><span class="sh">"""</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">unique_lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="ow">and</span> <span class="n">line</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">unique_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">unique_lines</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">apple
+banana
+apple
+cherry
+banana
+date
+apple
+fig</span><span class="sh">"""</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">原始文本:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">去重后:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">deduplicate_lines</span><span class="p">(</span><span class="n">sample_text</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="集合运算">集合运算</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本集合运算
+</span><span class="n">set_a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">set_b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span>
+<span class="n">set_c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合A: </span><span class="si">{</span><span class="n">set_a</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合B: </span><span class="si">{</span><span class="n">set_b</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合C: </span><span class="si">{</span><span class="n">set_c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 并集（union）
+</span><span class="n">union_ab</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">|</span> <span class="n">set_b</span>  <span class="c1"># 或者 set_a.union(set_b)
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">A ∪ B: </span><span class="si">{</span><span class="n">union_ab</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A.union(B): </span><span class="si">{</span><span class="n">set_a</span><span class="p">.</span><span class="nf">union</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 交集（intersection）
+</span><span class="n">intersection_ab</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">&amp;</span> <span class="n">set_b</span>  <span class="c1"># 或者 set_a.intersection(set_b)
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A ∩ B: </span><span class="si">{</span><span class="n">intersection_ab</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A.intersection(B): </span><span class="si">{</span><span class="n">set_a</span><span class="p">.</span><span class="nf">intersection</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 差集（difference）
+</span><span class="n">difference_ab</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">-</span> <span class="n">set_b</span>  <span class="c1"># 或者 set_a.difference(set_b)
+</span><span class="n">difference_ba</span> <span class="o">=</span> <span class="n">set_b</span> <span class="o">-</span> <span class="n">set_a</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A - B: </span><span class="si">{</span><span class="n">difference_ab</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">B - A: </span><span class="si">{</span><span class="n">difference_ba</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 对称差集（symmetric difference）
+</span><span class="n">sym_diff_ab</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">^</span> <span class="n">set_b</span>  <span class="c1"># 或者 set_a.symmetric_difference(set_b)
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A △ B: </span><span class="si">{</span><span class="n">sym_diff_ab</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A.symmetric_difference(B): </span><span class="si">{</span><span class="n">set_a</span><span class="p">.</span><span class="nf">symmetric_difference</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 子集和超集检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">子集和超集关系:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">C ⊆ A (C是A的子集): </span><span class="si">{</span><span class="n">set_c</span> <span class="o">&lt;=</span> <span class="n">set_a</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">C ⊂ A (C是A的真子集): </span><span class="si">{</span><span class="n">set_c</span> <span class="o">&lt;</span> <span class="n">set_a</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A ⊇ C (A是C的超集): </span><span class="si">{</span><span class="n">set_a</span> <span class="o">&gt;=</span> <span class="n">set_c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A ⊃ C (A是C的真超集): </span><span class="si">{</span><span class="n">set_a</span> <span class="o">&gt;</span> <span class="n">set_c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 不相交检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A和B不相交: </span><span class="si">{</span><span class="n">set_a</span><span class="p">.</span><span class="nf">isdisjoint</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A和</span><span class="si">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="si">}</span><span class="s">不相交: </span><span class="si">{</span><span class="n">set_a</span><span class="p">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="si">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="si">}</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 多集合运算
+</span><span class="n">sets</span> <span class="o">=</span> <span class="p">[</span><span class="n">set_a</span><span class="p">,</span> <span class="n">set_b</span><span class="p">,</span> <span class="n">set_c</span><span class="p">]</span>
+<span class="n">all_union</span> <span class="o">=</span> <span class="nf">set</span><span class="p">().</span><span class="nf">union</span><span class="p">(</span><span class="o">*</span><span class="n">sets</span><span class="p">)</span>
+<span class="n">all_intersection</span> <span class="o">=</span> <span class="n">set_a</span><span class="p">.</span><span class="nf">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">sets</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">多集合运算:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有集合并集: </span><span class="si">{</span><span class="n">all_union</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有集合交集: </span><span class="si">{</span><span class="n">all_intersection</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 实际应用：权限管理
+</span><span class="n">user_permissions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">alice</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">read</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">write</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">execute</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">bob</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">read</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">write</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">charlie</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">read</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">admin</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">read</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">write</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">execute</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">delete</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">admin</span><span class="sh">'</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">required_permissions</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">read</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">write</span><span class="sh">'</span><span class="p">}</span>
+<span class="n">admin_permissions</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">admin</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">delete</span><span class="sh">'</span><span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">权限管理示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">user</span><span class="p">,</span> <span class="n">perms</span> <span class="ow">in</span> <span class="n">user_permissions</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">has_required</span> <span class="o">=</span> <span class="n">required_permissions</span> <span class="o">&lt;=</span> <span class="n">perms</span>
+    <span class="n">has_admin</span> <span class="o">=</span> <span class="nf">bool</span><span class="p">(</span><span class="n">perms</span> <span class="o">&amp;</span> <span class="n">admin_permissions</span><span class="p">)</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_permissions</span> <span class="o">-</span> <span class="n">perms</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  权限: </span><span class="si">{</span><span class="n">perms</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  满足基本要求: </span><span class="si">{</span><span class="n">has_required</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  有管理权限: </span><span class="si">{</span><span class="n">has_admin</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  缺少权限: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数据分析应用
+</span><span class="n">survey_responses</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">question1</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">question2</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">Yes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">No</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Yes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Maybe</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Yes</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">No</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">question3</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">Good</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Excellent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Good</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Fair</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Excellent</span><span class="sh">'</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">调查数据分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">question</span><span class="p">,</span> <span class="n">responses</span> <span class="ow">in</span> <span class="n">survey_responses</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">unique_responses</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">unique_responses</span><span class="p">)</span><span class="si">}</span><span class="s">种不同回答 - </span><span class="si">{</span><span class="n">unique_responses</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 找出所有问题的共同回答模式
+</span><span class="n">all_responses</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">responses</span> <span class="ow">in</span> <span class="n">survey_responses</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+    <span class="n">all_responses</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有回答类型: </span><span class="si">{</span><span class="n">all_responses</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级应用">高级应用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 图算法中的应用
+</span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加边</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="nf">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="nf">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>  <span class="c1"># 无向图
+</span>    
+    <span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取邻居节点</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nf">set</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">广度优先搜索</span><span class="sh">"""</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">visited</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                
+                <span class="c1"># 添加未访问的邻居
+</span>                <span class="n">neighbors</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="o">-</span> <span class="n">visited</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="nf">find_connected_components</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">查找连通分量</span><span class="sh">"""</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">adjacency</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">component</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">bfs</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+                <span class="n">components</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">components</span>
+
+<span class="c1"># 创建图并测试
+</span><span class="n">graph</span> <span class="o">=</span> <span class="nc">Graph</span><span class="p">()</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+    <span class="n">graph</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">图的邻接表:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">adjacency</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">neighbors</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">从节点1开始的BFS: </span><span class="si">{</span><span class="n">graph</span><span class="p">.</span><span class="nf">bfs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">连通分量: </span><span class="si">{</span><span class="n">graph</span><span class="p">.</span><span class="nf">find_connected_components</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 文本分析：词汇统计
+</span><span class="k">def</span> <span class="nf">analyze_text_vocabulary</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">分析文本词汇</span><span class="sh">"""</span>
+    <span class="n">all_words</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="n">text_vocabularies</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="nf">lower</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+        <span class="n">text_vocabularies</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">all_words</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">文本</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">词汇量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">总词汇量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">all_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 计算词汇重叠
+</span>    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">text_vocabularies</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">common_words</span> <span class="o">=</span> <span class="n">text_vocabularies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">vocab</span> <span class="ow">in</span> <span class="n">text_vocabularies</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">common_words</span> <span class="o">&amp;=</span> <span class="n">vocab</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有文本共同词汇: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">common_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">common_words</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">共同词汇: </span><span class="si">{</span><span class="nf">sorted</span><span class="p">(</span><span class="n">common_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 计算每个文本的独特词汇
+</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vocab</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">text_vocabularies</span><span class="p">):</span>
+        <span class="n">unique_words</span> <span class="o">=</span> <span class="n">vocab</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">other_vocab</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">text_vocabularies</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">unique_words</span> <span class="o">-=</span> <span class="n">other_vocab</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">文本</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">独特词汇: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">unique_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unique_words</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="nf">sorted</span><span class="p">(</span><span class="n">unique_words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">total_vocabulary</span><span class="sh">'</span><span class="p">:</span> <span class="n">all_words</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">text_vocabularies</span><span class="sh">'</span><span class="p">:</span> <span class="n">text_vocabularies</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">common_words</span><span class="sh">'</span><span class="p">:</span> <span class="n">common_words</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">text_vocabularies</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="c1"># 测试文本分析
+</span><span class="n">sample_texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">Python is a powerful programming language</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Programming with Python is fun and easy</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Machine learning uses Python for data analysis</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="n">analysis</span> <span class="o">=</span> <span class="nf">analyze_text_vocabulary</span><span class="p">(</span><span class="n">sample_texts</span><span class="p">)</span>
+
+<span class="c1"># 推荐系统：基于集合的相似度
+</span><span class="k">def</span> <span class="nf">calculate_jaccard_similarity</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算Jaccard相似度</span><span class="sh">"""</span>
+    <span class="n">intersection</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>
+    <span class="n">union</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">intersection</span> <span class="o">/</span> <span class="n">union</span> <span class="k">if</span> <span class="n">union</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">recommend_items</span><span class="p">(</span><span class="n">user_items</span><span class="p">,</span> <span class="n">all_user_items</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">基于用户物品集合的推荐</span><span class="sh">"""</span>
+    <span class="n">recommendations</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">other_user</span><span class="p">,</span> <span class="n">other_items</span> <span class="ow">in</span> <span class="n">all_user_items</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">similarity</span> <span class="o">=</span> <span class="nf">calculate_jaccard_similarity</span><span class="p">(</span><span class="n">user_items</span><span class="p">,</span> <span class="n">other_items</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">similarity</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="c1"># 推荐其他用户有但当前用户没有的物品
+</span>            <span class="n">new_items</span> <span class="o">=</span> <span class="n">other_items</span> <span class="o">-</span> <span class="n">user_items</span>
+            <span class="n">recommendations</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">new_items</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">与用户</span><span class="si">{</span><span class="n">other_user</span><span class="si">}</span><span class="s">相似度: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">, 新物品: </span><span class="si">{</span><span class="n">new_items</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">recommendations</span>
+
+<span class="c1"># 用户购买记录
+</span><span class="n">user_purchases</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">alice</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">laptop</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mouse</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">keyboard</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">monitor</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">bob</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">laptop</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mouse</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">headphones</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">webcam</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">charlie</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">tablet</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">stylus</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">case</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">charger</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">diana</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">laptop</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mouse</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">keyboard</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">headphones</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">eve</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">monitor</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">keyboard</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">speakers</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">webcam</span><span class="sh">'</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">current_user_items</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">laptop</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mouse</span><span class="sh">'</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">当前用户物品: </span><span class="si">{</span><span class="n">current_user_items</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">推荐物品:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">recommended</span> <span class="o">=</span> <span class="nf">recommend_items</span><span class="p">(</span><span class="n">current_user_items</span><span class="p">,</span> <span class="n">user_purchases</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">最终推荐: </span><span class="si">{</span><span class="n">recommended</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数据质量检查
+</span><span class="k">def</span> <span class="nf">check_data_quality</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">检查数据集质量</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">数据质量检查:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">data_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="nf">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  总记录数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  唯一记录数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  重复记录数: </span><span class="si">{</span><span class="n">duplicates</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  重复率: </span><span class="si">{</span><span class="n">duplicates</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">%</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 检查空值
+</span>        <span class="n">empty_values</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span> <span class="ow">or</span> <span class="nf">str</span><span class="p">(</span><span class="n">item</span><span class="p">).</span><span class="nf">strip</span><span class="p">()</span> <span class="o">==</span> <span class="sh">''</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  空值数量: </span><span class="si">{</span><span class="n">empty_values</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 检查数据类型一致性
+</span>        <span class="n">types</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">item</span><span class="p">).</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_set</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  数据类型: </span><span class="si">{</span><span class="n">types</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  ⚠️ 警告：数据类型不一致</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试数据质量检查
+</span><span class="n">test_datasets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">user_ids</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">emails</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="sh">'</span><span class="s">a@test.com</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b@test.com</span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span><span class="p">,</span> <span class="sh">'</span><span class="s">c@test.com</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a@test.com</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">scores</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">85</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nf">check_data_quality</span><span class="p">(</span><span class="n">test_datasets</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化">性能优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">random</span>
+
+<span class="c1"># 成员测试性能比较
+</span><span class="k">def</span> <span class="nf">performance_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">性能比较测试</span><span class="sh">"""</span>
+    <span class="c1"># 创建测试数据
+</span>    <span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="n">test_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">test_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">test_list</span><span class="p">)</span>
+    <span class="n">test_tuple</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">test_list</span><span class="p">)</span>
+    
+    <span class="c1"># 随机选择测试元素
+</span>    <span class="n">test_elements</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能测试（数据量: </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s">，测试次数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">test_elements</span><span class="p">)</span><span class="si">}</span><span class="s">）:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 列表成员测试
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_elements</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_list</span>
+    <span class="n">list_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 集合成员测试
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_elements</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_set</span>
+    <span class="n">set_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 元组成员测试
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_elements</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">test_tuple</span>
+    <span class="n">tuple_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表查找时间: </span><span class="si">{</span><span class="n">list_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合查找时间: </span><span class="si">{</span><span class="n">set_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组查找时间: </span><span class="si">{</span><span class="n">tuple_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">set_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合比列表快: </span><span class="si">{</span><span class="n">list_time</span><span class="o">/</span><span class="n">set_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合比元组快: </span><span class="si">{</span><span class="n">tuple_time</span><span class="o">/</span><span class="n">set_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">performance_comparison</span><span class="p">()</span>
+
+<span class="c1"># 集合操作性能
+</span><span class="k">def</span> <span class="nf">set_operations_performance</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">集合操作性能测试</span><span class="sh">"""</span>
+    <span class="c1"># 创建大型集合
+</span>    <span class="n">set1</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">50000</span><span class="p">))</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">25000</span><span class="p">,</span> <span class="mi">75000</span><span class="p">))</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合操作性能测试:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合1大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合2大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="sh">'</span><span class="s">并集</span><span class="sh">'</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">),</span>
+        <span class="p">(</span><span class="sh">'</span><span class="s">交集</span><span class="sh">'</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">),</span>
+        <span class="p">(</span><span class="sh">'</span><span class="s">差集</span><span class="sh">'</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">),</span>
+        <span class="p">(</span><span class="sh">'</span><span class="s">对称差集</span><span class="sh">'</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>
+    <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">operation</span><span class="p">()</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒, 结果大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">set_operations_performance</span><span class="p">()</span>
+
+<span class="c1"># 内存使用比较
+</span><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">def</span> <span class="nf">memory_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">内存使用比较</span><span class="sh">"""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+    
+    <span class="c1"># 不同数据结构的内存使用
+</span>    <span class="n">list_obj</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">set_obj</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">tuple_obj</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">内存使用比较（</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s">个元素）:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">list_obj</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">set_obj</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">tuple_obj</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 计算每个元素的平均内存开销
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">每元素内存开销:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">list_obj</span><span class="p">)</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> 字节/元素</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">set_obj</span><span class="p">)</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> 字节/元素</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">tuple_obj</span><span class="p">)</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> 字节/元素</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">memory_comparison</span><span class="p">()</span>
+
+<span class="c1"># 集合创建方式性能比较
+</span><span class="k">def</span> <span class="nf">creation_performance</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">集合创建性能比较</span><span class="sh">"""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合创建性能比较:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 方法1: set()构造函数
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 方法2: 集合推导式
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">}</span>
+    <span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 方法3: 循环添加
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">set3</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">set3</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">time3</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 方法4: 字面量（小数据集）
+</span>    <span class="n">small_data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">set4</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>  <span class="c1"># 示例
+</span>    <span class="n">time4</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set()构造: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合推导式: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">循环添加: </span><span class="si">{</span><span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 验证结果一致性
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">结果一致性检查:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set1 == set2: </span><span class="si">{</span><span class="n">set1</span> <span class="o">==</span> <span class="n">set2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set2 == set3: </span><span class="si">{</span><span class="n">set2</span> <span class="o">==</span> <span class="n">set3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">creation_performance</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="元素要求">元素要求</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 集合元素必须是可哈希的
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">集合元素要求:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 有效的元素类型
+</span><span class="n">valid_elements</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">string</span><span class="sh">'</span><span class="p">,</span>
+    <span class="mi">42</span><span class="p">,</span>
+    <span class="mf">3.14</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>
+    <span class="bp">True</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">有效元素集合: </span><span class="si">{</span><span class="n">valid_elements</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 无效的元素类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">无效元素类型示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">invalid_elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="sh">"</span><span class="s">列表</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="sh">"</span><span class="s">集合</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">({</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="sh">"</span><span class="s">字典</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">invalid_element</span><span class="p">,</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">invalid_elements</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">test_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">invalid_element</span><span class="p">}</span>
+    <span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 可变对象的处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">可变对象处理:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">original_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始列表: </span><span class="si">{</span><span class="n">original_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 转换为不可变类型
+</span><span class="n">immutable_tuple</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">immutable_tuple</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换为元组后可以加入集合: </span><span class="si">{</span><span class="n">test_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 嵌套结构的处理
+</span><span class="n">nested_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">嵌套列表: </span><span class="si">{</span><span class="n">nested_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 转换为可哈希的元组
+</span><span class="n">hashable_data</span> <span class="o">=</span> <span class="p">[</span><span class="nf">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">nested_data</span><span class="p">]</span>
+<span class="n">unique_tuples</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">hashable_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换为元组集合: </span><span class="si">{</span><span class="n">unique_tuples</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 自定义对象的哈希
+</span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">hash</span><span class="p">((</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Point</span><span class="p">)</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Point(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="c1"># 测试自定义对象
+</span><span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="n">point_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">点对象集合: </span><span class="si">{</span><span class="n">point_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始点数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="si">}</span><span class="s">, 唯一点数: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">point_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="常见陷阱">常见陷阱</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 空集合创建陷阱
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">空集合创建陷阱:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 错误方式
+</span><span class="n">empty_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># 这是字典，不是集合
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s"> 的类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_dict</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确方式
+</span><span class="n">empty_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set() 的类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合是无序的
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合无序性:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">test_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">次创建: </span><span class="si">{</span><span class="n">test_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合修改时的迭代陷阱
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">迭代时修改集合的陷阱:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始集合: </span><span class="si">{</span><span class="n">test_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 错误的方式（可能导致RuntimeError）
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">test_set</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">test_set</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c1"># 在迭代时修改集合
+</span><span class="k">except</span> <span class="nb">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">迭代时修改错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确的方式1：先收集要删除的元素
+</span><span class="n">test_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">test_set</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">to_remove</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">:</span>
+    <span class="n">test_set</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">正确删除后: </span><span class="si">{</span><span class="n">test_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确的方式2：使用集合推导式
+</span><span class="n">original_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">filtered_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">original_set</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">推导式过滤: </span><span class="si">{</span><span class="n">filtered_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合与列表的转换顺序问题
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合与列表转换的顺序问题:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">original_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始列表: </span><span class="si">{</span><span class="n">original_list</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 通过集合去重会丢失顺序
+</span><span class="n">deduped_unordered</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">original_list</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合去重（无序）: </span><span class="si">{</span><span class="n">deduped_unordered</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 保持顺序的去重
+</span><span class="k">def</span> <span class="nf">ordered_unique</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">deduped_ordered</span> <span class="o">=</span> <span class="nf">ordered_unique</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">保持顺序去重: </span><span class="si">{</span><span class="n">deduped_ordered</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合比较的陷阱
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合比较陷阱:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set1: </span><span class="si">{</span><span class="n">set1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set2: </span><span class="si">{</span><span class="n">set2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set3: </span><span class="si">{</span><span class="n">set3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set1 == set2: </span><span class="si">{</span><span class="n">set1</span> <span class="o">==</span> <span class="n">set2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True，集合相等不考虑顺序
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set1 &gt; set3: </span><span class="si">{</span><span class="n">set1</span> <span class="o">&gt;</span> <span class="n">set3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>    <span class="c1"># True，set1是set3的超集
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set3 &lt; set1: </span><span class="si">{</span><span class="n">set3</span> <span class="o">&lt;</span> <span class="n">set1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>    <span class="c1"># True，set3是set1的子集
+</span>
+<span class="c1"># 注意：集合比较是基于包含关系，不是大小
+</span><span class="n">set4</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+<span class="n">set5</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">set4</span> <span class="o">&gt;</span> <span class="n">set5</span>  <span class="c1"># 这不会抛出错误，但结果是False
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">set4</span><span class="si">}</span><span class="s"> &gt; </span><span class="si">{</span><span class="n">set5</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False，因为{10}不包含{1,2,3}
+</span><span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">比较错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合的浅拷贝问题
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合浅拷贝问题:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">original_set</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])}</span>  <span class="c1"># 这会出错，因为列表不可哈希
+</span>
+<span class="c1"># 正确的方式
+</span><span class="n">original_set</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))}</span>
+<span class="n">copied_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">original_set</span><span class="p">)</span>  <span class="c1"># 浅拷贝
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始集合: </span><span class="si">{</span><span class="n">original_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">拷贝集合: </span><span class="si">{</span><span class="n">copied_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否同一对象: </span><span class="si">{</span><span class="n">original_set</span> <span class="ow">is</span> <span class="n">copied_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内容是否相等: </span><span class="si">{</span><span class="n">original_set</span> <span class="o">==</span> <span class="n">copied_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 对于包含可变对象的情况，需要深拷贝
+</span><span class="kn">import</span> <span class="n">copy</span>
+
+<span class="k">class</span> <span class="nc">MutablePoint</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">hash</span><span class="p">((</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MutablePoint</span><span class="p">)</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">MutablePoint(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">metadata</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="n">point1</span> <span class="o">=</span> <span class="nc">MutablePoint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">point1</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">info</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">original_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">point1</span><span class="p">}</span>
+
+<span class="n">shallow_copy</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">original_set</span><span class="p">)</span>
+<span class="n">deep_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="nf">deepcopy</span><span class="p">(</span><span class="n">original_set</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">可变对象集合:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始: </span><span class="si">{</span><span class="n">original_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">浅拷贝: </span><span class="si">{</span><span class="n">shallow_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">深拷贝: </span><span class="si">{</span><span class="n">deep_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 修改原始对象
+</span><span class="n">point1</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">modified</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">修改后:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始: </span><span class="si">{</span><span class="n">original_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">浅拷贝: </span><span class="si">{</span><span class="n">shallow_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">深拷贝: </span><span class="si">{</span><span class="n">deep_copy</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<h3 id="相关函数">相关函数</h3>
+<ul>
+  <li><a href="list.md">list() - 列表构造函数</a> - 创建列表</li>
+  <li><a href="tuple.md">tuple() - 元组构造函数</a> - 创建元组</li>
+  <li><a href="dict.md">dict() - 字典构造函数</a> - 创建字典</li>
+  <li><a href="frozenset.md">frozenset() - 不可变集合</a> - 创建不可变集合</li>
+  <li><a href="len.md">len() - 长度函数</a> - 获取长度</li>
+  <li><a href="any.md">any() - 任意为真</a> - 检查任意元素</li>
+  <li><a href="all.md">all() - 全部为真</a> - 检查所有元素</li>
+</ul>
+
+<h3 id="相关模块">相关模块</h3>
+<ul>
+  <li><a href="../stdlib/collections.md">collections模块</a> - 容器数据类型</li>
+  <li><a href="../stdlib/itertools.md">itertools模块</a> - 迭代工具</li>
+  <li><a href="../stdlib/copy.md">copy模块</a> - 拷贝操作</li>
+  <li><a href="../stdlib/operator.md">operator模块</a> - 操作符函数</li>
+</ul>
+
+<h3 id="相关概念">相关概念</h3>
+<ul>
+  <li><a href="../basics/set-comprehensions.md">集合推导式</a> - 集合生成</li>
+  <li><a href="../advanced/hash-tables.md">哈希表</a> - 底层实现</li>
+  <li><a href="../math/set-theory.md">集合论</a> - 数学基础</li>
+  <li><a href="../basics/data-structures.md">数据结构</a> - 数据组织</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#func-set">Python官方文档 - set()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#set">Python官方文档 - 集合类型</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/datastructures.html#sets">集合推导式</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset">集合操作</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">类型转换</code> <code class="language-plaintext highlighter-rouge">容器</code> <code class="language-plaintext highlighter-rouge">集合</code> <code class="language-plaintext highlighter-rouge">可变类型</code> <code class="language-plaintext highlighter-rouge">哈希表</code> <code class="language-plaintext highlighter-rouge">去重</code> <code class="language-plaintext highlighter-rouge">集合运算</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

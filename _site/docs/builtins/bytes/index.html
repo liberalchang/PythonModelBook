@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bytes() - 字节对象构造函数 - Python知识体系文档</title>
+  <meta name="description" content="创建不可变的字节序列对象">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>bytes() - 字节对象构造函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="bytes() - 字节对象构造函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="创建不可变的字节序列对象" />
+<meta property="og:description" content="创建不可变的字节序列对象" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/bytes/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/bytes/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="bytes() - 字节对象构造函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"创建不可变的字节序列对象","headline":"bytes() - 字节对象构造函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/bytes/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/bytes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">bytes() - 字节对象构造函数</h1>
+        
+        
+        <p class="doc-description">创建不可变的字节序列对象</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">字节</span>
+          
+          <span class="tag">二进制</span>
+          
+          <span class="tag">编码</span>
+          
+          <span class="tag">数据类型</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="bytes---字节对象构造函数">bytes() - 字节对象构造函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">bytes()</code> 是Python中的内置函数，用于创建不可变的字节序列对象。字节对象是由0-255范围内的整数组成的序列，主要用于处理二进制数据、文件I/O、网络通信、编码转换等场景。与字符串不同，字节对象直接表示原始的二进制数据。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握bytes()函数的基本用法和语法</li>
+  <li>理解字节对象与字符串的区别和联系</li>
+  <li>学会字节对象的编码和解码操作</li>
+  <li>了解字节对象在文件处理和网络编程中的应用</li>
+  <li>掌握字节对象的常用方法和操作</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>字符串的基本概念和操作</li>
+  <li>编码（如UTF-8、ASCII）的基本概念</li>
+  <li>二进制和十六进制数的基本知识</li>
+  <li>可迭代对象的概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>字节对象（bytes）是不可变的字节序列，每个元素都是0-255范围内的整数。它是Python中处理二进制数据的主要数据类型，与字符串类似但专门用于二进制数据。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">bytes</span><span class="p">([</span><span class="n">source</span><span class="p">[,</span> <span class="n">encoding</span><span class="p">[,</span> <span class="n">errors</span><span class="p">]]])</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>source</td>
+      <td>多种类型</td>
+      <td>否</td>
+      <td>无</td>
+      <td>数据源：字符串、可迭代对象、整数或缓冲区对象</td>
+    </tr>
+    <tr>
+      <td>encoding</td>
+      <td>字符串</td>
+      <td>否</td>
+      <td>无</td>
+      <td>当source为字符串时的编码方式</td>
+    </tr>
+    <tr>
+      <td>errors</td>
+      <td>字符串</td>
+      <td>否</td>
+      <td>‘strict’</td>
+      <td>编码错误的处理方式</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: bytes对象</li>
+  <li><strong>内容</strong>: 不可变的字节序列</li>
+</ul>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空的字节对象
+</span><span class="n">empty_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">empty_bytes</span><span class="p">)</span>  <span class="c1"># 输出: b''
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_bytes</span><span class="p">))</span>  <span class="c1"># 输出: &lt;class 'bytes'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">empty_bytes</span><span class="p">))</span>  <span class="c1"># 输出: 0
+</span>
+<span class="c1"># 从整数创建指定长度的零字节
+</span><span class="n">zero_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">zero_bytes</span><span class="p">)</span>  <span class="c1"># 输出: b'\x00\x00\x00\x00\x00'
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">zero_bytes</span><span class="p">))</span>  <span class="c1"># 输出: 5
+</span>
+<span class="c1"># 从整数列表创建字节对象
+</span><span class="n">int_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">69</span><span class="p">]</span>  <span class="c1"># ASCII码
+</span><span class="n">bytes_from_list</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">int_list</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">bytes_from_list</span><span class="p">)</span>  <span class="c1"># 输出: b'ABCDE'
+</span>
+<span class="c1"># 从范围对象创建字节对象
+</span><span class="n">bytes_from_range</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">bytes_from_range</span><span class="p">)</span>  <span class="c1"># 输出: b'ABCDE'
+</span>
+<span class="c1"># 字节字面量
+</span><span class="n">literal_bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Hello, World!</span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">literal_bytes</span><span class="p">)</span>  <span class="c1"># 输出: b'Hello, World!'
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">literal_bytes</span><span class="p">))</span>  <span class="c1"># 输出: &lt;class 'bytes'&gt;
+</span></code></pre></div></div>
+
+<h3 id="从字符串创建字节对象">从字符串创建字节对象</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 从字符串创建字节对象（需要指定编码）
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello, 世界!</span><span class="sh">"</span>
+
+<span class="c1"># UTF-8编码
+</span><span class="n">utf8_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTF-8编码: </span><span class="si">{</span><span class="n">utf8_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">utf8_bytes</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># ASCII编码（会出错，因为包含非ASCII字符）
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">ascii_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">UnicodeEncodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII编码错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用错误处理
+</span><span class="n">ascii_bytes_ignore</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="sh">'</span><span class="s">ignore</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII编码（忽略错误）: </span><span class="si">{</span><span class="n">ascii_bytes_ignore</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">ascii_bytes_replace</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="sh">'</span><span class="s">replace</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII编码（替换错误）: </span><span class="si">{</span><span class="n">ascii_bytes_replace</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 不同编码的比较
+</span><span class="n">text_simple</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原文本: </span><span class="si">{</span><span class="n">text_simple</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTF-8: </span><span class="si">{</span><span class="nf">bytes</span><span class="p">(</span><span class="n">text_simple</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII: </span><span class="si">{</span><span class="nf">bytes</span><span class="p">(</span><span class="n">text_simple</span><span class="p">,</span> <span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Latin-1: </span><span class="si">{</span><span class="nf">bytes</span><span class="p">(</span><span class="n">text_simple</span><span class="p">,</span> <span class="sh">'</span><span class="s">latin-1</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="字节对象的基本操作">字节对象的基本操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 字节对象的基本操作
+</span><span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Hello, World!</span><span class="sh">'</span>
+
+<span class="c1"># 长度
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 索引访问
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第一个字节: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s"> (字符: </span><span class="si">{</span><span class="nf">chr</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最后一个字节: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s"> (字符: </span><span class="si">{</span><span class="nf">chr</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 切片
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">前5个字节: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="si">:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">后6个字节: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="si">:</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">每隔2个字节: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="si">::</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 遍历字节对象
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">遍历字节值:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">byte_val</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  索引</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">byte_val</span><span class="si">}</span><span class="s"> (0x</span><span class="si">{</span><span class="n">byte_val</span><span class="si">:</span><span class="mi">02</span><span class="n">x</span><span class="si">}</span><span class="s">) </span><span class="sh">'</span><span class="si">{</span><span class="nf">chr</span><span class="p">(</span><span class="n">byte_val</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>
+
+<span class="c1"># 检查是否包含某个字节或子序列
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">包含字节72(H): </span><span class="si">{</span><span class="mi">72</span> <span class="ow">in</span> <span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">包含子序列b</span><span class="sh">'</span><span class="s">World</span><span class="sh">'</span><span class="s">: </span><span class="si">{</span><span class="sa">b</span><span class="sh">'</span><span class="s">World</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">包含子序列b</span><span class="sh">'</span><span class="s">Python</span><span class="sh">'</span><span class="s">: </span><span class="si">{</span><span class="sa">b</span><span class="sh">'</span><span class="s">Python</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 查找
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="s">World</span><span class="sh">'</span><span class="s">的位置: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">World</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="s">o</span><span class="sh">'</span><span class="s">的位置: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="s">xyz</span><span class="sh">'</span><span class="s">的位置: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">xyz</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="字节对象的方法">字节对象的方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 字节对象的常用方法
+</span><span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Hello, World! Hello, Python!</span><span class="sh">'</span>
+
+<span class="c1"># 大小写转换
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">大写: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">小写: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">标题: </span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">title</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 替换
+</span><span class="n">replaced</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">Hello</span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Hi</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">替换后: </span><span class="si">{</span><span class="n">replaced</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 分割
+</span><span class="n">split_result</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">按空格分割: </span><span class="si">{</span><span class="n">split_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">split_comma</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">按逗号分割: </span><span class="si">{</span><span class="n">split_comma</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 连接
+</span><span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">b</span><span class="sh">'</span><span class="s">Python</span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">is</span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">awesome</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">joined</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">连接结果: </span><span class="si">{</span><span class="n">joined</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 去除空白
+</span><span class="n">padded_data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">  Hello, World!  </span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始（带空格）: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">padded_data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去除空白: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">padded_data</span><span class="p">.</span><span class="nf">strip</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去除左空白: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">padded_data</span><span class="p">.</span><span class="nf">lstrip</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">去除右空白: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">padded_data</span><span class="p">.</span><span class="nf">rstrip</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 判断方法
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">12345</span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否全为数字: </span><span class="si">{</span><span class="n">test_data</span><span class="p">.</span><span class="nf">isdigit</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否全为字母: </span><span class="si">{</span><span class="n">test_data</span><span class="p">.</span><span class="nf">isalpha</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否全为字母数字: </span><span class="si">{</span><span class="n">test_data</span><span class="p">.</span><span class="nf">isalnum</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">test_alpha</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Hello</span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="si">{</span><span class="n">test_alpha</span><span class="si">}</span><span class="sh">'</span><span class="s">是否全为字母: </span><span class="si">{</span><span class="n">test_alpha</span><span class="p">.</span><span class="nf">isalpha</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-高级应用">🚀 高级应用</h2>
+
+<h3 id="编码和解码">编码和解码</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 编码和解码示例
+</span><span class="n">original_text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Python编程：从入门到精通</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始文本: </span><span class="si">{</span><span class="n">original_text</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 编码为不同格式
+</span><span class="n">encodings</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-16</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-32</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">gbk</span><span class="sh">'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">encoding</span> <span class="ow">in</span> <span class="n">encodings</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">original_text</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">encoding</span><span class="si">}</span><span class="s">编码:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字节对象: </span><span class="si">{</span><span class="n">encoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  十六进制: </span><span class="si">{</span><span class="n">encoded</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 解码回文本
+</span>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">encoded</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  解码结果: </span><span class="si">{</span><span class="n">decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  解码正确: </span><span class="si">{</span><span class="n">decoded</span> <span class="o">==</span> <span class="n">original_text</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="nb">UnicodeEncodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">encoding</span><span class="si">}</span><span class="s">编码失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 处理编码错误
+</span><span class="n">problematic_text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello 🌍 World</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">问题文本: </span><span class="si">{</span><span class="n">problematic_text</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 不同的错误处理策略
+</span><span class="n">error_strategies</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">strict</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ignore</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">replace</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">xmlcharrefreplace</span><span class="sh">'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">error_strategies</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">problematic_text</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII编码（</span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s">）: </span><span class="si">{</span><span class="n">encoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">UnicodeEncodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ASCII编码（</span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s">）失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="二进制文件处理">二进制文件处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">tempfile</span>
+
+<span class="c1"># 二进制文件读写示例
+</span><span class="k">def</span> <span class="nf">binary_file_demo</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">二进制文件处理演示</span><span class="sh">"""</span>
+    <span class="c1"># 创建临时文件
+</span>    <span class="k">with</span> <span class="n">tempfile</span><span class="p">.</span><span class="nc">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp_file</span><span class="p">:</span>
+        <span class="n">temp_filename</span> <span class="o">=</span> <span class="n">temp_file</span><span class="p">.</span><span class="n">name</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 准备二进制数据
+</span>        <span class="n">header</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\x89</span><span class="s">PNG</span><span class="se">\r\n\x1a\n</span><span class="sh">'</span>  <span class="c1"># PNG文件头
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">This is binary data: </span><span class="sh">'</span> <span class="o">+</span> <span class="nf">bytes</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+        <span class="n">footer</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\x00\x00\x00\x00</span><span class="s">IEND</span><span class="se">\xae</span><span class="s">B`</span><span class="se">\x82</span><span class="sh">'</span>  <span class="c1"># PNG文件尾
+</span>        
+        <span class="n">full_data</span> <span class="o">=</span> <span class="n">header</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="n">footer</span>
+        
+        <span class="c1"># 写入二进制文件
+</span>        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">full_data</span><span class="p">)</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">写入了 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">full_data</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节到文件</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 读取二进制文件
+</span>        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">read_data</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">从文件读取了 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">read_data</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据一致: </span><span class="si">{</span><span class="n">read_data</span> <span class="o">==</span> <span class="n">full_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 分析文件头
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">文件头分析:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  前8字节: </span><span class="si">{</span><span class="n">read_data</span><span class="p">[</span><span class="si">:</span><span class="mi">8</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  十六进制: </span><span class="si">{</span><span class="n">read_data</span><span class="p">[</span><span class="si">:</span><span class="mi">8</span><span class="p">].</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  是否为PNG: </span><span class="si">{</span><span class="n">read_data</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="se">\x89</span><span class="s">PNG</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 查找特定模式
+</span>        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">binary data</span><span class="sh">'</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  找到模式</span><span class="sh">'</span><span class="si">{</span><span class="n">pattern</span><span class="p">.</span><span class="nf">decode</span><span class="p">()</span><span class="si">}</span><span class="sh">'</span><span class="s">在位置: </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># 清理临时文件
+</span>        <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">):</span>
+            <span class="n">os</span><span class="p">.</span><span class="nf">unlink</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">)</span>
+
+<span class="nf">binary_file_demo</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="网络数据处理">网络数据处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">struct</span>
+<span class="kn">import</span> <span class="n">socket</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># 网络协议数据包构造
+</span><span class="k">class</span> <span class="nc">NetworkPacket</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">简单的网络数据包类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">packet_type</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">packet_type</span> <span class="o">=</span> <span class="n">packet_type</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">payload</span>
+    
+    <span class="k">def</span> <span class="nf">pack</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">将数据包打包为字节序列</span><span class="sh">"""</span>
+        <span class="c1"># 包头格式: 类型(1字节) + 序列号(4字节) + 时间戳(8字节) + 载荷长度(4字节)
+</span>        <span class="n">header</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="nf">pack</span><span class="p">(</span><span class="sh">'</span><span class="s">!BIQi</span><span class="sh">'</span><span class="p">,</span> 
+                           <span class="n">self</span><span class="p">.</span><span class="n">packet_type</span><span class="p">,</span>
+                           <span class="n">self</span><span class="p">.</span><span class="n">sequence</span><span class="p">,</span> 
+                           <span class="nf">int</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">timestamp</span><span class="p">),</span>
+                           <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">payload</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">header</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">payload</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">unpack</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">从字节序列解包数据包</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">17</span><span class="p">:</span>  <span class="c1"># 最小包头长度
+</span>            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">数据包太短</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 解包包头
+</span>        <span class="n">packet_type</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">payload_length</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="sh">'</span><span class="s">!BIQi</span><span class="sh">'</span><span class="p">,</span> <span class="n">data</span><span class="p">[:</span><span class="mi">17</span><span class="p">])</span>
+        
+        <span class="c1"># 检查载荷长度
+</span>        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">17</span> <span class="o">+</span> <span class="n">payload_length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">载荷数据不完整</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 提取载荷
+</span>        <span class="n">payload</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">17</span><span class="o">+</span><span class="n">payload_length</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="nf">cls</span><span class="p">(</span><span class="n">packet_type</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Packet(type=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">packet_type</span><span class="si">}</span><span class="s">, seq=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">sequence</span><span class="si">}</span><span class="s">, time=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s">, payload=</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">payload</span><span class="p">)</span><span class="si">}</span><span class="s">bytes)</span><span class="sh">"</span>
+
+<span class="c1"># 网络数据包示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">网络数据包处理示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建数据包
+</span><span class="n">packet1</span> <span class="o">=</span> <span class="nc">NetworkPacket</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12345</span><span class="p">,</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">timestamp</span><span class="p">(),</span> <span class="sh">"</span><span class="s">Hello, Network!</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">packet2</span> <span class="o">=</span> <span class="nc">NetworkPacket</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12346</span><span class="p">,</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">timestamp</span><span class="p">(),</span> <span class="sa">b</span><span class="sh">"</span><span class="se">\x01\x02\x03\x04</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据包1: </span><span class="si">{</span><span class="n">packet1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据包2: </span><span class="si">{</span><span class="n">packet2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 打包
+</span><span class="n">packed1</span> <span class="o">=</span> <span class="n">packet1</span><span class="p">.</span><span class="nf">pack</span><span class="p">()</span>
+<span class="n">packed2</span> <span class="o">=</span> <span class="n">packet2</span><span class="p">.</span><span class="nf">pack</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">打包后:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  数据包1: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">packed1</span><span class="p">)</span><span class="si">}</span><span class="s">字节, 十六进制: </span><span class="si">{</span><span class="n">packed1</span><span class="p">.</span><span class="nf">hex</span><span class="p">()[</span><span class="si">:</span><span class="mi">40</span><span class="p">]</span><span class="si">}</span><span class="s">...</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  数据包2: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">packed2</span><span class="p">)</span><span class="si">}</span><span class="s">字节, 十六进制: </span><span class="si">{</span><span class="n">packed2</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解包
+</span><span class="n">unpacked1</span> <span class="o">=</span> <span class="n">NetworkPacket</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="n">packed1</span><span class="p">)</span>
+<span class="n">unpacked2</span> <span class="o">=</span> <span class="n">NetworkPacket</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="n">packed2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">解包后:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  数据包1: </span><span class="si">{</span><span class="n">unpacked1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  数据包2: </span><span class="si">{</span><span class="n">unpacked2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 验证数据完整性
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">数据完整性验证:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  包1载荷一致: </span><span class="si">{</span><span class="n">packet1</span><span class="p">.</span><span class="n">payload</span> <span class="o">==</span> <span class="n">unpacked1</span><span class="p">.</span><span class="n">payload</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  包2载荷一致: </span><span class="si">{</span><span class="n">packet2</span><span class="p">.</span><span class="n">payload</span> <span class="o">==</span> <span class="n">unpacked2</span><span class="p">.</span><span class="n">payload</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 模拟网络传输
+</span><span class="k">def</span> <span class="nf">simulate_network_transmission</span><span class="p">(</span><span class="n">packets</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">模拟网络传输</span><span class="sh">"""</span>
+    <span class="c1"># 将多个数据包合并
+</span>    <span class="n">combined_data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">''</span>
+    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">:</span>
+        <span class="n">packed</span> <span class="o">=</span> <span class="n">packet</span><span class="p">.</span><span class="nf">pack</span><span class="p">()</span>
+        <span class="n">combined_data</span> <span class="o">+=</span> <span class="n">packed</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">模拟网络传输:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  总数据长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">combined_data</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 模拟接收和解析
+</span>    <span class="n">received_packets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">while</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">combined_data</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">packet</span> <span class="o">=</span> <span class="n">NetworkPacket</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="n">combined_data</span><span class="p">[</span><span class="n">offset</span><span class="p">:])</span>
+            <span class="n">received_packets</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+            
+            <span class="c1"># 计算下一个数据包的偏移
+</span>            <span class="n">packet_size</span> <span class="o">=</span> <span class="mi">17</span> <span class="o">+</span> <span class="nf">len</span><span class="p">(</span><span class="n">packet</span><span class="p">.</span><span class="n">payload</span><span class="p">)</span>
+            <span class="n">offset</span> <span class="o">+=</span> <span class="n">packet_size</span>
+            
+        <span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  解析错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">break</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  成功接收 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">received_packets</span><span class="p">)</span><span class="si">}</span><span class="s"> 个数据包</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">received_packets</span>
+
+<span class="c1"># 测试网络传输模拟
+</span><span class="n">test_packets</span> <span class="o">=</span> <span class="p">[</span><span class="n">packet1</span><span class="p">,</span> <span class="n">packet2</span><span class="p">]</span>
+<span class="n">received</span> <span class="o">=</span> <span class="nf">simulate_network_transmission</span><span class="p">(</span><span class="n">test_packets</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="数据序列化和反序列化">数据序列化和反序列化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">pickle</span>
+<span class="kn">import</span> <span class="n">base64</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># 复杂数据结构的序列化
+</span><span class="k">class</span> <span class="nc">DataSerializer</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">数据序列化工具类</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">serialize_json</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">JSON序列化（文本格式）</span><span class="sh">"""</span>
+        <span class="n">json_str</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json_str</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize_json</span><span class="p">(</span><span class="n">data_bytes</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">JSON反序列化</span><span class="sh">"""</span>
+        <span class="n">json_str</span> <span class="o">=</span> <span class="n">data_bytes</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">serialize_pickle</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Pickle序列化（二进制格式）</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize_pickle</span><span class="p">(</span><span class="n">data_bytes</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Pickle反序列化</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">data_bytes</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">serialize_base64</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Base64编码</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="p">.</span><span class="nf">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize_base64</span><span class="p">(</span><span class="n">data_bytes</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Base64解码</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="p">.</span><span class="nf">b64decode</span><span class="p">(</span><span class="n">data_bytes</span><span class="p">)</span>
+
+<span class="c1"># 测试数据
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">张三</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">scores</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">metadata</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">created</span><span class="sh">'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">tags</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="sh">'</span><span class="s">student</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">python</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">编程</span><span class="sh">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="sh">'</span><span class="s">binary_data</span><span class="sh">'</span><span class="p">:</span> <span class="nf">bytes</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">数据序列化示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">test_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># JSON序列化（需要处理不可序列化的类型）
+</span><span class="n">json_serializable_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">scores</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">scores</span><span class="sh">'</span><span class="p">],</span>
+    <span class="sh">'</span><span class="s">metadata</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">created</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">metadata</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">created</span><span class="sh">'</span><span class="p">].</span><span class="nf">isoformat</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">tags</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">metadata</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">tags</span><span class="sh">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="sh">'</span><span class="s">binary_data</span><span class="sh">'</span><span class="p">:</span> <span class="n">test_data</span><span class="p">[</span><span class="sh">'</span><span class="s">binary_data</span><span class="sh">'</span><span class="p">].</span><span class="nf">hex</span><span class="p">()</span>  <span class="c1"># 转换为十六进制字符串
+</span><span class="p">}</span>
+
+<span class="n">json_bytes</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">serialize_json</span><span class="p">(</span><span class="n">json_serializable_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">JSON序列化:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">json_bytes</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  内容: </span><span class="si">{</span><span class="n">json_bytes</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)[</span><span class="si">:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s">...</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># JSON反序列化
+</span><span class="n">json_restored</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">deserialize_json</span><span class="p">(</span><span class="n">json_bytes</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  反序列化: </span><span class="si">{</span><span class="n">json_restored</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">json_restored</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Pickle序列化（可以处理任意Python对象）
+</span><span class="n">pickle_bytes</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">serialize_pickle</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">Pickle序列化:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  十六进制: </span><span class="si">{</span><span class="n">pickle_bytes</span><span class="p">.</span><span class="nf">hex</span><span class="p">()[</span><span class="si">:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s">...</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Pickle反序列化
+</span><span class="n">pickle_restored</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">deserialize_pickle</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  反序列化成功: </span><span class="si">{</span><span class="n">pickle_restored</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  日期对象: </span><span class="si">{</span><span class="n">pickle_restored</span><span class="p">[</span><span class="sh">'</span><span class="s">metadata</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">created</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  二进制数据: </span><span class="si">{</span><span class="n">pickle_restored</span><span class="p">[</span><span class="sh">'</span><span class="s">binary_data</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Base64编码
+</span><span class="n">original_binary</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">"</span><span class="se">\x89</span><span class="s">PNG</span><span class="se">\r\n\x1a\n</span><span class="s">这是一些二进制数据</span><span class="sh">"</span>
+<span class="n">base64_encoded</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">serialize_base64</span><span class="p">(</span><span class="n">original_binary</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">Base64编码:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  原始: </span><span class="si">{</span><span class="n">original_binary</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  编码: </span><span class="si">{</span><span class="n">base64_encoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  编码字符串: </span><span class="si">{</span><span class="n">base64_encoded</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Base64解码
+</span><span class="n">base64_decoded</span> <span class="o">=</span> <span class="n">DataSerializer</span><span class="p">.</span><span class="nf">deserialize_base64</span><span class="p">(</span><span class="n">base64_encoded</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  解码: </span><span class="si">{</span><span class="n">base64_decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  一致性: </span><span class="si">{</span><span class="n">original_binary</span> <span class="o">==</span> <span class="n">base64_decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="编码问题">编码问题</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 常见编码问题和解决方案
+</span>
+<span class="c1"># 问题1：忘记指定编码
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello, 世界!</span><span class="sh">"</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 错误：没有指定编码
+</span>    <span class="n">wrong_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># TypeError
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误1: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确做法
+</span><span class="n">correct_bytes</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">正确: </span><span class="si">{</span><span class="n">correct_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 问题2：编码不匹配
+</span><span class="n">utf8_bytes</span> <span class="o">=</span> <span class="sh">"</span><span class="s">中文</span><span class="sh">"</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTF-8字节: </span><span class="si">{</span><span class="n">utf8_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 错误：用错误的编码解码
+</span>    <span class="n">wrong_decode</span> <span class="o">=</span> <span class="n">utf8_bytes</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">gbk</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误2: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确做法
+</span><span class="n">correct_decode</span> <span class="o">=</span> <span class="n">utf8_bytes</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">正确解码: </span><span class="si">{</span><span class="n">correct_decode</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 问题3：处理不完整的字节序列
+</span><span class="n">incomplete_utf8</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\xe4\xb8\xad</span><span class="sh">'</span>  <span class="c1"># "中"的UTF-8编码的前3字节中的3字节
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">完整UTF-8: </span><span class="si">{</span><span class="n">incomplete_utf8</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解码: </span><span class="si">{</span><span class="n">incomplete_utf8</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 不完整的序列
+</span><span class="n">incomplete</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\xe4\xb8</span><span class="sh">'</span>  <span class="c1"># 缺少最后一个字节
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">incomplete</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误3: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用错误处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">忽略错误: </span><span class="si">{</span><span class="n">incomplete</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="sh">'</span><span class="s">ignore</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">替换错误: </span><span class="si">{</span><span class="n">incomplete</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="sh">'</span><span class="s">replace</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化">性能优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+
+<span class="c1"># 字节对象性能优化
+</span><span class="k">def</span> <span class="nf">performance_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">性能比较</span><span class="sh">"""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+    
+    <span class="c1"># 方法1：逐个添加（低效）
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">''</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">result1</span> <span class="o">+=</span> <span class="nf">bytes</span><span class="p">([</span><span class="n">i</span> <span class="o">%</span> <span class="mi">256</span><span class="p">])</span>
+    <span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法2：使用列表然后转换（高效）
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">byte_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">256</span><span class="p">)</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">byte_list</span><span class="p">)</span>
+    <span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法3：使用生成器表达式（最高效）
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result3</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">256</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">time3</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能比较（</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">个字节）:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  逐个添加: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  列表转换: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  生成器: </span><span class="si">{</span><span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  结果一致: </span><span class="si">{</span><span class="n">result1</span> <span class="o">==</span> <span class="n">result2</span> <span class="o">==</span> <span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最快方法比最慢快: </span><span class="si">{</span><span class="n">time1</span> <span class="o">/</span> <span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">performance_comparison</span><span class="p">()</span>
+
+<span class="c1"># 大文件处理优化
+</span><span class="k">def</span> <span class="nf">efficient_file_processing</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">高效的文件处理</span><span class="sh">"""</span>
+    <span class="kn">import</span> <span class="n">tempfile</span>
+    <span class="kn">import</span> <span class="n">os</span>
+    
+    <span class="c1"># 创建大文件
+</span>    <span class="k">with</span> <span class="n">tempfile</span><span class="p">.</span><span class="nc">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp_file</span><span class="p">:</span>
+        <span class="n">temp_filename</span> <span class="o">=</span> <span class="n">temp_file</span><span class="p">.</span><span class="n">name</span>
+        <span class="c1"># 写入1MB数据
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span> <span class="o">*</span> <span class="mi">4096</span>  <span class="c1"># 1MB
+</span>        <span class="n">temp_file</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 方法1：一次性读取（内存消耗大）
+</span>        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">all_data</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+        <span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        
+        <span class="c1"># 方法2：分块读取（内存友好）
+</span>        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">8192</span>  <span class="c1"># 8KB块
+</span>        <span class="n">processed_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">processed_size</span> <span class="o">+=</span> <span class="nf">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                <span class="c1"># 处理块数据（这里只是计数）
+</span>        <span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">文件处理性能:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  文件大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  一次性读取: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  分块读取: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  处理大小一致: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span> <span class="o">==</span> <span class="n">processed_size</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="p">.</span><span class="nf">unlink</span><span class="p">(</span><span class="n">temp_filename</span><span class="p">)</span>
+
+<span class="nf">efficient_file_processing</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="内存管理">内存管理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+<span class="kn">import</span> <span class="n">gc</span>
+
+<span class="c1"># 内存使用分析
+</span><span class="k">def</span> <span class="nf">memory_analysis</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">内存使用分析</span><span class="sh">"""</span>
+    <span class="c1"># 不同大小的字节对象
+</span>    <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">]</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">字节对象内存使用分析:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
+        <span class="c1"># 创建字节对象
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">//</span> <span class="mi">256</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>  <span class="c1"># 截取到指定大小
+</span>        
+        <span class="c1"># 测量内存使用
+</span>        <span class="n">obj_size</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">overhead</span> <span class="o">=</span> <span class="n">obj_size</span> <span class="o">-</span> <span class="n">size</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s">字节数据:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    对象大小: </span><span class="si">{</span><span class="n">obj_size</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    开销: </span><span class="si">{</span><span class="n">overhead</span><span class="si">}</span><span class="s">字节 (</span><span class="si">{</span><span class="n">overhead</span><span class="o">/</span><span class="n">size</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">%)</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 字节对象vs字符串内存比较
+</span>    <span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello, World!</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="n">text_bytes</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">字符串vs字节对象:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字符串: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字节对象: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">text_bytes</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字符串长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s">字符</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字节对象长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">text_bytes</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">memory_analysis</span><span class="p">()</span>
+
+<span class="c1"># 内存泄漏预防
+</span><span class="k">def</span> <span class="nf">prevent_memory_leaks</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">预防内存泄漏</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">内存泄漏预防示例:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 问题：循环引用
+</span>    <span class="k">class</span> <span class="nc">DataProcessor</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">''</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">def</span> <span class="nf">add_callback</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+        
+        <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">new_data</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">new_data</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">callbacks</span><span class="p">:</span>
+                <span class="nf">callback</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="c1"># 创建处理器
+</span>    <span class="n">processor</span> <span class="o">=</span> <span class="nc">DataProcessor</span><span class="p">()</span>
+    
+    <span class="c1"># 添加回调（可能造成循环引用）
+</span>    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="c1"># 这个回调持有对processor的引用
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">处理了 </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">processor</span><span class="p">.</span><span class="nf">add_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+    
+    <span class="c1"># 处理数据
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">processor</span><span class="p">.</span><span class="nf">process</span><span class="p">(</span><span class="nf">bytes</span><span class="p">([</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+    
+    <span class="c1"># 清理（重要！）
+</span>    <span class="n">processor</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    <span class="k">del</span> <span class="n">processor</span>
+    <span class="n">gc</span><span class="p">.</span><span class="nf">collect</span><span class="p">()</span>  <span class="c1"># 强制垃圾回收
+</span>    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  已清理资源</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">prevent_memory_leaks</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-实际应用场景">🔧 实际应用场景</h2>
+
+<h3 id="图像处理">图像处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 简单的图像数据处理
+</span><span class="k">class</span> <span class="nc">SimpleImage</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">简单的图像类（演示用）</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">channels</span> <span class="o">=</span> <span class="n">channels</span>
+        <span class="c1"># 创建空白图像数据
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="n">channels</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置像素颜色</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">channels</span>
+            <span class="c1"># 转换为可变的bytearray进行修改
+</span>            <span class="n">data_array</span> <span class="o">=</span> <span class="nf">bytearray</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">color</span><span class="p">[:</span><span class="n">self</span><span class="p">.</span><span class="n">channels</span><span class="p">]):</span>
+                <span class="n">data_array</span><span class="p">[</span><span class="n">offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">data_array</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取像素颜色</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">channels</span>
+            <span class="k">return</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">channels</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">save_ppm</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">保存为PPM格式（简单的图像格式）</span><span class="sh">"""</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># PPM头部
+</span>            <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">P6</span><span class="se">\n</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">width</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="si">}</span><span class="se">\n</span><span class="s">255</span><span class="se">\n</span><span class="sh">"</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+            <span class="c1"># 图像数据
+</span>            <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load_ppm</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">从PPM文件加载</span><span class="sh">"""</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># 读取头部
+</span>            <span class="n">magic</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">magic</span> <span class="o">!=</span> <span class="sa">b</span><span class="sh">'</span><span class="s">P6</span><span class="sh">'</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不是P6 PPM文件</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 跳过注释
+</span>            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>
+            <span class="k">while</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">#</span><span class="sh">'</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>
+            
+            <span class="c1"># 解析尺寸
+</span>            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">())</span>
+            
+            <span class="c1"># 读取最大值
+</span>            <span class="n">max_val</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">max_val</span> <span class="o">!=</span> <span class="mi">255</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">只支持8位PPM文件</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 读取图像数据
+</span>            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+            
+            <span class="c1"># 创建图像对象
+</span>            <span class="n">image</span> <span class="o">=</span> <span class="nf">cls</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+            <span class="n">image</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="k">return</span> <span class="n">image</span>
+
+<span class="c1"># 创建简单图像
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">图像处理示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="nc">SimpleImage</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># 绘制简单图案
+</span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="c1"># 创建渐变效果
+</span>        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span> <span class="o">//</span> <span class="mi">100</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span> <span class="o">//</span> <span class="mi">100</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">128</span>
+        <span class="n">image</span><span class="p">.</span><span class="nf">set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># 检查几个像素
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">像素(0,0): </span><span class="si">{</span><span class="n">image</span><span class="p">.</span><span class="nf">get_pixel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">像素(50,50): </span><span class="si">{</span><span class="n">image</span><span class="p">.</span><span class="nf">get_pixel</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">像素(99,99): </span><span class="si">{</span><span class="n">image</span><span class="p">.</span><span class="nf">get_pixel</span><span class="p">(</span><span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">图像数据大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s">字节</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="加密和哈希">加密和哈希</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">hashlib</span>
+<span class="kn">import</span> <span class="n">hmac</span>
+<span class="kn">import</span> <span class="n">secrets</span>
+
+<span class="c1"># 加密和哈希示例
+</span><span class="k">class</span> <span class="nc">CryptoUtils</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">加密工具类</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">hash_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="sh">'</span><span class="s">sha256</span><span class="sh">'</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算数据哈希</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span>
+        <span class="n">hasher</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hasher</span><span class="p">.</span><span class="nf">digest</span><span class="p">()</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">hash_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="sh">'</span><span class="s">sha256</span><span class="sh">'</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算文件哈希</span><span class="sh">"""</span>
+        <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">hasher</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hasher</span><span class="p">.</span><span class="nf">digest</span><span class="p">()</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">hmac_sign</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="sh">'</span><span class="s">sha256</span><span class="sh">'</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">HMAC签名</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">hmac</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">).</span><span class="nf">digest</span><span class="p">()</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">simple_xor_encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">简单XOR加密（仅用于演示）</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="c1"># 扩展密钥到数据长度
+</span>        <span class="n">extended_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span> <span class="o">*</span> <span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">//</span> <span class="nf">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))[:</span><span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
+        
+        <span class="c1"># XOR操作
+</span>        <span class="n">encrypted</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">extended_key</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">encrypted</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_salt</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">生成随机盐值</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">secrets</span><span class="p">.</span><span class="nf">token_bytes</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+<span class="c1"># 加密示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">加密和哈希示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数据哈希
+</span><span class="n">original_data</span> <span class="o">=</span> <span class="sh">"</span><span class="s">这是需要哈希的重要数据</span><span class="sh">"</span>
+<span class="n">sha256_hash</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">hash_data</span><span class="p">(</span><span class="n">original_data</span><span class="p">)</span>
+<span class="n">md5_hash</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">hash_data</span><span class="p">(</span><span class="n">original_data</span><span class="p">,</span> <span class="sh">'</span><span class="s">md5</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始数据: </span><span class="si">{</span><span class="n">original_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">SHA256哈希: </span><span class="si">{</span><span class="n">sha256_hash</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">MD5哈希: </span><span class="si">{</span><span class="n">md5_hash</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># HMAC签名
+</span><span class="n">secret_key</span> <span class="o">=</span> <span class="sh">"</span><span class="s">my_secret_key</span><span class="sh">"</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">hmac_sign</span><span class="p">(</span><span class="n">original_data</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">HMAC签名: </span><span class="si">{</span><span class="n">signature</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 验证签名
+</span><span class="n">verify_signature</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">hmac_sign</span><span class="p">(</span><span class="n">original_data</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">签名验证: </span><span class="si">{</span><span class="n">signature</span> <span class="o">==</span> <span class="n">verify_signature</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 简单加密
+</span><span class="n">encryption_key</span> <span class="o">=</span> <span class="sh">"</span><span class="s">encryption_key_123</span><span class="sh">"</span>
+<span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">simple_xor_encrypt</span><span class="p">(</span><span class="n">original_data</span><span class="p">,</span> <span class="n">encryption_key</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">加密数据: </span><span class="si">{</span><span class="n">encrypted_data</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解密（XOR加密是对称的）
+</span><span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">simple_xor_encrypt</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="n">encryption_key</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解密数据: </span><span class="si">{</span><span class="n">decrypted_data</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解密正确: </span><span class="si">{</span><span class="n">decrypted_data</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="o">==</span> <span class="n">original_data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 生成随机盐值
+</span><span class="n">salt</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">generate_salt</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">随机盐值: </span><span class="si">{</span><span class="n">salt</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 密码哈希（加盐）
+</span><span class="n">password</span> <span class="o">=</span> <span class="sh">"</span><span class="s">user_password_123</span><span class="sh">"</span>
+<span class="n">salted_password</span> <span class="o">=</span> <span class="n">salt</span> <span class="o">+</span> <span class="n">password</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">password_hash</span> <span class="o">=</span> <span class="n">CryptoUtils</span><span class="p">.</span><span class="nf">hash_data</span><span class="p">(</span><span class="n">salted_password</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">加盐密码哈希: </span><span class="si">{</span><span class="n">password_hash</span><span class="p">.</span><span class="nf">hex</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数">🔗 相关函数</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><strong>bytearray()</strong> - 创建可变字节数组</li>
+  <li><strong>str()</strong> - 字符串构造函数</li>
+  <li><strong>int()</strong> - 整数转换函数</li>
+  <li><strong>len()</strong> - 获取长度</li>
+  <li><strong>iter()</strong> - 创建迭代器</li>
+  <li><strong>memoryview()</strong> - 创建内存视图</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><strong>codecs</strong> - 编解码器
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">encode()</code>, <code class="language-plaintext highlighter-rouge">decode()</code> - 编码解码</li>
+      <li><code class="language-plaintext highlighter-rouge">open()</code> - 编码文件操作</li>
+    </ul>
+  </li>
+  <li><strong>base64</strong> - Base64编码
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">b64encode()</code>, <code class="language-plaintext highlighter-rouge">b64decode()</code> - Base64编解码</li>
+      <li><code class="language-plaintext highlighter-rouge">urlsafe_b64encode()</code> - URL安全编码</li>
+    </ul>
+  </li>
+  <li><strong>binascii</strong> - 二进制和ASCII转换
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">hexlify()</code>, <code class="language-plaintext highlighter-rouge">unhexlify()</code> - 十六进制转换</li>
+      <li><code class="language-plaintext highlighter-rouge">crc32()</code> - CRC32校验</li>
+    </ul>
+  </li>
+  <li><strong>struct</strong> - 二进制数据结构
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pack()</code>, <code class="language-plaintext highlighter-rouge">unpack()</code> - 数据打包解包</li>
+    </ul>
+  </li>
+  <li><strong>hashlib</strong> - 哈希算法
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">md5()</code>, <code class="language-plaintext highlighter-rouge">sha256()</code> - 哈希函数</li>
+    </ul>
+  </li>
+  <li><strong>hmac</strong> - HMAC算法</li>
+  <li><strong>secrets</strong> - 安全随机数</li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><strong>cryptography</strong> - 现代加密库</li>
+  <li><strong>Pillow</strong> - 图像处理</li>
+  <li><strong>numpy</strong> - 数值计算
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">np.frombuffer()</code> - 从字节创建数组</li>
+      <li><code class="language-plaintext highlighter-rouge">np.tobytes()</code> - 转换为字节</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#bytes">Python官方文档 - bytes()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview">Python官方文档 - 二进制序列类型</a></li>
+  <li><a href="https://docs.python.org/3/library/codecs.html">Python官方文档 - 编解码器</a></li>
+  <li><a href="https://docs.python.org/3/howto/unicode.html">字符编码详解</a></li>
+  <li><a href="https://docs.python.org/3/library/struct.html">二进制数据处理指南</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">字节</code> <code class="language-plaintext highlighter-rouge">二进制</code> <code class="language-plaintext highlighter-rouge">编码</code> <code class="language-plaintext highlighter-rouge">数据类型</code> <code class="language-plaintext highlighter-rouge">文件处理</code> <code class="language-plaintext highlighter-rouge">网络编程</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eval() - 表达式求值函数 - Python知识体系文档</title>
+  <meta name="description" content="执行字符串形式的Python表达式并返回结果">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>eval() - 表达式求值函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="eval() - 表达式求值函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="执行字符串形式的Python表达式并返回结果" />
+<meta property="og:description" content="执行字符串形式的Python表达式并返回结果" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/eval/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/eval/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="eval() - 表达式求值函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"执行字符串形式的Python表达式并返回结果","headline":"eval() - 表达式求值函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/eval/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/eval/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">eval() - 表达式求值函数</h1>
+        
+        
+        <p class="doc-description">执行字符串形式的Python表达式并返回结果</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">表达式求值</span>
+          
+          <span class="tag">动态执行</span>
+          
+          <span class="tag">代码执行</span>
+          
+          <span class="tag">安全风险</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="eval---表达式求值函数">eval() - 表达式求值函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">eval()</code> 是Python中的内置函数，用于执行字符串形式的Python表达式并返回结果。这个函数可以动态地执行Python代码，但同时也带来了安全风险。它主要用于计算数学表达式、动态配置、简单的代码生成等场景。使用时需要特别注意安全性和性能问题。</p>
+
+<h2 id="️-安全警告">⚠️ 安全警告</h2>
+
+<p><strong>eval()函数存在严重的安全风险！</strong></p>
+<ul>
+  <li>永远不要对不可信的输入使用eval()</li>
+  <li>恶意代码可能导致系统被攻击</li>
+  <li>在生产环境中使用时必须进行严格的输入验证</li>
+  <li>考虑使用更安全的替代方案</li>
+</ul>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握eval()函数的基本用法和语法</li>
+  <li>理解eval()的工作机制和限制</li>
+  <li>学会安全地使用eval()函数</li>
+  <li>了解eval()的安全风险和防护措施</li>
+  <li>掌握eval()的替代方案和最佳实践</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>表达式和语句的区别</li>
+  <li>作用域和命名空间的概念</li>
+  <li>异常处理的基本知识</li>
+  <li>安全编程的基本概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">eval()</code> 函数接受一个字符串参数，将其作为Python表达式进行求值，并返回表达式的结果。它只能执行表达式，不能执行语句（如赋值、循环等）。如果需要执行语句，应该使用 <code class="language-plaintext highlighter-rouge">exec()</code> 函数。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">locals</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>expression</td>
+      <td>字符串或代码对象</td>
+      <td>是</td>
+      <td>无</td>
+      <td>要执行的Python表达式</td>
+    </tr>
+    <tr>
+      <td>globals</td>
+      <td>字典</td>
+      <td>否</td>
+      <td>None</td>
+      <td>全局命名空间</td>
+    </tr>
+    <tr>
+      <td>locals</td>
+      <td>字典</td>
+      <td>否</td>
+      <td>None</td>
+      <td>局部命名空间</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: 任意类型</li>
+  <li><strong>内容</strong>: 表达式的计算结果</li>
+</ul>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本数学表达式
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">基本数学表达式:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">2 + 3 * 4</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">2 + 3 * 4 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 14
+</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">(10 + 5) / 3</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">(10 + 5) / 3 = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 5.0
+</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">2 ** 10</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">2 ** 10 = </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 1024
+</span>
+<span class="c1"># 字符串表达式
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">字符串表达式:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result4</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"'</span><span class="s">Hello</span><span class="sh">'</span><span class="s"> + </span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="s"> + </span><span class="sh">'</span><span class="s">World</span><span class="sh">'"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串连接: </span><span class="si">{</span><span class="n">result4</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># Hello World
+</span>
+<span class="n">result5</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"'</span><span class="s">Python</span><span class="sh">'</span><span class="s"> * 3</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串重复: </span><span class="si">{</span><span class="n">result5</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># PythonPythonPython
+</span>
+<span class="c1"># 列表和元组表达式
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">列表和元组表达式:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result6</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">[1, 2, 3] + [4, 5, 6]</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表连接: </span><span class="si">{</span><span class="n">result6</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5, 6]
+</span>
+<span class="n">result7</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">(1, 2) + (3, 4)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组连接: </span><span class="si">{</span><span class="n">result7</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># (1, 2, 3, 4)
+</span>
+<span class="c1"># 字典表达式
+</span><span class="n">result8</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">{</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="s">: 1, </span><span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="s">: 2}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典创建: </span><span class="si">{</span><span class="n">result8</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># {'a': 1, 'b': 2}
+</span>
+<span class="c1"># 布尔表达式
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">布尔表达式:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result9</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">True and False</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">True and False = </span><span class="si">{</span><span class="n">result9</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span>
+<span class="n">result10</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">5 &gt; 3 and 2 &lt; 4</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">5 &gt; 3 and 2 &lt; 4 = </span><span class="si">{</span><span class="n">result10</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 函数调用
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数调用:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result11</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">len(</span><span class="sh">'</span><span class="s">Hello World</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串长度: </span><span class="si">{</span><span class="n">result11</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 11
+</span>
+<span class="n">result12</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">max([1, 5, 3, 9, 2])</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最大值: </span><span class="si">{</span><span class="n">result12</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 9
+</span>
+<span class="n">result13</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">abs(-42)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">绝对值: </span><span class="si">{</span><span class="n">result13</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 42
+</span></code></pre></div></div>
+
+<h3 id="使用自定义命名空间">使用自定义命名空间</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 自定义全局和局部命名空间
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">自定义命名空间示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 定义自定义的全局命名空间
+</span><span class="n">custom_globals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{},</span>  <span class="c1"># 限制内置函数访问
+</span>    <span class="sh">'</span><span class="s">pi</span><span class="sh">'</span><span class="p">:</span> <span class="mf">3.14159</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">e</span><span class="sh">'</span><span class="p">:</span> <span class="mf">2.71828</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">sqrt</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">square</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="p">}</span>
+
+<span class="c1"># 定义自定义的局部命名空间
+</span><span class="n">custom_locals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Python</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="c1"># 使用自定义命名空间
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">pi * square(x)</span><span class="sh">"</span><span class="p">,</span> <span class="n">custom_globals</span><span class="p">,</span> <span class="n">custom_locals</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">π * x² = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 314.159
+</span>    
+    <span class="n">result2</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">sqrt(x * y)</span><span class="sh">"</span><span class="p">,</span> <span class="n">custom_globals</span><span class="p">,</span> <span class="n">custom_locals</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">√(x * y) = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 14.142135623730951
+</span>    
+    <span class="n">result3</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">name + </span><span class="sh">'</span><span class="s"> is great!</span><span class="sh">'"</span><span class="p">,</span> <span class="n">custom_globals</span><span class="p">,</span> <span class="n">custom_locals</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串操作: </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># Python is great!
+</span>    
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行出错: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 尝试访问被限制的内置函数
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">安全性测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 这会失败，因为我们限制了__builtins__
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="sh">"</span><span class="s">len(</span><span class="sh">'</span><span class="s">test</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span> <span class="n">custom_globals</span><span class="p">,</span> <span class="n">custom_locals</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">访问内置函数失败（预期）: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 动态变量访问
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">动态变量访问:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">operation</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">+</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="c1"># 根据变量动态构建表达式
+</span><span class="n">expression</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">a </span><span class="si">{</span><span class="n">variables</span><span class="p">[</span><span class="sh">'</span><span class="s">operation</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> b</span><span class="sh">"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">动态表达式 </span><span class="sh">'</span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="sh">'</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 300
+</span>
+<span class="c1"># 更复杂的动态表达式
+</span><span class="n">math_operations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">add</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">multiply</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">power</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">variables</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">math_operations</span><span class="p">)</span>
+
+<span class="n">complex_expr</span> <span class="o">=</span> <span class="sh">"</span><span class="s">power(add(a, b), 2) - multiply(a, b)</span><span class="sh">"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">complex_expr</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复杂表达式 </span><span class="sh">'</span><span class="si">{</span><span class="n">complex_expr</span><span class="si">}</span><span class="sh">'</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 70000
+</span></code></pre></div></div>
+
+<h3 id="安全的eval使用">安全的eval使用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">re</span>
+<span class="kn">import</span> <span class="n">ast</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="c1"># 安全的eval包装器
+</span><span class="k">class</span> <span class="nc">SafeEval</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">安全的表达式求值器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 允许的操作符
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">allowed_operators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">Add</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Sub</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Mult</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Div</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Mod</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Pow</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">LShift</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">RShift</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">BitOr</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">BitXor</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">BitAnd</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">FloorDiv</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">And</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Or</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Eq</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">NotEq</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">Lt</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">LtE</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Gt</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">GtE</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Is</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">IsNot</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">In</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">NotIn</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Not</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Invert</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">UAdd</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">USub</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 允许的节点类型
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">allowed_nodes</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">Expression</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">BinOp</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">UnaryOp</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Compare</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">BoolOp</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Num</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Str</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">List</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Tuple</span><span class="p">,</span>
+            <span class="n">ast</span><span class="p">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Set</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Load</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Constant</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 允许的内置函数
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">allowed_builtins</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">bool</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">list</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tuple</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">dict</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">set</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sorted</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">reversed</span><span class="sh">'</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 安全的全局命名空间
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">safe_globals</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">__builtins__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> 
+                           <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_builtins</span> 
+                           <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__builtins__</span><span class="p">}</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">is_safe_expression</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">检查表达式是否安全</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 解析表达式
+</span>            <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">)</span>
+            
+            <span class="c1"># 检查所有节点
+</span>            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="p">.</span><span class="nf">walk</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+                <span class="n">node_type</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                
+                <span class="c1"># 检查节点类型
+</span>                <span class="k">if</span> <span class="n">node_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_nodes</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">不允许的节点类型: </span><span class="si">{</span><span class="n">node_type</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                
+                <span class="c1"># 检查操作符
+</span>                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="p">.</span><span class="n">BinOp</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">UnaryOp</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Compare</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">BoolOp</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="sh">'</span><span class="s">op</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">type</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">op</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_operators</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">不允许的操作符: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">op</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                    <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="sh">'</span><span class="s">ops</span><span class="sh">'</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">node</span><span class="p">.</span><span class="n">ops</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="nf">type</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_operators</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">不允许的比较操作符: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">op</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                
+                <span class="c1"># 检查函数调用
+</span>                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Call</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">func</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Name</span><span class="p">):</span>
+                        <span class="n">func_name</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">id</span>
+                        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_builtins</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">不允许的函数调用: </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="sh">"</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">不允许的复杂函数调用</span><span class="sh">"</span>
+                
+                <span class="c1"># 检查属性访问
+</span>                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Attribute</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">不允许属性访问</span><span class="sh">"</span>
+                
+                <span class="c1"># 检查导入
+</span>                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="p">.</span><span class="n">Import</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">ImportFrom</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">不允许导入语句</span><span class="sh">"</span>
+            
+            <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="sh">"</span><span class="s">表达式安全</span><span class="sh">"</span>
+            
+        <span class="k">except</span> <span class="nb">SyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">语法错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">解析错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">safe_eval</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">安全地执行表达式</span><span class="sh">"""</span>
+        <span class="c1"># 检查表达式安全性
+</span>        <span class="n">is_safe</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_safe_expression</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_safe</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">不安全的表达式: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 准备命名空间
+</span>        <span class="n">safe_locals</span> <span class="o">=</span> <span class="n">variables</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">variables</span> <span class="k">else</span> <span class="p">{}</span>
+        
+        <span class="c1"># 执行表达式
+</span>        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">safe_globals</span><span class="p">,</span> <span class="n">safe_locals</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">表达式执行失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试安全的eval
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">安全eval测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">safe_evaluator</span> <span class="o">=</span> <span class="nc">SafeEval</span><span class="p">()</span>
+
+<span class="c1"># 安全的表达式
+</span><span class="n">safe_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">2 + 3 * 4</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max([1, 5, 3, 9, 2])</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">len(</span><span class="sh">'</span><span class="s">Hello World</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">abs(-42)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">[1, 2, 3] + [4, 5, 6]</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">{</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="s">: 1, </span><span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="s">: 2}</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">x * 2 + y</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">安全表达式测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">safe_expressions</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">safe_evaluator</span><span class="p">.</span><span class="nf">safe_eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 不安全的表达式
+</span><span class="n">unsafe_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">__import__(</span><span class="sh">'</span><span class="s">os</span><span class="sh">'</span><span class="s">).system(</span><span class="sh">'</span><span class="s">ls</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># 导入和系统调用
+</span>    <span class="sh">"</span><span class="s">open(</span><span class="sh">'</span><span class="s">/etc/passwd</span><span class="sh">'</span><span class="s">).read()</span><span class="sh">"</span><span class="p">,</span>      <span class="c1"># 文件操作
+</span>    <span class="sh">"</span><span class="s">exec(</span><span class="sh">'</span><span class="s">print(</span><span class="se">\"</span><span class="s">hello</span><span class="se">\"</span><span class="s">)</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>        <span class="c1"># 执行代码
+</span>    <span class="sh">"</span><span class="s">[].append.__globals__</span><span class="sh">"</span><span class="p">,</span>           <span class="c1"># 属性访问
+</span>    <span class="sh">"</span><span class="s">eval(</span><span class="sh">'</span><span class="s">2+2</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>                     <span class="c1"># 嵌套eval
+</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">不安全表达式测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">unsafe_expressions</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">safe_evaluator</span><span class="p">.</span><span class="nf">safe_eval</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s"> (不应该成功!)</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 被阻止: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="计算器应用示例">计算器应用示例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">re</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="c1"># 简单的计算器类
+</span><span class="k">class</span> <span class="nc">SimpleCalculator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">简单的表达式计算器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 允许的字符模式
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">allowed_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sa">r</span><span class="sh">'</span><span class="s">^[0-9+\-*/().\s]+$</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="c1"># 数学常量和函数
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">math_context</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="sh">'</span><span class="s">pi</span><span class="sh">'</span><span class="p">:</span> <span class="mf">3.14159265359</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">e</span><span class="sh">'</span><span class="p">:</span> <span class="mf">2.71828182846</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">sqrt</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">sin</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">).</span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">cos</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">).</span><span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">tan</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">).</span><span class="nf">tan</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">log</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">).</span><span class="nf">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">log10</span><span class="sh">'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">).</span><span class="nf">log10</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">validate_expression</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">验证表达式</span><span class="sh">"""</span>
+        <span class="c1"># 检查字符
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">allowed_pattern</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">表达式包含不允许的字符</span><span class="sh">"</span>
+        
+        <span class="c1"># 检查括号匹配
+</span>        <span class="k">if</span> <span class="n">expression</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">(</span><span class="sh">'</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expression</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">)</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">括号不匹配</span><span class="sh">"</span>
+        
+        <span class="c1"># 检查空表达式
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">expression</span><span class="p">.</span><span class="nf">strip</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">表达式为空</span><span class="sh">"</span>
+        
+        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="sh">"</span><span class="s">表达式有效</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">计算表达式</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 验证表达式
+</span>            <span class="n">is_valid</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">validate_expression</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">验证失败: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            
+            <span class="c1"># 计算结果
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">math_context</span><span class="p">,</span> <span class="p">{})</span>
+            
+            <span class="c1"># 检查结果类型
+</span>            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nf">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果类型错误: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">None</span>
+                
+        <span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">错误: 除零</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="nb">OverflowError</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">错误: 数值溢出</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数值错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="nb">SyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">语法错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计算错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">interactive_mode</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">交互模式</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">简单计算器 - 输入</span><span class="sh">'</span><span class="s">quit</span><span class="sh">'</span><span class="s">退出</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">支持的操作: +, -, *, /, (), 数字</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">支持的函数: sqrt, sin, cos, tan, log, log10, abs, max, min, round</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">支持的常量: pi, e</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">expression</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt;&gt;&gt; </span><span class="sh">"</span><span class="p">).</span><span class="nf">strip</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="n">expression</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">'</span><span class="s">quit</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">exit</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">q</span><span class="sh">'</span><span class="p">]:</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">再见!</span><span class="sh">"</span><span class="p">)</span>
+                    <span class="k">break</span>
+                
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">expression</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                
+                <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">calculate</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                
+            <span class="k">except</span> <span class="nb">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">再见!</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="nb">EOFError</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">再见!</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">break</span>
+
+<span class="c1"># 测试计算器
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">计算器测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">calculator</span> <span class="o">=</span> <span class="nc">SimpleCalculator</span><span class="p">()</span>
+
+<span class="c1"># 测试表达式
+</span><span class="n">test_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">2 + 3 * 4</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">(10 + 5) / 3</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">2 ** 10</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">sqrt(16)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">pi * 2</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">sin(pi / 2)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">log(e)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(1, 5, 3, 9, 2)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">round(3.14159, 2)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">1 / 0</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># 除零错误
+</span>    <span class="sh">"</span><span class="s">2 +</span><span class="sh">"</span><span class="p">,</span>    <span class="c1"># 语法错误
+</span>    <span class="sh">"</span><span class="s">sqrt(-1)</span><span class="sh">"</span> <span class="c1"># 数学错误
+</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">test_expressions</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">计算: </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">.</span><span class="nf">calculate</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 如果需要交互模式，取消下面的注释
+# calculator.interactive_mode()
+</span></code></pre></div></div>
+
+<h2 id="-高级应用">🚀 高级应用</h2>
+
+<h3 id="配置文件解析">配置文件解析</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="c1"># 动态配置解析器
+</span><span class="k">class</span> <span class="nc">DynamicConfigParser</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">动态配置解析器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 配置上下文
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">config_context</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="c1"># 环境变量
+</span>            <span class="sh">'</span><span class="s">env</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_env_vars</span><span class="p">(),</span>
+            <span class="c1"># 系统信息
+</span>            <span class="sh">'</span><span class="s">system</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_system_info</span><span class="p">(),</span>
+            <span class="c1"># 数学函数
+</span>            <span class="sh">'</span><span class="s">math</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">_get_env_vars</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取环境变量（模拟）</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">HOME</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">/home/user</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">PATH</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">/usr/bin:/bin</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">DEBUG</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">true</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">PORT</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">8080</span><span class="sh">'</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">_get_system_info</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取系统信息（模拟）</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">cpu_count</span><span class="sh">'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">memory_gb</span><span class="sh">'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">platform</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">linux</span><span class="sh">'</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">parse_config_value</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">解析配置值</span><span class="sh">"""</span>
+        <span class="c1"># 如果不是字符串，直接返回
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span>
+        
+        <span class="c1"># 如果不包含表达式标记，直接返回
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">${</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">'</span><span class="s">}</span><span class="sh">'</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">value</span>
+        
+        <span class="c1"># 提取表达式
+</span>        <span class="n">expression</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">strip</span><span class="p">()</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 安全检查
+</span>            <span class="k">if</span> <span class="nf">any</span><span class="p">(</span><span class="n">dangerous</span> <span class="ow">in</span> <span class="n">expression</span> <span class="k">for</span> <span class="n">dangerous</span> <span class="ow">in</span> 
+                   <span class="p">[</span><span class="sh">'</span><span class="s">import</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">exec</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">open</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__</span><span class="sh">'</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">不安全的表达式: </span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 执行表达式
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">config_context</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">return</span> <span class="n">result</span>
+            
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解析配置值失败 </span><span class="sh">'</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">'</span><span class="s">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span>  <span class="c1"># 返回原始值
+</span>    
+    <span class="k">def</span> <span class="nf">parse_config</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">解析整个配置</span><span class="sh">"""</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="c1"># 递归处理嵌套字典
+</span>                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">parse_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1"># 处理列表
+</span>                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="nf">parse_config_value</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> 
+                              <span class="k">else</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 处理单个值
+</span>                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">parse_config_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 测试动态配置解析
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">动态配置解析示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="nc">DynamicConfigParser</span><span class="p">()</span>
+
+<span class="c1"># 示例配置
+</span><span class="n">sample_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">app</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">MyApp</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${env[</span><span class="sh">'</span><span class="s">DEBUG</span><span class="sh">'</span><span class="s">] == </span><span class="sh">'</span><span class="s">true</span><span class="sh">'</span><span class="s">}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">port</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${int(env[</span><span class="sh">'</span><span class="s">PORT</span><span class="sh">'</span><span class="s">])}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">workers</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${system[</span><span class="sh">'</span><span class="s">cpu_count</span><span class="sh">'</span><span class="s">] * 2}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">memory_limit</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${system[</span><span class="sh">'</span><span class="s">memory_gb</span><span class="sh">'</span><span class="s">] * 1024}MB</span><span class="sh">"</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">database</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">host</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">port</span><span class="sh">"</span><span class="p">:</span> <span class="mi">5432</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${math[</span><span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="s">](10, system[</span><span class="sh">'</span><span class="s">cpu_count</span><span class="sh">'</span><span class="s">] * 5)}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">timeout</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${30 if env[</span><span class="sh">'</span><span class="s">DEBUG</span><span class="sh">'</span><span class="s">] == </span><span class="sh">'</span><span class="s">true</span><span class="sh">'</span><span class="s"> else 10}</span><span class="sh">"</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">cache</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">enabled</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${system[</span><span class="sh">'</span><span class="s">memory_gb</span><span class="sh">'</span><span class="s">] &gt;= 4}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">size</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">${math[</span><span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="s">](system[</span><span class="sh">'</span><span class="s">memory_gb</span><span class="sh">'</span><span class="s">] * 128, 1024)}MB</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">ttl</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3600</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">features</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sh">"</span><span class="s">feature1</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">${env[</span><span class="sh">'</span><span class="s">DEBUG</span><span class="sh">'</span><span class="s">] == </span><span class="sh">'</span><span class="s">true</span><span class="sh">'</span><span class="s"> and </span><span class="sh">'</span><span class="s">debug_feature</span><span class="sh">'</span><span class="s"> or </span><span class="sh">'</span><span class="s">prod_feature</span><span class="sh">'</span><span class="s">}</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">feature3</span><span class="sh">"</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">原始配置:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">sample_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+
+<span class="c1"># 解析配置
+</span><span class="n">parsed_config</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse_config</span><span class="p">(</span><span class="n">sample_config</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">解析后的配置:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">parsed_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+
+<span class="c1"># 显示解析结果
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">解析结果分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">应用调试模式: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">app</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">debug</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">应用端口: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">app</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">port</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">工作进程数: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">app</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">workers</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内存限制: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">app</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">memory_limit</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据库最大连接数: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">database</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">max_connections</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存启用: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">cache</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">enabled</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存大小: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">cache</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">size</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">功能列表: </span><span class="si">{</span><span class="n">parsed_config</span><span class="p">[</span><span class="sh">'</span><span class="s">features</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="表达式引擎">表达式引擎</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">operator</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="c1"># 表达式引擎
+</span><span class="k">class</span> <span class="nc">ExpressionEngine</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">表达式引擎</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 操作符映射
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">operators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">-</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">sub</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">*</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">mul</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">truediv</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">//</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">floordiv</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">%</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">mod</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">**</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="nb">pow</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">==</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">eq</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">!=</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">ne</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">&lt;</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">lt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">&lt;=</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">le</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">&gt;</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">gt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">&gt;=</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">ge</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">and</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">and_</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">or</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">or_</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">not</span><span class="sh">'</span><span class="p">:</span> <span class="n">operator</span><span class="p">.</span><span class="n">not_</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 内置函数
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">functions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">:</span> <span class="nb">len</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">:</span> <span class="nb">sum</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">bool</span><span class="sh">'</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">list</span><span class="sh">'</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">tuple</span><span class="sh">'</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">dict</span><span class="sh">'</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">set</span><span class="sh">'</span><span class="p">:</span> <span class="nb">set</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 常量
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">constants</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">True</span><span class="sh">'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">None</span><span class="sh">'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">pi</span><span class="sh">'</span><span class="p">:</span> <span class="mf">3.14159265359</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">e</span><span class="sh">'</span><span class="p">:</span> <span class="mf">2.71828182846</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 变量存储
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">set_variable</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置变量</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取变量</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">variables</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">add_function</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加自定义函数</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">functions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>
+    
+    <span class="k">def</span> <span class="nf">create_context</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">extra_vars</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">创建执行上下文</span><span class="sh">"""</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">functions</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">self</span><span class="p">.</span><span class="n">constants</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">self</span><span class="p">.</span><span class="n">variables</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">extra_vars</span><span class="p">:</span>
+            <span class="n">context</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">extra_vars</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">context</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">求值表达式</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">create_context</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">{</span><span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{}},</span> <span class="n">context</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">表达式求值失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate_batch</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expressions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> 
+                      <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">批量求值</span><span class="sh">"""</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">create_context</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">expressions</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{</span><span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{}},</span> <span class="n">context</span><span class="p">)</span>
+                <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+    
+    <span class="k">def</span> <span class="nf">create_formula</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                      <span class="n">parameters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">创建公式函数</span><span class="sh">"""</span>
+        <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="nf">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">参数数量不匹配: 期望</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span><span class="si">}</span><span class="s">, 实际</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 创建参数映射
+</span>            <span class="n">param_vars</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+            
+            <span class="c1"># 求值表达式
+</span>            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">param_vars</span><span class="p">)</span>
+        
+        <span class="c1"># 设置函数名和文档
+</span>        <span class="n">formula</span><span class="p">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">formula</span><span class="p">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">公式: </span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="s">, 参数: </span><span class="si">{</span><span class="n">parameters</span><span class="si">}</span><span class="sh">"</span>
+        
+        <span class="c1"># 添加到函数库
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">add_function</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">formula</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">formula</span>
+
+<span class="c1"># 测试表达式引擎
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">表达式引擎示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="nc">ExpressionEngine</span><span class="p">()</span>
+
+<span class="c1"># 设置变量
+</span><span class="n">engine</span><span class="p">.</span><span class="nf">set_variable</span><span class="p">(</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">engine</span><span class="p">.</span><span class="nf">set_variable</span><span class="p">(</span><span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">engine</span><span class="p">.</span><span class="nf">set_variable</span><span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Python</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">engine</span><span class="p">.</span><span class="nf">set_variable</span><span class="p">(</span><span class="sh">'</span><span class="s">items</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 基本表达式测试
+</span><span class="n">basic_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">x + y</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">x * y + 100</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(items)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">sum(items)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">len(name)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">name + </span><span class="sh">'</span><span class="s"> is great!</span><span class="sh">'"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">x &gt; 5 and y &lt; 30</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">pi * 2</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">round(e, 3)</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">基本表达式测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">basic_expressions</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 批量求值测试
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">批量求值测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">batch_results</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">evaluate_batch</span><span class="p">(</span><span class="n">basic_expressions</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">basic_expressions</span><span class="p">,</span> <span class="n">batch_results</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建自定义函数
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">自定义函数测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 添加自定义函数
+</span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算阶乘</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算斐波那契数</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">engine</span><span class="p">.</span><span class="nf">add_function</span><span class="p">(</span><span class="sh">'</span><span class="s">factorial</span><span class="sh">'</span><span class="p">,</span> <span class="n">factorial</span><span class="p">)</span>
+<span class="n">engine</span><span class="p">.</span><span class="nf">add_function</span><span class="p">(</span><span class="sh">'</span><span class="s">fibonacci</span><span class="sh">'</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">)</span>
+
+<span class="c1"># 测试自定义函数
+</span><span class="n">custom_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">factorial(5)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">fibonacci(10)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">factorial(x // 2)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(factorial(3), fibonacci(5))</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">custom_expressions</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建公式
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">公式创建测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建数学公式
+</span><span class="n">area_circle</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">create_formula</span><span class="p">(</span><span class="sh">'</span><span class="s">area_circle</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">pi * r ** 2</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">area_rectangle</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">create_formula</span><span class="p">(</span><span class="sh">'</span><span class="s">area_rectangle</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">width * height</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">width</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">height</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">quadratic</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">create_formula</span><span class="p">(</span><span class="sh">'</span><span class="s">quadratic</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a * x ** 2 + b * x + c</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">])</span>
+
+<span class="c1"># 测试公式
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">圆形面积 (r=5): </span><span class="si">{</span><span class="nf">area_circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">矩形面积 (3x4): </span><span class="si">{</span><span class="nf">area_rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">二次函数 (1, 2, 1, 3): </span><span class="si">{</span><span class="nf">quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 在表达式中使用公式
+</span><span class="n">formula_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">area_circle(10)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">area_rectangle(x, y)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">quadratic(1, -2, 1, 5)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(area_circle(3), area_rectangle(2, 4))</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">公式表达式测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">formula_expressions</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="安全风险和防护">安全风险和防护</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 安全风险示例和防护措施
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">安全风险和防护示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 危险示例1：代码注入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 代码注入风险:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 危险的用法（永远不要这样做！）
+</span><span class="k">def</span> <span class="nf">dangerous_calculator</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">危险的计算器 - 仅用于演示</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>  <span class="c1"># 极其危险！
+</span>    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">错误</span><span class="sh">"</span>
+
+<span class="c1"># 这些输入可能造成严重安全问题
+</span><span class="n">dangerous_inputs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">__import__(</span><span class="sh">'</span><span class="s">os</span><span class="sh">'</span><span class="s">).system(</span><span class="sh">'</span><span class="s">echo 危险命令</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">open(</span><span class="sh">'</span><span class="s">/etc/passwd</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="s">).read()</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">[].append.__globals__[</span><span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="s">][</span><span class="sh">'</span><span class="s">exec</span><span class="sh">'</span><span class="s">](</span><span class="sh">'</span><span class="s">import os; os.system(</span><span class="se">\"</span><span class="s">ls</span><span class="se">\"</span><span class="s">)</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">().__class__.__bases__[0].__subclasses__()[104].__init__.__globals__[</span><span class="sh">'</span><span class="s">sys</span><span class="sh">'</span><span class="s">].exit()</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">危险输入示例（不会实际执行）:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">dangerous_input</span> <span class="ow">in</span> <span class="n">dangerous_inputs</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  - </span><span class="si">{</span><span class="n">dangerous_input</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 安全的防护措施
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 安全防护措施:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法1：限制全局和局部命名空间
+</span><span class="k">def</span> <span class="nf">safe_eval_v1</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">allowed_names</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的eval - 方法1</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">allowed_names</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">allowed_names</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># 创建安全的命名空间
+</span>    <span class="n">safe_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span> <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">:</span> <span class="nb">len</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">safe_dict</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">allowed_names</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">safe_dict</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">表达式执行失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法2：使用AST解析检查
+</span><span class="kn">import</span> <span class="n">ast</span>
+
+<span class="k">def</span> <span class="nf">safe_eval_v2</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的eval - 方法2</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 解析表达式
+</span>        <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="c1"># 检查节点类型
+</span>        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="p">.</span><span class="nf">walk</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="p">.</span><span class="n">Import</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">ImportFrom</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Call</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Call</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">func</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Name</span><span class="p">):</span>
+                    <span class="c1"># 只允许特定的函数调用
+</span>                    <span class="n">allowed_functions</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">}</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_functions</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">不允许的函数调用: </span><span class="si">{</span><span class="n">node</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="p">.</span><span class="n">Import</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">ImportFrom</span><span class="p">)):</span>
+                    <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不允许导入语句</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="p">.</span><span class="n">Call</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不允许复杂的函数调用</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 安全执行
+</span>        <span class="n">safe_globals</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span> <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">:</span> <span class="nb">len</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="nf">compile</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="sh">'</span><span class="s">&lt;string&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">),</span> <span class="n">safe_globals</span><span class="p">,</span> <span class="p">{})</span>
+        
+    <span class="k">except</span> <span class="nb">SyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">语法错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法3：使用正则表达式预检查
+</span><span class="kn">import</span> <span class="n">re</span>
+
+<span class="k">def</span> <span class="nf">safe_eval_v3</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的eval - 方法3</span><span class="sh">"""</span>
+    <span class="c1"># 检查危险模式
+</span>    <span class="n">dangerous_patterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">r</span><span class="sh">'</span><span class="s">__\w+__</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 双下划线属性
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">import</span><span class="sh">'</span><span class="p">,</span>   <span class="c1"># 导入语句
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">exec</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 执行函数
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 嵌套eval
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">open</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 文件操作
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">file</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 文件对象
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">input</span><span class="sh">'</span><span class="p">,</span>    <span class="c1"># 输入函数
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">raw_input</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># Python 2的输入
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">compile</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 编译函数
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">globals</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 全局变量
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">,</span>   <span class="c1"># 局部变量
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">vars</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 变量字典
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">dir</span><span class="sh">'</span><span class="p">,</span>      <span class="c1"># 目录函数
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">hasattr</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 属性检查
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">getattr</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 属性获取
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">setattr</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 属性设置
+</span>        <span class="sa">r</span><span class="sh">'</span><span class="s">delattr</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># 属性删除
+</span>    <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">dangerous_patterns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">表达式包含危险模式: </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 只允许安全字符
+</span>    <span class="n">safe_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sa">r</span><span class="sh">'</span><span class="s">^[a-zA-Z0-9+\-*/().\s,\[\]{}:\'</span><span class="sh">"</span><span class="s">_]+$</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">safe_pattern</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">表达式包含不安全字符</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 安全执行
+</span>    <span class="n">safe_globals</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">__builtins__</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">abs</span><span class="sh">'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">,</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span> <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nb">min</span><span class="p">,</span> <span class="sh">'</span><span class="s">round</span><span class="sh">'</span><span class="p">:</span> <span class="nb">round</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">int</span><span class="sh">'</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="sh">'</span><span class="s">float</span><span class="sh">'</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="sh">'</span><span class="s">str</span><span class="sh">'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="sh">'</span><span class="s">len</span><span class="sh">'</span><span class="p">:</span> <span class="nb">len</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">safe_globals</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试安全方法
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">安全方法测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">safe_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">2 + 3 * 4</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(1, 5, 3)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">abs(-42)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">round(3.14159, 2)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">int(</span><span class="sh">'</span><span class="s">123</span><span class="sh">'</span><span class="s">) + float(</span><span class="sh">'</span><span class="s">45.6</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">len(</span><span class="sh">'</span><span class="s">hello world</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="n">unsafe_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">__import__(</span><span class="sh">'</span><span class="s">os</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">exec(</span><span class="sh">'</span><span class="s">print(1)</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">open(</span><span class="sh">'</span><span class="s">file.txt</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">globals()</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">[].append.__globals__</span><span class="sh">"</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[(</span><span class="sh">'</span><span class="s">方法1</span><span class="sh">'</span><span class="p">,</span> <span class="n">safe_eval_v1</span><span class="p">),</span> <span class="p">(</span><span class="sh">'</span><span class="s">方法2</span><span class="sh">'</span><span class="p">,</span> <span class="n">safe_eval_v2</span><span class="p">),</span> <span class="p">(</span><span class="sh">'</span><span class="s">方法3</span><span class="sh">'</span><span class="p">,</span> <span class="n">safe_eval_v3</span><span class="p">)]:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s">测试:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  安全表达式:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">safe_expressions</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nf">method</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  不安全表达式:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">unsafe_expressions</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nf">method</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s"> (不应该成功!)</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s"> 被阻止: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化">性能优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="c1"># 性能优化示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">性能优化示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 问题1：重复编译
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 编译缓存优化:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 低效的方法
+</span><span class="k">def</span> <span class="nf">slow_evaluator</span><span class="p">(</span><span class="n">expressions</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">慢速求值器</span><span class="sh">"""</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">expressions</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># 优化的方法
+</span><span class="k">class</span> <span class="nc">CachedEvaluator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">缓存求值器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">compiled_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">compile_expression</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">编译并缓存表达式</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">compile</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="sh">'</span><span class="s">&lt;string&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">eval</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">求值表达式</span><span class="sh">"""</span>
+        <span class="n">compiled_expr</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">compile_expression</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">compiled_expr</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate_batch</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expressions</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">批量求值</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span> <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">expressions</span><span class="p">]</span>
+
+<span class="c1"># 性能测试
+</span><span class="n">test_expressions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">x + y</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">x * y + z</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max(x, y, z)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">(x + y) * z / 2</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">x ** 2 + y ** 2 + z ** 2</span><span class="sh">"</span>
+<span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># 重复100次
+</span>
+<span class="n">test_variables</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="sh">'</span><span class="s">z</span><span class="sh">'</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+
+<span class="c1"># 测试慢速方法
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">slow_results</span> <span class="o">=</span> <span class="nf">slow_evaluator</span><span class="p">(</span><span class="n">test_expressions</span><span class="p">,</span> <span class="n">test_variables</span><span class="p">)</span>
+<span class="n">slow_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 测试快速方法
+</span><span class="n">cached_evaluator</span> <span class="o">=</span> <span class="nc">CachedEvaluator</span><span class="p">()</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">fast_results</span> <span class="o">=</span> <span class="n">cached_evaluator</span><span class="p">.</span><span class="nf">evaluate_batch</span><span class="p">(</span><span class="n">test_expressions</span><span class="p">,</span> <span class="n">test_variables</span><span class="p">)</span>
+<span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">慢速方法耗时: </span><span class="si">{</span><span class="n">slow_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存方法耗时: </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="n">slow_time</span><span class="o">/</span><span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="n">slow_results</span> <span class="o">==</span> <span class="n">fast_results</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 问题2：复杂表达式优化
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 复杂表达式优化:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用预计算优化复杂表达式
+</span><span class="k">class</span> <span class="nc">OptimizedEvaluator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">优化的求值器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">precomputed</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">precompute_constants</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">constants</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">预计算常量</span><span class="sh">"""</span>
+        <span class="c1"># 简单的常量替换
+</span>        <span class="n">optimized_expr</span> <span class="o">=</span> <span class="n">expression</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">constants</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">optimized_expr</span> <span class="o">=</span> <span class="n">optimized_expr</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">precomputed</span><span class="p">[</span><span class="n">expression</span><span class="p">]</span> <span class="o">=</span> <span class="n">optimized_expr</span>
+        <span class="k">return</span> <span class="n">optimized_expr</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate_optimized</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">constants</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">优化求值</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">constants</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">expression</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">precomputed</span><span class="p">:</span>
+                <span class="n">self</span><span class="p">.</span><span class="nf">precompute_constants</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">constants</span><span class="p">)</span>
+            <span class="n">expression</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">precomputed</span><span class="p">[</span><span class="n">expression</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="nf">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="p">)</span>
+
+<span class="c1"># 测试优化
+</span><span class="n">optimized_evaluator</span> <span class="o">=</span> <span class="nc">OptimizedEvaluator</span><span class="p">()</span>
+
+<span class="c1"># 包含常量的复杂表达式
+</span><span class="n">complex_expr</span> <span class="o">=</span> <span class="sh">"</span><span class="s">pi * r ** 2 + e * h</span><span class="sh">"</span>
+<span class="n">constants</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">pi</span><span class="sh">'</span><span class="p">:</span> <span class="mf">3.14159</span><span class="p">,</span> <span class="sh">'</span><span class="s">e</span><span class="sh">'</span><span class="p">:</span> <span class="mf">2.71828</span><span class="p">}</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+
+<span class="c1"># 普通方法
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">complex_expr</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="o">**</span><span class="n">constants</span><span class="p">,</span> <span class="o">**</span><span class="n">variables</span><span class="p">})</span>
+<span class="n">normal_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 优化方法
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="n">optimized_evaluator</span><span class="p">.</span><span class="nf">evaluate_optimized</span><span class="p">(</span><span class="n">complex_expr</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">constants</span><span class="p">)</span>
+<span class="n">optimized_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">普通方法耗时: </span><span class="si">{</span><span class="n">normal_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">优化方法耗时: </span><span class="si">{</span><span class="n">optimized_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="n">normal_time</span><span class="o">/</span><span class="n">optimized_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">result1</span> <span class="o">-</span> <span class="n">result2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数和模块">📚 相关函数和模块</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">exec()</code> - 执行Python语句</li>
+  <li><code class="language-plaintext highlighter-rouge">compile()</code> - 编译Python代码</li>
+  <li><code class="language-plaintext highlighter-rouge">globals()</code> - 获取全局命名空间</li>
+  <li><code class="language-plaintext highlighter-rouge">locals()</code> - 获取局部命名空间</li>
+  <li><code class="language-plaintext highlighter-rouge">vars()</code> - 获取对象的属性字典</li>
+  <li><code class="language-plaintext highlighter-rouge">dir()</code> - 列出对象的属性</li>
+  <li><code class="language-plaintext highlighter-rouge">hasattr()</code> - 检查属性是否存在</li>
+  <li><code class="language-plaintext highlighter-rouge">getattr()</code> - 获取属性值</li>
+  <li><code class="language-plaintext highlighter-rouge">setattr()</code> - 设置属性值</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ast</code> - 抽象语法树</li>
+  <li><code class="language-plaintext highlighter-rouge">code</code> - 交互式解释器</li>
+  <li><code class="language-plaintext highlighter-rouge">codeop</code> - 编译Python代码</li>
+  <li><code class="language-plaintext highlighter-rouge">dis</code> - 字节码反汇编</li>
+  <li><code class="language-plaintext highlighter-rouge">inspect</code> - 对象检查</li>
+  <li><code class="language-plaintext highlighter-rouge">types</code> - 动态类型创建</li>
+  <li><code class="language-plaintext highlighter-rouge">operator</code> - 函数形式的操作符</li>
+  <li><code class="language-plaintext highlighter-rouge">math</code> - 数学函数</li>
+  <li><code class="language-plaintext highlighter-rouge">re</code> - 正则表达式</li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sympy</code> - 符号数学</li>
+  <li><code class="language-plaintext highlighter-rouge">numexpr</code> - 快速数值表达式求值</li>
+  <li><code class="language-plaintext highlighter-rouge">asteval</code> - 安全的表达式求值</li>
+  <li><code class="language-plaintext highlighter-rouge">RestrictedPython</code> - 受限的Python执行</li>
+  <li><code class="language-plaintext highlighter-rouge">pyparsing</code> - 解析库</li>
+</ul>
+
+<h2 id="-扩展阅读">📖 扩展阅读</h2>
+
+<ol>
+  <li><strong>Python官方文档</strong>
+    <ul>
+      <li><a href="https://docs.python.org/3/library/functions.html#eval">Built-in Functions - eval()</a></li>
+      <li><a href="https://docs.python.org/3/library/ast.html">AST - Abstract Syntax Trees</a></li>
+    </ul>
+  </li>
+  <li><strong>安全相关</strong>
+    <ul>
+      <li>Python代码注入攻击</li>
+      <li>安全编程最佳实践</li>
+      <li>沙箱执行环境</li>
+    </ul>
+  </li>
+  <li><strong>性能优化</strong>
+    <ul>
+      <li>表达式编译和缓存</li>
+      <li>数值计算优化</li>
+      <li>解释器性能调优</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">表达式求值</code> <code class="language-plaintext highlighter-rouge">动态执行</code> <code class="language-plaintext highlighter-rouge">代码执行</code> <code class="language-plaintext highlighter-rouge">安全风险</code> <code class="language-plaintext highlighter-rouge">AST解析</code> <code class="language-plaintext highlighter-rouge">性能优化</code> <code class="language-plaintext highlighter-rouge">配置解析</code> <code class="language-plaintext highlighter-rouge">计算器</code> <code class="language-plaintext highlighter-rouge">公式引擎</code> <code class="language-plaintext highlighter-rouge">沙箱执行</code></p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

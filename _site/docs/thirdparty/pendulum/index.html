@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendulum库 - Python知识体系文档</title>
+  <meta name="description" content="Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Pendulum库 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Pendulum库" />
+<meta name="author" content="Python文档团队" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持" />
+<meta property="og:description" content="Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/thirdparty/pendulum/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/thirdparty/pendulum/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pendulum库" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档团队"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持","headline":"Pendulum库","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/thirdparty/pendulum/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/thirdparty/pendulum/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">Pendulum库</h1>
+        
+        
+        <p class="doc-description">Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: thirdparty</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-01</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">第三方库</span>
+          
+          <span class="tag">日期时间</span>
+          
+          <span class="tag">时区</span>
+          
+          <span class="tag">解析</span>
+          
+          <span class="tag">格式化</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="pendulum库">Pendulum库</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p>Pendulum是一个Python第三方库，旨在成为标准datetime库的替代品。它提供了更直观的API、更好的时区支持、更强大的解析功能和本地化支持。Pendulum完全兼容datetime，但提供了更多便利的功能和更好的性能。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握Pendulum库的安装和基本使用</li>
+  <li>学会使用Pendulum进行日期时间创建和操作</li>
+  <li>了解Pendulum的时区处理和转换</li>
+  <li>掌握日期时间的解析和格式化</li>
+  <li>学会使用Pendulum进行日期时间计算</li>
+  <li>了解本地化和人性化显示功能</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>了解datetime模块的基本概念</li>
+  <li>包管理工具pip的使用</li>
+  <li>时区和UTC概念</li>
+</ul>
+
+<h2 id="-安装">🔧 安装</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用pip安装</span>
+pip <span class="nb">install </span>pendulum
+
+<span class="c"># 或使用conda安装</span>
+conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge pendulum
+</code></pre></div></div>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本导入和创建">基本导入和创建</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pendulum</span>
+
+<span class="c1"># 获取当前时间
+</span><span class="n">now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">当前时间: </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取UTC时间
+</span><span class="n">utc_now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTC时间: </span><span class="si">{</span><span class="n">utc_now</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取特定时区的时间
+</span><span class="n">beijing_now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">tokyo_now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Tokyo</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">newyork_now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">北京时间: </span><span class="si">{</span><span class="n">beijing_now</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">东京时间: </span><span class="si">{</span><span class="n">tokyo_now</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">纽约时间: </span><span class="si">{</span><span class="n">newyork_now</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取今天的日期
+</span><span class="n">today</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">today</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">今天: </span><span class="si">{</span><span class="n">today</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取明天和昨天
+</span><span class="n">tomorrow</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">tomorrow</span><span class="p">()</span>
+<span class="n">yesterday</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">yesterday</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">明天: </span><span class="si">{</span><span class="n">tomorrow</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">昨天: </span><span class="si">{</span><span class="n">yesterday</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="创建特定日期时间">创建特定日期时间</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建特定日期时间
+</span><span class="n">dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">指定日期时间: </span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建带时区的日期时间
+</span><span class="n">dt_with_tz</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">带时区的日期时间: </span><span class="si">{</span><span class="n">dt_with_tz</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建日期
+</span><span class="n">date_only</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">仅日期: </span><span class="si">{</span><span class="n">date_only</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建时间
+</span><span class="n">time_only</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">仅时间: </span><span class="si">{</span><span class="n">time_only</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 从时间戳创建
+</span><span class="n">timestamp</span> <span class="o">=</span> <span class="mi">1704110445</span>
+<span class="n">dt_from_timestamp</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">from_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">从时间戳创建: </span><span class="si">{</span><span class="n">dt_from_timestamp</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 从时间戳创建（指定时区）
+</span><span class="n">dt_from_timestamp_tz</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">from_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">从时间戳创建(带时区): </span><span class="si">{</span><span class="n">dt_from_timestamp_tz</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="字符串解析">字符串解析</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 解析ISO格式字符串
+</span><span class="n">iso_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="sh">'</span><span class="s">2024-01-01T12:30:45</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解析ISO格式: </span><span class="si">{</span><span class="n">iso_dt</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解析带时区的字符串
+</span><span class="n">iso_with_tz</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="sh">'</span><span class="s">2024-01-01T12:30:45+08:00</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解析带时区: </span><span class="si">{</span><span class="n">iso_with_tz</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解析各种格式的字符串
+</span><span class="n">formats</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">'</span><span class="s">2024-01-01</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">2024/01/01</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">01/01/2024</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">2024-01-01 12:30:45</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">2024年1月1日</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">January 1, 2024</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">1st January 2024</span><span class="sh">'</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">解析不同格式的字符串:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">fmt</span><span class="si">:</span><span class="mi">20</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">parsed</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">fmt</span><span class="si">:</span><span class="mi">20</span><span class="si">}</span><span class="s"> -&gt; 解析失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 严格模式解析
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">strict_parse</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="sh">'</span><span class="s">2024-13-01</span><span class="sh">'</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># 无效月份
+</span><span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">严格模式解析失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 指定默认时区
+</span><span class="n">default_tz_parse</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="sh">'</span><span class="s">2024-01-01 12:30:45</span><span class="sh">'</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">指定默认时区: </span><span class="si">{</span><span class="n">default_tz_parse</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="格式化输出">格式化输出</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># 基本格式化
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ISO格式: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">to_iso8601_string</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日期字符串: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">to_date_string</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">时间字符串: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">to_time_string</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日期时间字符串: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">to_datetime_string</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 自定义格式化
+</span><span class="n">formats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">标准格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">YYYY-MM-DD HH:mm:ss</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">中文格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">YYYY年MM月DD日 HH时mm分ss秒</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">美式格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">MM/DD/YYYY hh:mm:ss A</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">欧式格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">DD/MM/YYYY HH:mm:ss</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">简短格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">YYMMDD_HHmmss</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">文件名格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">YYYY-MM-DD_HH-mm-ss</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">星期格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">dddd, MMMM Do YYYY</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">相对格式</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">YYYY-MM-DD (dddd)</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">自定义格式化:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">formatted</span> <span class="o">=</span> <span class="n">dt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">formatted</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 本地化格式化
+</span><span class="n">dt_cn</span> <span class="o">=</span> <span class="n">dt</span><span class="p">.</span><span class="nf">in_timezone</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">本地化格式化:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">中文: </span><span class="si">{</span><span class="n">dt_cn</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY年MM月DD日 dddd</span><span class="sh">'</span><span class="p">,</span> <span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">zh</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">英文: </span><span class="si">{</span><span class="n">dt_cn</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">MMMM Do, YYYY (dddd)</span><span class="sh">'</span><span class="p">,</span> <span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">en</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日文: </span><span class="si">{</span><span class="n">dt_cn</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY年MM月DD日 (dddd)</span><span class="sh">'</span><span class="p">,</span> <span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">ja</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="时区操作">时区操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建不同时区的时间
+</span><span class="n">utc_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">beijing_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">tokyo_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Tokyo</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">london_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Europe/London</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">newyork_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">世界时间:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTC:    </span><span class="si">{</span><span class="n">utc_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">北京:   </span><span class="si">{</span><span class="n">beijing_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">东京:   </span><span class="si">{</span><span class="n">tokyo_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">伦敦:   </span><span class="si">{</span><span class="n">london_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">纽约:   </span><span class="si">{</span><span class="n">newyork_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 时区转换
+</span><span class="n">base_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时区转换 (基准UTC时间: </span><span class="si">{</span><span class="n">base_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s">):</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">timezones</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Asia/Tokyo</span><span class="sh">'</span><span class="p">,</span> 
+    <span class="sh">'</span><span class="s">Europe/London</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">America/Los_Angeles</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Australia/Sydney</span><span class="sh">'</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">timezones</span><span class="p">:</span>
+    <span class="n">converted</span> <span class="o">=</span> <span class="n">base_time</span><span class="p">.</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">tz</span><span class="si">:</span><span class="mi">20</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">converted</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="nf">ss </span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取时区信息
+</span><span class="n">dt_with_tz</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时区信息:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">时区名称: </span><span class="si">{</span><span class="n">dt_with_tz</span><span class="p">.</span><span class="n">timezone_name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">时区缩写: </span><span class="si">{</span><span class="n">dt_with_tz</span><span class="p">.</span><span class="n">timezone</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">UTC偏移: </span><span class="si">{</span><span class="n">dt_with_tz</span><span class="p">.</span><span class="n">offset_hours</span><span class="si">}</span><span class="s">小时</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否夏令时: </span><span class="si">{</span><span class="n">dt_with_tz</span><span class="p">.</span><span class="nf">is_dst</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="日期时间计算">日期时间计算</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本加减运算
+</span><span class="n">base_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">基准时间: </span><span class="si">{</span><span class="n">base_dt</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 加减时间
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时间加减:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1小时后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">30分钟后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1天后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1周后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1个月后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1年后: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时间减法:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1小时前: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1天前: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1个月前: </span><span class="si">{</span><span class="n">base_dt</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 复合运算
+</span><span class="n">complex_add</span> <span class="o">=</span> <span class="n">base_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">复合加法: </span><span class="si">{</span><span class="n">complex_add</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 时间差计算
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时间差计算:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">开始时间: </span><span class="si">{</span><span class="n">start_time</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结束时间: </span><span class="si">{</span><span class="n">end_time</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">时间差: </span><span class="si">{</span><span class="n">diff</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总秒数: </span><span class="si">{</span><span class="n">diff</span><span class="p">.</span><span class="nf">total_seconds</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总小时数: </span><span class="si">{</span><span class="n">diff</span><span class="p">.</span><span class="nf">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用diff方法
+</span><span class="n">diff_obj</span> <span class="o">=</span> <span class="n">start_time</span><span class="p">.</span><span class="nf">diff</span><span class="p">(</span><span class="n">end_time</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">diff对象:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">小时差: </span><span class="si">{</span><span class="n">diff_obj</span><span class="p">.</span><span class="nf">in_hours</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">分钟差: </span><span class="si">{</span><span class="n">diff_obj</span><span class="p">.</span><span class="nf">in_minutes</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">秒差: </span><span class="si">{</span><span class="n">diff_obj</span><span class="p">.</span><span class="nf">in_seconds</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">天差: </span><span class="si">{</span><span class="n">diff_obj</span><span class="p">.</span><span class="nf">in_days</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="人性化显示">人性化显示</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 相对时间显示
+</span><span class="n">base_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">45</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">base_time</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">人性化时间显示:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">time_obj</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">time_obj</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="si">:</span><span class="n">ss</span><span class="sh">'</span><span class="s">)</span><span class="si">:</span><span class="mi">20</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">time_obj</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 本地化的人性化显示
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">本地化人性化显示:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">time_obj</span> <span class="ow">in</span> <span class="n">times</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">英文: </span><span class="si">{</span><span class="n">time_obj</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">(</span><span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">en</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">中文: </span><span class="si">{</span><span class="n">time_obj</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">(</span><span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">zh</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日文: </span><span class="si">{</span><span class="n">time_obj</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">(</span><span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">ja</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">---</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="日期时间属性和方法">日期时间属性和方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">日期时间属性:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">年份: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">year</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月份: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">month</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日期: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">day</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">小时: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">hour</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">分钟: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">minute</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">秒: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">second</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">微秒: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">microsecond</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">星期几: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">day_of_week</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">一年中的第几天: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">day_of_year</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">一年中的第几周: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">week_of_year</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">一月中的第几周: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">week_of_month</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">季度: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="n">quarter</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">星期和月份名称:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">星期名称: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">dddd</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月份名称: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">MMMM</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">星期缩写: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">ddd</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月份缩写: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">MMM</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">布尔属性:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否闰年: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_leap_year</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否夏令时: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_dst</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否过去: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_past</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否未来: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_future</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否今天: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_today</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否昨天: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_yesterday</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否明天: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_tomorrow</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否周末: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_weekend</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否工作日: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">is_weekday</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 月份和年份的开始/结束
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时间边界:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月初: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">month</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月末: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">month</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">年初: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">年末: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">周初: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">week</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">周末: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">week</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日初: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日末: </span><span class="si">{</span><span class="n">dt</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">datetime_formatter</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">日期时间格式化工具</span><span class="sh">"""</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="n">formats</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">ISO</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">to_iso8601_string</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">RFC</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">to_rfc3339_string</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">时间戳</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="nf">timestamp</span><span class="p">()),</span>
+        <span class="sh">'</span><span class="s">日期</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">to_date_string</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">时间</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">to_time_string</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">中文</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY年MM月DD日 HH时mm分ss秒</span><span class="sh">'</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">文件名</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD_HH-mm-ss</span><span class="sh">'</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">日志</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">[YYYY-MM-DD HH:mm:ss]</span><span class="sh">'</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">相对时间</span><span class="sh">'</span><span class="p">:</span> <span class="n">now</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">日期时间格式化:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="mi">8</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">formats</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">datetime_formatter</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="高级用法">高级用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TimeZoneConverter</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">时区转换器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">common_timezones</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">北京</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">东京</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Tokyo</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">首尔</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Seoul</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">新加坡</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Singapore</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">悉尼</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Australia/Sydney</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">伦敦</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Europe/London</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">巴黎</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Europe/Paris</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">纽约</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">洛杉矶</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">America/Los_Angeles</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">芝加哥</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">America/Chicago</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">多伦多</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">America/Toronto</span><span class="sh">'</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">convert_time</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">time_str</span><span class="p">,</span> <span class="n">from_tz</span><span class="p">,</span> <span class="n">to_tz</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">转换时间到不同时区</span><span class="sh">"""</span>
+        <span class="c1"># 解析时间字符串
+</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">time_str</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">from_tz</span><span class="p">)</span>
+        
+        <span class="c1"># 转换到目标时区
+</span>        <span class="n">converted</span> <span class="o">=</span> <span class="n">dt</span><span class="p">.</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">to_tz</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">original</span><span class="sh">'</span><span class="p">:</span> <span class="n">dt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">converted</span><span class="sh">'</span><span class="p">:</span> <span class="n">converted</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">from_tz</span><span class="sh">'</span><span class="p">:</span> <span class="n">from_tz</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">to_tz</span><span class="sh">'</span><span class="p">:</span> <span class="n">to_tz</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">world_clock</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">base_time</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">世界时钟</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">base_time</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">base_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">base_time</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">base_time</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">base_time</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="n">world_times</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">common_timezones</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">local_time</span> <span class="o">=</span> <span class="n">base_time</span><span class="p">.</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span>
+            <span class="n">world_times</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="n">local_time</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">formatted</span><span class="sh">'</span><span class="p">:</span> <span class="n">local_time</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH:mm:ss</span><span class="sh">'</span><span class="p">),</span>
+                <span class="sh">'</span><span class="s">timezone</span><span class="sh">'</span><span class="p">:</span> <span class="n">tz</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">offset</span><span class="sh">'</span><span class="p">:</span> <span class="n">local_time</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">Z</span><span class="sh">'</span><span class="p">)</span>
+            <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">world_times</span>
+    
+    <span class="k">def</span> <span class="nf">meeting_time_finder</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">participants_tz</span><span class="p">,</span> <span class="n">duration_hours</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">寻找适合多时区参与者的会议时间</span><span class="sh">"""</span>
+        <span class="c1"># 工作时间范围（9:00-18:00）
+</span>        <span class="n">work_start</span> <span class="o">=</span> <span class="mi">9</span>
+        <span class="n">work_end</span> <span class="o">=</span> <span class="mi">18</span>
+        
+        <span class="n">base_date</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">tomorrow</span><span class="p">(</span><span class="sh">'</span><span class="s">UTC</span><span class="sh">'</span><span class="p">).</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">suitable_times</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># 检查24小时内的每个小时
+</span>        <span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">24</span><span class="p">):</span>
+            <span class="n">meeting_time</span> <span class="o">=</span> <span class="n">base_date</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">hour</span><span class="p">)</span>
+            <span class="n">is_suitable</span> <span class="o">=</span> <span class="bp">True</span>
+            
+            <span class="n">participant_times</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">participant</span><span class="p">,</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">participants_tz</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="n">local_time</span> <span class="o">=</span> <span class="n">meeting_time</span><span class="p">.</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">participant_times</span><span class="p">[</span><span class="n">participant</span><span class="p">]</span> <span class="o">=</span> <span class="n">local_time</span>
+                
+                <span class="c1"># 检查是否在工作时间内
+</span>                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">work_start</span> <span class="o">&lt;=</span> <span class="n">local_time</span><span class="p">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="n">work_end</span> <span class="o">-</span> <span class="n">duration_hours</span><span class="p">):</span>
+                    <span class="n">is_suitable</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="k">break</span>
+                
+                <span class="c1"># 检查是否为工作日
+</span>                <span class="k">if</span> <span class="n">local_time</span><span class="p">.</span><span class="nf">is_weekend</span><span class="p">():</span>
+                    <span class="n">is_suitable</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="k">break</span>
+            
+            <span class="k">if</span> <span class="n">is_suitable</span><span class="p">:</span>
+                <span class="n">suitable_times</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                    <span class="sh">'</span><span class="s">utc_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">meeting_time</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">participant_times</span><span class="sh">'</span><span class="p">:</span> <span class="n">participant_times</span>
+                <span class="p">})</span>
+        
+        <span class="k">return</span> <span class="n">suitable_times</span>
+    
+    <span class="k">def</span> <span class="nf">display_world_clock</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">显示世界时钟</span><span class="sh">"""</span>
+        <span class="n">world_times</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">world_clock</span><span class="p">()</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">🌍 世界时钟</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">world_times</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">time_str</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="sh">'</span><span class="s">formatted</span><span class="sh">'</span><span class="p">]</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="sh">'</span><span class="s">offset</span><span class="sh">'</span><span class="p">]</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">city</span><span class="si">:</span><span class="mi">8</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">world_times</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">converter</span> <span class="o">=</span> <span class="nc">TimeZoneConverter</span><span class="p">()</span>
+
+<span class="c1"># 显示世界时钟
+</span><span class="n">converter</span><span class="p">.</span><span class="nf">display_world_clock</span><span class="p">()</span>
+
+<span class="c1"># 时区转换
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="p">.</span><span class="nf">convert_time</span><span class="p">(</span><span class="sh">'</span><span class="s">2024-01-15 14:30:00</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">时区转换:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原时间: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">original</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">from_tz</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换后: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">converted</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">to_tz</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 寻找会议时间
+</span><span class="n">participants</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">张三</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">John</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">America/New_York</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Tanaka</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Asia/Tokyo</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Smith</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Europe/London</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="n">suitable_times</span> <span class="o">=</span> <span class="n">converter</span><span class="p">.</span><span class="nf">meeting_time_finder</span><span class="p">(</span><span class="n">participants</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">适合的会议时间:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">time_slot</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">suitable_times</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">选项 </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">time_slot</span><span class="p">[</span><span class="sh">'</span><span class="s">utc_time</span><span class="sh">'</span><span class="p">].</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s"> UTC</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">participant</span><span class="p">,</span> <span class="n">local_time</span> <span class="ow">in</span> <span class="n">time_slot</span><span class="p">[</span><span class="sh">'</span><span class="s">participant_times</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">participant</span><span class="si">:</span><span class="mi">8</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">local_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYY-MM-DD HH</span><span class="si">:</span><span class="n">mm</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">local_time</span><span class="p">.</span><span class="n">timezone_name</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例">实际案例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EventManager</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">事件管理器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">default_timezone</span><span class="o">=</span><span class="sh">'</span><span class="s">Asia/Shanghai</span><span class="sh">'</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">default_timezone</span> <span class="o">=</span> <span class="n">default_timezone</span>
+    
+    <span class="k">def</span> <span class="nf">add_event</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                  <span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">""</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="sh">""</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加事件</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">timezone</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timezone</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">default_timezone</span>
+        
+        <span class="c1"># 解析开始时间
+</span>        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">start_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_dt</span> <span class="o">=</span> <span class="n">start_time</span>
+        
+        <span class="c1"># 计算结束时间
+</span>        <span class="k">if</span> <span class="n">end_time</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">end_time</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">end_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">end_time</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">end_dt</span> <span class="o">=</span> <span class="n">end_time</span>
+        <span class="k">elif</span> <span class="n">duration</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">end_dt</span> <span class="o">=</span> <span class="n">start_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="o">**</span><span class="n">duration</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 假设duration是小时数
+</span>                <span class="n">end_dt</span> <span class="o">=</span> <span class="n">start_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 默认1小时
+</span>            <span class="n">end_dt</span> <span class="o">=</span> <span class="n">start_dt</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">event</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">events</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">start_dt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">end_dt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">duration</span><span class="sh">'</span><span class="p">:</span> <span class="n">end_dt</span> <span class="o">-</span> <span class="n">start_dt</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">timezone</span><span class="sh">'</span><span class="p">:</span> <span class="n">timezone</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">description</span><span class="sh">'</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">location</span><span class="sh">'</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">created_at</span><span class="sh">'</span><span class="p">:</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">events</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_events_by_date_range</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取日期范围内的事件</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">timezone</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timezone</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">default_timezone</span>
+        
+        <span class="c1"># 解析日期
+</span>        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">start_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="p">).</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_dt</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">.</span><span class="nf">start_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">end_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="p">).</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">end_dt</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="n">filtered_events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">events</span><span class="p">:</span>
+            <span class="n">event_start</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">start_dt</span> <span class="o">&lt;=</span> <span class="n">event_start</span> <span class="o">&lt;=</span> <span class="n">end_dt</span><span class="p">:</span>
+                <span class="n">filtered_events</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        
+        <span class="c1"># 按开始时间排序
+</span>        <span class="n">filtered_events</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">filtered_events</span>
+    
+    <span class="k">def</span> <span class="nf">get_upcoming_events</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取即将到来的事件</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">timezone</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timezone</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">default_timezone</span>
+        
+        <span class="n">now</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">now</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+        <span class="n">future_date</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
+        
+        <span class="n">upcoming</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">events</span><span class="p">:</span>
+            <span class="n">event_start</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">now</span> <span class="o">&lt;=</span> <span class="n">event_start</span> <span class="o">&lt;=</span> <span class="n">future_date</span><span class="p">:</span>
+                <span class="n">upcoming</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        
+        <span class="n">upcoming</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">upcoming</span>
+    
+    <span class="k">def</span> <span class="nf">generate_calendar_view</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">生成日历视图</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">timezone</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timezone</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">default_timezone</span>
+        
+        <span class="c1"># 获取月份的第一天和最后一天
+</span>        <span class="n">first_day</span> <span class="o">=</span> <span class="n">pendulum</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="p">)</span>
+        <span class="n">last_day</span> <span class="o">=</span> <span class="n">first_day</span><span class="p">.</span><span class="nf">end_of</span><span class="p">(</span><span class="sh">'</span><span class="s">month</span><span class="sh">'</span><span class="p">)</span>
+        
+        <span class="c1"># 获取该月的所有事件
+</span>        <span class="n">month_events</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_events_by_date_range</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">last_day</span><span class="p">,</span> <span class="n">timezone</span><span class="p">)</span>
+        
+        <span class="c1"># 按日期分组事件
+</span>        <span class="n">events_by_date</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">month_events</span><span class="p">:</span>
+            <span class="n">event_date</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">timezone</span><span class="p">).</span><span class="nf">date</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">event_date</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">events_by_date</span><span class="p">:</span>
+                <span class="n">events_by_date</span><span class="p">[</span><span class="n">event_date</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">events_by_date</span><span class="p">[</span><span class="n">event_date</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        
+        <span class="c1"># 生成日历
+</span>        <span class="n">calendar_str</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">年</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s">月 日历</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">日  一  二  三  四  五  六</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="c1"># 获取月份第一天是星期几
+</span>        <span class="n">first_weekday</span> <span class="o">=</span> <span class="n">first_day</span><span class="p">.</span><span class="n">day_of_week</span> <span class="o">%</span> <span class="mi">7</span>  <span class="c1"># 转换为0=周日的格式
+</span>        
+        <span class="c1"># 填充第一周的空白
+</span>        <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">   </span><span class="sh">"</span> <span class="o">*</span> <span class="n">first_weekday</span>
+        
+        <span class="c1"># 填充日期
+</span>        <span class="n">current_date</span> <span class="o">=</span> <span class="n">first_day</span>
+        <span class="k">while</span> <span class="n">current_date</span><span class="p">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">month</span><span class="p">:</span>
+            <span class="n">day_str</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">current_date</span><span class="p">.</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="sh">"</span>
+            
+            <span class="c1"># 检查是否有事件
+</span>            <span class="k">if</span> <span class="n">current_date</span><span class="p">.</span><span class="nf">date</span><span class="p">()</span> <span class="ow">in</span> <span class="n">events_by_date</span><span class="p">:</span>
+                <span class="n">day_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">*</span><span class="sh">"</span>  <span class="c1"># 标记有事件的日期
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">day_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span>
+            
+            <span class="n">calendar_str</span> <span class="o">+=</span> <span class="n">day_str</span>
+            
+            <span class="c1"># 换行处理
+</span>            <span class="k">if</span> <span class="n">current_date</span><span class="p">.</span><span class="n">day_of_week</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># 周六
+</span>                <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+            
+            <span class="n">current_date</span> <span class="o">=</span> <span class="n">current_date</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># 添加事件详情
+</span>        <span class="k">if</span> <span class="n">events_by_date</span><span class="p">:</span>
+            <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="se">\n\n</span><span class="s">事件详情:</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+            
+            <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">events</span> <span class="ow">in</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">events_by_date</span><span class="p">.</span><span class="nf">items</span><span class="p">()):</span>
+                <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">date</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">MM月DD日</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">pendulum</span><span class="p">.</span><span class="nf">instance</span><span class="p">(</span><span class="n">date</span><span class="p">).</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">dddd</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s">):</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+                    <span class="n">start_time</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+                    <span class="n">end_time</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">in_timezone</span><span class="p">(</span><span class="n">timezone</span><span class="p">)</span>
+                    <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  </span><span class="si">{</span><span class="n">start_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">HH</span><span class="si">:</span><span class="n">mm</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">end_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">HH</span><span class="si">:</span><span class="n">mm</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+                    <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">location</span><span class="sh">'</span><span class="p">]:</span>
+                        <span class="n">calendar_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s"> @ </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">location</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+        
+        <span class="k">return</span> <span class="n">calendar_str</span>
+    
+    <span class="k">def</span> <span class="nf">export_to_ical</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">导出为iCal格式</span><span class="sh">"""</span>
+        <span class="n">ical_content</span> <span class="o">=</span> <span class="sh">"</span><span class="s">BEGIN:VCALENDAR</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">ical_content</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">VERSION:2.0</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">ical_content</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">PRODID:-//Event Manager//Event Manager 1.0//EN</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">events</span><span class="p">:</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">BEGIN:VEVENT</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">UID:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">@eventmanager</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">DTSTART:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYYMMDDTHHmmss</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s">Z</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">DTEND:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">].</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYYMMDDTHHmmss</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s">Z</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">SUMMARY:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">description</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">DESCRIPTION:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">description</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">location</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">LOCATION:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">location</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">CREATED:</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">created_at</span><span class="sh">'</span><span class="p">].</span><span class="nf">format</span><span class="p">(</span><span class="sh">'</span><span class="s">YYYYMMDDTHHmmss</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s">Z</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="n">ical_content</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">END:VEVENT</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="n">ical_content</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">END:VCALENDAR</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">ical_content</span><span class="p">)</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日历已导出到 </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">manager</span> <span class="o">=</span> <span class="nc">EventManager</span><span class="p">()</span>
+
+<span class="c1"># 添加一些事件
+</span><span class="n">manager</span><span class="p">.</span><span class="nf">add_event</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">项目启动会议</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">2024-01-15 09:00:00</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">hours</span><span class="sh">'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">新项目启动会议，讨论项目计划和分工</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">location</span><span class="o">=</span><span class="sh">"</span><span class="s">会议室A</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">manager</span><span class="p">.</span><span class="nf">add_event</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">客户演示</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">2024-01-15 14:00:00</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">end_time</span><span class="o">=</span><span class="sh">"</span><span class="s">2024-01-15 16:00:00</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">向客户演示产品功能</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">location</span><span class="o">=</span><span class="sh">"</span><span class="s">客户办公室</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">manager</span><span class="p">.</span><span class="nf">add_event</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">团队建设活动</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">2024-01-20 10:00:00</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">hours</span><span class="sh">'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">团队户外活动</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">location</span><span class="o">=</span><span class="sh">"</span><span class="s">公园</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1"># 获取即将到来的事件
+</span><span class="n">upcoming</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">get_upcoming_events</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">即将到来的事件:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">upcoming</span><span class="p">:</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">- </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">start_time</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="sh">'</span><span class="s">MM月DD日 HH</span><span class="si">:</span><span class="n">mm</span><span class="sh">'</span><span class="s">)</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">start_time</span><span class="p">.</span><span class="nf">diff_for_humans</span><span class="p">()</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 生成日历视图
+</span><span class="n">calendar_view</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">generate_calendar_view</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">calendar_view</span><span class="p">)</span>
+
+<span class="c1"># 导出日历
+</span><span class="n">manager</span><span class="p">.</span><span class="nf">export_to_ical</span><span class="p">(</span><span class="sh">'</span><span class="s">events.ics</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><strong>性能</strong>: Pendulum比标准datetime稍慢，但提供更多功能</li>
+  <li><strong>依赖</strong>: Pendulum依赖于系统的时区数据库</li>
+  <li><strong>兼容性</strong>: 虽然兼容datetime，但某些操作可能需要转换</li>
+  <li><strong>本地化</strong>: 需要安装相应的语言包才能支持本地化</li>
+  <li><strong>时区数据</strong>: 确保时区数据库是最新的</li>
+  <li><strong>内存使用</strong>: 大量日期时间对象可能占用较多内存</li>
+</ul>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="datetime/">datetime模块</a> - Python标准日期时间模块</li>
+  <li><a href="time/">time模块</a> - 基础时间处理功能</li>
+  <li><a href="calendar/">calendar模块</a> - 日历相关功能</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://pendulum.eustace.io/">Pendulum官方文档</a></li>
+  <li><a href="https://www.iana.org/time-zones">时区数据库</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601标准</a></li>
+  <li><a href="https://tools.ietf.org/html/rfc3339">RFC 3339标准</a></li>
+  <li><a href="https://docs.python.org/3/library/datetime.html#datetime-objects">Python时间处理最佳实践</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">第三方库</code> <code class="language-plaintext highlighter-rouge">日期时间</code> <code class="language-plaintext highlighter-rouge">时区</code> <code class="language-plaintext highlighter-rouge">解析</code> <code class="language-plaintext highlighter-rouge">格式化</code> <code class="language-plaintext highlighter-rouge">本地化</code> <code class="language-plaintext highlighter-rouge">人性化</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-01<br />
+<strong>作者</strong>: Python文档团队<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档团队</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

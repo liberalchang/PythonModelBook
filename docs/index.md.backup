@@ -1,0 +1,263 @@
+---
+layout: page
+title: Python知识体系文档
+permalink: /docs/
+---
+
+# Python知识体系文档
+
+欢迎来到Python知识体系文档！这里包含了从基础语法到高级应用的完整Python学习资源。
+
+<div class="docs-grid">
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">📚</span>
+                <h3>基础语法</h3>
+            </div>
+            <p class="category-description">Python基础语法和核心概念</p>
+            <div class="doc-links">
+                    <a href="basics/variables/" class="doc-link">变量与数据类型</a>
+                    <a href="basics/control-flow/" class="doc-link">判断语句与循环语句</a>
+                    <a href="basics/match-case/" class="doc-link">match-case语句 - 结构化模式匹配</a>
+                    <a href="basics/with/" class="doc-link">with语句 - 上下文管理器</a>
+                    <a href="basics/raise-assert/" class="doc-link">raise/assert - 异常抛出和断言</a>
+                    <a href="basics/yield/" class="doc-link">yield - 生成器和协程</a>
+                    <a href="basics/functions/" class="doc-link">函数定义与调用</a>
+                    <a href="basics/function-scope/" class="doc-link">函数作用域与闭包</a>
+                    <a href="basics/packages/" class="doc-link">Python包和__init__.py文件</a>
+                    <a href="basics/class-definition/" class="doc-link">类的定义与使用</a>
+                    <a href="basics/class-inheritance/" class="doc-link">类的继承</a>
+                    <a href="basics/polymorphism/" class="doc-link">多态性</a>
+                    <a href="basics/encapsulation/" class="doc-link">封装</a>
+                    <a href="basics/magic-methods/" class="doc-link">魔术方法</a>
+                    <a href="basics/abstract-classes/" class="doc-link">抽象基类</a>
+                    <a href="basics/dataclasses/" class="doc-link">数据类 (dataclass)</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">🔧</span>
+                <h3>内置函数</h3>
+            </div>
+            <p class="category-description">Python内置函数详解</p>
+            <div class="doc-links">
+                    <a href="builtins/int/" class="doc-link">int() - 整数转换函数</a>
+                    <a href="builtins/float/" class="doc-link">float() - 浮点数转换函数</a>
+                    <a href="builtins/str/" class="doc-link">str() - 字符串转换函数</a>
+                    <a href="builtins/bool/" class="doc-link">bool() - 布尔值转换函数</a>
+                    <a href="builtins/list/" class="doc-link">list() - 列表构造函数</a>
+                    <a href="builtins/tuple/" class="doc-link">tuple() - 元组构造函数</a>
+                    <a href="builtins/dict/" class="doc-link">dict() - 字典构造函数</a>
+                    <a href="builtins/set/" class="doc-link">set() - 集合构造函数</a>
+                    <a href="builtins/frozenset/" class="doc-link">frozenset() - 不可变集合构造函数</a>
+                    <a href="builtins/complex/" class="doc-link">complex() - 复数构造函数</a>
+                    <a href="builtins/bytes/" class="doc-link">bytes() - 字节对象构造函数</a>
+                    <a href="builtins/bytearray/" class="doc-link">bytearray() - 可变字节数组构造函数</a>
+                    <a href="builtins/abs/" class="doc-link">abs() - 绝对值函数</a>
+                    <a href="builtins/round/" class="doc-link">round() - 数字四舍五入函数</a>
+                    <a href="builtins/min/" class="doc-link">min() - 最小值函数</a>
+                    <a href="builtins/max/" class="doc-link">max() - 最大值函数</a>
+                    <a href="builtins/sum/" class="doc-link">sum() - 求和函数</a>
+                    <a href="builtins/pow/" class="doc-link">pow() - 幂运算函数</a>
+                    <a href="builtins/divmod/" class="doc-link">divmod() - 除法和取模运算函数</a>
+                    <a href="builtins/round/" class="doc-link">round() - 数字四舍五入函数</a>
+                    <a href="builtins/len/" class="doc-link">len() - 长度函数</a>
+                    <a href="builtins/sorted/" class="doc-link">sorted() - 排序函数</a>
+                    <a href="builtins/reversed/" class="doc-link">reversed() - 反转函数</a>
+                    <a href="builtins/range/" class="doc-link">range() - 范围函数</a>
+                    <a href="builtins/slice/" class="doc-link">slice() - 切片对象创建函数</a>
+                    <a href="builtins/enumerate/" class="doc-link">enumerate() - 枚举函数</a>
+                    <a href="builtins/zip/" class="doc-link">zip() - 打包函数</a>
+                    <a href="builtins/map/" class="doc-link">map() - 映射函数</a>
+                    <a href="builtins/filter/" class="doc-link">filter() - 过滤函数</a>
+                    <a href="builtins/iter/" class="doc-link">iter() - 迭代器创建函数</a>
+                    <a href="builtins/next/" class="doc-link">next() - 迭代器元素获取函数</a>
+                    <a href="builtins/any/" class="doc-link">any() - 逻辑或函数</a>
+                    <a href="builtins/all/" class="doc-link">all() - 逻辑与函数</a>
+                    <a href="builtins/type/" class="doc-link">type() - 类型函数</a>
+                    <a href="builtins/isinstance/" class="doc-link">isinstance() - 实例检查函数</a>
+                    <a href="builtins/issubclass/" class="doc-link">issubclass() - 子类检查函数</a>
+                    <a href="builtins/hasattr/" class="doc-link">hasattr() - 属性检查函数</a>
+                    <a href="builtins/print/" class="doc-link">print() - 输出函数</a>
+                    <a href="builtins/input/" class="doc-link">input() - 输入函数</a>
+                    <a href="builtins/open/" class="doc-link">open() - 文件操作函数</a>
+                    <a href="builtins/eval/" class="doc-link">eval() - 表达式求值函数</a>
+                    <a href="builtins/exec/" class="doc-link">exec() - 代码执行函数</a>
+                    <a href="builtins/compile/" class="doc-link">compile() - 代码编译函数</a>
+                    <a href="builtins/globals/" class="doc-link">globals() - 全局命名空间函数</a>
+                    <a href="builtins/locals/" class="doc-link">locals() - 局部命名空间函数</a>
+                    <a href="builtins/vars/" class="doc-link">vars() - 对象属性字典获取函数</a>
+                    <a href="builtins/memoryview/" class="doc-link">memoryview() - 内存视图对象构造函数</a>
+                    <a href="builtins/help/" class="doc-link">help() - 帮助系统函数</a>
+                    <a href="builtins/format/" class="doc-link">format() - 格式化函数</a>
+                    <a href="builtins/f-string/" class="doc-link">f-string - 格式化字符串字面量</a>
+                    <a href="builtins/repr/" class="doc-link">repr() - 对象字符串表示函数</a>
+                    <a href="builtins/ascii/" class="doc-link">ascii() - ASCII字符串表示函数</a>
+                    <a href="builtins/bin/" class="doc-link">bin() - 二进制转换函数</a>
+                    <a href="builtins/oct/" class="doc-link">oct() - 八进制转换函数</a>
+                    <a href="builtins/hex/" class="doc-link">hex() - 十六进制转换函数</a>
+                    <a href="builtins/ord/" class="doc-link">ord() - Unicode码点获取函数</a>
+                    <a href="builtins/chr/" class="doc-link">chr() - Unicode字符生成函数</a>
+                    <a href="builtins/../basics/index/" class="doc-link">Python基础语法</a>
+                    <a href="builtins/../stdlib/index/" class="doc-link">Python标准库</a>
+                    <a href="builtins/../thirdparty/index/" class="doc-link">第三方库</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">📦</span>
+                <h3>标准库</h3>
+            </div>
+            <p class="category-description">Python标准库模块</p>
+            <div class="doc-links">
+                    <a href="stdlib/time/" class="doc-link">time模块</a>
+                    <a href="stdlib/calendar/" class="doc-link">calendar模块</a>
+                    <a href="stdlib/datetime/" class="doc-link">datetime模块</a>
+                    <a href="stdlib/operator/" class="doc-link">operator模块</a>
+                    <a href="stdlib/copy/" class="doc-link">copy模块</a>
+                    <a href="stdlib/inspect/" class="doc-link">inspect模块</a>
+                    <a href="stdlib/enum/" class="doc-link">enum模块</a>
+                    <a href="stdlib/typing/" class="doc-link">typing模块</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-header">
+                <span class="category-icon">🌟</span>
+                <h3>第三方库</h3>
+            </div>
+            <p class="category-description">常用第三方库和框架</p>
+            <div class="doc-links">
+                    <a href="thirdparty/pendulum/" class="doc-link">Pendulum</a>
+            </div>
+        </div>
+
+</div>
+
+## 使用指南
+
+- **基础语法**: 适合Python初学者，涵盖变量、控制流、函数等核心概念
+- **内置函数**: 详细介绍Python内置函数的用法和示例
+- **标准库**: 深入了解Python标准库的各个模块
+- **第三方库**: 探索流行的第三方库和框架
+
+## 学习建议
+
+1. **循序渐进**: 建议按照基础语法 → 内置函数 → 标准库 → 第三方库的顺序学习
+2. **实践为主**: 每个概念都配有实际代码示例，建议动手实践
+3. **查漏补缺**: 可以根据需要跳转到特定主题进行学习
+
+## 参考资源
+
+- [Python官方文档](https://docs.python.org/3/)
+- [PEP 8 代码风格指南](https://pep8.org/)
+- [Python增强提案(PEPs)](https://www.python.org/dev/peps/)
+
+<style>
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.category-card {
+    background: var(--background-color, #ffffff);
+    border: 1px solid var(--border-color, #e1e4e8);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: var(--link-color, #0366d6);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.category-icon {
+    font-size: 2rem;
+    margin-right: 0.75rem;
+}
+
+.category-header h3 {
+    margin: 0;
+    color: var(--heading-color, #24292e);
+    font-size: 1.25rem;
+}
+
+.category-description {
+    color: var(--text-color, #586069);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.doc-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.doc-link {
+    color: var(--link-color, #0366d6);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.doc-link:hover {
+    background-color: var(--hover-background, #f6f8fa);
+    border-left-color: var(--link-color, #0366d6);
+    text-decoration: none;
+    transform: translateX(4px);
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+    .category-card {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+    
+    .category-header h3 {
+        color: #ffffff;
+    }
+    
+    .category-description {
+        color: #cccccc;
+    }
+    
+    .doc-link:hover {
+        background-color: #2a2a2a;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .docs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .category-card {
+        padding: 1rem;
+    }
+    
+    .category-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+}
+</style>

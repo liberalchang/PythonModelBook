@@ -1,6 +1,7 @@
 ---
 layout: doc
 title: 文档标题
+permalink: /docs/category/document-name/
 category: 分类标签 # basics/builtins/stdlib/thirdparty
 tags: [标签1, 标签2, 标签3]
 description: 简短的功能描述

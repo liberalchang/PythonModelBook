@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>str() - 字符串转换函数 - Python知识体系文档</title>
+  <meta name="description" content="将值转换为字符串类型或创建字符串对象">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>str() - 字符串转换函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="str() - 字符串转换函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="将值转换为字符串类型或创建字符串对象" />
+<meta property="og:description" content="将值转换为字符串类型或创建字符串对象" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/str/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/str/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="str() - 字符串转换函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"将值转换为字符串类型或创建字符串对象","headline":"str() - 字符串转换函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/str/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/str/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">str() - 字符串转换函数</h1>
+        
+        
+        <p class="doc-description">将值转换为字符串类型或创建字符串对象</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">类型转换</span>
+          
+          <span class="tag">字符串</span>
+          
+          <span class="tag">文本处理</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="str---字符串转换函数">str() - 字符串转换函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">str()</code> 是Python中的内置函数，用于将各种数据类型转换为字符串，或者创建新的字符串对象。它是最常用的类型转换函数之一，支持编码参数用于字节序列的解码。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握str()函数的基本用法</li>
+  <li>理解不同数据类型到字符串的转换规则</li>
+  <li>学会使用编码参数处理字节数据</li>
+  <li>了解字符串表示和显示的区别</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型</li>
+  <li>字符编码基础概念</li>
+  <li>字节和字符串的区别</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">str()</code> 函数将输入对象转换为字符串表示。对于自定义对象，它会调用对象的 <code class="language-plaintext highlighter-rouge">__str__()</code> 方法，如果不存在则调用 <code class="language-plaintext highlighter-rouge">__repr__()</code> 方法。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 无参数调用，返回空字符串
+</span><span class="nf">str</span><span class="p">()</span>
+
+<span class="c1"># 转换对象为字符串
+</span><span class="nf">str</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+
+<span class="c1"># 从字节序列解码为字符串
+</span><span class="nf">str</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="sh">'</span><span class="s">strict</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>object</td>
+      <td>any</td>
+      <td>否</td>
+      <td>无</td>
+      <td>要转换的对象</td>
+    </tr>
+    <tr>
+      <td>encoding</td>
+      <td>str</td>
+      <td>否</td>
+      <td>‘utf-8’</td>
+      <td>字节解码时使用的编码</td>
+    </tr>
+    <tr>
+      <td>errors</td>
+      <td>str</td>
+      <td>否</td>
+      <td>‘strict’</td>
+      <td>编码错误的处理方式</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: str</li>
+  <li><strong>说明</strong>: 转换后的字符串对象</li>
+</ul>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 无参数调用
+</span><span class="n">result</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>  <span class="c1"># 返回空字符串
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">无参数调用: </span><span class="sh">'</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>  <span class="c1"># 输出: 无参数调用: ''
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 输出: 长度: 0
+</span>
+<span class="c1"># 数值转换
+</span><span class="n">int_num</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">float_num</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">complex_num</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mf">4j</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">整数转换: </span><span class="sh">'</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">int_num</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>      <span class="c1"># 输出: 整数转换: '42'
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">浮点数转换: </span><span class="sh">'</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">float_num</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>   <span class="c1"># 输出: 浮点数转换: '3.14159'
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复数转换: </span><span class="sh">'</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">complex_num</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>   <span class="c1"># 输出: 复数转换: '(3+4j)'
+</span>
+<span class="c1"># 布尔值转换
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">True转换: </span><span class="sh">'</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>   <span class="c1"># 输出: True转换: 'True'
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">False转换: </span><span class="sh">'</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span> <span class="c1"># 输出: False转换: 'False'
+</span></code></pre></div></div>
+
+<h3 id="容器类型转换">容器类型转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 列表转换
+</span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">'</span><span class="s">hello</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">list_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表转换: </span><span class="si">{</span><span class="n">list_str</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 列表转换: [1, 2, 3, 'hello']
+</span>
+<span class="c1"># 字典转换
+</span><span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">张三</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+<span class="n">dict_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典转换: </span><span class="si">{</span><span class="n">dict_str</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 字典转换: {'name': '张三', 'age': 25}
+</span>
+<span class="c1"># 元组转换
+</span><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">tuple_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组转换: </span><span class="si">{</span><span class="n">tuple_str</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 元组转换: (1, 2, 3)
+</span>
+<span class="c1"># 集合转换
+</span><span class="n">my_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">set_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">my_set</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合转换: </span><span class="si">{</span><span class="n">set_str</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 集合转换: {1, 2, 3}
+</span></code></pre></div></div>
+
+<h3 id="字节序列解码">字节序列解码</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># UTF-8编码的字节序列
+</span><span class="n">utf8_bytes</span> <span class="o">=</span> <span class="sh">'</span><span class="s">你好世界</span><span class="sh">'</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字节序列: </span><span class="si">{</span><span class="n">utf8_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解码为字符串
+</span><span class="n">decoded_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">utf8_bytes</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解码结果: </span><span class="si">{</span><span class="n">decoded_str</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 解码结果: 你好世界
+</span>
+<span class="c1"># 不同编码示例
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello 世界</span><span class="sh">"</span>
+<span class="n">encodings</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-16</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">gbk</span><span class="sh">'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">encoding</span> <span class="ow">in</span> <span class="n">encodings</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 编码为字节
+</span>        <span class="n">encoded_bytes</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">encoding</span><span class="si">}</span><span class="s">编码:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字节序列: </span><span class="si">{</span><span class="n">encoded_bytes</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 解码回字符串
+</span>        <span class="n">decoded</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">encoded_bytes</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  解码结果: </span><span class="si">{</span><span class="n">decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="nb">UnicodeEncodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">encoding</span><span class="si">}</span><span class="s">编码失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="错误处理模式">错误处理模式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 包含无效字节的序列
+</span><span class="n">invalid_bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\xff\xfe\x00</span><span class="s">H</span><span class="se">\x00</span><span class="s">e</span><span class="se">\x00</span><span class="s">l</span><span class="se">\x00</span><span class="s">l</span><span class="se">\x00</span><span class="s">o</span><span class="sh">'</span>
+
+<span class="c1"># 不同的错误处理模式
+</span><span class="n">error_modes</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">strict</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ignore</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">replace</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">xmlcharrefreplace</span><span class="sh">'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="n">error_modes</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">invalid_bytes</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s">模式: </span><span class="sh">'</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s">模式: 解码错误 - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 输出示例:
+# strict模式: 解码错误 - 'utf-8' codec can't decode byte 0xff in position 0
+# ignore模式: 'Hello'
+# replace模式: '��Hello'
+# xmlcharrefreplace模式: '&amp;#255;&amp;#254;&amp;#0;H&amp;#0;e&amp;#0;l&amp;#0;l&amp;#0;o'
+</span></code></pre></div></div>
+
+<h3 id="自定义对象转换">自定义对象转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">定义字符串表示</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">岁)</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">定义开发者表示</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Person(name=</span><span class="sh">'</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="sh">'</span><span class="s">, age=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span>
+    
+    <span class="c1"># 只定义__repr__，没有__str__
+</span>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Student(name=</span><span class="sh">'</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="sh">'</span><span class="s">, grade=</span><span class="sh">'</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">grade</span><span class="si">}</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="c1"># 测试自定义对象
+</span><span class="n">person</span> <span class="o">=</span> <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">student</span> <span class="o">=</span> <span class="nc">Student</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">高三</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Person str(): </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>    <span class="c1"># 调用__str__
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Person repr(): </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 调用__repr__
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Student str(): </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">student</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 调用__repr__（因为没有__str__）
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Student repr(): </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">student</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># 调用__repr__
+</span></code></pre></div></div>
+
+<h3 id="实际案例数据格式化">实际案例：数据格式化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">format_data_report</span><span class="p">(</span><span class="n">data_dict</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">格式化数据报告</span><span class="sh">"""</span>
+    <span class="n">report_lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">report_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">report_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">数据报告</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">report_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="c1"># 根据数据类型进行不同的格式化
+</span>        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="si">:</span><span class="mi">3</span><span class="p">]))</span><span class="si">}</span><span class="s">, ... 共</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s">项]</span><span class="sh">"</span>
+        <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">formatted_value</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">字典(包含</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s">个键)</span><span class="sh">"</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">formatted_value</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="n">report_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">formatted_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">report_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">report_lines</span><span class="p">)</span>
+
+<span class="c1"># 测试数据
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">用户数量</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1250</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">平均年龄</span><span class="sh">"</span><span class="p">:</span> <span class="mf">28.5</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">活跃用户</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">user1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user4</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user5</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user6</span><span class="sh">"</span><span class="p">],</span>
+    <span class="sh">"</span><span class="s">配置信息</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">theme</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">dark</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">zh-CN</span><span class="sh">"</span><span class="p">},</span>
+    <span class="sh">"</span><span class="s">状态</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">最后更新</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">2024-01-15</span><span class="sh">"</span>
+<span class="p">}</span>
+
+<span class="n">report</span> <span class="o">=</span> <span class="nf">format_data_report</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化技巧">性能优化技巧</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+
+<span class="c1"># 大量字符串转换的性能比较
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+
+<span class="c1"># 方法1：使用str()函数
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">results1</span> <span class="o">=</span> <span class="p">[</span><span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法2：使用map()函数
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">results2</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">numbers</span><span class="p">))</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法3：使用格式化字符串
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">results3</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="sh">"</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+<span class="n">time3</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">str()函数耗时: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">map()函数耗时: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">f-string耗时: </span><span class="si">{</span><span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 字符串连接性能比较
+</span><span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+
+<span class="c1"># 方法1：使用+操作符（低效）
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="sh">""</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]:</span>  <span class="c1"># 只测试1000个，避免过慢
+</span>    <span class="n">result1</span> <span class="o">+=</span> <span class="n">s</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法2：使用join()方法（高效）
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">字符串连接比较:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">+操作符耗时: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">join()方法耗时: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="p">(</span><span class="n">time1</span><span class="o">/</span><span class="n">time2</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="str-vs-repr">str() vs repr()</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># str()和repr()的区别
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello</span><span class="se">\n</span><span class="s">World</span><span class="sh">"</span>
+<span class="n">date_obj</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">str(text): </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">repr(text): </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">str(date): </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">date_obj</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">repr(date): </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">date_obj</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># str()面向用户，repr()面向开发者
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">区别说明:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">str() - 用户友好的字符串表示</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">repr() - 开发者友好的字符串表示，通常可以用eval()重建对象</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="编码问题">编码问题</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 常见编码问题
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">中文测试</span><span class="sh">"</span>
+
+<span class="c1"># 正确的编码解码流程
+</span><span class="n">encoded</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 字符串 -&gt; 字节
+</span><span class="n">decoded</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 字节 -&gt; 字符串
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始文本: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">编码后: </span><span class="si">{</span><span class="n">encoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解码后: </span><span class="si">{</span><span class="n">decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">是否相等: </span><span class="si">{</span><span class="n">text</span> <span class="o">==</span> <span class="n">decoded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 错误示例：编码不匹配
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">wrong_decode</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 用ASCII解码UTF-8
+</span><span class="k">except</span> <span class="nb">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">解码错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="内存使用">内存使用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="c1"># 字符串内存使用
+</span><span class="n">short_str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">long_str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">1000</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">短字符串内存: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">short_str</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">长字符串内存: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">long_str</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 字符串驻留（string interning）
+</span><span class="n">a</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">b</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">字符串驻留:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">a is b: </span><span class="si">{</span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True，小字符串会被驻留
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">a is c: </span><span class="si">{</span><span class="n">a</span> <span class="ow">is</span> <span class="n">c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True，相同内容
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">id(a): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">id(b): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">id(c): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<h3 id="相关函数">相关函数</h3>
+<ul>
+  <li><a href="repr.md">repr() - 对象表示函数</a> - 获取对象的开发者表示</li>
+  <li><a href="ascii.md">ascii() - ASCII表示函数</a> - 获取ASCII字符串表示</li>
+  <li><a href="format.md">format() - 格式化函数</a> - 格式化值</li>
+  <li><a href="int.md">int() - 整数转换函数</a> - 转换为整数</li>
+  <li><a href="float.md">float() - 浮点数转换函数</a> - 转换为浮点数</li>
+  <li><a href="bool.md">bool() - 布尔转换函数</a> - 转换为布尔值</li>
+</ul>
+
+<h3 id="字符串方法">字符串方法</h3>
+<ul>
+  <li><a href="../basics/string-methods.md">字符串方法详解</a> - 字符串操作方法</li>
+  <li><a href="../basics/string-formatting.md">字符串格式化</a> - 格式化技巧</li>
+  <li><a href="../stdlib/regex.md">正则表达式</a> - 模式匹配</li>
+</ul>
+
+<h3 id="相关概念">相关概念</h3>
+<ul>
+  <li><a href="../advanced/character-encoding.md">字符编码</a> - 编码详解</li>
+  <li><a href="../basics/data-types.md">Python数据类型</a> - 基本数据类型</li>
+  <li><a href="../basics/exceptions.md">异常处理</a> - 异常处理机制</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#func-str">Python官方文档 - str()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#string-methods">Python字符串方法</a></li>
+  <li><a href="https://docs.python.org/3/howto/unicode.html">Unicode和字符编码</a></li>
+  <li><a href="https://docs.python.org/3/library/string.html#format-string-syntax">字符串格式化</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">类型转换</code> <code class="language-plaintext highlighter-rouge">字符串</code> <code class="language-plaintext highlighter-rouge">编码解码</code> <code class="language-plaintext highlighter-rouge">文本处理</code> <code class="language-plaintext highlighter-rouge">格式化</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

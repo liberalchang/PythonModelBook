@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数定义与调用 - Python知识体系文档</title>
+  <meta name="description" content="Python函数的定义、调用和参数传递详解">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>函数定义与调用 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="函数定义与调用" />
+<meta name="author" content="Python文档团队" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Python函数的定义、调用和参数传递详解" />
+<meta property="og:description" content="Python函数的定义、调用和参数传递详解" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/basics/functions/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/basics/functions/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="函数定义与调用" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档团队"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"Python函数的定义、调用和参数传递详解","headline":"函数定义与调用","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/basics/functions/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/basics/functions/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">函数定义与调用</h1>
+        
+        
+        <p class="doc-description">Python函数的定义、调用和参数传递详解</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: basics</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-01</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">函数</span>
+          
+          <span class="tag">函数定义</span>
+          
+          <span class="tag">参数</span>
+          
+          <span class="tag">返回值</span>
+          
+          <span class="tag">函数调用</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="函数定义与调用">函数定义与调用</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p>函数是Python编程中的核心概念，它允许我们将代码组织成可重用的模块。函数可以接收输入参数，执行特定的任务，并返回结果。掌握函数的定义、调用和参数传递是编写高质量Python代码的基础。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握函数的定义语法和基本结构</li>
+  <li>理解函数的调用机制和参数传递</li>
+  <li>学会使用不同类型的参数（位置参数、关键字参数、默认参数）</li>
+  <li>掌握可变参数和参数解构的使用方法</li>
+  <li>了解函数返回值的处理</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法和缩进规则</li>
+  <li>变量和数据类型</li>
+  <li>基本的输入输出操作</li>
+  <li>字符串格式化</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="函数的定义">函数的定义</h3>
+
+<h4 id="基本语法">基本语法</h4>
+
+<p>函数定义使用<code class="language-plaintext highlighter-rouge">def</code>关键字，遵循以下基本格式：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">函数名</span><span class="p">(</span><span class="n">参数列表</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">函数文档字符串（可选）</span><span class="sh">"""</span>
+    <span class="n">函数体</span><span class="p">(</span><span class="n">代码块</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">返回值</span>  <span class="c1"># return可以省略，默认返回None
+</span></code></pre></div></div>
+
+<h4 id="基础示例">基础示例</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 简单的函数定义
+</span><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">问候函数，接收一个姓名参数</span><span class="sh">"""</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">你好，</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">！</span><span class="sh">"</span>
+    <span class="k">return</span> <span class="n">message</span>
+
+<span class="c1"># 调用函数
+</span><span class="n">result</span> <span class="o">=</span> <span class="nf">greet</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># 输出：你好，张三！
+</span>
+<span class="c1"># 无参数函数
+</span><span class="k">def</span> <span class="nf">get_current_time</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">获取当前时间</span><span class="sh">"""</span>
+    <span class="kn">import</span> <span class="n">datetime</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%Y-%m-%d %H:%M:%S</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">get_current_time</span><span class="p">())</span>  <span class="c1"># 输出：2024-01-01 12:00:00
+</span>
+<span class="c1"># 无返回值函数
+</span><span class="k">def</span> <span class="nf">print_separator</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">打印分隔线</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="nf">print_separator</span><span class="p">()</span>  <span class="c1"># 输出：--------------------------------------------------
+</span></code></pre></div></div>
+
+<h4 id="函数命名规范">函数命名规范</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 好的函数命名示例
+</span><span class="k">def</span> <span class="nf">calculate_area</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算矩形面积</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span>
+
+<span class="k">def</span> <span class="nf">is_even</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">判断数字是否为偶数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">get_user_input</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">获取用户输入</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">请输入内容：</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">area</span> <span class="o">=</span> <span class="nf">calculate_area</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">面积：</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：面积：15
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">is_even</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>   <span class="c1"># 输出：True
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">is_even</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>   <span class="c1"># 输出：False
+</span></code></pre></div></div>
+
+<h3 id="函数的调用">函数的调用</h3>
+
+<h4 id="基本调用方式">基本调用方式</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">两数相加</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># 直接调用并打印结果
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">add_numbers</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># 输出：8
+</span>
+<span class="c1"># 将结果赋值给变量
+</span><span class="n">result</span> <span class="o">=</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计算结果：</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：计算结果：30
+</span>
+<span class="c1"># 在表达式中使用
+</span><span class="n">total</span> <span class="o">=</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总和：</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：总和：10
+</span></code></pre></div></div>
+
+<h4 id="函数作为参数">函数作为参数</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_operation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">应用指定的操作函数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">operation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">乘法运算</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">除法运算</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">除数不能为零</span><span class="sh">"</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">result1</span> <span class="o">=</span> <span class="nf">apply_operation</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">multiply</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">6 × 3 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：6 × 3 = 18
+</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="nf">apply_operation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">divide</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">10 ÷ 2 = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：10 ÷ 2 = 5.0
+</span></code></pre></div></div>
+
+<h3 id="参数传递">参数传递</h3>
+
+<h4 id="位置参数">位置参数</h4>
+
+<p>位置参数按照定义的顺序传递，参数的位置很重要。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">introduce_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">介绍一个人的信息</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">我叫</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">，今年</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">岁，来自</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按位置传递参数
+</span><span class="nf">introduce_person</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="sh">"</span><span class="s">北京</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 输出：我叫李四，今年25岁，来自北京
+</span>
+<span class="c1"># 位置错误会导致逻辑错误
+</span><span class="nf">introduce_person</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">上海</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 参数位置错误
+# 输出：我叫25，今年王五岁，来自上海
+</span></code></pre></div></div>
+
+<h4 id="关键字参数">关键字参数</h4>
+
+<p>关键字参数通过参数名指定值，不依赖于位置顺序。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_user_profile</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建用户档案</span><span class="sh">"""</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">用户名</span><span class="sh">"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">邮箱</span><span class="sh">"</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">年龄</span><span class="sh">"</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">城市</span><span class="sh">"</span><span class="p">:</span> <span class="n">city</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">profile</span>
+
+<span class="c1"># 使用关键字参数，顺序可以任意
+</span><span class="n">user1</span> <span class="o">=</span> <span class="nf">create_user_profile</span><span class="p">(</span>
+    <span class="n">city</span><span class="o">=</span><span class="sh">"</span><span class="s">深圳</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">age</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="sh">"</span><span class="s">zhangsan@example.com</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+<span class="c1"># 输出：{'用户名': '张三', '邮箱': 'zhangsan@example.com', '年龄': 28, '城市': '深圳'}
+</span></code></pre></div></div>
+
+<h4 id="位置参数和关键字参数混合使用">位置参数和关键字参数混合使用</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">book_flight</span><span class="p">(</span><span class="n">departure</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="sh">"</span><span class="s">09:00</span><span class="sh">"</span><span class="p">,</span> <span class="n">class_type</span><span class="o">=</span><span class="sh">"</span><span class="s">经济舱</span><span class="sh">"</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">预订航班</span><span class="sh">"""</span>
+    <span class="n">booking_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">出发地</span><span class="sh">"</span><span class="p">:</span> <span class="n">departure</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">目的地</span><span class="sh">"</span><span class="p">:</span> <span class="n">destination</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">日期</span><span class="sh">"</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">时间</span><span class="sh">"</span><span class="p">:</span> <span class="n">time</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">舱位类型</span><span class="sh">"</span><span class="p">:</span> <span class="n">class_type</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">booking_info</span>
+
+<span class="c1"># 混合使用位置参数和关键字参数
+# 注意：位置参数必须在关键字参数之前
+</span><span class="n">flight1</span> <span class="o">=</span> <span class="nf">book_flight</span><span class="p">(</span><span class="sh">"</span><span class="s">北京</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">上海</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">2024-01-15</span><span class="sh">"</span><span class="p">,</span> <span class="n">class_type</span><span class="o">=</span><span class="sh">"</span><span class="s">商务舱</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">flight1</span><span class="p">)</span>
+
+<span class="n">flight2</span> <span class="o">=</span> <span class="nf">book_flight</span><span class="p">(</span><span class="sh">"</span><span class="s">广州</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">深圳</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">2024-01-20</span><span class="sh">"</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="sh">"</span><span class="s">14:30</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">flight2</span><span class="p">)</span>
+
+<span class="c1"># 错误示例：关键字参数不能在位置参数之前
+# flight3 = book_flight("北京", destination="上海", "2024-01-15")  # 语法错误
+</span></code></pre></div></div>
+
+<h4 id="默认参数缺省参数">默认参数（缺省参数）</h4>
+
+<p>默认参数为函数参数提供默认值，调用时可以省略这些参数。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_circle_area</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">pi</span><span class="o">=</span><span class="mf">3.14159</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算圆的面积</span><span class="sh">"""</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">area</span>
+
+<span class="c1"># 使用默认的pi值
+</span><span class="n">area1</span> <span class="o">=</span> <span class="nf">calculate_circle_area</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">半径为5的圆面积：</span><span class="si">{</span><span class="n">area1</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：半径为5的圆面积：78.54
+</span>
+<span class="c1"># 提供自定义的pi值
+</span><span class="kn">import</span> <span class="n">math</span>
+<span class="n">area2</span> <span class="o">=</span> <span class="nf">calculate_circle_area</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">半径为5的圆面积（精确）：</span><span class="si">{</span><span class="n">area2</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：半径为5的圆面积（精确）：78.54
+</span>
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bcc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="sh">"</span><span class="s">normal</span><span class="sh">"</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">发送邮件</span><span class="sh">"""</span>
+    <span class="n">email_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">收件人</span><span class="sh">"</span><span class="p">:</span> <span class="n">to</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">主题</span><span class="sh">"</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">正文</span><span class="sh">"</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">抄送</span><span class="sh">"</span><span class="p">:</span> <span class="n">cc</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">密送</span><span class="sh">"</span><span class="p">:</span> <span class="n">bcc</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">优先级</span><span class="sh">"</span><span class="p">:</span> <span class="n">priority</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">邮件已发送：</span><span class="si">{</span><span class="n">email_info</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">email_info</span>
+
+<span class="c1"># 只提供必需参数
+</span><span class="nf">send_email</span><span class="p">(</span><span class="sh">"</span><span class="s">user@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">会议通知</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">明天上午10点开会</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 提供部分可选参数
+</span><span class="nf">send_email</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">user@example.com</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="sh">"</span><span class="s">紧急通知</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="sh">"</span><span class="s">系统维护通知</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">priority</span><span class="o">=</span><span class="sh">"</span><span class="s">high</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="可变参数">可变参数</h3>
+
+<h4 id="位置可变参数args">位置可变参数（*args）</h4>
+
+<p>使用<code class="language-plaintext highlighter-rouge">*args</code>可以接收任意数量的位置参数，这些参数会被收集到一个元组中。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_sum</span><span class="p">(</span><span class="o">*</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算任意数量数字的和</span><span class="sh">"""</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="c1"># 传递不同数量的参数
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">calculate_sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>           <span class="c1"># 输出：6
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">calculate_sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>     <span class="c1"># 输出：15
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">calculate_sum</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>                <span class="c1"># 输出：10
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">calculate_sum</span><span class="p">())</span>                  <span class="c1"># 输出：0
+</span>
+<span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="o">*</span><span class="n">hobbies</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">打印个人信息和爱好</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">姓名：</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">年龄：</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hobbies</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">爱好：</span><span class="si">{</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">hobbies</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">暂无爱好信息</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print_info</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="sh">"</span><span class="s">读书</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">游泳</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">编程</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 输出：
+# 姓名：张三
+# 年龄：25
+# 爱好：读书, 游泳, 编程
+</span>
+<span class="nf">print_info</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1"># 输出：
+# 姓名：李四
+# 年龄：30
+# 暂无爱好信息
+</span></code></pre></div></div>
+
+<h4 id="关键字可变参数kwargs">关键字可变参数（**kwargs）</h4>
+
+<p>使用<code class="language-plaintext highlighter-rouge">**kwargs</code>可以接收任意数量的关键字参数，这些参数会被收集到一个字典中。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_student_record</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">,</span> <span class="o">**</span><span class="n">additional_info</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建学生记录</span><span class="sh">"""</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">姓名</span><span class="sh">"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">学号</span><span class="sh">"</span><span class="p">:</span> <span class="n">student_id</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># 添加额外信息
+</span>    <span class="n">record</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">additional_info</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">record</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">student1</span> <span class="o">=</span> <span class="nf">create_student_record</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="sh">"</span><span class="s">2024001</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">专业</span><span class="o">=</span><span class="sh">"</span><span class="s">计算机科学</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">年级</span><span class="o">=</span><span class="sh">"</span><span class="s">大二</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">班级</span><span class="o">=</span><span class="sh">"</span><span class="s">CS2022-1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">联系电话</span><span class="o">=</span><span class="sh">"</span><span class="s">13800138000</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">student1</span><span class="p">)</span>
+<span class="c1"># 输出：{'姓名': '张三', '学号': '2024001', '专业': '计算机科学', '年级': '大二', '班级': 'CS2022-1', '联系电话': '13800138000'}
+</span>
+<span class="k">def</span> <span class="nf">configure_database</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">配置数据库连接</span><span class="sh">"""</span>
+    <span class="n">default_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">host</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">port</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3306</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">charset</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">utf8</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">timeout</span><span class="sh">"</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># 更新默认配置
+</span>    <span class="n">default_config</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">数据库配置：</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">default_config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">default_config</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">db_config</span> <span class="o">=</span> <span class="nf">configure_database</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="sh">"</span><span class="s">192.168.1.100</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">admin</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="sh">"</span><span class="s">secret123</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="sh">"</span><span class="s">myapp</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="混合使用可变参数">混合使用可变参数</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">flexible_function</span><span class="p">(</span><span class="n">required_arg</span><span class="p">,</span> <span class="n">default_arg</span><span class="o">=</span><span class="sh">"</span><span class="s">default</span><span class="sh">"</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">演示参数的综合使用</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">必需参数：</span><span class="si">{</span><span class="n">required_arg</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">默认参数：</span><span class="si">{</span><span class="n">default_arg</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">位置可变参数：</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">关键字可变参数：</span><span class="si">{</span><span class="n">kwargs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">示例1：</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">flexible_function</span><span class="p">(</span><span class="sh">"</span><span class="s">必需值</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">示例2：</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">flexible_function</span><span class="p">(</span><span class="sh">"</span><span class="s">必需值</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">自定义默认值</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">额外1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">额外2</span><span class="sh">"</span><span class="p">,</span> <span class="n">key1</span><span class="o">=</span><span class="sh">"</span><span class="s">value1</span><span class="sh">"</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="sh">"</span><span class="s">value2</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># keyword-only参数
+</span><span class="k">def</span> <span class="nf">advanced_function</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">other_info</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">使用keyword-only参数</span><span class="sh">"""</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">姓名</span><span class="sh">"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">年龄</span><span class="sh">"</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">邮箱</span><span class="sh">"</span><span class="p">:</span> <span class="n">email</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">phone</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">[</span><span class="sh">"</span><span class="s">电话</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">phone</span>
+    
+    <span class="n">info</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">other_info</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">info</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">user_info</span> <span class="o">=</span> <span class="nf">advanced_function</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="mi">25</span><span class="p">,</span> 
+    <span class="n">email</span><span class="o">=</span><span class="sh">"</span><span class="s">zhangsan@example.com</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">phone</span><span class="o">=</span><span class="sh">"</span><span class="s">13800138000</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">address</span><span class="o">=</span><span class="sh">"</span><span class="s">北京市朝阳区</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">department</span><span class="o">=</span><span class="sh">"</span><span class="s">技术部</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数解构">参数解构</h3>
+
+<p>参数解构允许我们将集合（列表、元组、字典）的元素作为函数参数传递。</p>
+
+<h4 id="解构列表和元组操作符">解构列表和元组（*操作符）</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_rectangle_area</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算矩形面积</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span>
+
+<span class="c1"># 使用列表解构
+</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">area</span> <span class="o">=</span> <span class="nf">calculate_rectangle_area</span><span class="p">(</span><span class="o">*</span><span class="n">dimensions</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">矩形面积：</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：矩形面积：15
+</span>
+<span class="c1"># 使用元组解构
+</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="nf">calculate_rectangle_area</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">矩形面积：</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出：矩形面积：24
+</span>
+<span class="k">def</span> <span class="nf">print_student_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">grade</span><span class="p">,</span> <span class="o">*</span><span class="n">subjects</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">打印学生信息</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">学生：</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">，年龄：</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s">，年级：</span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">subjects</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">选修课程：</span><span class="si">{</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">subjects</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解构包含多个元素的列表
+</span><span class="n">student_data</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">李明</span><span class="sh">"</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="sh">"</span><span class="s">高一</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">数学</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">物理</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">化学</span><span class="sh">"</span><span class="p">]</span>
+<span class="nf">print_student_info</span><span class="p">(</span><span class="o">*</span><span class="n">student_data</span><span class="p">)</span>
+<span class="c1"># 输出：
+# 学生：李明，年龄：16，年级：高一
+# 选修课程：数学, 物理, 化学
+</span></code></pre></div></div>
+
+<h4 id="解构字典操作符">解构字典（**操作符）</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_user_account</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">profile</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建用户账户</span><span class="sh">"""</span>
+    <span class="n">account</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">用户名</span><span class="sh">"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">邮箱</span><span class="sh">"</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">密码</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">*</span><span class="sh">"</span> <span class="o">*</span> <span class="nf">len</span><span class="p">(</span><span class="n">password</span><span class="p">),</span>  <span class="c1"># 隐藏密码
+</span>        <span class="sh">"</span><span class="s">档案</span><span class="sh">"</span><span class="p">:</span> <span class="n">profile</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">account</span>
+
+<span class="c1"># 使用字典解构
+</span><span class="n">user_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">john_doe</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">john@example.com</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">password</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">secret123</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">first_name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">John</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">last_name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Doe</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">New York</span><span class="sh">"</span>
+<span class="p">}</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="nf">create_user_account</span><span class="p">(</span><span class="o">**</span><span class="n">user_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+
+<span class="c1"># 混合使用位置参数和字典解构
+</span><span class="n">login_info</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">jane@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">password</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">mypassword</span><span class="sh">"</span><span class="p">}</span>
+<span class="n">profile_info</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">first_name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Jane</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span> <span class="sh">"</span><span class="s">occupation</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Engineer</span><span class="sh">"</span><span class="p">}</span>
+
+<span class="n">account2</span> <span class="o">=</span> <span class="nf">create_user_account</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">jane_smith</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="o">**</span><span class="n">login_info</span><span class="p">,</span> 
+    <span class="o">**</span><span class="n">profile_info</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">account2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">temperature_converter</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">温度转换器</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">celsius_to_fahrenheit</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">摄氏度转华氏度</span><span class="sh">"""</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
+    
+    <span class="k">def</span> <span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">华氏度转摄氏度</span><span class="sh">"""</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
+    
+    <span class="k">def</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">摄氏度转开尔文</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">celsius</span> <span class="o">+</span> <span class="mf">273.15</span>
+    
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">温度转换器</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 摄氏度 → 华氏度</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. 华氏度 → 摄氏度</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. 摄氏度 → 开尔文</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">4. 退出</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">choice</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">请选择转换类型（1-4）：</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="sh">'</span><span class="s">4</span><span class="sh">'</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">谢谢使用！</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">break</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">celsius</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">请输入摄氏度：</span><span class="sh">"</span><span class="p">))</span>
+                <span class="n">fahrenheit</span> <span class="o">=</span> <span class="nf">celsius_to_fahrenheit</span><span class="p">(</span><span class="n">celsius</span><span class="p">)</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">celsius</span><span class="si">}</span><span class="s">°C = </span><span class="si">{</span><span class="n">fahrenheit</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">°F</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">fahrenheit</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">请输入华氏度：</span><span class="sh">"</span><span class="p">))</span>
+                <span class="n">celsius</span> <span class="o">=</span> <span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">)</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">fahrenheit</span><span class="si">}</span><span class="s">°F = </span><span class="si">{</span><span class="n">celsius</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">°C</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="sh">'</span><span class="s">3</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">celsius</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">请输入摄氏度：</span><span class="sh">"</span><span class="p">))</span>
+                <span class="n">kelvin</span> <span class="o">=</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">celsius</span><span class="p">)</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">celsius</span><span class="si">}</span><span class="s">°C = </span><span class="si">{</span><span class="n">kelvin</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">K</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">无效选择，请重新输入</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">请输入有效的数字</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+# temperature_converter()
+</span></code></pre></div></div>
+
+<h3 id="高级用法">高级用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Calculator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">计算器类，演示函数的高级用法</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">add_to_history</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加计算历史</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+            <span class="sh">"</span><span class="s">operation</span><span class="sh">"</span><span class="p">:</span> <span class="n">operation</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">result</span><span class="sh">"</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_timestamp</span><span class="p">()</span>
+        <span class="p">})</span>
+    
+    <span class="k">def</span> <span class="nf">_get_timestamp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取时间戳（私有方法）</span><span class="sh">"""</span>
+        <span class="kn">import</span> <span class="n">datetime</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%Y-%m-%d %H:%M:%S</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">operation_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">通用计算方法</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nf">operation_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">operation_name</span> <span class="o">=</span> <span class="n">operation_func</span><span class="p">.</span><span class="n">__name__</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">add_to_history</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">operation_name</span><span class="si">}{</span><span class="n">args</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计算错误：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">basic_operations</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="sh">"</span><span class="s">add</span><span class="sh">"</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">基本运算</span><span class="sh">"""</span>
+        <span class="n">operations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">add</span><span class="sh">"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">subtract</span><span class="sh">"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">multiply</span><span class="sh">"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">divide</span><span class="sh">"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="sh">"</span><span class="s">除数不能为零</span><span class="sh">"</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">operations</span><span class="p">[</span><span class="n">operation</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sh">"</span><span class="s">不支持的运算类型</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">advanced_operations</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="sh">"</span><span class="s">sum</span><span class="sh">"</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">高级运算</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">numbers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="sh">"</span><span class="s">sum</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="sh">"</span><span class="s">average</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="sh">"</span><span class="s">product</span><span class="sh">"</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">*=</span> <span class="n">num</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sh">"</span><span class="s">不支持的运算类型</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取计算历史</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">history</span>
+    
+    <span class="k">def</span> <span class="nf">clear_history</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">清空历史记录</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">历史记录已清空</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">calc</span> <span class="o">=</span> <span class="nc">Calculator</span><span class="p">()</span>
+
+<span class="c1"># 基本运算
+</span><span class="n">result1</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">basic_operations</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="sh">"</span><span class="s">add</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">10 + 5 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">basic_operations</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">divide</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">10 ÷ 3 = </span><span class="si">{</span><span class="n">result2</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 高级运算
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">advanced_operations</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="sh">"</span><span class="s">average</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平均值：</span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">result4</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">advanced_operations</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="sh">"</span><span class="s">product</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">乘积：</span><span class="si">{</span><span class="n">result4</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 查看历史记录
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">计算历史：</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">calc</span><span class="p">.</span><span class="nf">get_history</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">operation</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例">实际案例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">data_processor</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">数据处理器，演示函数的实际应用</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">validate_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">required_fields</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data_types</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">数据验证</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">"</span><span class="s">数据必须是字典格式</span><span class="sh">"</span>
+        
+        <span class="c1"># 检查必需字段
+</span>        <span class="k">if</span> <span class="n">required_fields</span><span class="p">:</span>
+            <span class="n">missing_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">required_fields</span> <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">missing_fields</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">缺少必需字段：</span><span class="si">{</span><span class="n">missing_fields</span><span class="si">}</span><span class="sh">"</span>
+        
+        <span class="c1"># 检查数据类型
+</span>        <span class="k">if</span> <span class="n">data_types</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">expected_type</span> <span class="ow">in</span> <span class="n">data_types</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">field</span><span class="p">],</span> <span class="n">expected_type</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">字段 </span><span class="sh">'</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="sh">'</span><span class="s"> 类型错误，期望 </span><span class="si">{</span><span class="n">expected_type</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+        
+        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="sh">"</span><span class="s">数据验证通过</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">cleaning_options</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">数据清洗</span><span class="sh">"""</span>
+        <span class="n">cleaned_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        
+        <span class="c1"># 移除空值
+</span>        <span class="k">if</span> <span class="n">cleaning_options</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">remove_empty</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="n">cleaned_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cleaned_data</span><span class="p">.</span><span class="nf">items</span><span class="p">()</span> 
+                          <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="sh">""</span><span class="p">}</span>
+        
+        <span class="c1"># 转换字符串为小写
+</span>        <span class="k">if</span> <span class="n">cleaning_options</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">lowercase_strings</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cleaned_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">cleaned_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+        
+        <span class="c1"># 移除前后空格
+</span>        <span class="k">if</span> <span class="n">cleaning_options</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">strip_strings</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cleaned_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">cleaned_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">cleaned_data</span>
+    
+    <span class="k">def</span> <span class="nf">transform_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">transformations</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">数据转换</span><span class="sh">"""</span>
+        <span class="n">transformed_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">transform_func</span> <span class="ow">in</span> <span class="n">transformations</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">transformed_data</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">transformed_data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="nf">transform_func</span><span class="p">(</span><span class="n">transformed_data</span><span class="p">[</span><span class="n">field</span><span class="p">])</span>
+                <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换字段 </span><span class="sh">'</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="sh">'</span><span class="s"> 时出错：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">transformed_data</span>
+    
+    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="o">*</span><span class="n">processing_steps</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">批量处理数据</span><span class="sh">"""</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">data_list</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">processed_data</span> <span class="o">=</span> <span class="n">data</span>
+                
+                <span class="c1"># 应用所有处理步骤
+</span>                <span class="k">for</span> <span class="n">step_func</span> <span class="ow">in</span> <span class="n">processing_steps</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nf">callable</span><span class="p">(</span><span class="n">step_func</span><span class="p">):</span>
+                        <span class="n">processed_data</span> <span class="o">=</span> <span class="nf">step_func</span><span class="p">(</span><span class="n">processed_data</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+                
+                <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">processed_data</span><span class="p">)</span>
+                
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">error_info</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">error</span><span class="sh">"</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="p">}</span>
+                <span class="n">errors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">error_info</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">continue_on_error</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+                    <span class="k">break</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">results</span><span class="sh">"</span><span class="p">:</span> <span class="n">results</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">errors</span><span class="sh">"</span><span class="p">:</span> <span class="n">errors</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">success_count</span><span class="sh">"</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">results</span><span class="p">),</span>
+            <span class="sh">"</span><span class="s">error_count</span><span class="sh">"</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+        <span class="p">}</span>
+    
+    <span class="c1"># 示例数据
+</span>    <span class="n">sample_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">  张三  </span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">25</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ZHANG@EXAMPLE.COM</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">北京</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">30</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">li@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span><span class="p">},</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">invalid</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">wang@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">上海</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">28</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">wang@example.com</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">广州</span><span class="sh">"</span><span class="p">}</span>
+    <span class="p">]</span>
+    
+    <span class="c1"># 定义转换函数
+</span>    <span class="k">def</span> <span class="nf">age_to_int</span><span class="p">(</span><span class="n">age_str</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">将年龄字符串转换为整数</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">age_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">age_str</span><span class="p">.</span><span class="nf">isdigit</span><span class="p">()</span> <span class="k">else</span> <span class="bp">None</span>
+    
+    <span class="c1"># 处理步骤
+</span>    <span class="k">def</span> <span class="nf">step1_clean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">strip_strings</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">remove_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">step2_transform</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="n">age_to_int</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="nb">str</span><span class="p">.</span><span class="n">lower</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nf">transform_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">transformations</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">step3_validate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">]</span>
+        <span class="n">data_types</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">:</span> <span class="nb">str</span><span class="p">}</span>
+        
+        <span class="n">is_valid</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">required_fields</span><span class="p">,</span> <span class="n">data_types</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">data</span>
+    
+    <span class="c1"># 批量处理
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">开始批量处理数据...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">process_batch</span><span class="p">(</span>
+        <span class="n">sample_data</span><span class="p">,</span>
+        <span class="n">step1_clean</span><span class="p">,</span>
+        <span class="n">step2_transform</span><span class="p">,</span>
+        <span class="n">step3_validate</span><span class="p">,</span>
+        <span class="n">continue_on_error</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">处理完成：</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">成功处理：</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">success_count</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> 条</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">处理失败：</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">error_count</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> 条</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">成功处理的数据：</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">results</span><span class="sh">'</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">. </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">errors</span><span class="sh">'</span><span class="p">]:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">处理失败的数据：</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">errors</span><span class="sh">'</span><span class="p">]:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">索引 </span><span class="si">{</span><span class="n">error</span><span class="p">[</span><span class="sh">'</span><span class="s">index</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">error</span><span class="p">[</span><span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 使用示例
+# data_processor()
+</span></code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><strong>参数顺序</strong>: 普通参数 → 默认参数 → *args → keyword-only参数 → **kwargs</li>
+  <li><strong>可变默认参数</strong>: 避免使用可变对象（如列表、字典）作为默认参数</li>
+  <li><strong>函数命名</strong>: 使用描述性的函数名，遵循Python命名规范</li>
+  <li><strong>文档字符串</strong>: 为函数添加清晰的文档说明</li>
+  <li><strong>参数验证</strong>: 在函数内部验证参数的有效性</li>
+  <li><strong>异常处理</strong>: 适当处理可能出现的异常情况</li>
+</ul>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="../variables/">变量和数据类型</a> - 了解函数参数的数据类型</li>
+  <li><a href="../control-flow/">控制流程</a> - 学习函数内的逻辑控制</li>
+  <li><a href="../function-scope/">函数作用域</a> - 深入理解变量作用域</li>
+  <li><a href="../oop/">面向对象编程</a> - 学习类方法和实例方法</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Python官方文档 - 函数定义</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-3102/">PEP 3102 - Keyword-Only Arguments</a></li>
+  <li><a href="https://docs.python.org/3/howto/functional.html">Python函数式编程指南</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">函数</code> <code class="language-plaintext highlighter-rouge">函数定义</code> <code class="language-plaintext highlighter-rouge">参数</code> <code class="language-plaintext highlighter-rouge">返回值</code> <code class="language-plaintext highlighter-rouge">函数调用</code> <code class="language-plaintext highlighter-rouge">可变参数</code> <code class="language-plaintext highlighter-rouge">默认参数</code> <code class="language-plaintext highlighter-rouge">参数解构</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-01<br />
+<strong>作者</strong>: Python文档团队<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档团队</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

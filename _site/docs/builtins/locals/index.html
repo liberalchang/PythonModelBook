@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>locals() - 局部命名空间函数 - Python知识体系文档</title>
+  <meta name="description" content="返回当前局部命名空间的字典">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>locals() - 局部命名空间函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="locals() - 局部命名空间函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="返回当前局部命名空间的字典" />
+<meta property="og:description" content="返回当前局部命名空间的字典" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/locals/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/locals/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="locals() - 局部命名空间函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"返回当前局部命名空间的字典","headline":"locals() - 局部命名空间函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/locals/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/locals/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">locals() - 局部命名空间函数</h1>
+        
+        
+        <p class="doc-description">返回当前局部命名空间的字典</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">命名空间</span>
+          
+          <span class="tag">局部变量</span>
+          
+          <span class="tag">作用域</span>
+          
+          <span class="tag">变量管理</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="locals---局部命名空间函数">locals() - 局部命名空间函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">locals()</code> 是Python中的内置函数，用于返回当前局部命名空间的字典。这个字典包含了当前作用域中的所有局部变量。在模块级别调用时，<code class="language-plaintext highlighter-rouge">locals()</code> 的行为与 <code class="language-plaintext highlighter-rouge">globals()</code> 相同。在函数内部调用时，它返回函数的局部变量字典。需要注意的是，对 <code class="language-plaintext highlighter-rouge">locals()</code> 返回字典的修改可能不会影响实际的局部变量。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握locals()函数的基本用法和特性</li>
+  <li>理解局部命名空间的概念和作用域</li>
+  <li>学会在不同上下文中使用locals()</li>
+  <li>掌握locals()在调试和内省中的应用</li>
+  <li>了解locals()与globals()的区别和联系</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>变量作用域的概念</li>
+  <li>函数定义和调用</li>
+  <li>字典操作基础</li>
+  <li>理解全局和局部变量的区别</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>局部命名空间是Python中存储局部变量的字典，其内容取决于调用 <code class="language-plaintext highlighter-rouge">locals()</code> 的上下文：</p>
+
+<ol>
+  <li><strong>模块级别</strong>: 返回全局命名空间（等同于 <code class="language-plaintext highlighter-rouge">globals()</code>）</li>
+  <li><strong>函数内部</strong>: 返回函数的局部变量</li>
+  <li><strong>类定义内部</strong>: 返回类的局部命名空间</li>
+  <li><strong>方法内部</strong>: 返回方法的局部变量</li>
+</ol>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">locals</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<p><code class="language-plaintext highlighter-rouge">locals()</code> 函数不接受任何参数。</p>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: 字典（dict）</li>
+  <li><strong>内容</strong>: 当前局部命名空间中的所有名称和对应的对象</li>
+</ul>
+
+<h3 id="重要特性">重要特性</h3>
+
+<ol>
+  <li><strong>只读性</strong>: 对返回字典的修改通常不会影响实际的局部变量</li>
+  <li><strong>上下文相关</strong>: 返回内容取决于调用位置</li>
+  <li><strong>动态性</strong>: 每次调用都返回当前状态的快照</li>
+</ol>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基本用法示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">locals()基本用法:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 模块级别的locals()
+</span><span class="n">module_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">模块变量1</span><span class="sh">"</span>
+<span class="n">module_var2</span> <span class="o">=</span> <span class="mi">42</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 模块级别的locals():</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">module_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">locals()类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">module_locals</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">变量数量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">module_locals</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 检查模块级别locals()是否等同于globals()
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">locals() is globals(): </span><span class="si">{</span><span class="nf">locals</span><span class="p">()</span> <span class="ow">is</span> <span class="nf">globals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">模块变量在locals()中: </span><span class="si">{</span><span class="sh">'</span><span class="s">module_var1</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">module_locals</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 函数中的locals()
+</span><span class="k">def</span> <span class="nf">demonstrate_function_locals</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">演示函数中的locals()</span><span class="sh">"""</span>
+    <span class="n">func_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">函数变量1</span><span class="sh">"</span>
+    <span class="n">func_var2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">func_var3</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">}</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 函数中的locals():</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">func_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">函数局部变量数量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">func_locals</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">局部变量列表:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">func_locals</span>
+
+<span class="c1"># 调用函数
+</span><span class="n">function_locals_result</span> <span class="o">=</span> <span class="nf">demonstrate_function_locals</span><span class="p">()</span>
+
+<span class="c1"># 带参数的函数
+</span><span class="k">def</span> <span class="nf">function_with_parameters</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">带参数的函数</span><span class="sh">"""</span>
+    <span class="n">local_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">局部变量</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 带参数函数的locals():</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">func_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">参数和局部变量:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">func_locals</span>
+
+<span class="c1"># 测试带参数的函数
+</span><span class="n">params_result</span> <span class="o">=</span> <span class="nf">function_with_parameters</span><span class="p">(</span><span class="sh">"</span><span class="s">arg1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">arg2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">extra1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">extra2</span><span class="sh">"</span><span class="p">,</span> <span class="n">key1</span><span class="o">=</span><span class="sh">"</span><span class="s">value1</span><span class="sh">"</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="sh">"</span><span class="s">value2</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 嵌套函数中的locals()
+</span><span class="k">def</span> <span class="nf">outer_function</span><span class="p">(</span><span class="n">outer_param</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">外层函数</span><span class="sh">"""</span>
+    <span class="n">outer_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">外层变量</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">inner_function</span><span class="p">(</span><span class="n">inner_param</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">内层函数</span><span class="sh">"""</span>
+        <span class="n">inner_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">内层变量</span><span class="sh">"</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 嵌套函数的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内层函数locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">inner_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inner_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">inner_locals</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">外层函数locals():</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">outer_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">outer_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># 不显示函数对象
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nf">inner_function</span><span class="p">(</span><span class="sh">"</span><span class="s">内层参数</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试嵌套函数
+</span><span class="n">nested_result</span> <span class="o">=</span> <span class="nf">outer_function</span><span class="p">(</span><span class="sh">"</span><span class="s">外层参数</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="locals的修改行为">locals()的修改行为</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># locals()修改行为示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">locals()修改行为示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 模块级别的修改
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 模块级别修改:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">original_value</span> <span class="o">=</span> <span class="sh">"</span><span class="s">原始值</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改前: original_value = </span><span class="si">{</span><span class="n">original_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 在模块级别，locals()等同于globals()，修改会生效
+</span><span class="nf">locals</span><span class="p">()[</span><span class="sh">'</span><span class="s">original_value</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">修改后的值</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改后: original_value = </span><span class="si">{</span><span class="n">original_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 函数级别的修改（通常不会生效）
+</span><span class="k">def</span> <span class="nf">test_local_modification</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">测试局部变量修改</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 函数级别修改:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">local_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">原始局部值</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改前: local_var = </span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 尝试通过locals()修改局部变量
+</span>    <span class="n">local_dict</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="n">local_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">local_var</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">尝试修改的值</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改locals()后: local_var = </span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">locals()字典中的值: </span><span class="si">{</span><span class="nf">locals</span><span class="p">()[</span><span class="sh">'</span><span class="s">local_var</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 直接修改变量
+</span>    <span class="n">local_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">直接修改的值</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">直接修改后: local_var = </span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nf">locals</span><span class="p">()</span>
+
+<span class="n">test_result</span> <span class="o">=</span> <span class="nf">test_local_modification</span><span class="p">()</span>
+
+<span class="c1"># 演示为什么函数中的locals()修改不生效
+</span><span class="k">def</span> <span class="nf">explain_locals_behavior</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">解释locals()行为</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. locals()行为解释:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">变量1</span><span class="sh">"</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="sh">"</span><span class="s">变量2</span><span class="sh">"</span>
+    
+    <span class="c1"># 获取locals()的引用
+</span>    <span class="n">local_dict</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">获取locals()引用</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 修改字典
+</span>    <span class="n">local_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">var1</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">修改的变量1</span><span class="sh">"</span>
+    <span class="n">local_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">new_var</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">新变量</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改字典后:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  var1 = </span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  var2 = </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="sh">'</span><span class="s">new_var</span><span class="sh">'</span><span class="s"> in locals(): </span><span class="si">{</span><span class="sh">'</span><span class="s">new_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">locals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 再次调用locals()查看
+</span>    <span class="n">current_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">再次调用locals():</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">current_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">explain_locals_behavior</span><span class="p">()</span>
+
+<span class="c1"># 安全的局部变量检查
+</span><span class="k">def</span> <span class="nf">safe_locals_inspection</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">安全的局部变量检查</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 安全的局部变量检查:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">inspection_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">检查变量1</span><span class="sh">"</span>
+    <span class="n">inspection_var2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">inspection_var3</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+    
+    <span class="c1"># 创建locals()的副本进行安全操作
+</span>    <span class="n">locals_copy</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">().</span><span class="nf">copy</span><span class="p">()</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">局部变量快照:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">locals_copy</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">locals_copy</span><span class="sh">'</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 分析变量类型
+</span>    <span class="n">type_counts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">locals_copy</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span>
+        <span class="n">type_counts</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_counts</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">变量类型统计:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">type_counts</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">locals_copy</span>
+
+<span class="n">safe_inspection_result</span> <span class="o">=</span> <span class="nf">safe_locals_inspection</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="类中的locals使用">类中的locals()使用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 类中的locals()使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">类中的locals()使用示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 类定义中的locals()
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 类定义中的locals():</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">DemoClass</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">演示类</span><span class="sh">"""</span>
+    <span class="n">class_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">类变量1</span><span class="sh">"</span>
+    <span class="n">class_var2</span> <span class="o">=</span> <span class="mi">42</span>
+    
+    <span class="c1"># 在类定义中使用locals()
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">类定义中的locals():</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">class_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  类局部变量数量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">class_locals</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">class_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">__</span><span class="sh">'</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">instance_param</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">初始化方法</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">instance_var</span> <span class="o">=</span> <span class="n">instance_param</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. __init__方法中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">init_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">init_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">instance_method</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">method_param</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">实例方法</span><span class="sh">"""</span>
+        <span class="n">method_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">方法变量</span><span class="sh">"</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 实例方法中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">method_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">method_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">method_locals</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">class_method</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">class_param</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">类方法</span><span class="sh">"""</span>
+        <span class="n">class_method_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">类方法变量</span><span class="sh">"</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 类方法中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">class_method_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">class_method_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">class_method_locals</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">static_method</span><span class="p">(</span><span class="n">static_param</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">静态方法</span><span class="sh">"""</span>
+        <span class="n">static_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">静态方法变量</span><span class="sh">"</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 静态方法中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">static_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">static_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">static_locals</span>
+
+<span class="c1"># 测试类中的locals()
+</span><span class="n">demo_instance</span> <span class="o">=</span> <span class="nc">DemoClass</span><span class="p">(</span><span class="sh">"</span><span class="s">实例参数</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">instance_result</span> <span class="o">=</span> <span class="n">demo_instance</span><span class="p">.</span><span class="nf">instance_method</span><span class="p">(</span><span class="sh">"</span><span class="s">方法参数</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">class_result</span> <span class="o">=</span> <span class="n">DemoClass</span><span class="p">.</span><span class="nf">class_method</span><span class="p">(</span><span class="sh">"</span><span class="s">类参数</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">static_result</span> <span class="o">=</span> <span class="n">DemoClass</span><span class="p">.</span><span class="nf">static_method</span><span class="p">(</span><span class="sh">"</span><span class="s">静态参数</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 属性访问中的locals()
+</span><span class="k">class</span> <span class="nc">PropertyDemo</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">属性演示类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">属性getter</span><span class="sh">"""</span>
+        <span class="n">getter_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">getter变量</span><span class="sh">"</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">6. 属性getter中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">getter_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">getter_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_value</span>
+    
+    <span class="nd">@value.setter</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">属性setter</span><span class="sh">"""</span>
+        <span class="n">setter_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">setter变量</span><span class="sh">"</span>
+        <span class="n">old_value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">_value</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">7. 属性setter中的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">setter_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">setter_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">new_value</span>
+
+<span class="c1"># 测试属性中的locals()
+</span><span class="n">prop_demo</span> <span class="o">=</span> <span class="nc">PropertyDemo</span><span class="p">()</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">prop_demo</span><span class="p">.</span><span class="n">value</span>  <span class="c1"># 触发getter
+</span><span class="n">prop_demo</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">42</span>     <span class="c1"># 触发setter
+</span></code></pre></div></div>
+
+<h3 id="调试和内省应用">调试和内省应用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">inspect</span>
+<span class="kn">import</span> <span class="n">traceback</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># 调试和内省工具
+</span><span class="k">class</span> <span class="nc">LocalsInspector</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">局部变量检查器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">inspect_current_locals</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">frame_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">检查当前局部变量</span><span class="sh">"""</span>
+        <span class="c1"># 获取调用者的帧
+</span>        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">currentframe</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 向上查找指定层数的帧
+</span>            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">frame_offset</span><span class="p">):</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_back</span>
+                <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Frame not found</span><span class="sh">'</span><span class="p">}</span>
+            
+            <span class="c1"># 获取局部变量
+</span>            <span class="n">frame_locals</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_locals</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+            
+            <span class="c1"># 获取帧信息
+</span>            <span class="n">frame_info</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">filename</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_code</span><span class="p">.</span><span class="n">co_filename</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_code</span><span class="p">.</span><span class="n">co_name</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">line_number</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_lineno</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">locals_count</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">frame_locals</span><span class="p">)</span>
+            <span class="p">}</span>
+            
+            <span class="n">inspection_result</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame_info</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame_locals</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="nf">__import__</span><span class="p">(</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">).</span><span class="nf">time</span><span class="p">()</span>
+            <span class="p">}</span>
+            
+            <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">inspection_result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">inspection_result</span>
+            
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">frame</span>  <span class="c1"># 避免循环引用
+</span>    
+    <span class="k">def</span> <span class="nf">debug_function_call</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">调试函数调用</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">调试函数调用: </span><span class="si">{</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 调用前检查
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">调用前的局部变量:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">pre_locals</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">inspect_current_locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">pre_locals</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 执行函数
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            
+            <span class="c1"># 调用后检查
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">调用后的局部变量:</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">post_locals</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">inspect_current_locals</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">post_locals</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="n">result</span>
+            
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数执行出错: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误时的局部变量:</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">error_locals</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">inspect_current_locals</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">error_locals</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">raise</span>
+    
+    <span class="k">def</span> <span class="nf">analyze_variable_changes</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sh">"""</span><span class="s">分析变量变化</span><span class="sh">"""</span>
+        <span class="n">changes</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">inspection</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="n">change_info</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="sh">'</span><span class="s">inspection_index</span><span class="sh">'</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">],</span>
+                    <span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">:</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">],</span>
+                    <span class="sh">'</span><span class="s">line</span><span class="sh">'</span><span class="p">:</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">line_number</span><span class="sh">'</span><span class="p">],</span>
+                    <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">][</span><span class="n">var_name</span><span class="p">],</span>
+                    <span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">:</span> <span class="nf">type</span><span class="p">(</span><span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">][</span><span class="n">var_name</span><span class="p">]).</span><span class="n">__name__</span>
+                <span class="p">}</span>
+                <span class="n">changes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">change_info</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">changes</span>
+    
+    <span class="k">def</span> <span class="nf">get_inspection_summary</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取检查摘要</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">message</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">No inspections performed</span><span class="sh">'</span><span class="p">}</span>
+        
+        <span class="c1"># 统计信息
+</span>        <span class="n">total_inspections</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">)</span>
+        <span class="n">functions_inspected</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="n">all_variables</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">inspection</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">:</span>
+            <span class="n">functions_inspected</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">])</span>
+            <span class="n">all_variables</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">keys</span><span class="p">())</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">total_inspections</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_inspections</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">functions_inspected</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">functions_inspected</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">unique_variables</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">all_variables</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">function_list</span><span class="sh">'</span><span class="p">:</span> <span class="nf">list</span><span class="p">(</span><span class="n">functions_inspected</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">common_variables</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">_find_common_variables</span><span class="p">()</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">_find_common_variables</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">查找常见变量</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="c1"># 统计变量出现次数
+</span>        <span class="n">var_counts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">inspection</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">keys</span><span class="p">():</span>
+                <span class="n">var_counts</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var_counts</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        
+        <span class="c1"># 返回出现次数超过一半的变量
+</span>        <span class="n">threshold</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">inspection_history</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">var_counts</span><span class="p">.</span><span class="nf">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+
+<span class="c1"># 测试调试工具
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">调试和内省应用示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">inspector</span> <span class="o">=</span> <span class="nc">LocalsInspector</span><span class="p">()</span>
+
+<span class="c1"># 测试函数1
+</span><span class="k">def</span> <span class="nf">test_function1</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">测试函数1</span><span class="sh">"""</span>
+    <span class="n">local_var1</span> <span class="o">=</span> <span class="n">param1</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">local_var2</span> <span class="o">=</span> <span class="n">param2</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">param2</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nf">str</span><span class="p">(</span><span class="n">param2</span><span class="p">)</span>
+    
+    <span class="c1"># 在函数中检查局部变量
+</span>    <span class="n">inspection</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">inspect_current_locals</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 检查当前帧
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数1中的局部变量检查:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  函数: </span><span class="si">{</span><span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  行号: </span><span class="si">{</span><span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">frame_info</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">line_number</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  局部变量:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">local_var1</span><span class="p">,</span> <span class="n">local_var2</span>
+
+<span class="c1"># 测试函数2
+</span><span class="k">def</span> <span class="nf">test_function2</span><span class="p">(</span><span class="n">data_list</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">测试函数2</span><span class="sh">"""</span>
+    <span class="n">processed_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">data_list</span><span class="p">):</span>
+        <span class="n">processed_item</span> <span class="o">=</span> <span class="n">item</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">processed_data</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">processed_item</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">processed_item</span>
+        
+        <span class="c1"># 在循环中检查局部变量
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># 只在第3次迭代时检查
+</span>            <span class="n">inspection</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">inspect_current_locals</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数2循环中的局部变量检查 (i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">):</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inspection</span><span class="p">[</span><span class="sh">'</span><span class="s">locals</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">data_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_list</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">processed_data</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">average</span>
+
+<span class="c1"># 使用调试器测试函数
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 使用调试器测试函数:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">debug_function_call</span><span class="p">(</span><span class="n">test_function1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">函数1结果: </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">debug_function_call</span><span class="p">(</span><span class="n">test_function2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">函数2结果: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 分析变量变化
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 变量变化分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">changes</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">analyze_variable_changes</span><span class="p">(</span><span class="sh">'</span><span class="s">local_var1</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">changes</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">变量 </span><span class="sh">'</span><span class="s">local_var1</span><span class="sh">'</span><span class="s"> 的变化:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  函数 </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">function</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">, 行 </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">line</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">变量 </span><span class="sh">'</span><span class="s">local_var1</span><span class="sh">'</span><span class="s"> 未找到变化记录</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取检查摘要
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 检查摘要:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">inspector</span><span class="p">.</span><span class="nf">get_inspection_summary</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">summary</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级应用动态变量跟踪">高级应用：动态变量跟踪</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">functools</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="c1"># 动态变量跟踪器
+</span><span class="k">class</span> <span class="nc">VariableTracker</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">变量跟踪器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">active_tracking</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">track_function</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">track_vars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">函数装饰器：跟踪函数中的变量</span><span class="sh">"""</span>
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+            <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">func_name</span> <span class="o">=</span> <span class="n">func</span><span class="p">.</span><span class="n">__name__</span>
+                
+                <span class="c1"># 初始化跟踪数据
+</span>                <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">:</span>
+                    <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="sh">'</span><span class="s">calls</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+                        <span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">:</span> <span class="p">{}</span>
+                    <span class="p">}</span>
+                
+                <span class="n">call_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+                <span class="n">call_id</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">calls</span><span class="sh">'</span><span class="p">])</span>
+                
+                <span class="c1"># 执行函数并跟踪变量
+</span>                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># 创建包装的locals()函数
+</span>                    <span class="n">original_locals</span> <span class="o">=</span> <span class="nb">locals</span>
+                    
+                    <span class="k">def</span> <span class="nf">tracking_locals</span><span class="p">():</span>
+                        <span class="n">current_locals</span> <span class="o">=</span> <span class="nf">original_locals</span><span class="p">()</span>
+                        
+                        <span class="c1"># 记录指定变量的变化
+</span>                        <span class="k">if</span> <span class="n">track_vars</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">track_vars</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">current_locals</span><span class="p">:</span>
+                                    <span class="n">self</span><span class="p">.</span><span class="nf">_record_variable_change</span><span class="p">(</span>
+                                        <span class="n">func_name</span><span class="p">,</span> <span class="n">call_id</span><span class="p">,</span> <span class="n">var_name</span><span class="p">,</span> 
+                                        <span class="n">current_locals</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span>
+                                    <span class="p">)</span>
+                        
+                        <span class="k">return</span> <span class="n">current_locals</span>
+                    
+                    <span class="c1"># 临时替换locals()（仅在此函数作用域内）
+</span>                    <span class="c1"># 注意：这只是演示，实际中不建议替换内置函数
+</span>                    
+                    <span class="n">result</span> <span class="o">=</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                    
+                    <span class="c1"># 记录调用信息
+</span>                    <span class="n">call_info</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="sh">'</span><span class="s">call_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">call_id</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">call_start_time</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">(),</span>
+                        <span class="sh">'</span><span class="s">args</span><span class="sh">'</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">kwargs</span><span class="sh">'</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">:</span> <span class="bp">True</span>
+                    <span class="p">}</span>
+                    
+                    <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">calls</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">call_info</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">result</span>
+                    
+                <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="c1"># 记录异常调用
+</span>                    <span class="n">call_info</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="sh">'</span><span class="s">call_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">call_id</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">call_start_time</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">(),</span>
+                        <span class="sh">'</span><span class="s">args</span><span class="sh">'</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">kwargs</span><span class="sh">'</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                        <span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span>
+                    <span class="p">}</span>
+                    
+                    <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">calls</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">call_info</span><span class="p">)</span>
+                    <span class="k">raise</span>
+            
+            <span class="k">return</span> <span class="n">wrapper</span>
+        <span class="k">return</span> <span class="n">decorator</span>
+    
+    <span class="k">def</span> <span class="nf">_record_variable_change</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">call_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+                               <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">记录变量变化</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">var_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">]:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">][</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">change_record</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">call_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">call_id</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">(),</span>
+            <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">:</span> <span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span>
+        <span class="p">}</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">][</span><span class="n">var_name</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">change_record</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_function_stats</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取函数统计信息</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span> <span class="sa">f</span><span class="sh">'</span><span class="s">Function </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s"> not tracked</span><span class="sh">'</span><span class="p">}</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+        <span class="n">calls</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">calls</span><span class="sh">'</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">calls</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">message</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">No calls recorded</span><span class="sh">'</span><span class="p">}</span>
+        
+        <span class="c1"># 计算统计信息
+</span>        <span class="n">successful_calls</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span> <span class="k">if</span> <span class="n">call</span><span class="p">[</span><span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">]]</span>
+        <span class="n">failed_calls</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">call</span><span class="p">[</span><span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">]]</span>
+        
+        <span class="k">if</span> <span class="n">successful_calls</span><span class="p">:</span>
+            <span class="n">execution_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span><span class="p">[</span><span class="sh">'</span><span class="s">end_time</span><span class="sh">'</span><span class="p">]</span> <span class="o">-</span> <span class="n">call</span><span class="p">[</span><span class="sh">'</span><span class="s">start_time</span><span class="sh">'</span><span class="p">]</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">successful_calls</span><span class="p">]</span>
+            <span class="n">avg_execution_time</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">execution_times</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">execution_times</span><span class="p">)</span>
+            <span class="n">min_execution_time</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">execution_times</span><span class="p">)</span>
+            <span class="n">max_execution_time</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">execution_times</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">avg_execution_time</span> <span class="o">=</span> <span class="n">min_execution_time</span> <span class="o">=</span> <span class="n">max_execution_time</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">total_calls</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">calls</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">successful_calls</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">successful_calls</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">failed_calls</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">failed_calls</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">avg_execution_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">avg_execution_time</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">min_execution_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">min_execution_time</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">max_execution_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">max_execution_time</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">tracked_variables</span><span class="sh">'</span><span class="p">:</span> <span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">].</span><span class="nf">keys</span><span class="p">())</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">get_variable_timeline</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sh">"""</span><span class="s">获取变量时间线</span><span class="sh">"""</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span> <span class="ow">or</span> 
+            <span class="n">var_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="sh">'</span><span class="s">variable_history</span><span class="sh">'</span><span class="p">][</span><span class="n">var_name</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">print_tracking_report</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">打印跟踪报告</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">func_name</span><span class="p">:</span>
+            <span class="n">functions_to_report</span> <span class="o">=</span> <span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="k">if</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">functions_to_report</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">tracking_data</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">functions_to_report</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">没有跟踪数据</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">变量跟踪报告:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">=</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">functions_to_report</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_function_stats</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数: </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  总调用次数: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">total_calls</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  成功调用: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">successful_calls</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  失败调用: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">failed_calls</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  平均执行时间: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">avg_execution_time</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  跟踪的变量: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">tracked_variables</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 显示变量变化
+</span>            <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="sh">'</span><span class="s">tracked_variables</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="n">timeline</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_variable_timeline</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  变量 </span><span class="sh">'</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="sh">'</span><span class="s"> 的变化:</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">change</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">timeline</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]):</span>  <span class="c1"># 只显示最近5次变化
+</span>                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">. 调用</span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">call_id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试变量跟踪器
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">动态变量跟踪示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">tracker</span> <span class="o">=</span> <span class="nc">VariableTracker</span><span class="p">()</span>
+
+<span class="c1"># 使用跟踪装饰器
+</span><span class="nd">@tracker.track_function</span><span class="p">([</span><span class="sh">'</span><span class="s">counter</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">temp</span><span class="sh">'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">tracked_calculation</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">被跟踪的计算函数</span><span class="sh">"""</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">temp</span>
+        
+        <span class="c1"># 模拟一些局部变量操作
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">*=</span> <span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nd">@tracker.track_function</span><span class="p">([</span><span class="sh">'</span><span class="s">data</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">processed</span><span class="sh">'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">tracked_processing</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">被跟踪的处理函数</span><span class="sh">"""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">input_data</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span> <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="sh">'</span><span class="s">copy</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="nf">list</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+    <span class="n">processed</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">processed_item</span> <span class="o">=</span> <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">processed</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">processed_item</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">processed</span>
+
+<span class="c1"># 测试跟踪功能
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 执行被跟踪的函数:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 多次调用函数
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="nf">tracked_calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  计算结果 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="nf">tracked_processing</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  处理结果 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 打印跟踪报告
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 跟踪报告:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">tracker</span><span class="p">.</span><span class="nf">print_tracking_report</span><span class="p">()</span>
+
+<span class="c1"># 获取特定函数的详细统计
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 详细统计:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">tracker</span><span class="p">.</span><span class="nf">get_function_stats</span><span class="p">(</span><span class="sh">'</span><span class="s">tracked_calculation</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">tracked_calculation 统计:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取变量时间线
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 变量时间线:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">timeline</span> <span class="o">=</span> <span class="n">tracker</span><span class="p">.</span><span class="nf">get_variable_timeline</span><span class="p">(</span><span class="sh">'</span><span class="s">tracked_calculation</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">变量 </span><span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="s"> 的完整时间线:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">timeline</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  调用</span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">call_id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (时间: </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="locals的限制和注意事项">locals()的限制和注意事项</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># locals()限制和注意事项
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">locals()限制和注意事项:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 1. 修改限制
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 修改限制:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">modification_limitation_demo</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">演示修改限制</span><span class="sh">"""</span>
+    <span class="n">local_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">原始值</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  修改前: local_var = </span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 尝试修改locals()字典
+</span>    <span class="nf">locals</span><span class="p">()[</span><span class="sh">'</span><span class="s">local_var</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">修改的值</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  尝试修改后: local_var = </span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 通常不会改变
+</span>    
+    <span class="c1"># 添加新变量到locals()
+</span>    <span class="nf">locals</span><span class="p">()[</span><span class="sh">'</span><span class="s">new_local</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">新变量</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  添加新变量后: </span><span class="sh">'</span><span class="s">new_local</span><span class="sh">'</span><span class="s"> in locals() = </span><span class="si">{</span><span class="sh">'</span><span class="s">new_local</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">locals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 但是新变量通常无法直接访问
+</span>    <span class="k">try</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  直接访问new_local: </span><span class="si">{</span><span class="n">new_local</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">NameError</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  无法直接访问new_local变量</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nf">locals</span><span class="p">()</span>
+
+<span class="n">modification_result</span> <span class="o">=</span> <span class="nf">modification_limitation_demo</span><span class="p">()</span>
+
+<span class="c1"># 2. 性能考虑
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 性能考虑:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="n">time</span>
+
+<span class="k">def</span> <span class="nf">performance_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">性能比较</span><span class="sh">"""</span>
+    <span class="n">test_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">测试变量1</span><span class="sh">"</span>
+    <span class="n">test_var2</span> <span class="o">=</span> <span class="sh">"</span><span class="s">测试变量2</span><span class="sh">"</span>
+    <span class="n">test_var3</span> <span class="o">=</span> <span class="sh">"</span><span class="s">测试变量3</span><span class="sh">"</span>
+    
+    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">100000</span>
+    
+    <span class="c1"># 直接访问变量
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">test_var1</span>
+    <span class="n">direct_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 通过locals()访问
+</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="n">local_dict</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">local_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">test_var1</span><span class="sh">'</span><span class="p">]</span>
+    <span class="n">locals_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># 缓存locals()后访问
+</span>    <span class="n">local_dict</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">local_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">test_var1</span><span class="sh">'</span><span class="p">]</span>
+    <span class="n">cached_locals_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  性能比较 (</span><span class="si">{</span><span class="n">iterations</span><span class="si">}</span><span class="s"> 次迭代):</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    直接访问: </span><span class="si">{</span><span class="n">direct_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    locals()访问: </span><span class="si">{</span><span class="n">locals_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒 (慢 </span><span class="si">{</span><span class="n">locals_time</span><span class="o">/</span><span class="n">direct_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍)</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    缓存locals()访问: </span><span class="si">{</span><span class="n">cached_locals_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒 (慢 </span><span class="si">{</span><span class="n">cached_locals_time</span><span class="o">/</span><span class="n">direct_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">performance_comparison</span><span class="p">()</span>
+
+<span class="c1"># 3. 作用域陷阱
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 作用域陷阱:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">scope_trap_demo</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">作用域陷阱演示</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">outer_function</span><span class="p">():</span>
+        <span class="n">outer_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">外层变量</span><span class="sh">"</span>
+        
+        <span class="k">def</span> <span class="nf">inner_function</span><span class="p">():</span>
+            <span class="n">inner_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">内层变量</span><span class="sh">"</span>
+            
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  内层函数的locals():</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">inner_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inner_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 尝试访问外层变量
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  外层变量在内层locals()中: </span><span class="si">{</span><span class="sh">'</span><span class="s">outer_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">inner_locals</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="c1"># 但可以直接访问（闭包）
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  直接访问外层变量: </span><span class="si">{</span><span class="n">outer_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="n">inner_locals</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  外层函数的locals():</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">outer_locals</span> <span class="o">=</span> <span class="nf">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">outer_locals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nf">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="nf">inner_function</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="nf">outer_function</span><span class="p">()</span>
+
+<span class="n">scope_result</span> <span class="o">=</span> <span class="nf">scope_trap_demo</span><span class="p">()</span>
+
+<span class="c1"># 4. 最佳实践
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 最佳实践:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">LocalsBestPractices</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">locals()最佳实践</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">safe_locals_access</span><span class="p">(</span><span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">安全的locals()访问</span><span class="sh">"""</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">currentframe</span><span class="p">().</span><span class="n">f_back</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_locals</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">frame</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">locals_snapshot</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">创建locals()快照</span><span class="sh">"""</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">currentframe</span><span class="p">().</span><span class="n">f_back</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_locals</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">frame</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">filter_locals</span><span class="p">(</span><span class="n">exclude_private</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exclude_functions</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">过滤locals()内容</span><span class="sh">"""</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">currentframe</span><span class="p">().</span><span class="n">f_back</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">local_vars</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_locals</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+            
+            <span class="n">filtered</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">local_vars</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="c1"># 排除私有变量
+</span>                <span class="k">if</span> <span class="n">exclude_private</span> <span class="ow">and</span> <span class="n">name</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                
+                <span class="c1"># 排除函数
+</span>                <span class="k">if</span> <span class="n">exclude_functions</span> <span class="ow">and</span> <span class="nf">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                
+                <span class="n">filtered</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            
+            <span class="k">return</span> <span class="n">filtered</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">frame</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">debug_locals_info</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">调试locals()信息</span><span class="sh">"""</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">currentframe</span><span class="p">().</span><span class="n">f_back</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">local_vars</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_locals</span>
+            
+            <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">function_name</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_code</span><span class="p">.</span><span class="n">co_name</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">filename</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_code</span><span class="p">.</span><span class="n">co_filename</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">line_number</span><span class="sh">'</span><span class="p">:</span> <span class="n">frame</span><span class="p">.</span><span class="n">f_lineno</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">variable_count</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">local_vars</span><span class="p">),</span>
+                <span class="sh">'</span><span class="s">variable_types</span><span class="sh">'</span><span class="p">:</span> <span class="p">{}</span>
+            <span class="p">}</span>
+            
+            <span class="c1"># 统计变量类型
+</span>            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">local_vars</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+                <span class="n">type_name</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span>
+                <span class="n">info</span><span class="p">[</span><span class="sh">'</span><span class="s">variable_types</span><span class="sh">'</span><span class="p">][</span><span class="n">type_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="sh">'</span><span class="s">variable_types</span><span class="sh">'</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            
+            <span class="k">return</span> <span class="n">info</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">frame</span>
+
+<span class="c1"># 测试最佳实践
+</span><span class="k">def</span> <span class="nf">test_best_practices</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">测试最佳实践</span><span class="sh">"""</span>
+    <span class="n">test_var1</span> <span class="o">=</span> <span class="sh">"</span><span class="s">测试值1</span><span class="sh">"</span>
+    <span class="n">test_var2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">_private_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">私有变量</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">local_function</span><span class="p">():</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">局部函数</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  安全访问测试:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">LocalsBestPractices</span><span class="p">.</span><span class="nf">safe_locals_access</span><span class="p">(</span><span class="sh">'</span><span class="s">test_var1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">default</span><span class="sh">'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    test_var1: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">value</span> <span class="o">=</span> <span class="n">LocalsBestPractices</span><span class="p">.</span><span class="nf">safe_locals_access</span><span class="p">(</span><span class="sh">'</span><span class="s">nonexistent</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">default</span><span class="sh">'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    nonexistent: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  快照测试:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">snapshot</span> <span class="o">=</span> <span class="n">LocalsBestPractices</span><span class="p">.</span><span class="nf">locals_snapshot</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    快照变量数量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  过滤测试:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">LocalsBestPractices</span><span class="p">.</span><span class="nf">filter_locals</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    过滤后变量: </span><span class="si">{</span><span class="nf">list</span><span class="p">(</span><span class="n">filtered</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  调试信息:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">debug_info</span> <span class="o">=</span> <span class="n">LocalsBestPractices</span><span class="p">.</span><span class="nf">debug_locals_info</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">debug_info</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">test_best_practices</span><span class="p">()</span>
+
+<span class="c1"># 5. 与globals()的比较
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 与globals()的比较:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">global_comparison_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">全局比较变量</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">compare_globals_locals</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">比较globals()和locals()</span><span class="sh">"""</span>
+    <span class="n">local_comparison_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">局部比较变量</span><span class="sh">"</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  函数中的比较:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    locals() == globals(): </span><span class="si">{</span><span class="nf">locals</span><span class="p">()</span> <span class="o">==</span> <span class="nf">globals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    len(locals()): </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="nf">locals</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    len(globals()): </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="nf">globals</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  变量位置:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="sh">'</span><span class="s">local_comparison_var</span><span class="sh">'</span><span class="s"> in locals(): </span><span class="si">{</span><span class="sh">'</span><span class="s">local_comparison_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">locals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="sh">'</span><span class="s">local_comparison_var</span><span class="sh">'</span><span class="s"> in globals(): </span><span class="si">{</span><span class="sh">'</span><span class="s">local_comparison_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">globals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="sh">'</span><span class="s">global_comparison_var</span><span class="sh">'</span><span class="s"> in locals(): </span><span class="si">{</span><span class="sh">'</span><span class="s">global_comparison_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">locals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="sh">'</span><span class="s">global_comparison_var</span><span class="sh">'</span><span class="s"> in globals(): </span><span class="si">{</span><span class="sh">'</span><span class="s">global_comparison_var</span><span class="sh">'</span> <span class="ow">in</span> <span class="nf">globals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 在模块级别的比较
+</span>    <span class="k">return</span> <span class="nf">locals</span><span class="p">(),</span> <span class="nf">globals</span><span class="p">()</span>
+
+<span class="n">func_locals</span><span class="p">,</span> <span class="n">func_globals</span> <span class="o">=</span> <span class="nf">compare_globals_locals</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  模块级别的比较:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    locals() is globals(): </span><span class="si">{</span><span class="nf">locals</span><span class="p">()</span> <span class="ow">is</span> <span class="nf">globals</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    id(locals()): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="nf">locals</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    id(globals()): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="nf">globals</span><span class="p">())</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数和模块">🔗 相关函数和模块</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">globals()</code> - 返回全局命名空间字典</li>
+  <li><code class="language-plaintext highlighter-rouge">vars()</code> - 返回对象的属性字典</li>
+  <li><code class="language-plaintext highlighter-rouge">dir()</code> - 列出对象的属性名</li>
+  <li><code class="language-plaintext highlighter-rouge">hasattr()</code> - 检查对象是否有指定属性</li>
+  <li><code class="language-plaintext highlighter-rouge">getattr()</code> - 获取对象属性值</li>
+  <li><code class="language-plaintext highlighter-rouge">setattr()</code> - 设置对象属性值</li>
+  <li><code class="language-plaintext highlighter-rouge">delattr()</code> - 删除对象属性</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">inspect</code> - 对象检查和内省</li>
+  <li><code class="language-plaintext highlighter-rouge">types</code> - 动态类型创建和检查</li>
+  <li><code class="language-plaintext highlighter-rouge">sys</code> - 系统相关参数和函数</li>
+  <li><code class="language-plaintext highlighter-rouge">traceback</code> - 异常跟踪</li>
+  <li><code class="language-plaintext highlighter-rouge">frame</code> - 帧对象操作</li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">varname</code> - 获取变量名</li>
+  <li><code class="language-plaintext highlighter-rouge">executing</code> - 获取执行上下文</li>
+  <li><code class="language-plaintext highlighter-rouge">stack_data</code> - 栈数据分析</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces">Python命名空间和作用域</a></li>
+  <li><a href="https://docs.python.org/3/library/functions.html#locals">内置函数文档</a></li>
+  <li><a href="https://docs.python.org/3/reference/executionmodel.html">Python执行模型</a></li>
+  <li><a href="https://docs.python.org/3/library/inspect.html">inspect模块详解</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">命名空间</code> <code class="language-plaintext highlighter-rouge">局部变量</code> <code class="language-plaintext highlighter-rouge">作用域</code> <code class="language-plaintext highlighter-rouge">变量管理</code> <code class="language-plaintext highlighter-rouge">调试工具</code> <code class="language-plaintext highlighter-rouge">内省</code> <code class="language-plaintext highlighter-rouge">函数检查</code> <code class="language-plaintext highlighter-rouge">动态访问</code></p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数作用域与闭包 - Python知识体系文档</title>
+  <meta name="description" content="Python函数作用域、闭包和变量生命周期详解">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>函数作用域与闭包 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="函数作用域与闭包" />
+<meta name="author" content="Python文档团队" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Python函数作用域、闭包和变量生命周期详解" />
+<meta property="og:description" content="Python函数作用域、闭包和变量生命周期详解" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/basics/function-scope/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/basics/function-scope/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="函数作用域与闭包" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档团队"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"Python函数作用域、闭包和变量生命周期详解","headline":"函数作用域与闭包","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/basics/function-scope/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/basics/function-scope/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">函数作用域与闭包</h1>
+        
+        
+        <p class="doc-description">Python函数作用域、闭包和变量生命周期详解</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: basics</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-01</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">作用域</span>
+          
+          <span class="tag">闭包</span>
+          
+          <span class="tag">global</span>
+          
+          <span class="tag">nonlocal</span>
+          
+          <span class="tag">变量作用域</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="函数作用域与闭包">函数作用域与闭包</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p>作用域是编程中的重要概念，它决定了变量在程序中的可见性和生命周期。Python的作用域规则遵循LEGB原则（Local、Enclosing、Global、Built-in），理解作用域对于编写正确、高效的Python代码至关重要。闭包是函数式编程的重要特性，它允许内层函数访问外层函数的变量，创建强大而灵活的编程模式。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>理解Python的作用域规则和LEGB原则</li>
+  <li>掌握global和nonlocal关键字的使用</li>
+  <li>学会创建和使用闭包</li>
+  <li>了解变量的生命周期和销毁机制</li>
+  <li>掌握默认参数的作用域特性</li>
+  <li>能够解决作用域相关的常见问题</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python函数定义和调用</li>
+  <li>变量和数据类型</li>
+  <li>可变对象和不可变对象的概念</li>
+  <li>基本的面向对象概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="作用域基础">作用域基础</h3>
+
+<h4 id="作用域定义">作用域定义</h4>
+
+<p>作用域决定了变量在程序中的可见范围和访问权限。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 全局作用域
+</span><span class="n">global_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">我是全局变量</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">outer_function</span><span class="p">():</span>
+    <span class="c1"># 外层函数作用域（Enclosing scope）
+</span>    <span class="n">outer_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">我是外层函数变量</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">inner_function</span><span class="p">():</span>
+        <span class="c1"># 局部作用域（Local scope）
+</span>        <span class="n">local_var</span> <span class="o">=</span> <span class="sh">"</span><span class="s">我是局部变量</span><span class="sh">"</span>
+        
+        <span class="c1"># 可以访问所有外层作用域的变量
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">局部变量：</span><span class="si">{</span><span class="n">local_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">外层变量：</span><span class="si">{</span><span class="n">outer_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">全局变量：</span><span class="si">{</span><span class="n">global_var</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内置函数：</span><span class="si">{</span><span class="nf">len</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">inner_function</span><span class="p">()</span>
+    
+    <span class="c1"># 无法访问内层函数的局部变量
+</span>    <span class="c1"># print(local_var)  # 这会引发NameError
+</span>
+<span class="nf">outer_function</span><span class="p">()</span>
+
+<span class="c1"># 演示作用域查找顺序
+</span><span class="k">def</span> <span class="nf">scope_demo</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">演示LEGB作用域查找顺序</span><span class="sh">"""</span>
+    <span class="c1"># Local - 局部作用域
+</span>    <span class="n">name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">局部作用域</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="c1"># 如果这里不定义name，会向上查找
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内层函数访问：</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">inner</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">外层函数访问：</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">scope_demo</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="变量查找规则">变量查找规则</h4>
+
+<p>Python按照LEGB顺序查找变量：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Built-in scope（内置作用域）
+# len, print, str等内置函数
+</span>
+<span class="c1"># Global scope（全局作用域）
+</span><span class="nb">len</span> <span class="o">=</span> <span class="sh">"</span><span class="s">我重新定义了len</span><span class="sh">"</span>  <span class="c1"># 不推荐这样做
+</span>
+<span class="k">def</span> <span class="nf">demonstrate_legb</span><span class="p">():</span>
+    <span class="c1"># Enclosing scope（外层作用域）
+</span>    <span class="nb">len</span> <span class="o">=</span> <span class="sh">"</span><span class="s">外层函数的len</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">inner_function</span><span class="p">():</span>
+        <span class="c1"># Local scope（局部作用域）
+</span>        <span class="nb">len</span> <span class="o">=</span> <span class="sh">"</span><span class="s">局部的len</span><span class="sh">"</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">局部作用域中的len：</span><span class="si">{</span><span class="nb">len</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 访问不同作用域的变量
+</span>        <span class="k">def</span> <span class="nf">show_scopes</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">当前len：</span><span class="si">{</span><span class="nb">len</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 局部的len
+</span>    
+    <span class="nf">inner_function</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">外层作用域中的len：</span><span class="si">{</span><span class="nb">len</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">demonstrate_legb</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">全局作用域中的len：</span><span class="si">{</span><span class="nb">len</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 恢复内置的len函数
+</span><span class="k">del</span> <span class="nb">len</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内置的len函数：</span><span class="si">{</span><span class="nf">len</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 现在又可以正常使用了
+</span></code></pre></div></div>
+
+<h3 id="global关键字">global关键字</h3>
+
+<h4 id="基本用法">基本用法</h4>
+
+<p><code class="language-plaintext highlighter-rouge">global</code>关键字用于在函数内部声明全局变量。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 全局变量
+</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">user_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">未设置</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">increment_counter</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">增加计数器</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计数器值：</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">set_user_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">设置用户名</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">user_name</span>
+    <span class="n">user_name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户名已设置为：</span><span class="si">{</span><span class="n">user_name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_user_info</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">获取用户信息</span><span class="sh">"""</span>
+    <span class="c1"># 只读取全局变量，不需要global声明
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">当前用户：</span><span class="si">{</span><span class="n">user_name</span><span class="si">}</span><span class="s">，访问次数：</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始计数器：</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">increment_counter</span><span class="p">()</span>
+<span class="nf">increment_counter</span><span class="p">()</span>
+<span class="nf">set_user_name</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">get_user_info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="复杂示例">复杂示例</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 配置管理示例
+</span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">timeout</span><span class="sh">"</span><span class="p">:</span> <span class="mi">30</span>
+<span class="p">}</span>
+
+<span class="n">log_level</span> <span class="o">=</span> <span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">update_config</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">更新配置</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">config</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">old_value</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">配置更新：</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s"> 从 </span><span class="si">{</span><span class="n">old_value</span><span class="si">}</span><span class="s"> 改为 </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">未知配置项：</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">set_debug_mode</span><span class="p">(</span><span class="n">enabled</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">设置调试模式</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">config</span><span class="p">,</span> <span class="n">log_level</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">enabled</span>
+    <span class="n">log_level</span> <span class="o">=</span> <span class="sh">"</span><span class="s">DEBUG</span><span class="sh">"</span> <span class="k">if</span> <span class="n">enabled</span> <span class="k">else</span> <span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">调试模式：</span><span class="si">{</span><span class="sh">'</span><span class="s">开启</span><span class="sh">'</span> <span class="k">if</span> <span class="n">enabled</span> <span class="k">else</span> <span class="sh">'</span><span class="s">关闭</span><span class="sh">'</span><span class="si">}</span><span class="s">，日志级别：</span><span class="si">{</span><span class="n">log_level</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_config_summary</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">获取配置摘要</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">当前配置：</span><span class="si">{</span><span class="n">config</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">日志级别：</span><span class="si">{</span><span class="n">log_level</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="nf">get_config_summary</span><span class="p">()</span>
+<span class="nf">update_config</span><span class="p">(</span><span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="nf">set_debug_mode</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="nf">get_config_summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="注意事项">注意事项</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 常见错误示例
+</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">problematic_function</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">演示常见的global使用错误</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># 这行可以正常执行
+</span>    <span class="c1"># x += 1  # 这行会报错：UnboundLocalError
+</span>    <span class="c1"># 因为+=操作既读取又赋值，Python认为x是局部变量
+</span>
+<span class="k">def</span> <span class="nf">correct_function</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">正确的做法</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">x增加后：</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 演示
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始x：</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">problematic_function</span><span class="p">()</span>  <span class="c1"># 只打印，不修改
+</span><span class="nf">correct_function</span><span class="p">()</span>      <span class="c1"># 正确修改全局变量
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最终x：</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 另一个常见错误
+</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">modify_list</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">修改可变对象</span><span class="sh">"""</span>
+    <span class="c1"># 对于可变对象，如果只是修改内容（不重新赋值），不需要global
+</span>    <span class="n">y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改后的列表：</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">replace_list</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">替换整个列表</span><span class="sh">"""</span>
+    <span class="k">global</span> <span class="n">y</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">替换后的列表：</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">modify_list</span><span class="p">()</span>   <span class="c1"># 修改内容
+</span><span class="nf">replace_list</span><span class="p">()</span>  <span class="c1"># 替换整个对象
+</span></code></pre></div></div>
+
+<h3 id="nonlocal关键字">nonlocal关键字</h3>
+
+<h4 id="基本概念">基本概念</h4>
+
+<p><code class="language-plaintext highlighter-rouge">nonlocal</code>关键字用于在嵌套函数中访问外层函数的变量。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_counter</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">创建一个计数器函数</span><span class="sh">"""</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">increment</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">count</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">def</span> <span class="nf">decrement</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">count</span>
+        <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">def</span> <span class="nf">get_count</span><span class="p">():</span>
+        <span class="c1"># 只读取，不需要nonlocal
+</span>        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">count</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="c1"># 返回操作函数
+</span>    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">increment</span><span class="sh">"</span><span class="p">:</span> <span class="n">increment</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">decrement</span><span class="sh">"</span><span class="p">:</span> <span class="n">decrement</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_count</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_count</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">reset</span><span class="sh">"</span><span class="p">:</span> <span class="n">reset</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">counter1</span> <span class="o">=</span> <span class="nf">create_counter</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始计数：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">get_count</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 0
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">增加后：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">increment</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 1
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">再增加：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">increment</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 2
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">减少后：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">decrement</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 1
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">重置后：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">reset</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>         <span class="c1"># 0
+</span>
+<span class="c1"># 创建另一个独立的计数器
+</span><span class="n">counter2</span> <span class="o">=</span> <span class="nf">create_counter</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计数器2：</span><span class="si">{</span><span class="n">counter2</span><span class="p">[</span><span class="sh">'</span><span class="s">increment</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>     <span class="c1"># 1
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计数器1：</span><span class="si">{</span><span class="n">counter1</span><span class="p">[</span><span class="sh">'</span><span class="s">get_count</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>    <span class="c1"># 0（独立的）
+</span></code></pre></div></div>
+
+<h4 id="高级应用">高级应用</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_bank_account</span><span class="p">(</span><span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建银行账户</span><span class="sh">"""</span>
+    <span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
+    <span class="n">transaction_history</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">存款</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">balance</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="n">transaction_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">存款：+</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s">，余额：</span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">取款</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">balance</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="n">balance</span><span class="p">:</span>
+            <span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="n">transaction_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">取款：-</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s">，余额：</span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">get_balance</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">查询余额</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">balance</span>
+    
+    <span class="k">def</span> <span class="nf">get_history</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">查询交易历史</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">transaction_history</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">transfer_to</span><span class="p">(</span><span class="n">target_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">转账到其他账户</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">target_account</span><span class="p">[</span><span class="sh">'</span><span class="s">deposit</span><span class="sh">'</span><span class="p">](</span><span class="n">amount</span><span class="p">):</span>
+                <span class="n">transaction_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转出：-</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s">，余额：</span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 如果目标账户存款失败，回滚
+</span>                <span class="nf">deposit</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+                <span class="n">transaction_history</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>  <span class="c1"># 移除取款记录
+</span>        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">deposit</span><span class="sh">"</span><span class="p">:</span> <span class="n">deposit</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">withdraw</span><span class="sh">"</span><span class="p">:</span> <span class="n">withdraw</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_balance</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_balance</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_history</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_history</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">transfer_to</span><span class="sh">"</span><span class="p">:</span> <span class="n">transfer_to</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">account1</span> <span class="o">=</span> <span class="nf">create_bank_account</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">account2</span> <span class="o">=</span> <span class="nf">create_bank_account</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">账户1余额：</span><span class="si">{</span><span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">get_balance</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">账户2余额：</span><span class="si">{</span><span class="n">account2</span><span class="p">[</span><span class="sh">'</span><span class="s">get_balance</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 存取款操作
+</span><span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">deposit</span><span class="sh">'</span><span class="p">](</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">withdraw</span><span class="sh">'</span><span class="p">](</span><span class="mi">150</span><span class="p">)</span>
+
+<span class="c1"># 转账操作
+</span><span class="k">if</span> <span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">transfer_to</span><span class="sh">'</span><span class="p">](</span><span class="n">account2</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">转账成功</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">转账失败</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">账户1余额：</span><span class="si">{</span><span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">get_balance</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">账户2余额：</span><span class="si">{</span><span class="n">account2</span><span class="p">[</span><span class="sh">'</span><span class="s">get_balance</span><span class="sh">'</span><span class="p">]()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">账户1交易历史：</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">account1</span><span class="p">[</span><span class="sh">'</span><span class="s">get_history</span><span class="sh">'</span><span class="p">]():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">record</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="闭包">闭包</h3>
+
+<h4 id="闭包的概念">闭包的概念</h4>
+
+<p>闭包是指内层函数引用了外层函数的变量，即使外层函数已经执行完毕，这些变量仍然被保持。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_multiplier</span><span class="p">(</span><span class="n">factor</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建乘法器闭包</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+        <span class="c1"># 这里引用了外层函数的factor变量
+</span>        <span class="k">return</span> <span class="n">number</span> <span class="o">*</span> <span class="n">factor</span>
+    
+    <span class="k">return</span> <span class="n">multiply</span>
+
+<span class="c1"># 创建不同的乘法器
+</span><span class="n">double</span> <span class="o">=</span> <span class="nf">create_multiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">triple</span> <span class="o">=</span> <span class="nf">create_multiplier</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tenfold</span> <span class="o">=</span> <span class="nf">create_multiplier</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 使用闭包
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">5的两倍：</span><span class="si">{</span><span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 10
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">5的三倍：</span><span class="si">{</span><span class="nf">triple</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>      <span class="c1"># 15
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">5的十倍：</span><span class="si">{</span><span class="nf">tenfold</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>     <span class="c1"># 50
+</span>
+<span class="c1"># 每个闭包都保持着自己的factor值
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">double的factor：</span><span class="si">{</span><span class="n">double</span><span class="p">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">cell_contents</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">triple的factor：</span><span class="si">{</span><span class="n">triple</span><span class="p">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">cell_contents</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="闭包的实际应用">闭包的实际应用</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_validator</span><span class="p">(</span><span class="n">validation_rule</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建验证器闭包</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">validation_rule</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">validate</span>
+
+<span class="c1"># 创建不同的验证器
+</span><span class="n">is_positive</span> <span class="o">=</span> <span class="nf">create_validator</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">is_even</span> <span class="o">=</span> <span class="nf">create_validator</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">is_in_range</span> <span class="o">=</span> <span class="nf">create_validator</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># 使用验证器
+</span><span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">值 </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  是正数：</span><span class="si">{</span><span class="nf">is_positive</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  是偶数：</span><span class="si">{</span><span class="nf">is_even</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  在范围内：</span><span class="si">{</span><span class="nf">is_in_range</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">create_cache</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">创建缓存闭包</span><span class="sh">"""</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">cached_function</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># 创建缓存键
+</span>            <span class="n">key</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="p">.</span><span class="nf">items</span><span class="p">()))</span>
+            
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存命中：</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            
+            <span class="c1"># 计算结果并缓存
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存存储：</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        
+        <span class="k">return</span> <span class="n">wrapper</span>
+    
+    <span class="k">def</span> <span class="nf">get_cache_info</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">size</span><span class="sh">"</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">cache</span><span class="p">),</span>
+            <span class="sh">"</span><span class="s">keys</span><span class="sh">"</span><span class="p">:</span> <span class="nf">list</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">clear_cache</span><span class="p">():</span>
+        <span class="n">cache</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">缓存已清空</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">cached_function</span><span class="p">,</span> <span class="n">get_cache_info</span><span class="p">,</span> <span class="n">clear_cache</span>
+
+<span class="c1"># 使用缓存闭包
+</span><span class="n">cached_decorator</span><span class="p">,</span> <span class="n">get_info</span><span class="p">,</span> <span class="n">clear</span> <span class="o">=</span> <span class="nf">create_cache</span><span class="p">()</span>
+
+<span class="nd">@cached_decorator</span>
+<span class="k">def</span> <span class="nf">expensive_calculation</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">模拟耗时计算</span><span class="sh">"""</span>
+    <span class="kn">import</span> <span class="n">time</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 模拟计算时间
+</span>    <span class="k">return</span> <span class="n">n</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="c1"># 测试缓存效果
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">第一次计算：</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="nf">expensive_calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果：</span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">第二次计算（相同参数）：</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="nf">expensive_calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果：</span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">缓存信息：</span><span class="si">{</span><span class="nf">get_info</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="默认参数的作用域">默认参数的作用域</h3>
+
+<h4 id="可变默认参数的陷阱">可变默认参数的陷阱</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 错误示例：可变默认参数
+</span><span class="k">def</span> <span class="nf">add_item_wrong</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">target_list</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sh">"""</span><span class="s">错误的默认参数使用</span><span class="sh">"""</span>
+    <span class="n">target_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_list</span>
+
+<span class="c1"># 演示问题
+</span><span class="n">list1</span> <span class="o">=</span> <span class="nf">add_item_wrong</span><span class="p">(</span><span class="sh">"</span><span class="s">第一个</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第一次调用：</span><span class="si">{</span><span class="n">list1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># ['第一个']
+</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="nf">add_item_wrong</span><span class="p">(</span><span class="sh">"</span><span class="s">第二个</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第二次调用：</span><span class="si">{</span><span class="n">list2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># ['第一个', '第二个'] - 意外！
+</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="nf">add_item_wrong</span><span class="p">(</span><span class="sh">"</span><span class="s">第三个</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第三次调用：</span><span class="si">{</span><span class="n">list3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># ['第一个', '第二个', '第三个'] - 更意外！
+</span>
+<span class="c1"># 查看默认参数
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">函数默认参数：</span><span class="si">{</span><span class="n">add_item_wrong</span><span class="p">.</span><span class="n">__defaults__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确的做法1：使用None作为默认值
+</span><span class="k">def</span> <span class="nf">add_item_correct1</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">target_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">正确的默认参数使用方法1</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">target_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">target_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">target_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_list</span>
+
+<span class="c1"># 正确的做法2：使用影子拷贝
+</span><span class="k">def</span> <span class="nf">add_item_correct2</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">target_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">正确的默认参数使用方法2</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">target_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">target_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">target_list</span> <span class="o">=</span> <span class="n">target_list</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>  <span class="c1"># 创建副本
+</span>    <span class="n">target_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_list</span>
+
+<span class="c1"># 测试正确的实现
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">正确实现的测试：</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">list_a</span> <span class="o">=</span> <span class="nf">add_item_correct1</span><span class="p">(</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">list_b</span> <span class="o">=</span> <span class="nf">add_item_correct1</span><span class="p">(</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表A：</span><span class="si">{</span><span class="n">list_a</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># ['A']
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表B：</span><span class="si">{</span><span class="n">list_b</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># ['B']
+</span></code></pre></div></div>
+
+<h4 id="默认参数的最佳实践">默认参数的最佳实践</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_user_profile</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">hobbies</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建用户档案的最佳实践</span><span class="sh">"""</span>
+    <span class="c1"># 使用None作为可变对象的默认值
+</span>    <span class="k">if</span> <span class="n">hobbies</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">hobbies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">theme</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">light</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">notifications</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+    
+    <span class="n">profile</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">hobbies</span><span class="sh">"</span><span class="p">:</span> <span class="n">hobbies</span><span class="p">.</span><span class="nf">copy</span><span class="p">(),</span>  <span class="c1"># 创建副本避免意外修改
+</span>        <span class="sh">"</span><span class="s">settings</span><span class="sh">"</span><span class="p">:</span> <span class="n">settings</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">profile</span>
+
+<span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="sh">"</span><span class="s">INFO</span><span class="sh">"</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">日志记录函数</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="n">datetime</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+    
+    <span class="n">log_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s">] </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">log_entry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">log_entry</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">user1</span> <span class="o">=</span> <span class="nf">create_user_profile</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="p">[</span><span class="sh">"</span><span class="s">读书</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">游泳</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">user2</span> <span class="o">=</span> <span class="nf">create_user_profile</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># 使用默认值
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户1：</span><span class="si">{</span><span class="n">user1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户2：</span><span class="si">{</span><span class="n">user2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 修改user1的爱好不会影响user2
+</span><span class="n">user1</span><span class="p">[</span><span class="sh">"</span><span class="s">hobbies</span><span class="sh">"</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">编程</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">修改后用户1：</span><span class="si">{</span><span class="n">user1</span><span class="p">[</span><span class="sh">'</span><span class="s">hobbies</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户2仍然是：</span><span class="si">{</span><span class="n">user2</span><span class="p">[</span><span class="sh">'</span><span class="s">hobbies</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 日志示例
+</span><span class="nf">log_message</span><span class="p">(</span><span class="sh">"</span><span class="s">系统启动</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">log_message</span><span class="p">(</span><span class="sh">"</span><span class="s">用户登录</span><span class="sh">"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="sh">"</span><span class="s">DEBUG</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">log_message</span><span class="p">(</span><span class="sh">"</span><span class="s">错误发生</span><span class="sh">"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="sh">"</span><span class="s">ERROR</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="函数的销毁和生命周期">函数的销毁和生命周期</h3>
+
+<h4 id="全局函数的销毁">全局函数的销毁</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 演示函数的销毁
+</span><span class="k">def</span> <span class="nf">original_function</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">原始函数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="s">我是原始函数</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">调用原始函数：</span><span class="si">{</span><span class="nf">original_function</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法1：重新定义同名函数
+</span><span class="k">def</span> <span class="nf">original_function</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">重新定义的函数</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="s">我是新函数</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">调用新函数：</span><span class="si">{</span><span class="nf">original_function</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法2：使用del删除函数
+</span><span class="k">def</span> <span class="nf">temp_function</span><span class="p">():</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="s">临时函数</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">临时函数存在：</span><span class="si">{</span><span class="nf">temp_function</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">temp_function</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nf">temp_function</span><span class="p">()</span>
+<span class="k">except</span> <span class="nb">NameError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">函数已删除：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 方法3：程序结束时自动销毁（这里只是演示概念）
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">程序结束时，所有函数都会被销毁</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="局部函数和闭包的生命周期">局部函数和闭包的生命周期</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demonstrate_function_lifecycle</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">演示函数生命周期</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">create_closure_with_data</span><span class="p">():</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+        
+        <span class="k">def</span> <span class="nf">inner_function</span><span class="p">():</span>
+            <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">inner_function</span>
+    
+    <span class="c1"># 创建闭包
+</span>    <span class="n">closure_func</span> <span class="o">=</span> <span class="nf">create_closure_with_data</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">闭包结果：</span><span class="si">{</span><span class="nf">closure_func</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 即使外层函数执行完毕，闭包仍然保持对data的引用
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">闭包仍然有效：</span><span class="si">{</span><span class="nf">closure_func</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 删除闭包引用
+</span>    <span class="k">del</span> <span class="n">closure_func</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">闭包引用已删除</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 演示局部函数的销毁
+</span>    <span class="k">def</span> <span class="nf">outer_with_inner</span><span class="p">():</span>
+        <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+            <span class="k">return</span> <span class="sh">"</span><span class="s">内层函数</span><span class="sh">"</span>
+        
+        <span class="c1"># 在外层函数内部可以调用
+</span>        <span class="n">result</span> <span class="o">=</span> <span class="nf">inner</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">outer_with_inner</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">外层函数结果：</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 外层函数执行完毕后，内层函数也被销毁
+</span>    <span class="c1"># inner()  # 这会引发NameError
+</span>
+<span class="nf">demonstrate_function_lifecycle</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="配置管理器">配置管理器</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_config_manager</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">创建配置管理器</span><span class="sh">"""</span>
+    <span class="n">_config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_defaults</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_validators</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">set_default</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置默认值</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_defaults</span><span class="p">,</span> <span class="n">_validators</span>
+        <span class="n">_defaults</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="n">validator</span><span class="p">:</span>
+            <span class="n">_validators</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span>
+    
+    <span class="k">def</span> <span class="nf">set_config</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置配置值</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_config</span>
+        
+        <span class="c1"># 验证值
+</span>        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_validators</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_validators</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">配置值 </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s"> 验证失败</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">_config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取配置值</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_config</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_defaults</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_defaults</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+    
+    <span class="k">def</span> <span class="nf">get_all_config</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">获取所有配置</span><span class="sh">"""</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">_defaults</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        <span class="n">result</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">_config</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="nf">reset_config</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">重置配置</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_config</span>
+        <span class="k">if</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">_config</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_config</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">set_default</span><span class="sh">"</span><span class="p">:</span> <span class="n">set_default</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">set_config</span><span class="sh">"</span><span class="p">:</span> <span class="n">set_config</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_config</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_config</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_all_config</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_all_config</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">reset_config</span><span class="sh">"</span><span class="p">:</span> <span class="n">reset_config</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用配置管理器
+</span><span class="n">config_mgr</span> <span class="o">=</span> <span class="nf">create_config_manager</span><span class="p">()</span>
+
+<span class="c1"># 设置默认值和验证器
+</span><span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_default</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_default</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">timeout</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_default</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">bool</span><span class="p">))</span>
+
+<span class="c1"># 设置配置
+</span><span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_config</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_config</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">debug</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">当前配置：</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">get_all_config</span><span class="sh">"</span><span class="p">]().</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 尝试设置无效值
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">config_mgr</span><span class="p">[</span><span class="sh">"</span><span class="s">set_config</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">max_connections</span><span class="sh">"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">配置错误：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="事件系统">事件系统</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_event_system</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">创建事件系统</span><span class="sh">"""</span>
+    <span class="n">_listeners</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_event_history</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">add_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加事件监听器</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_listeners</span>
+        <span class="k">if</span> <span class="n">event_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_listeners</span><span class="p">:</span>
+            <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">remove_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">移除事件监听器</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_listeners</span>
+        <span class="k">if</span> <span class="n">event_type</span> <span class="ow">in</span> <span class="n">_listeners</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">].</span><span class="nf">remove</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]:</span>
+                    <span class="k">del</span> <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span>
+            <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">emit_event</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">触发事件</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_event_history</span>
+        
+        <span class="c1"># 记录事件历史
+</span>        <span class="kn">import</span> <span class="n">datetime</span>
+        <span class="n">event_record</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="n">event_type</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="p">:</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">(),</span>
+            <span class="sh">"</span><span class="s">listeners_count</span><span class="sh">"</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">_listeners</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="p">[]))</span>
+        <span class="p">}</span>
+        <span class="n">_event_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">event_record</span><span class="p">)</span>
+        
+        <span class="c1"># 调用所有监听器
+</span>        <span class="k">if</span> <span class="n">event_type</span> <span class="ow">in</span> <span class="n">_listeners</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">事件监听器错误：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_listeners</span><span class="p">(</span><span class="n">event_type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取监听器信息</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">event_type</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_listeners</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">_listeners</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">get_event_history</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取事件历史</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">limit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_event_history</span><span class="p">[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">_event_history</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">clear_history</span><span class="p">():</span>
+        <span class="sh">"""</span><span class="s">清空事件历史</span><span class="sh">"""</span>
+        <span class="k">nonlocal</span> <span class="n">_event_history</span>
+        <span class="n">_event_history</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">add_listener</span><span class="sh">"</span><span class="p">:</span> <span class="n">add_listener</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">remove_listener</span><span class="sh">"</span><span class="p">:</span> <span class="n">remove_listener</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">emit_event</span><span class="sh">"</span><span class="p">:</span> <span class="n">emit_event</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_listeners</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_listeners</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">get_event_history</span><span class="sh">"</span><span class="p">:</span> <span class="n">get_event_history</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">clear_history</span><span class="sh">"</span><span class="p">:</span> <span class="n">clear_history</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用事件系统
+</span><span class="n">event_system</span> <span class="o">=</span> <span class="nf">create_event_system</span><span class="p">()</span>
+
+<span class="c1"># 定义事件处理函数
+</span><span class="k">def</span> <span class="nf">on_user_login</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户登录：</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">username</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_user_logout</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">用户登出：</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">username</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">log_all_events</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">事件日志：</span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 注册事件监听器
+</span><span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">add_listener</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_login</span><span class="sh">"</span><span class="p">,</span> <span class="n">on_user_login</span><span class="p">)</span>
+<span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">add_listener</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_logout</span><span class="sh">"</span><span class="p">,</span> <span class="n">on_user_logout</span><span class="p">)</span>
+<span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">add_listener</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_login</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_all_events</span><span class="p">)</span>
+<span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">add_listener</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_logout</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_all_events</span><span class="p">)</span>
+
+<span class="c1"># 触发事件
+</span><span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">emit_event</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_login</span><span class="sh">"</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ip</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">192.168.1.100</span><span class="sh">"</span><span class="p">})</span>
+<span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">emit_event</span><span class="sh">"</span><span class="p">](</span><span class="sh">"</span><span class="s">user_logout</span><span class="sh">"</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">})</span>
+
+<span class="c1"># 查看事件历史
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">事件历史：</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_system</span><span class="p">[</span><span class="sh">"</span><span class="s">get_event_history</span><span class="sh">"</span><span class="p">]():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (监听器: </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">listeners_count</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><strong>避免过度使用global</strong>: 全局变量会增加代码的复杂性和耦合度</li>
+  <li><strong>谨慎使用可变默认参数</strong>: 使用None作为默认值，在函数内部创建可变对象</li>
+  <li><strong>理解闭包的内存影响</strong>: 闭包会保持对外层变量的引用，可能影响垃圾回收</li>
+  <li><strong>nonlocal的限制</strong>: nonlocal只能用于嵌套函数，不能用于全局作用域</li>
+  <li><strong>作用域查找性能</strong>: 访问局部变量比全局变量更快</li>
+  <li><strong>避免循环引用</strong>: 在闭包中要注意避免创建循环引用</li>
+</ul>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="../functions/">函数定义与调用</a> - 学习函数的基本概念</li>
+  <li><a href="../oop/">面向对象编程</a> - 了解类的作用域规则</li>
+  <li><a href="../decorators/">装饰器</a> - 闭包的高级应用</li>
+  <li><a href="../exceptions/">异常处理</a> - 异常的作用域特性</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/tutorial/classes.html#scopes-and-namespaces">Python官方文档 - 作用域和命名空间</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0227/">PEP 227 - Statically Nested Scopes</a></li>
+  <li><a href="https://realpython.com/python-closure/">Python闭包详解</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">作用域</code> <code class="language-plaintext highlighter-rouge">闭包</code> <code class="language-plaintext highlighter-rouge">global</code> <code class="language-plaintext highlighter-rouge">nonlocal</code> <code class="language-plaintext highlighter-rouge">变量作用域</code> <code class="language-plaintext highlighter-rouge">LEGB</code> <code class="language-plaintext highlighter-rouge">函数生命周期</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-01<br />
+<strong>作者</strong>: Python文档团队<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档团队</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

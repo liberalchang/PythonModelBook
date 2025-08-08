@@ -17,16 +17,14 @@ layout: null
     {% endif %}
   {% endfor %}
   {% for doc in site.docs %}
-    {% if doc.title %}
-      {% unless first %},{% endunless %}
-      {
-        "title": {{ doc.title | jsonify }},
-        "content": {{ doc.content | strip_html | strip_newlines | jsonify }},
-        "url": {{ doc.url | jsonify }},
-        "category": {% if doc.category %}{{ doc.category | jsonify }}{% else %}"文档"{% endif %},
-        "tags": {% if doc.tags %}{{ doc.tags | jsonify }}{% else %}[]{% endif %}
-      }
-      {% assign first = false %}
-    {% endif %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ doc.title | default: "无标题" | jsonify }},
+      "content": {{ doc.content | strip_html | strip_newlines | jsonify }},
+      "url": {{ doc.url | jsonify }},
+      "category": {% if doc.category %}{{ doc.category | jsonify }}{% else %}"文档"{% endif %},
+      "tags": {% if doc.tags %}{{ doc.tags | jsonify }}{% else %}[]{% endif %}
+    }
+    {% assign first = false %}
   {% endfor %}
 ]

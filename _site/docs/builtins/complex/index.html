@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>complex() - 复数构造函数 - Python知识体系文档</title>
+  <meta name="description" content="创建复数对象或将值转换为复数">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>complex() - 复数构造函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="complex() - 复数构造函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="创建复数对象或将值转换为复数" />
+<meta property="og:description" content="创建复数对象或将值转换为复数" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/complex/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/complex/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="complex() - 复数构造函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"创建复数对象或将值转换为复数","headline":"complex() - 复数构造函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/complex/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/complex/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">complex() - 复数构造函数</h1>
+        
+        
+        <p class="doc-description">创建复数对象或将值转换为复数</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">复数</span>
+          
+          <span class="tag">数学</span>
+          
+          <span class="tag">数据类型</span>
+          
+          <span class="tag">构造函数</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="complex---复数构造函数">complex() - 复数构造函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">complex()</code> 是Python中的内置函数，用于创建复数对象或将其他数值类型转换为复数。复数是数学中的重要概念，由实部和虚部组成，在科学计算、信号处理、工程计算等领域有广泛应用。Python原生支持复数运算，使得复数计算变得简单直观。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握complex()函数的基本用法和语法</li>
+  <li>理解复数的概念和表示方法</li>
+  <li>学会复数的基本运算和操作</li>
+  <li>了解复数在实际编程中的应用场景</li>
+  <li>掌握复数与其他数值类型的转换</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>数值类型（int、float）的基本概念</li>
+  <li>数学中复数的基本概念</li>
+  <li>基本的数学运算</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p>复数是由实部（real part）和虚部（imaginary part）组成的数，通常表示为 <code class="language-plaintext highlighter-rouge">a + bj</code> 的形式，其中 <code class="language-plaintext highlighter-rouge">a</code> 是实部，<code class="language-plaintext highlighter-rouge">b</code> 是虚部，<code class="language-plaintext highlighter-rouge">j</code> 是虚数单位（在数学中通常用 <code class="language-plaintext highlighter-rouge">i</code> 表示）。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">complex</span><span class="p">([</span><span class="n">real</span><span class="p">[,</span> <span class="n">imag</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>real</td>
+      <td>数值或字符串</td>
+      <td>否</td>
+      <td>0</td>
+      <td>实部，可以是数值或表示复数的字符串</td>
+    </tr>
+    <tr>
+      <td>imag</td>
+      <td>数值</td>
+      <td>否</td>
+      <td>0</td>
+      <td>虚部，只能是数值类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: complex对象</li>
+  <li><strong>内容</strong>: 包含指定实部和虚部的复数</li>
+</ul>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建复数的不同方式
+</span>
+<span class="c1"># 1. 无参数创建（默认为0+0j）
+</span><span class="n">zero_complex</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">zero_complex</span><span class="p">)</span>  <span class="c1"># 输出: 0j
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">zero_complex</span><span class="p">))</span>  <span class="c1"># 输出: &lt;class 'complex'&gt;
+</span>
+<span class="c1"># 2. 只指定实部
+</span><span class="n">real_only</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">real_only</span><span class="p">)</span>  <span class="c1"># 输出: (3+0j)
+</span>
+<span class="c1"># 3. 指定实部和虚部
+</span><span class="n">full_complex</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">full_complex</span><span class="p">)</span>  <span class="c1"># 输出: (3+4j)
+</span>
+<span class="c1"># 4. 使用负数
+</span><span class="n">negative_complex</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">negative_complex</span><span class="p">)</span>  <span class="c1"># 输出: (-2-5j)
+</span>
+<span class="c1"># 5. 使用浮点数
+</span><span class="n">float_complex</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">float_complex</span><span class="p">)</span>  <span class="c1"># 输出: (1.5+2.7j)
+</span></code></pre></div></div>
+
+<h3 id="从字符串创建复数">从字符串创建复数</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 从字符串创建复数
+</span>
+<span class="c1"># 标准格式
+</span><span class="n">complex_from_str1</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sh">'</span><span class="s">3+4j</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">complex_from_str1</span><span class="p">)</span>  <span class="c1"># 输出: (3+4j)
+</span>
+<span class="c1"># 不同的字符串格式
+</span><span class="n">complex_from_str2</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sh">'</span><span class="s">5-2j</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">complex_from_str2</span><span class="p">)</span>  <span class="c1"># 输出: (5-2j)
+</span>
+<span class="c1"># 只有虚部
+</span><span class="n">complex_from_str3</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sh">'</span><span class="s">3j</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">complex_from_str3</span><span class="p">)</span>  <span class="c1"># 输出: 3j
+</span>
+<span class="c1"># 只有实部
+</span><span class="n">complex_from_str4</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sh">'</span><span class="s">7</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">complex_from_str4</span><span class="p">)</span>  <span class="c1"># 输出: (7+0j)
+</span>
+<span class="c1"># 带空格的字符串（会出错）
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">complex_with_space</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sh">'</span><span class="s">3 + 4j</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 错误：不能有空格
+</span><span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确的格式要求
+</span><span class="n">valid_formats</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">1+2j</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1-2j</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1j</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">-1j</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1.5+2.7j</span><span class="sh">'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">valid_formats</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="si">{</span><span class="n">fmt</span><span class="si">}</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="si">{</span><span class="nf">complex</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="复数的属性和方法">复数的属性和方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 复数的属性
+</span><span class="n">c</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># 获取实部和虚部
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复数: </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">实部: </span><span class="si">{</span><span class="n">c</span><span class="p">.</span><span class="n">real</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 3.0
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">虚部: </span><span class="si">{</span><span class="n">c</span><span class="p">.</span><span class="n">imag</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 4.0
+</span>
+<span class="c1"># 注意：实部和虚部总是浮点数类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">实部类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">real</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: &lt;class 'float'&gt;
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">虚部类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">imag</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: &lt;class 'float'&gt;
+</span>
+<span class="c1"># 复数的共轭
+</span><span class="n">conjugate</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="nf">conjugate</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">共轭复数: </span><span class="si">{</span><span class="n">conjugate</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (3-4j)
+</span>
+<span class="c1"># 复数的模（绝对值）
+</span><span class="n">modulus</span> <span class="o">=</span> <span class="nf">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">模: </span><span class="si">{</span><span class="n">modulus</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 5.0
+</span>
+<span class="c1"># 复数的字符串表示
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串表示: </span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (3+4j)
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">repr表示: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (3+4j)
+</span></code></pre></div></div>
+
+<h3 id="复数运算">复数运算</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 复数的基本运算
+</span><span class="n">c1</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c1 = </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c2 = </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 加法
+</span><span class="n">addition</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">加法: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> + </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">addition</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (4+6j)
+</span>
+<span class="c1"># 减法
+</span><span class="n">subtraction</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">减法: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> - </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">subtraction</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (2+2j)
+</span>
+<span class="c1"># 乘法
+</span><span class="n">multiplication</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">c2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">乘法: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> * </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">multiplication</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (-5+10j)
+</span>
+<span class="c1"># 除法
+</span><span class="n">division</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">/</span> <span class="n">c2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">除法: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> / </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">division</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (2.2+0.4j)
+</span>
+<span class="c1"># 幂运算
+</span><span class="n">power</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平方: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s">^2 = </span><span class="si">{</span><span class="n">power</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (-7+24j)
+</span>
+<span class="c1"># 与实数运算
+</span><span class="n">real_add</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">与实数相加: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> + 5 = </span><span class="si">{</span><span class="n">real_add</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (8+4j)
+</span>
+<span class="n">real_mult</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">与实数相乘: </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> * 2 = </span><span class="si">{</span><span class="n">real_mult</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (6+8j)
+</span></code></pre></div></div>
+
+<h3 id="复数比较">复数比较</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 复数的比较
+</span><span class="n">c1</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 相等比较
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> == </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> == </span><span class="si">{</span><span class="n">c3</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: False
+</span>
+<span class="c1"># 不等比较
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s"> != </span><span class="si">{</span><span class="n">c3</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">c1</span> <span class="err">!</span><span class="o">=</span> <span class="n">c3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: True
+</span>
+<span class="c1"># 复数不支持大小比较
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">&gt;</span> <span class="n">c2</span>  <span class="c1"># 这会引发TypeError
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复数不支持大小比较: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 但可以比较模的大小
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">模的比较: abs(</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s">) &gt; abs(</span><span class="si">{</span><span class="n">c3</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">abs</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: True
+</span></code></pre></div></div>
+
+<h2 id="-高级应用">🚀 高级应用</h2>
+
+<h3 id="极坐标形式转换">极坐标形式转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="c1"># 直角坐标转极坐标
+</span><span class="k">def</span> <span class="nf">rect_to_polar</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">将复数从直角坐标转换为极坐标形式</span><span class="sh">"""</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nf">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  <span class="c1"># 模
+</span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">atan2</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">real</span><span class="p">)</span>  <span class="c1"># 幅角（弧度）
+</span>    <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">theta</span>
+
+<span class="c1"># 极坐标转直角坐标
+</span><span class="k">def</span> <span class="nf">polar_to_rect</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">将极坐标转换为复数</span><span class="sh">"""</span>
+    <span class="n">real</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">imag</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">complex</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">)</span>
+
+<span class="c1"># 示例
+</span><span class="n">c</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="nf">rect_to_polar</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复数 </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">极坐标形式: r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">, θ=</span><span class="si">{</span><span class="n">theta</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">弧度 (</span><span class="si">{</span><span class="n">math</span><span class="p">.</span><span class="nf">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">度)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 验证转换
+</span><span class="n">c_back</span> <span class="o">=</span> <span class="nf">polar_to_rect</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">转换回来: </span><span class="si">{</span><span class="n">c_back</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">误差: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_back</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">10</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 欧拉公式: e^(iθ) = cos(θ) + i*sin(θ)
+</span><span class="k">def</span> <span class="nf">euler_formula</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">欧拉公式实现</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">complex</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+
+<span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>  <span class="c1"># 45度
+</span><span class="n">euler_result</span> <span class="o">=</span> <span class="nf">euler_formula</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">欧拉公式 e^(i*π/4) = </span><span class="si">{</span><span class="n">euler_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">验证: cos(π/4) + i*sin(π/4) = </span><span class="si">{</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="si">}</span><span class="s"> + </span><span class="si">{</span><span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="si">}</span><span class="s">i</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="复数序列和数组">复数序列和数组</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建复数序列
+</span><span class="k">def</span> <span class="nf">create_complex_sequence</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建复数序列</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">complex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="c1"># 复数列表
+</span><span class="n">complex_list</span> <span class="o">=</span> <span class="nf">create_complex_sequence</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">复数序列:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">complex_list</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 复数运算的向量化
+</span><span class="k">def</span> <span class="nf">complex_vector_add</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">复数列表的向量加法</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">complex_vector_multiply</span><span class="p">(</span><span class="n">complex_list</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">复数列表的标量乘法</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">c</span> <span class="o">*</span> <span class="n">scalar</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">complex_list</span><span class="p">]</span>
+
+<span class="c1"># 示例
+</span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="nf">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="nf">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+
+<span class="n">vector_sum</span> <span class="o">=</span> <span class="nf">complex_vector_add</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">向量加法结果: </span><span class="si">{</span><span class="n">vector_sum</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">scalar_mult</span> <span class="o">=</span> <span class="nf">complex_vector_multiply</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">标量乘法结果: </span><span class="si">{</span><span class="n">scalar_mult</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="复数在信号处理中的应用">复数在信号处理中的应用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="c1"># 生成复数信号
+</span><span class="k">def</span> <span class="nf">generate_complex_signal</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">生成复数正弦信号</span><span class="sh">"""</span>
+    <span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">/</span> <span class="n">sample_rate</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">sample_rate</span><span class="p">))]</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_values</span><span class="p">:</span>
+        <span class="c1"># 复数信号: e^(i*2π*f*t) = cos(2πft) + i*sin(2πft)
+</span>        <span class="n">angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="n">signal</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">complex</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span>
+    
+    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">signal</span>
+
+<span class="c1"># 计算信号的功率
+</span><span class="k">def</span> <span class="nf">signal_power</span><span class="p">(</span><span class="n">signal</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算复数信号的平均功率</span><span class="sh">"""</span>
+    <span class="n">power_sum</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">signal</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">power_sum</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+
+<span class="c1"># 示例：生成1Hz信号，持续1秒，采样率10Hz
+</span><span class="n">time</span><span class="p">,</span> <span class="n">signal</span> <span class="o">=</span> <span class="nf">generate_complex_signal</span><span class="p">(</span><span class="n">frequency</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">复数信号示例（前5个采样点）:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  t=</span><span class="si">{</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">s: </span><span class="si">{</span><span class="n">signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">power</span> <span class="o">=</span> <span class="nf">signal_power</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">信号平均功率: </span><span class="si">{</span><span class="n">power</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 信号的频谱分析（简化版DFT）
+</span><span class="k">def</span> <span class="nf">simple_dft</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">简化的离散傅里叶变换（单个频率分量）</span><span class="sh">"""</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="n">N</span>
+        <span class="n">twiddle</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">signal</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">twiddle</span>
+    
+    <span class="k">return</span> <span class="n">result</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="c1"># 计算几个频率分量
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">频谱分析（DFT系数）:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">dft_coeff</span> <span class="o">=</span> <span class="nf">simple_dft</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">dft_coeff</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> (幅度: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">dft_coeff</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="复数在几何变换中的应用">复数在几何变换中的应用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="c1"># 复数表示的2D点
+</span><span class="k">class</span> <span class="nc">ComplexPoint</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span><span class="p">.</span><span class="n">real</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span><span class="p">.</span><span class="n">imag</span>
+    
+    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">绕原点旋转</span><span class="sh">"""</span>
+        <span class="n">rotation</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">rotated</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span> <span class="o">*</span> <span class="n">rotation</span>
+        <span class="k">return</span> <span class="nc">ComplexPoint</span><span class="p">(</span><span class="n">rotated</span><span class="p">.</span><span class="n">real</span><span class="p">,</span> <span class="n">rotated</span><span class="p">.</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">缩放</span><span class="sh">"""</span>
+        <span class="n">scaled</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span> <span class="o">*</span> <span class="n">factor</span>
+        <span class="k">return</span> <span class="nc">ComplexPoint</span><span class="p">(</span><span class="n">scaled</span><span class="p">.</span><span class="n">real</span><span class="p">,</span> <span class="n">scaled</span><span class="p">.</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">平移</span><span class="sh">"""</span>
+        <span class="n">translated</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">complex_coord</span> <span class="o">+</span> <span class="nf">complex</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">ComplexPoint</span><span class="p">(</span><span class="n">translated</span><span class="p">.</span><span class="n">real</span><span class="p">,</span> <span class="n">translated</span><span class="p">.</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="c1"># 几何变换示例
+</span><span class="n">original_point</span> <span class="o">=</span> <span class="nc">ComplexPoint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始点: </span><span class="si">{</span><span class="n">original_point</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 旋转90度
+</span><span class="n">rotated_point</span> <span class="o">=</span> <span class="n">original_point</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">旋转90度后: </span><span class="si">{</span><span class="n">rotated_point</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 缩放2倍
+</span><span class="n">scaled_point</span> <span class="o">=</span> <span class="n">original_point</span><span class="p">.</span><span class="nf">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缩放2倍后: </span><span class="si">{</span><span class="n">scaled_point</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 平移
+</span><span class="n">translated_point</span> <span class="o">=</span> <span class="n">original_point</span><span class="p">.</span><span class="nf">translate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平移(1,-2)后: </span><span class="si">{</span><span class="n">translated_point</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 复合变换：先旋转45度，再缩放1.5倍
+</span><span class="n">complex_transform</span> <span class="o">=</span> <span class="n">original_point</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">).</span><span class="nf">scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复合变换后: </span><span class="si">{</span><span class="n">complex_transform</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 多边形的变换
+</span><span class="k">def</span> <span class="nf">transform_polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">transformation_func</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">对多边形的所有顶点应用变换</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">transformation_func</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">]</span>
+
+<span class="c1"># 创建一个正方形
+</span><span class="n">square</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nc">ComplexPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="nc">ComplexPoint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="nc">ComplexPoint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="nc">ComplexPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">原始正方形顶点:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">square</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  顶点</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">vertex</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 旋转正方形45度
+</span><span class="n">rotated_square</span> <span class="o">=</span> <span class="nf">transform_polygon</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">旋转45度后的正方形:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">rotated_square</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  顶点</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">vertex</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="字符串格式要求">字符串格式要求</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 正确的字符串格式
+</span><span class="n">valid_strings</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">'</span><span class="s">1+2j</span><span class="sh">'</span><span class="p">,</span>    <span class="c1"># 标准格式
+</span>    <span class="sh">'</span><span class="s">1-2j</span><span class="sh">'</span><span class="p">,</span>    <span class="c1"># 负虚部
+</span>    <span class="sh">'</span><span class="s">1j</span><span class="sh">'</span><span class="p">,</span>      <span class="c1"># 只有虚部
+</span>    <span class="sh">'</span><span class="s">-1j</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 负虚部
+</span>    <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">,</span>       <span class="c1"># 只有实部
+</span>    <span class="sh">'</span><span class="s">1.5+2.7j</span><span class="sh">'</span> <span class="c1"># 浮点数
+</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">valid_strings</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="si">{</span><span class="nf">complex</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 错误的字符串格式
+</span><span class="n">invalid_strings</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">'</span><span class="s">1 + 2j</span><span class="sh">'</span><span class="p">,</span>   <span class="c1"># 不能有空格
+</span>    <span class="sh">'</span><span class="s">1+2i</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 必须用j，不能用i
+</span>    <span class="sh">'</span><span class="s">1+j2</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># j必须在数字后面
+</span>    <span class="sh">'</span><span class="s">(1+2j)</span><span class="sh">'</span><span class="p">,</span>   <span class="c1"># 不能有括号
+</span>    <span class="sh">'</span><span class="s">1+2*j</span><span class="sh">'</span>     <span class="c1"># 不能有乘号
+</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">错误格式示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">invalid_strings</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"'</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="sh">'</span><span class="s"> -&gt; 错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="浮点数精度问题">浮点数精度问题</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 浮点数精度问题
+</span><span class="n">c1</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c1</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c1 = </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c2 = </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c3 = c1 + c1 + c1 = </span><span class="si">{</span><span class="n">c3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">c3 == c2: </span><span class="si">{</span><span class="n">c3</span> <span class="o">==</span> <span class="n">c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 可能为False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">差值: </span><span class="si">{</span><span class="n">c3</span> <span class="o">-</span> <span class="n">c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 解决方案：使用容差比较
+</span><span class="k">def</span> <span class="nf">complex_almost_equal</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">复数的近似相等比较</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">abs</span><span class="p">(</span><span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tolerance</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">近似相等: </span><span class="si">{</span><span class="nf">complex_almost_equal</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用decimal模块提高精度
+</span><span class="kn">from</span> <span class="n">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
+
+<span class="c1"># 设置精度
+</span><span class="nf">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># 使用Decimal创建高精度复数
+</span><span class="k">def</span> <span class="nf">high_precision_complex</span><span class="p">(</span><span class="n">real_str</span><span class="p">,</span> <span class="n">imag_str</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建高精度复数</span><span class="sh">"""</span>
+    <span class="n">real</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nc">Decimal</span><span class="p">(</span><span class="n">real_str</span><span class="p">))</span>
+    <span class="n">imag</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nc">Decimal</span><span class="p">(</span><span class="n">imag_str</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nf">complex</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">)</span>
+
+<span class="n">hp_c1</span> <span class="o">=</span> <span class="nf">high_precision_complex</span><span class="p">(</span><span class="sh">'</span><span class="s">0.1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">0.2</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">hp_c2</span> <span class="o">=</span> <span class="nf">high_precision_complex</span><span class="p">(</span><span class="sh">'</span><span class="s">0.3</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">0.0</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">hp_c3</span> <span class="o">=</span> <span class="n">hp_c1</span> <span class="o">+</span> <span class="n">hp_c1</span> <span class="o">+</span> <span class="n">hp_c1</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">高精度计算:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">hp_c3 = </span><span class="si">{</span><span class="n">hp_c3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">hp_c2 = </span><span class="si">{</span><span class="n">hp_c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">差值: </span><span class="si">{</span><span class="n">hp_c3</span> <span class="o">-</span> <span class="n">hp_c2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化">性能优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+
+<span class="c1"># 性能比较：不同创建方式
+</span><span class="k">def</span> <span class="nf">performance_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">比较不同复数创建方式的性能</span><span class="sh">"""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+    
+    <span class="c1"># 方法1：使用complex()函数
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">method1_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法2：使用复数字面量
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">1j</span>
+    <span class="n">method2_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法3：从字符串创建（最慢）
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>  <span class="c1"># 减少次数，因为很慢
+</span>        <span class="n">c</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">+</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">j</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">method3_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能比较（</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">次创建）:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  complex()函数: </span><span class="si">{</span><span class="n">method1_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  复数字面量: </span><span class="si">{</span><span class="n">method2_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  字符串解析: </span><span class="si">{</span><span class="n">method3_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒（估算）</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最快方法比最慢方法快: </span><span class="si">{</span><span class="n">method3_time</span> <span class="o">/</span> <span class="n">method2_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">performance_comparison</span><span class="p">()</span>
+
+<span class="c1"># 批量复数运算优化
+</span><span class="k">def</span> <span class="nf">optimized_complex_operations</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">优化的复数批量运算</span><span class="sh">"""</span>
+    <span class="c1"># 创建大量复数
+</span>    <span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">complex_list</span> <span class="o">=</span> <span class="p">[</span><span class="nf">complex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    
+    <span class="c1"># 方法1：逐个运算
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">complex_list</span><span class="p">:</span>
+        <span class="n">result1</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">c</span><span class="p">.</span><span class="nf">conjugate</span><span class="p">())</span>  <span class="c1"># 计算模的平方
+</span>    <span class="n">method1_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法2：列表推导式
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">*</span> <span class="n">c</span><span class="p">.</span><span class="nf">conjugate</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">complex_list</span><span class="p">]</span>
+    <span class="n">method2_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 方法3：使用内置函数
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result3</span> <span class="o">=</span> <span class="p">[</span><span class="nf">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">complex_list</span><span class="p">]</span>
+    <span class="n">method3_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">批量运算性能比较（</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">个复数）:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  逐个运算: </span><span class="si">{</span><span class="n">method1_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  列表推导式: </span><span class="si">{</span><span class="n">method2_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  内置函数: </span><span class="si">{</span><span class="n">method3_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  结果一致性: </span><span class="si">{</span><span class="n">result1</span><span class="p">[</span><span class="si">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">result2</span><span class="p">[</span><span class="si">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">result3</span><span class="p">[</span><span class="si">:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">optimized_complex_operations</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-实际应用场景">🔧 实际应用场景</h2>
+
+<h3 id="电路分析">电路分析</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="c1"># 交流电路分析
+</span><span class="k">class</span> <span class="nc">ACCircuit</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">add_resistor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">resistance</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加电阻（实数阻抗）</span><span class="sh">"""</span>
+        <span class="n">impedance</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">resistance</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="n">resistance</span><span class="p">,</span> <span class="n">impedance</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">impedance</span>
+    
+    <span class="k">def</span> <span class="nf">add_capacitor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">,</span> <span class="n">frequency</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加电容（负虚数阻抗）</span><span class="sh">"""</span>
+        <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span>
+        <span class="n">impedance</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">capacitance</span><span class="p">))</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">,</span> <span class="n">impedance</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">impedance</span>
+    
+    <span class="k">def</span> <span class="nf">add_inductor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">inductance</span><span class="p">,</span> <span class="n">frequency</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加电感（正虚数阻抗）</span><span class="sh">"""</span>
+        <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span>
+        <span class="n">impedance</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">inductance</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="n">inductance</span><span class="p">,</span> <span class="n">impedance</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">impedance</span>
+    
+    <span class="k">def</span> <span class="nf">series_impedance</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算串联总阻抗</span><span class="sh">"""</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">impedance</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">impedance</span>
+        <span class="k">return</span> <span class="n">total</span>
+    
+    <span class="k">def</span> <span class="nf">parallel_impedance</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算并联总阻抗</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">reciprocal_sum</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">impedance</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">impedance</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">reciprocal_sum</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">impedance</span>
+        
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">reciprocal_sum</span> <span class="k">if</span> <span class="n">reciprocal_sum</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="nf">complex</span><span class="p">(</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 示例：RLC串联电路
+</span><span class="n">frequency</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># 50Hz
+</span><span class="n">circuit</span> <span class="o">=</span> <span class="nc">ACCircuit</span><span class="p">()</span>
+
+<span class="c1"># 添加组件
+</span><span class="n">R</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">.</span><span class="nf">add_resistor</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100Ω电阻
+</span><span class="n">L</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">.</span><span class="nf">add_inductor</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span>  <span class="c1"># 0.1H电感
+</span><span class="n">C</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">.</span><span class="nf">add_capacitor</span><span class="p">(</span><span class="mf">100e-6</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span>  <span class="c1"># 100μF电容
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">RLC串联电路分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">电阻阻抗: </span><span class="si">{</span><span class="n">R</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">Ω</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">电感阻抗: </span><span class="si">{</span><span class="n">L</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">Ω</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">电容阻抗: </span><span class="si">{</span><span class="n">C</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">Ω</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">total_impedance</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">.</span><span class="nf">series_impedance</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总阻抗: </span><span class="si">{</span><span class="n">total_impedance</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">Ω</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">阻抗模: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">total_impedance</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">Ω</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">相位角: </span><span class="si">{</span><span class="n">math</span><span class="p">.</span><span class="nf">degrees</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">atan2</span><span class="p">(</span><span class="n">total_impedance</span><span class="p">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">total_impedance</span><span class="p">.</span><span class="n">real</span><span class="p">))</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">度</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 计算电流和功率
+</span><span class="n">voltage</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># 220V交流电压
+</span><span class="n">current</span> <span class="o">=</span> <span class="n">voltage</span> <span class="o">/</span> <span class="n">total_impedance</span>
+<span class="n">power</span> <span class="o">=</span> <span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">.</span><span class="nf">conjugate</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">电压: </span><span class="si">{</span><span class="n">voltage</span><span class="si">}</span><span class="s">V</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">电流: </span><span class="si">{</span><span class="n">current</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">A</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">电流幅值: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">current</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">A</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">功率: </span><span class="si">{</span><span class="n">power</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">W</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">有功功率: </span><span class="si">{</span><span class="n">power</span><span class="p">.</span><span class="n">real</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">W</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">无功功率: </span><span class="si">{</span><span class="n">power</span><span class="p">.</span><span class="n">imag</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">VAR</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="量子计算模拟">量子计算模拟</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="kn">import</span> <span class="n">random</span>
+
+<span class="c1"># 简单的量子比特模拟
+</span><span class="k">class</span> <span class="nc">Qubit</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">初始化量子比特状态 |ψ⟩ = α|0⟩ + β|1⟩</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>  <span class="c1"># |0⟩态的振幅
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>    <span class="c1"># |1⟩态的振幅
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">normalize</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">归一化量子态</span><span class="sh">"""</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">/=</span> <span class="n">norm</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">/=</span> <span class="n">norm</span>
+    
+    <span class="k">def</span> <span class="nf">probability_0</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">测量到|0⟩态的概率</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">def</span> <span class="nf">probability_1</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">测量到|1⟩态的概率</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">abs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">测量量子比特</span><span class="sh">"""</span>
+        <span class="n">prob_0</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">probability_0</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">prob_0</span><span class="p">:</span>
+            <span class="c1"># 坍缩到|0⟩态
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 坍缩到|1⟩态
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>
+    
+    <span class="k">def</span> <span class="nf">hadamard</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Hadamard门操作</span><span class="sh">"""</span>
+        <span class="n">new_alpha</span> <span class="o">=</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">new_beta</span> <span class="o">=</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">new_alpha</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">new_beta</span>
+    
+    <span class="k">def</span> <span class="nf">pauli_x</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Pauli-X门操作（量子非门）</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">alpha</span>
+    
+    <span class="k">def</span> <span class="nf">pauli_z</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Pauli-Z门操作</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">=</span> <span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">beta</span>
+    
+    <span class="k">def</span> <span class="nf">phase</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">相位门操作</span><span class="sh">"""</span>
+        <span class="n">phase_factor</span> <span class="o">=</span> <span class="nf">complex</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">beta</span> <span class="o">*=</span> <span class="n">phase_factor</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">|ψ⟩ = </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">|0⟩ + </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">|1⟩</span><span class="sh">"</span>
+
+<span class="c1"># 量子计算示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">量子比特模拟:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建|0⟩态
+</span><span class="n">qubit</span> <span class="o">=</span> <span class="nc">Qubit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始态: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测量到|0⟩的概率: </span><span class="si">{</span><span class="n">qubit</span><span class="p">.</span><span class="nf">probability_0</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测量到|1⟩的概率: </span><span class="si">{</span><span class="n">qubit</span><span class="p">.</span><span class="nf">probability_1</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 应用Hadamard门创建叠加态
+</span><span class="n">qubit</span><span class="p">.</span><span class="nf">hadamard</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">Hadamard门后: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测量到|0⟩的概率: </span><span class="si">{</span><span class="n">qubit</span><span class="p">.</span><span class="nf">probability_0</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测量到|1⟩的概率: </span><span class="si">{</span><span class="n">qubit</span><span class="p">.</span><span class="nf">probability_1</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 多次测量统计
+</span><span class="n">measurement_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">test_qubit</span> <span class="o">=</span> <span class="nc">Qubit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">test_qubit</span><span class="p">.</span><span class="nf">hadamard</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">test_qubit</span><span class="p">.</span><span class="nf">measure</span><span class="p">()</span>
+    <span class="n">measurement_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">count_0</span> <span class="o">=</span> <span class="n">measurement_results</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">count_1</span> <span class="o">=</span> <span class="n">measurement_results</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">1000次测量结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  |0⟩: </span><span class="si">{</span><span class="n">count_0</span><span class="si">}</span><span class="s">次 (</span><span class="si">{</span><span class="n">count_0</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  |1⟩: </span><span class="si">{</span><span class="n">count_1</span><span class="si">}</span><span class="s">次 (</span><span class="si">{</span><span class="n">count_1</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 量子干涉演示
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">量子干涉演示:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">qubit</span> <span class="o">=</span> <span class="nc">Qubit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">初始态: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># H-Z-H序列
+</span><span class="n">qubit</span><span class="p">.</span><span class="nf">hadamard</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第一个H门后: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">qubit</span><span class="p">.</span><span class="nf">pauli_z</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Z门后: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">qubit</span><span class="p">.</span><span class="nf">hadamard</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">第二个H门后: </span><span class="si">{</span><span class="n">qubit</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最终测量到|1⟩的概率: </span><span class="si">{</span><span class="n">qubit</span><span class="p">.</span><span class="nf">probability_1</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数">🔗 相关函数</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><strong>int()</strong> - 整数转换函数</li>
+  <li><strong>float()</strong> - 浮点数转换函数</li>
+  <li><strong>abs()</strong> - 绝对值函数（复数的模）</li>
+  <li><strong>round()</strong> - 四舍五入函数</li>
+  <li><strong>pow()</strong> - 幂运算函数</li>
+  <li><strong>divmod()</strong> - 除法和取模运算</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><strong>math</strong> - 数学函数
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sqrt()</code> - 平方根</li>
+      <li><code class="language-plaintext highlighter-rouge">atan2()</code> - 反正切函数</li>
+      <li><code class="language-plaintext highlighter-rouge">cos()</code>, <code class="language-plaintext highlighter-rouge">sin()</code> - 三角函数</li>
+      <li><code class="language-plaintext highlighter-rouge">pi</code>, <code class="language-plaintext highlighter-rouge">e</code> - 数学常数</li>
+    </ul>
+  </li>
+  <li><strong>cmath</strong> - 复数数学函数
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sqrt()</code> - 复数平方根</li>
+      <li><code class="language-plaintext highlighter-rouge">exp()</code> - 复数指数函数</li>
+      <li><code class="language-plaintext highlighter-rouge">log()</code> - 复数对数函数</li>
+      <li><code class="language-plaintext highlighter-rouge">sin()</code>, <code class="language-plaintext highlighter-rouge">cos()</code> - 复数三角函数</li>
+      <li><code class="language-plaintext highlighter-rouge">phase()</code> - 复数相位</li>
+      <li><code class="language-plaintext highlighter-rouge">polar()</code> - 极坐标转换</li>
+      <li><code class="language-plaintext highlighter-rouge">rect()</code> - 直角坐标转换</li>
+    </ul>
+  </li>
+  <li><strong>decimal</strong> - 高精度十进制运算</li>
+  <li><strong>fractions</strong> - 分数运算</li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><strong>numpy</strong> - 数值计算
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">np.complex64</code>, <code class="language-plaintext highlighter-rouge">np.complex128</code> - 复数数组类型</li>
+      <li><code class="language-plaintext highlighter-rouge">np.real()</code>, <code class="language-plaintext highlighter-rouge">np.imag()</code> - 实部虚部提取</li>
+      <li><code class="language-plaintext highlighter-rouge">np.conj()</code> - 共轭</li>
+      <li><code class="language-plaintext highlighter-rouge">np.angle()</code> - 相位角</li>
+      <li><code class="language-plaintext highlighter-rouge">np.fft</code> - 快速傅里叶变换</li>
+    </ul>
+  </li>
+  <li><strong>scipy</strong> - 科学计算
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">scipy.signal</code> - 信号处理</li>
+      <li><code class="language-plaintext highlighter-rouge">scipy.fft</code> - 傅里叶变换</li>
+    </ul>
+  </li>
+  <li><strong>matplotlib</strong> - 绘图
+    <ul>
+      <li>复数的可视化</li>
+      <li>复平面绘图</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#complex">Python官方文档 - complex()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex">Python官方文档 - 数值类型</a></li>
+  <li><a href="https://docs.python.org/3/library/cmath.html">Python官方文档 - cmath模块</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Complex_number">复数数学基础</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Phasor">复数在工程中的应用</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">复数</code> <code class="language-plaintext highlighter-rouge">数学</code> <code class="language-plaintext highlighter-rouge">数据类型</code> <code class="language-plaintext highlighter-rouge">构造函数</code> <code class="language-plaintext highlighter-rouge">科学计算</code> <code class="language-plaintext highlighter-rouge">信号处理</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>frozenset() - 不可变集合构造函数 - Python知识体系文档</title>
+  <meta name="description" content="创建不可变的集合对象">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>frozenset() - 不可变集合构造函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="frozenset() - 不可变集合构造函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="创建不可变的集合对象" />
+<meta property="og:description" content="创建不可变的集合对象" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/frozenset/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/frozenset/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="frozenset() - 不可变集合构造函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"创建不可变的集合对象","headline":"frozenset() - 不可变集合构造函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/frozenset/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/frozenset/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">frozenset() - 不可变集合构造函数</h1>
+        
+        
+        <p class="doc-description">创建不可变的集合对象</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">集合</span>
+          
+          <span class="tag">不可变</span>
+          
+          <span class="tag">数据结构</span>
+          
+          <span class="tag">哈希</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="frozenset---不可变集合构造函数">frozenset() - 不可变集合构造函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">frozenset()</code> 是Python中的内置函数，用于创建不可变的集合对象。与普通的set不同，frozenset一旦创建就不能修改，这使得它可以作为字典的键或其他集合的元素使用。frozenset保持了集合的所有特性：元素唯一、无序、支持集合运算。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握frozenset()函数的基本用法和语法</li>
+  <li>理解frozenset与set的区别和联系</li>
+  <li>学会在需要不可变集合的场景中使用frozenset</li>
+  <li>了解frozenset的哈希特性和应用场景</li>
+  <li>掌握frozenset的集合运算操作</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>集合（set）的基本概念和操作</li>
+  <li>可变与不可变对象的概念</li>
+  <li>哈希和字典键的要求</li>
+  <li>可迭代对象的概念</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">frozenset()</code> 创建一个不可变的集合对象。不可变意味着一旦创建，就不能添加、删除或修改其中的元素。这种不可变性使得frozenset对象是可哈希的，因此可以用作字典的键或其他集合的元素。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">frozenset</span><span class="p">([</span><span class="n">iterable</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>iterable</td>
+      <td>可迭代对象</td>
+      <td>否</td>
+      <td>无</td>
+      <td>用于初始化frozenset的可迭代对象</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: frozenset对象</li>
+  <li><strong>内容</strong>: 包含来自可迭代对象的唯一元素的不可变集合</li>
+</ul>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建空的frozenset
+</span><span class="n">empty_fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">empty_fs</span><span class="p">)</span>  <span class="c1"># 输出: frozenset()
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">empty_fs</span><span class="p">))</span>  <span class="c1"># 输出: &lt;class 'frozenset'&gt;
+</span>
+<span class="c1"># 从列表创建frozenset
+</span><span class="n">list_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">fs_from_list</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">fs_from_list</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({1, 2, 3})
+</span>
+<span class="c1"># 从字符串创建frozenset
+</span><span class="n">fs_from_string</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">fs_from_string</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({'h', 'e', 'l', 'o'})
+</span>
+<span class="c1"># 从元组创建frozenset
+</span><span class="n">fs_from_tuple</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">fs_from_tuple</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({1, 2, 3, 4})
+</span></code></pre></div></div>
+
+<h3 id="与set的比较">与set的比较</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建普通集合和不可变集合
+</span><span class="n">regular_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">frozen_set</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">普通集合: </span><span class="si">{</span><span class="n">regular_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">不可变集合: </span><span class="si">{</span><span class="n">frozen_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 尝试修改普通集合（成功）
+</span><span class="n">regular_set</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">添加元素后的普通集合: </span><span class="si">{</span><span class="n">regular_set</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 尝试修改不可变集合（失败）
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">frozen_set</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># 这会引发AttributeError
+</span><span class="k">except</span> <span class="nb">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 检查可哈希性
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">普通集合是否可哈希: </span><span class="si">{</span><span class="nf">hash</span><span class="p">(</span><span class="n">regular_set</span><span class="p">)</span> <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">regular_set</span><span class="p">,</span> <span class="sh">'</span><span class="s">__hash__</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="sh">'</span><span class="s">不可哈希</span><span class="sh">'</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">不可变集合的哈希值: </span><span class="si">{</span><span class="nf">hash</span><span class="p">(</span><span class="n">frozen_set</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="作为字典键使用">作为字典键使用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozenset可以作为字典的键
+</span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># 使用frozenset作为键
+</span><span class="n">key1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">key2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">key3</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># 与key1相同
+</span>
+<span class="n">data_dict</span><span class="p">[</span><span class="n">key1</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">数字集合</span><span class="sh">"</span>
+<span class="n">data_dict</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">字母集合</span><span class="sh">"</span>
+<span class="n">data_dict</span><span class="p">[</span><span class="n">key3</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">另一个数字集合</span><span class="sh">"</span>  <span class="c1"># 会覆盖key1的值
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="c1"># 输出: {frozenset({1, 2, 3}): '另一个数字集合', frozenset({'a', 'b', 'c'}): '字母集合'}
+</span>
+<span class="c1"># 普通set不能作为字典键
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">regular_set_key</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="n">regular_set_key</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">这会失败</span><span class="sh">"</span>
+<span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">使用set作为键的错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="集合运算">集合运算</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozenset支持所有集合运算
+</span><span class="n">fs1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">fs2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">fs3</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># 并集
+</span><span class="n">union_result</span> <span class="o">=</span> <span class="n">fs1</span> <span class="o">|</span> <span class="n">fs2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">并集: </span><span class="si">{</span><span class="n">union_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({1, 2, 3, 4, 5, 6})
+</span>
+<span class="c1"># 交集
+</span><span class="n">intersection_result</span> <span class="o">=</span> <span class="n">fs1</span> <span class="o">&amp;</span> <span class="n">fs2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">交集: </span><span class="si">{</span><span class="n">intersection_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({3, 4})
+</span>
+<span class="c1"># 差集
+</span><span class="n">difference_result</span> <span class="o">=</span> <span class="n">fs1</span> <span class="o">-</span> <span class="n">fs2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">差集: </span><span class="si">{</span><span class="n">difference_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({1, 2})
+</span>
+<span class="c1"># 对称差集
+</span><span class="n">symmetric_diff</span> <span class="o">=</span> <span class="n">fs1</span> <span class="o">^</span> <span class="n">fs2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">对称差集: </span><span class="si">{</span><span class="n">symmetric_diff</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: frozenset({1, 2, 5, 6})
+</span>
+<span class="c1"># 子集检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fs3是fs1的子集: </span><span class="si">{</span><span class="n">fs3</span> <span class="o">&lt;=</span> <span class="n">fs1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fs1是fs2的超集: </span><span class="si">{</span><span class="n">fs1</span> <span class="o">&gt;=</span> <span class="n">fs2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: False
+</span></code></pre></div></div>
+
+<h3 id="集合方法">集合方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 检查元素是否存在
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">3在集合中: </span><span class="si">{</span><span class="mi">3</span> <span class="ow">in</span> <span class="n">fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">6在集合中: </span><span class="si">{</span><span class="mi">6</span> <span class="ow">in</span> <span class="n">fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: False
+</span>
+<span class="c1"># 获取集合长度
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 5
+</span>
+<span class="c1"># 遍历集合
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">集合元素:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 集合方法（返回新的frozenset）
+</span><span class="n">other_fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+
+<span class="c1"># union方法
+</span><span class="n">union_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">.</span><span class="nf">union</span><span class="p">(</span><span class="n">other_fs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">union方法结果: </span><span class="si">{</span><span class="n">union_fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># intersection方法
+</span><span class="n">intersection_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">.</span><span class="nf">intersection</span><span class="p">(</span><span class="n">other_fs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">intersection方法结果: </span><span class="si">{</span><span class="n">intersection_fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># difference方法
+</span><span class="n">difference_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">.</span><span class="nf">difference</span><span class="p">(</span><span class="n">other_fs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">difference方法结果: </span><span class="si">{</span><span class="n">difference_fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># issubset和issuperset方法
+</span><span class="n">small_fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">small_fs是fs的子集: </span><span class="si">{</span><span class="n">small_fs</span><span class="p">.</span><span class="nf">issubset</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fs是small_fs的超集: </span><span class="si">{</span><span class="n">fs</span><span class="p">.</span><span class="nf">issuperset</span><span class="p">(</span><span class="n">small_fs</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-高级应用">🚀 高级应用</h2>
+
+<h3 id="嵌套集合结构">嵌套集合结构</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建包含frozenset的集合
+</span><span class="n">nested_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>
+    <span class="nf">frozenset</span><span class="p">([</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">]),</span>
+    <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>  <span class="c1"># 重复，会被去除
+</span>    <span class="nf">frozenset</span><span class="p">([</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">z</span><span class="sh">'</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">嵌套集合: </span><span class="si">{</span><span class="n">nested_sets</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">嵌套集合长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">nested_sets</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 在嵌套集合中查找
+</span><span class="n">target</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">目标集合在嵌套集合中: </span><span class="si">{</span><span class="n">target</span> <span class="ow">in</span> <span class="n">nested_sets</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建集合的集合
+</span><span class="n">set_of_sets</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+<span class="n">set_of_sets</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="n">set_of_sets</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nf">frozenset</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+<span class="n">set_of_sets</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>  <span class="c1"># 重复，不会添加
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">集合的集合: </span><span class="si">{</span><span class="n">set_of_sets</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="缓存和记忆化">缓存和记忆化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="c1"># 使用frozenset作为缓存键
+</span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">calculate_set_properties</span><span class="p">(</span><span class="n">elements</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">计算集合的属性（使用frozenset作为参数）</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">):</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">size</span><span class="sh">'</span><span class="p">:</span> <span class="nf">len</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span>
+        <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">:</span> <span class="nf">sum</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="k">if</span> <span class="nf">all</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nf">min</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="k">if</span> <span class="n">elements</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nf">max</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="k">if</span> <span class="n">elements</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">data1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>  <span class="c1"># 相同的数据
+</span><span class="n">data3</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="n">result1</span> <span class="o">=</span> <span class="nf">calculate_set_properties</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="nf">calculate_set_properties</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>  <span class="c1"># 会使用缓存
+</span><span class="n">result3</span> <span class="o">=</span> <span class="nf">calculate_set_properties</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果1: </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果2: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果3: </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存信息: </span><span class="si">{</span><span class="n">calculate_set_properties</span><span class="p">.</span><span class="nf">cache_info</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="图算法中的应用">图算法中的应用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 在图算法中使用frozenset表示边
+</span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">edges</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>  <span class="c1"># 存储frozenset表示的边
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加无向边</span><span class="sh">"""</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">edges</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">vertices</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">vertex1</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">vertices</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">vertex2</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">has_edge</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">检查是否存在边</span><span class="sh">"""</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">edges</span>
+    
+    <span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取顶点的邻居</span><span class="sh">"""</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+                <span class="n">neighbors</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">edge</span> <span class="o">-</span> <span class="p">{</span><span class="n">vertex</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">neighbors</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Graph(vertices=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">vertices</span><span class="si">}</span><span class="s">, edges=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">edges</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">graph</span> <span class="o">=</span> <span class="nc">Graph</span><span class="p">()</span>
+<span class="n">graph</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">graph</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">graph</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">graph</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 重复边，不会添加
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A和B之间有边: </span><span class="si">{</span><span class="n">graph</span><span class="p">.</span><span class="nf">has_edge</span><span class="p">(</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">A的邻居: </span><span class="si">{</span><span class="n">graph</span><span class="p">.</span><span class="nf">get_neighbors</span><span class="p">(</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="配置管理">配置管理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 使用frozenset管理不可变配置
+</span><span class="k">class</span> <span class="nc">ConfigManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">configs</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># 配置名 -&gt; frozenset的映射
+</span>    
+    <span class="k">def</span> <span class="nf">add_config</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加配置</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="c1"># 将字典转换为frozenset of tuples
+</span>            <span class="n">config_items</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">settings</span><span class="p">.</span><span class="nf">items</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="sh">'</span><span class="s">__iter__</span><span class="sh">'</span><span class="p">):</span>
+            <span class="n">config_items</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">设置必须是字典或可迭代对象</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">configs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_items</span>
+    
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取配置</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">configs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">compare_configs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name1</span><span class="p">,</span> <span class="n">name2</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">比较两个配置</span><span class="sh">"""</span>
+        <span class="n">config1</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">configs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">name1</span><span class="p">)</span>
+        <span class="n">config2</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">configs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">name2</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">config1</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">config2</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">common</span><span class="sh">'</span><span class="p">:</span> <span class="n">config1</span> <span class="o">&amp;</span> <span class="n">config2</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">only_in_first</span><span class="sh">'</span><span class="p">:</span> <span class="n">config1</span> <span class="o">-</span> <span class="n">config2</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">only_in_second</span><span class="sh">'</span><span class="p">:</span> <span class="n">config2</span> <span class="o">-</span> <span class="n">config1</span>
+        <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">config_manager</span> <span class="o">=</span> <span class="nc">ConfigManager</span><span class="p">()</span>
+
+<span class="c1"># 添加配置
+</span><span class="n">config_manager</span><span class="p">.</span><span class="nf">add_config</span><span class="p">(</span><span class="sh">'</span><span class="s">dev</span><span class="sh">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">debug</span><span class="sh">'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">database_url</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">localhost:5432</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">cache_enabled</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span>
+<span class="p">})</span>
+
+<span class="n">config_manager</span><span class="p">.</span><span class="nf">add_config</span><span class="p">(</span><span class="sh">'</span><span class="s">prod</span><span class="sh">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">debug</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">database_url</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">prod-server:5432</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">cache_enabled</span><span class="sh">'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ssl_enabled</span><span class="sh">'</span><span class="p">:</span> <span class="bp">True</span>
+<span class="p">})</span>
+
+<span class="c1"># 比较配置
+</span><span class="n">comparison</span> <span class="o">=</span> <span class="n">config_manager</span><span class="p">.</span><span class="nf">compare_configs</span><span class="p">(</span><span class="sh">'</span><span class="s">dev</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">prod</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">配置比较结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  共同设置: </span><span class="si">{</span><span class="n">comparison</span><span class="p">[</span><span class="sh">'</span><span class="s">common</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  仅在dev中: </span><span class="si">{</span><span class="n">comparison</span><span class="p">[</span><span class="sh">'</span><span class="s">only_in_first</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  仅在prod中: </span><span class="si">{</span><span class="n">comparison</span><span class="p">[</span><span class="sh">'</span><span class="s">only_in_second</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="不可变性理解">不可变性理解</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 正确理解不可变性
+</span><span class="n">fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># 错误：尝试修改frozenset
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">fs</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># AttributeError
+</span><span class="k">except</span> <span class="nb">AttributeError</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">frozenset不支持add方法</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">fs</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># AttributeError
+</span><span class="k">except</span> <span class="nb">AttributeError</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">frozenset不支持remove方法</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确：创建新的frozenset
+</span><span class="n">new_fs</span> <span class="o">=</span> <span class="n">fs</span> <span class="o">|</span> <span class="p">{</span><span class="mi">4</span><span class="p">}</span>  <span class="c1"># 使用并集操作
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原frozenset: </span><span class="si">{</span><span class="n">fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">新frozenset: </span><span class="si">{</span><span class="n">new_fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 正确：使用方法创建新frozenset
+</span><span class="n">another_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">.</span><span class="nf">union</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">使用union方法: </span><span class="si">{</span><span class="n">another_fs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="哈希和相等性">哈希和相等性</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozenset的哈希和相等性
+</span><span class="n">fs1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">fs2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 顺序不同
+</span><span class="n">fs3</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># 有重复元素
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fs1 == fs2: </span><span class="si">{</span><span class="n">fs1</span> <span class="o">==</span> <span class="n">fs2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True，集合不考虑顺序
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fs1 == fs3: </span><span class="si">{</span><span class="n">fs1</span> <span class="o">==</span> <span class="n">fs3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True，集合自动去重
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">hash(fs1) == hash(fs2): </span><span class="si">{</span><span class="nf">hash</span><span class="p">(</span><span class="n">fs1</span><span class="p">)</span> <span class="o">==</span> <span class="nf">hash</span><span class="p">(</span><span class="n">fs2</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 在字典中使用
+</span><span class="n">dict_with_fs_keys</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">dict_with_fs_keys</span><span class="p">[</span><span class="n">fs1</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">第一个</span><span class="sh">"</span>
+<span class="n">dict_with_fs_keys</span><span class="p">[</span><span class="n">fs2</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">第二个</span><span class="sh">"</span>  <span class="c1"># 会覆盖第一个
+</span><span class="n">dict_with_fs_keys</span><span class="p">[</span><span class="n">fs3</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">第三个</span><span class="sh">"</span>  <span class="c1"># 会覆盖前面的
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字典内容: </span><span class="si">{</span><span class="n">dict_with_fs_keys</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 只有一个键值对
+</span></code></pre></div></div>
+
+<h3 id="性能考虑">性能考虑</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+
+<span class="c1"># 性能比较：frozenset vs set vs list
+</span><span class="k">def</span> <span class="nf">performance_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">比较不同数据结构的性能</span><span class="sh">"""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+    
+    <span class="c1"># 创建时间比较
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">regular_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">set_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">frozen_set</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">frozenset_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">list_data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">list_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">创建时间比较:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  set: </span><span class="si">{</span><span class="n">set_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  frozenset: </span><span class="si">{</span><span class="n">frozenset_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  list: </span><span class="si">{</span><span class="n">list_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 查找时间比较
+</span>    <span class="n">target</span> <span class="o">=</span> <span class="mi">5000</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">target</span> <span class="ow">in</span> <span class="n">regular_set</span>
+    <span class="n">set_lookup_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">target</span> <span class="ow">in</span> <span class="n">frozen_set</span>
+    <span class="n">frozenset_lookup_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">target</span> <span class="ow">in</span> <span class="n">list_data</span>
+    <span class="n">list_lookup_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">查找时间比较（1000次）:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  set: </span><span class="si">{</span><span class="n">set_lookup_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  frozenset: </span><span class="si">{</span><span class="n">frozenset_lookup_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  list: </span><span class="si">{</span><span class="n">list_lookup_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">performance_comparison</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="内存使用优化">内存使用优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="c1"># 内存使用比较
+</span><span class="k">def</span> <span class="nf">memory_comparison</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">比较不同数据结构的内存使用</span><span class="sh">"""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+    
+    <span class="n">regular_set</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">frozen_set</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">list_data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">tuple_data</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">内存使用比较:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  set: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">regular_set</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  frozenset: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">frozen_set</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  list: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  tuple: </span><span class="si">{</span><span class="n">sys</span><span class="p">.</span><span class="nf">getsizeof</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span><span class="si">}</span><span class="s"> 字节</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># frozenset的共享优化
+</span>    <span class="n">fs1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">fs2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">frozenset对象共享:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  fs1 is fs2: </span><span class="si">{</span><span class="n">fs1</span> <span class="ow">is</span> <span class="n">fs2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 可能为True（实现相关）
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  id(fs1): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="n">fs1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  id(fs2): </span><span class="si">{</span><span class="nf">id</span><span class="p">(</span><span class="n">fs2</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">memory_comparison</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-性能优化">🔧 性能优化</h2>
+
+<h3 id="批量操作优化">批量操作优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 批量操作的性能优化
+</span><span class="k">def</span> <span class="nf">optimize_batch_operations</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">优化批量frozenset操作</span><span class="sh">"""</span>
+    <span class="c1"># 避免频繁创建小的frozenset
+</span>    <span class="n">data_sets</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># 不推荐：频繁创建
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">data_sets</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">slow_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># 推荐：批量创建
+</span>    <span class="n">data_sets</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">batch_data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+    <span class="n">data_sets</span> <span class="o">=</span> <span class="p">[</span><span class="nf">frozenset</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">batch_data</span><span class="p">]</span>
+    <span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">频繁创建时间: </span><span class="si">{</span><span class="n">slow_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">批量创建时间: </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="n">slow_time</span> <span class="o">/</span> <span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">倍</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">optimize_batch_operations</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="集合运算优化">集合运算优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 集合运算的性能优化
+</span><span class="k">def</span> <span class="nf">optimize_set_operations</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">优化集合运算性能</span><span class="sh">"""</span>
+    <span class="c1"># 创建测试数据
+</span>    <span class="n">large_fs1</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+    <span class="n">large_fs2</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">15000</span><span class="p">))</span>
+    <span class="n">small_fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+    
+    <span class="c1"># 优化1：使用合适的运算顺序
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="c1"># 不推荐：大集合先运算
+</span>    <span class="n">result1</span> <span class="o">=</span> <span class="p">(</span><span class="n">large_fs1</span> <span class="o">|</span> <span class="n">large_fs2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">small_fs</span>
+    <span class="n">slow_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="c1"># 推荐：小集合先运算
+</span>    <span class="n">result2</span> <span class="o">=</span> <span class="n">small_fs</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">large_fs1</span> <span class="o">|</span> <span class="n">large_fs2</span><span class="p">)</span>
+    <span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">大集合先运算: </span><span class="si">{</span><span class="n">slow_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">小集合先运算: </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果相同: </span><span class="si">{</span><span class="n">result1</span> <span class="o">==</span> <span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 优化2：避免不必要的中间结果
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="c1"># 不推荐：创建中间frozenset
+</span>    <span class="n">temp_fs</span> <span class="o">=</span> <span class="nf">frozenset</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+    <span class="n">result3</span> <span class="o">=</span> <span class="n">large_fs1</span> <span class="o">&amp;</span> <span class="n">temp_fs</span>
+    <span class="n">slow_time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="c1"># 推荐：直接使用其他可迭代对象
+</span>    <span class="n">result4</span> <span class="o">=</span> <span class="n">large_fs1</span> <span class="o">&amp;</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+    <span class="n">fast_time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">创建中间frozenset: </span><span class="si">{</span><span class="n">slow_time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">直接使用set: </span><span class="si">{</span><span class="n">fast_time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果相同: </span><span class="si">{</span><span class="n">result3</span> <span class="o">==</span> <span class="n">result4</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">optimize_set_operations</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数">🔗 相关函数</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><strong>set()</strong> - 创建可变集合</li>
+  <li><strong>list()</strong> - 创建列表</li>
+  <li><strong>tuple()</strong> - 创建元组</li>
+  <li><strong>dict()</strong> - 创建字典</li>
+  <li><strong>len()</strong> - 获取集合长度</li>
+  <li><strong>iter()</strong> - 创建迭代器</li>
+  <li><strong>hash()</strong> - 计算哈希值</li>
+  <li><strong>bool()</strong> - 布尔值转换</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><strong>collections</strong> - 特殊容器数据类型
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Counter</code> - 计数器</li>
+      <li><code class="language-plaintext highlighter-rouge">defaultdict</code> - 默认字典</li>
+    </ul>
+  </li>
+  <li><strong>itertools</strong> - 迭代工具
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">chain()</code> - 连接迭代器</li>
+      <li><code class="language-plaintext highlighter-rouge">combinations()</code> - 组合</li>
+      <li><code class="language-plaintext highlighter-rouge">permutations()</code> - 排列</li>
+    </ul>
+  </li>
+  <li><strong>operator</strong> - 函数式操作符
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">or_()</code> - 并集操作</li>
+      <li><code class="language-plaintext highlighter-rouge">and_()</code> - 交集操作</li>
+      <li><code class="language-plaintext highlighter-rouge">sub()</code> - 差集操作</li>
+      <li><code class="language-plaintext highlighter-rouge">xor()</code> - 对称差集操作</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><strong>numpy</strong> - 数值计算
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">np.unique()</code> - 唯一值</li>
+      <li><code class="language-plaintext highlighter-rouge">np.intersect1d()</code> - 一维交集</li>
+      <li><code class="language-plaintext highlighter-rouge">np.union1d()</code> - 一维并集</li>
+    </ul>
+  </li>
+  <li><strong>pandas</strong> - 数据分析
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pd.Series.unique()</code> - 唯一值</li>
+      <li><code class="language-plaintext highlighter-rouge">pd.Index</code> - 索引对象</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#frozenset">Python官方文档 - frozenset()</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset">Python官方文档 - 集合类型</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Python数据结构详解</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#object.__hash__">Python哈希和相等性</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Set_theory">集合论基础</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">集合</code> <code class="language-plaintext highlighter-rouge">不可变</code> <code class="language-plaintext highlighter-rouge">数据结构</code> <code class="language-plaintext highlighter-rouge">哈希</code> <code class="language-plaintext highlighter-rouge">集合运算</code> <code class="language-plaintext highlighter-rouge">函数式编程</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

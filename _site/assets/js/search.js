@@ -30,6 +30,10 @@ class SearchManager {
         this.documents = this.createBasicDocuments();
       } else {
         this.documents = await response.json();
+        // 为每个文档添加id字段（使用url作为唯一标识）
+        this.documents.forEach((doc, index) => {
+          doc.id = doc.url || `doc-${index}`;
+        });
       }
 
       // 创建Lunr搜索索引

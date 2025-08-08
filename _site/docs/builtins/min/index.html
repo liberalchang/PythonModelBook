@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>min() - 最小值函数 - Python知识体系文档</title>
+  <meta name="description" content="返回可迭代对象中的最小值或多个参数中的最小值">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>min() - 最小值函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="min() - 最小值函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="返回可迭代对象中的最小值或多个参数中的最小值" />
+<meta property="og:description" content="返回可迭代对象中的最小值或多个参数中的最小值" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/min/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/min/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="min() - 最小值函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"返回可迭代对象中的最小值或多个参数中的最小值","headline":"min() - 最小值函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/min/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/min/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">min() - 最小值函数</h1>
+        
+        
+        <p class="doc-description">返回可迭代对象中的最小值或多个参数中的最小值</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">序列操作</span>
+          
+          <span class="tag">比较</span>
+          
+          <span class="tag">最值</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="min---最小值函数">min() - 最小值函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">min()</code> 是Python中的内置函数，用于返回可迭代对象中的最小值，或者多个参数中的最小值。它支持自定义比较函数和默认值设置，是数据分析和处理中的重要工具。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握min()函数的基本用法</li>
+  <li>理解不同数据类型的比较规则</li>
+  <li>学会使用key参数进行自定义比较</li>
+  <li>了解default参数的使用场景</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型</li>
+  <li>可迭代对象概念</li>
+  <li>比较运算符基础</li>
+  <li>lambda函数基础</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">min()</code> 函数通过比较操作找到最小值。对于数值类型，比较大小；对于字符串，按字典序比较；对于自定义对象，可以通过key参数指定比较方式。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 多个参数的最小值
+</span><span class="nf">min</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># 可迭代对象的最小值
+</span><span class="nf">min</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nf">object</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>iterable</td>
+      <td>iterable</td>
+      <td>是*</td>
+      <td>无</td>
+      <td>可迭代对象</td>
+    </tr>
+    <tr>
+      <td>arg1, arg2, …</td>
+      <td>any</td>
+      <td>是*</td>
+      <td>无</td>
+      <td>要比较的多个参数</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>function</td>
+      <td>否</td>
+      <td>None</td>
+      <td>用于比较的函数</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>any</td>
+      <td>否</td>
+      <td>无</td>
+      <td>空迭代器时的默认返回值</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>*注：iterable和多个参数二选一</p>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: 与输入元素类型相同</li>
+  <li><strong>说明</strong>: 最小的元素值</li>
+</ul>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 多个参数的最小值
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(5, 2, 8, 1): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min(5, 2, 8, 1): 1
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(3.14, 2.71, 1.41): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="mf">2.71</span><span class="p">,</span> <span class="mf">1.41</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min(3.14, 2.71, 1.41): 1.41
+</span>
+<span class="c1"># 列表的最小值
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(</span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s">): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min([10, 5, 8, 3, 15, 2]): 2
+</span>
+<span class="c1"># 字符串的最小值（按字典序）
+</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">apple</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">banana</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">cherry</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(</span><span class="si">{</span><span class="n">words</span><span class="si">}</span><span class="s">): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min(['apple', 'banana', 'cherry', 'date']): apple
+</span>
+<span class="c1"># 字符串中字符的最小值
+</span><span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(</span><span class="sh">'</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="sh">'</span><span class="s">): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min('hello'): e
+</span>
+<span class="c1"># 元组的最小值
+</span><span class="n">tuples</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min(</span><span class="si">{</span><span class="n">tuples</span><span class="si">}</span><span class="s">): </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: min([(1, 2), (3, 1), (2, 3)]): (1, 2)
+</span></code></pre></div></div>
+
+<h3 id="使用key参数">使用key参数</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 按绝对值找最小值
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">min_abs</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">abs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">按绝对值最小: </span><span class="si">{</span><span class="n">min_abs</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 按绝对值最小: -1
+</span>
+<span class="c1"># 按字符串长度找最短字符串
+</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">python</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">java</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">javascript</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">go</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">shortest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最短单词: </span><span class="si">{</span><span class="n">shortest</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 最短单词: c
+</span>
+<span class="c1"># 按字符串长度，然后按字典序
+</span><span class="n">words_with_same_length</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">cat</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">dog</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">bat</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">rat</span><span class="sh">'</span><span class="p">]</span>
+<span class="c1"># 先按长度，再按字典序
+</span><span class="n">min_word</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">words_with_same_length</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">按长度和字典序最小: </span><span class="si">{</span><span class="n">min_word</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 按长度和字典序最小: bat
+</span>
+<span class="c1"># 复杂对象的比较
+</span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">张三</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">:</span> <span class="mi">85</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">李四</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">:</span> <span class="mi">92</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">王五</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">:</span> <span class="mi">78</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">赵六</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span> <span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">:</span> <span class="mi">88</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># 按年龄找最小
+</span><span class="n">youngest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最年轻的学生: </span><span class="si">{</span><span class="n">youngest</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">, 年龄: </span><span class="si">{</span><span class="n">youngest</span><span class="p">[</span><span class="sh">'</span><span class="s">age</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按成绩找最小
+</span><span class="n">lowest_score</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">成绩最低的学生: </span><span class="si">{</span><span class="n">lowest_score</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">, 成绩: </span><span class="si">{</span><span class="n">lowest_score</span><span class="p">[</span><span class="sh">'</span><span class="s">score</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="使用default参数">使用default参数</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 空列表的处理
+</span><span class="n">empty_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 不使用default会抛出异常
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">empty_list</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">空列表错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用default参数
+</span><span class="n">result_with_default</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">empty_list</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">空列表使用默认值: </span><span class="si">{</span><span class="n">result_with_default</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 空列表使用默认值: 0
+</span>
+<span class="c1"># 条件过滤后可能为空的情况
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">min_even</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">even_numbers</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="sh">"</span><span class="s">无偶数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最小偶数: </span><span class="si">{</span><span class="n">min_even</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: 最小偶数: 无偶数
+</span>
+<span class="c1"># 实际应用：安全的最小值查找
+</span><span class="k">def</span> <span class="nf">safe_min</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的最小值查找</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="nf">condition</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span>
+    
+    <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>
+
+<span class="c1"># 测试
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">所有数据最小值: </span><span class="si">{</span><span class="nf">safe_min</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">正数最小值: </span><span class="si">{</span><span class="n">safe_min</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="si">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">无正数</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">大于20的最小值: </span><span class="si">{</span><span class="n">safe_min</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="si">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="sh">'</span><span class="s">无符合条件的数</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例数据分析">实际案例：数据分析</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">analyze_sales_data</span><span class="p">(</span><span class="n">sales_records</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">分析销售数据</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">无销售数据</span><span class="sh">"</span>
+    
+    <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># 最低销售额
+</span>    <span class="n">min_amount</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">sales_records</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">])</span>
+    <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">lowest_sale</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="n">min_amount</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">],</span>
+        <span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="n">min_amount</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">],</span>
+        <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="n">min_amount</span><span class="p">[</span><span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># 最早销售日期
+</span>    <span class="n">earliest_sale</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">sales_records</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">])</span>
+    <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">earliest_date</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">earliest_sale</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">]</span>
+    
+    <span class="c1"># 按产品分组找最低价格
+</span>    <span class="n">products</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">product</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
+            <span class="n">products</span><span class="p">[</span><span class="n">product</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">products</span><span class="p">[</span><span class="n">product</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+    
+    <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">min_price_by_product</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">products</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">min_record</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">records</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">])</span>
+        <span class="n">analysis</span><span class="p">[</span><span class="sh">'</span><span class="s">min_price_by_product</span><span class="sh">'</span><span class="p">][</span><span class="n">product</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_record</span><span class="p">[</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">analysis</span>
+
+<span class="c1"># 测试销售数据
+</span><span class="n">sales_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-15</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">999</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-16</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPad</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">599</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-14</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">899</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-17</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">MacBook</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">1299</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-15</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPad</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">549</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2024-01-18</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">iPhone</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">:</span> <span class="mi">799</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">analysis_result</span> <span class="o">=</span> <span class="nf">analyze_sales_data</span><span class="p">(</span><span class="n">sales_data</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">销售数据分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最低销售额: </span><span class="si">{</span><span class="n">analysis_result</span><span class="p">[</span><span class="sh">'</span><span class="s">lowest_sale</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">amount</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">元</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  产品: </span><span class="si">{</span><span class="n">analysis_result</span><span class="p">[</span><span class="sh">'</span><span class="s">lowest_sale</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">product</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  日期: </span><span class="si">{</span><span class="n">analysis_result</span><span class="p">[</span><span class="sh">'</span><span class="s">lowest_sale</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最早销售日期: </span><span class="si">{</span><span class="n">analysis_result</span><span class="p">[</span><span class="sh">'</span><span class="s">earliest_date</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">  各产品最低价格:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">analysis_result</span><span class="p">[</span><span class="sh">'</span><span class="s">min_price_by_product</span><span class="sh">'</span><span class="p">].</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    </span><span class="si">{</span><span class="n">product</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s">元</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="多维数据处理">多维数据处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_min_in_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">在二维矩阵中找最小值及其位置</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+    
+    <span class="n">min_value</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">min_position</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_value</span><span class="p">:</span>
+                <span class="n">min_value</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="n">min_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">min_value</span><span class="p">,</span> <span class="n">min_position</span>
+
+<span class="k">def</span> <span class="nf">find_min_by_dimension</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">按维度找最小值</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="n">dimension</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 按行找最小值
+</span>        <span class="k">return</span> <span class="p">[</span><span class="nf">min</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">dimension</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># 按列找最小值
+</span>        <span class="k">return</span> <span class="p">[</span><span class="nf">min</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)))</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">维度只能是0（行）或1（列）</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试矩阵
+</span><span class="n">test_matrix</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">矩阵: </span><span class="si">{</span><span class="n">test_matrix</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 全局最小值
+</span><span class="n">min_val</span><span class="p">,</span> <span class="n">min_pos</span> <span class="o">=</span> <span class="nf">find_min_in_matrix</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">全局最小值: </span><span class="si">{</span><span class="n">min_val</span><span class="si">}</span><span class="s">, 位置: </span><span class="si">{</span><span class="n">min_pos</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按行最小值
+</span><span class="n">row_mins</span> <span class="o">=</span> <span class="nf">find_min_by_dimension</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">各行最小值: </span><span class="si">{</span><span class="n">row_mins</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 按列最小值
+</span><span class="n">col_mins</span> <span class="o">=</span> <span class="nf">find_min_by_dimension</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">各列最小值: </span><span class="si">{</span><span class="n">col_mins</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用内置函数的简洁写法
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">使用内置函数:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">全局最小值: </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test_matrix</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">各行最小值: </span><span class="si">{</span><span class="p">[</span><span class="nf">min</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test_matrix</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">各列最小值: </span><span class="si">{</span><span class="p">[</span><span class="nf">min</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="o">*</span><span class="n">test_matrix</span><span class="p">)]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化技巧">性能优化技巧</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">random</span>
+
+<span class="c1"># 生成测试数据
+</span><span class="n">large_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
+
+<span class="c1"># 方法1：直接使用min()
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">large_data</span><span class="p">)</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法2：手动循环查找
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">min_val</span> <span class="o">=</span> <span class="n">large_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">large_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">:</span>
+        <span class="n">min_val</span> <span class="o">=</span> <span class="n">val</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">min_val</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法3：使用heapq（对于部分最小值）
+</span><span class="kn">import</span> <span class="n">heapq</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="n">heapq</span><span class="p">.</span><span class="nf">nsmallest</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">large_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">time3</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能比较（数据量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">large_data</span><span class="p">)</span><span class="si">}</span><span class="s">）:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">min()函数: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒, 结果: </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">手动循环: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒, 结果: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">heapq方法: </span><span class="si">{</span><span class="n">time3</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒, 结果: </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 对于需要多个最小值的情况
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">获取最小的5个值:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">sorted_method</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">large_data</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">time_sorted</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">heap_method</span> <span class="o">=</span> <span class="n">heapq</span><span class="p">.</span><span class="nf">nsmallest</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">large_data</span><span class="p">)</span>
+<span class="n">time_heap</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">排序方法: </span><span class="si">{</span><span class="n">time_sorted</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">堆方法: </span><span class="si">{</span><span class="n">time_heap</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">堆方法快 </span><span class="si">{</span><span class="n">time_sorted</span><span class="o">/</span><span class="n">time_heap</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> 倍</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="比较规则">比较规则</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 不同类型的比较可能出错
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">min</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>  <span class="c1"># 混合类型
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">类型错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 字符串比较是按字典序
+</span><span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">10</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">30</span><span class="sh">'</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">字符串比较: </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: '10' (字典序)
+</span>
+<span class="c1"># 数值字符串需要转换
+</span><span class="n">numeric_strings</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">10</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">30</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">min_numeric</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">numeric_strings</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">按数值比较: </span><span class="si">{</span><span class="n">min_numeric</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: '2'
+</span>
+<span class="c1"># 元组比较是逐元素比较
+</span><span class="n">tuples</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">元组比较: </span><span class="si">{</span><span class="nf">min</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 输出: (1, 2)
+</span></code></pre></div></div>
+
+<h3 id="空序列处理">空序列处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 空序列的不同处理方式
+</span><span class="n">empty_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[],</span>
+    <span class="p">(),</span>
+    <span class="nf">set</span><span class="p">(),</span>
+    <span class="sh">''</span><span class="p">,</span>
+    <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">empty</span> <span class="ow">in</span> <span class="n">empty_cases</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">empty</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">: 空序列，无法计算最小值</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># 使用default参数
+</span>        <span class="n">result</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="sh">"</span><span class="s">空</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  使用默认值: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="自定义对象比较">自定义对象比较</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">定义小于比较</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">岁)</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Product</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+    
+    <span class="c1"># 没有定义比较方法
+</span>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">price</span><span class="si">}</span><span class="s">元</span><span class="sh">"</span>
+
+<span class="c1"># 有比较方法的对象
+</span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="nc">Person</span><span class="p">(</span><span class="sh">"</span><span class="s">王五</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">youngest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最年轻的人: </span><span class="si">{</span><span class="n">youngest</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 没有比较方法的对象需要使用key
+</span><span class="n">products</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nc">Product</span><span class="p">(</span><span class="sh">"</span><span class="s">苹果</span><span class="sh">"</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span>
+    <span class="nc">Product</span><span class="p">(</span><span class="sh">"</span><span class="s">香蕉</span><span class="sh">"</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
+    <span class="nc">Product</span><span class="p">(</span><span class="sh">"</span><span class="s">橙子</span><span class="sh">"</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">cheapest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">products</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">price</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最便宜的产品: </span><span class="si">{</span><span class="n">cheapest</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<h3 id="相关函数">相关函数</h3>
+<ul>
+  <li><a href="max.md">max() - 最大值函数</a> - 找最大值</li>
+  <li><a href="sorted.md">sorted() - 排序函数</a> - 排序操作</li>
+  <li><a href="sum.md">sum() - 求和函数</a> - 数值求和</li>
+  <li><a href="len.md">len() - 长度函数</a> - 获取长度</li>
+  <li><a href="any.md">any() - 逻辑或函数</a> - 任一为真</li>
+  <li><a href="all.md">all() - 逻辑与函数</a> - 全部为真</li>
+</ul>
+
+<h3 id="相关模块">相关模块</h3>
+<ul>
+  <li><a href="../stdlib/heapq.md">heapq模块</a> - 堆队列算法</li>
+  <li><a href="../stdlib/operator.md">operator模块</a> - 操作符函数</li>
+  <li><a href="../stdlib/functools.md">functools模块</a> - 函数工具</li>
+</ul>
+
+<h3 id="相关概念">相关概念</h3>
+<ul>
+  <li><a href="../basics/comparison-operators.md">比较运算</a> - 比较运算符</li>
+  <li><a href="../algorithms/sorting.md">排序算法</a> - 排序算法详解</li>
+  <li><a href="../basics/lambda-functions.md">lambda函数</a> - 匿名函数</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#min">Python官方文档 - min()</a></li>
+  <li><a href="https://docs.python.org/3/howto/sorting.html">Python排序指南</a></li>
+  <li><a href="https://docs.python.org/3/reference/expressions.html#comparisons">比较运算</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html#object.__lt__">数据模型 - 比较方法</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">序列操作</code> <code class="language-plaintext highlighter-rouge">比较</code> <code class="language-plaintext highlighter-rouge">最值</code> <code class="language-plaintext highlighter-rouge">数据分析</code> <code class="language-plaintext highlighter-rouge">排序</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

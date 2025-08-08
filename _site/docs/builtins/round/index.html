@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>round() - 数字四舍五入函数 - Python知识体系文档</title>
+  <meta name="description" content="对数字进行四舍五入到指定精度的内置函数">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>round() - 数字四舍五入函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="round() - 数字四舍五入函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="对数字进行四舍五入到指定精度的内置函数" />
+<meta property="og:description" content="对数字进行四舍五入到指定精度的内置函数" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/round/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/round/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="round() - 数字四舍五入函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"对数字进行四舍五入到指定精度的内置函数","headline":"round() - 数字四舍五入函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/round/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/round/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">round() - 数字四舍五入函数</h1>
+        
+        
+        <p class="doc-description">对数字进行四舍五入到指定精度的内置函数</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">数学运算</span>
+          
+          <span class="tag">数字处理</span>
+          
+          <span class="tag">精度控制</span>
+          
+          <span class="tag">四舍五入</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="round---数字四舍五入函数">round() - 数字四舍五入函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">round()</code> 是Python中用于数字四舍五入的内置函数。它可以将浮点数四舍五入到指定的小数位数，或者将数字四舍五入到最接近的整数。这个函数在数据处理、财务计算、科学计算等场景中非常有用，特别是在需要控制数字精度的情况下。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握round()函数的基本语法和用法</li>
+  <li>理解四舍五入的规则和特殊情况</li>
+  <li>学会处理不同精度的数字四舍五入</li>
+  <li>了解浮点数精度问题和解决方案</li>
+  <li>掌握在实际项目中的应用技巧</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本数据类型（整数、浮点数）</li>
+  <li>数学基础（四舍五入概念）</li>
+  <li>浮点数表示和精度概念</li>
+  <li>Python数字运算基础</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">round()</code> 函数实现了”银行家舍入”（也称为”四舍六入五成双”）规则，这是IEEE 754标准推荐的舍入方式。当要舍入的数字正好是5时，会舍入到最近的偶数。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="n">number</span><span class="p">[,</span> <span class="n">ndigits</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>number</td>
+      <td>int/float</td>
+      <td>是</td>
+      <td>要进行四舍五入的数字</td>
+    </tr>
+    <tr>
+      <td>ndigits</td>
+      <td>int</td>
+      <td>否</td>
+      <td>保留的小数位数，默认为0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>当ndigits省略或为None时</strong>: 返回int类型，四舍五入到最近的整数</li>
+  <li><strong>当ndigits为正整数时</strong>: 返回float类型，保留指定位数的小数</li>
+  <li><strong>当ndigits为负整数时</strong>: 返回float类型，四舍五入到十位、百位等</li>
+</ul>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础四舍五入操作">基础四舍五入操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 基础四舍五入示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">基础四舍五入操作:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 1. 基本整数四舍五入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 基本整数四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">test_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">3.7</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">test_numbers</span><span class="p">:</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">rounded</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 2. 银行家舍入规则演示
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 银行家舍入规则 (五成双):</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 当小数部分正好是0.5时的特殊情况
+</span><span class="n">special_cases</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">special_cases</span><span class="p">:</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="sh">'</span><span class="s">偶数</span><span class="sh">'</span> <span class="k">if</span> <span class="n">rounded</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="sh">'</span><span class="s">奇数</span><span class="sh">'</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">银行家舍入规则说明:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">- 当小数部分 &lt; 0.5 时，向下舍入</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">- 当小数部分 &gt; 0.5 时，向上舍入</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">- 当小数部分 = 0.5 时，舍入到最近的偶数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">- 这种方式可以减少舍入误差的累积</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 3. 不同数据类型的处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 不同数据类型处理:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="n">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">import</span> <span class="n">fractions</span>
+
+<span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">3.14159</span><span class="p">,</span>                    <span class="c1"># 浮点数
+</span>    <span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">3.14159</span><span class="sh">'</span><span class="p">),</span>         <span class="c1"># Decimal类型
+</span>    <span class="n">fractions</span><span class="p">.</span><span class="nc">Fraction</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>  <span class="c1"># 分数
+</span>    <span class="mi">5</span><span class="p">,</span>                          <span class="c1"># 整数
+</span>    <span class="bp">True</span><span class="p">,</span>                       <span class="c1"># 布尔值
+</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s"> (输入类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">, 输出类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">result</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">) 失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 4. 边界情况和特殊值
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 边界情况和特殊值:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">special_values</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">0.0</span><span class="p">,</span>                <span class="c1"># 零
+</span>    <span class="o">-</span><span class="mf">0.0</span><span class="p">,</span>               <span class="c1"># 负零
+</span>    <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">),</span>       <span class="c1"># 正无穷
+</span>    <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">-inf</span><span class="sh">'</span><span class="p">),</span>      <span class="c1"># 负无穷
+</span>    <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">nan</span><span class="sh">'</span><span class="p">),</span>       <span class="c1"># 非数字
+</span>    <span class="mf">1e-10</span><span class="p">,</span>              <span class="c1"># 极小数
+</span>    <span class="mf">1e10</span><span class="p">,</span>               <span class="c1"># 极大数
+</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">special_values</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">) 错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="指定精度的四舍五入">指定精度的四舍五入</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 指定精度的四舍五入示例
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">指定精度的四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 1. 保留小数位数
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 保留不同小数位数:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+
+<span class="k">for</span> <span class="n">digits</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">pi</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">digits</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">rounded</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 2. 负数精度 - 四舍五入到十位、百位等
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 负数精度四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">large_number</span> <span class="o">=</span> <span class="mf">123456.789</span>
+
+<span class="k">for</span> <span class="n">digits</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">large_number</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">large_number</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">digits</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">负数精度说明:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-1: 四舍五入到十位</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-2: 四舍五入到百位</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-3: 四舍五入到千位</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">以此类推...</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 3. 财务计算中的精度控制
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 财务计算精度控制:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 模拟商品价格计算
+</span><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">19.99</span><span class="p">,</span> <span class="mf">25.678</span><span class="p">,</span> <span class="mf">100.005</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">]</span>
+<span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.08</span>  <span class="c1"># 8%税率
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">商品价格计算 (含税):</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">tax_rate</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">price</span> <span class="o">+</span> <span class="n">tax</span>
+    
+    <span class="c1"># 不同的舍入策略
+</span>    <span class="n">total_rounded_2</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 保留2位小数
+</span>    <span class="n">total_rounded_1</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 保留1位小数
+</span>    <span class="n">total_rounded_0</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>     <span class="c1"># 四舍五入到整数
+</span>    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">原价: $</span><span class="si">{</span><span class="n">price</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">税额: $</span><span class="si">{</span><span class="n">tax</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">总价: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  保留2位: $</span><span class="si">{</span><span class="n">total_rounded_2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  保留1位: $</span><span class="si">{</span><span class="n">total_rounded_1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  整数: $</span><span class="si">{</span><span class="n">total_rounded_0</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 4. 科学计算中的精度处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 科学计算精度处理:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="n">math</span>
+
+<span class="c1"># 计算圆的面积和周长
+</span><span class="n">radius</span> <span class="o">=</span> <span class="mf">5.7</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">circumference</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">半径: </span><span class="si">{</span><span class="n">radius</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">面积: </span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">周长: </span><span class="si">{</span><span class="n">circumference</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">不同精度的结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="n">area_rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">circ_rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">circumference</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">精度</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s">: 面积=</span><span class="si">{</span><span class="n">area_rounded</span><span class="si">}</span><span class="s">, 周长=</span><span class="si">{</span><span class="n">circ_rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 5. 数据分析中的数值处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 数据分析数值处理:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 模拟测量数据
+</span><span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span><span class="mf">23.456789</span><span class="p">,</span> <span class="mf">24.123456</span><span class="p">,</span> <span class="mf">22.987654</span><span class="p">,</span> <span class="mf">25.345678</span><span class="p">,</span> <span class="mf">23.876543</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">原始测量数据:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">measurements</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测量</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">measurement</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 计算统计值
+</span><span class="n">average</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+<span class="n">variance</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">average</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+<span class="n">std_dev</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">统计结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">平均值: </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">方差: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">标准差: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">四舍五入后的统计结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">精度</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  平均值: </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="n">average</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  方差: </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="n">variance</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  标准差: </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="n">std_dev</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="浮点数精度问题和解决方案">浮点数精度问题和解决方案</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 浮点数精度问题和解决方案
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">浮点数精度问题和解决方案:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 1. 浮点数精度问题演示
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 浮点数精度问题:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 经典的浮点数精度问题
+</span><span class="n">result1</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">0.1 + 0.2 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">0.1 + 0.2 == 0.3: </span><span class="si">{</span><span class="n">result1</span> <span class="o">==</span> <span class="mf">0.3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">repr(0.1 + 0.2): </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 更多精度问题示例
+</span><span class="n">problematic_calculations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1.1</span> <span class="o">+</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">更多精度问题示例:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">calc</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">problematic_calculations</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">calc</span><span class="si">}</span><span class="s"> == </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">calc</span> <span class="o">==</span> <span class="n">expected</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  实际值: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  期望值: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  差值: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">calc</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+
+<span class="c1"># 2. 使用round()解决精度问题
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. 使用round()解决精度问题:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">safe_round_compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的浮点数比较</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span> <span class="o">==</span> <span class="nf">round</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">calc</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">problematic_calculations</span><span class="p">:</span>
+    <span class="n">is_equal_direct</span> <span class="o">=</span> <span class="n">calc</span> <span class="o">==</span> <span class="n">expected</span>
+    <span class="n">is_equal_rounded</span> <span class="o">=</span> <span class="nf">safe_round_compare</span><span class="p">(</span><span class="n">calc</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">计算: </span><span class="si">{</span><span class="n">calc</span><span class="si">}</span><span class="s"> vs 期望: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  直接比较: </span><span class="si">{</span><span class="n">is_equal_direct</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  四舍五入比较: </span><span class="si">{</span><span class="n">is_equal_rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  四舍五入后的值: </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="n">calc</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+
+<span class="c1"># 3. 不同精度的影响
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. 不同精度对比较的影响:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">test_value</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+<span class="n">expected_value</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测试值: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">test_value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">期望值: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">expected_value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">差值: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">test_value</span> <span class="o">-</span> <span class="n">expected_value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">不同精度下的比较结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">rounded_test</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">test_value</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">rounded_expected</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">expected_value</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">is_equal</span> <span class="o">=</span> <span class="n">rounded_test</span> <span class="o">==</span> <span class="n">rounded_expected</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">精度</span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">rounded_test</span><span class="si">}</span><span class="s"> == </span><span class="si">{</span><span class="n">rounded_expected</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">is_equal</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 4. 使用Decimal解决精度问题
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 使用Decimal解决精度问题:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="n">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
+
+<span class="c1"># 设置Decimal精度
+</span><span class="nf">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">28</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Decimal vs float 比较:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用Decimal进行精确计算
+</span><span class="n">decimal_result</span> <span class="o">=</span> <span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">0.1</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">0.2</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">float_result</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Decimal(</span><span class="sh">'</span><span class="s">0.1</span><span class="sh">'</span><span class="s">) + Decimal(</span><span class="sh">'</span><span class="s">0.2</span><span class="sh">'</span><span class="s">) = </span><span class="si">{</span><span class="n">decimal_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">0.1 + 0.2 = </span><span class="si">{</span><span class="n">float_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Decimal结果 == 0.3: </span><span class="si">{</span><span class="n">decimal_result</span> <span class="o">==</span> <span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">0.3</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">float结果 == 0.3: </span><span class="si">{</span><span class="n">float_result</span> <span class="o">==</span> <span class="mf">0.3</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Decimal的四舍五入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">Decimal的四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">decimal_pi</span> <span class="o">=</span> <span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">3.141592653589793</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">rounded_decimal</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">decimal_pi</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(Decimal(π), </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded_decimal</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">rounded_decimal</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 5. 实用的精度处理函数
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 实用的精度处理函数:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">round_to_precision</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">四舍五入到指定精度</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="nf">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">precision</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-09</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">检查两个数是否接近（Python 3.5+有math.isclose）</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nf">max</span><span class="p">(</span><span class="n">rel_tol</span> <span class="o">*</span> <span class="nf">max</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">abs_tol</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">format_currency</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">格式化货币金额</span><span class="sh">"""</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">$</span><span class="si">{</span><span class="n">rounded</span><span class="si">:</span><span class="p">.</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">round_to_nearest</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">nearest</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">四舍五入到最近的指定值（如0.05）</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span> <span class="o">/</span> <span class="n">nearest</span><span class="p">)</span> <span class="o">*</span> <span class="n">nearest</span>
+
+<span class="c1"># 测试实用函数
+</span><span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.14159</span><span class="p">,</span> <span class="mf">2.71828</span><span class="p">,</span> <span class="mf">1.41421</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">实用函数测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">原值: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  精度2: </span><span class="si">{</span><span class="nf">round_to_precision</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  精度4: </span><span class="si">{</span><span class="nf">round_to_precision</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  货币格式: </span><span class="si">{</span><span class="nf">format_currency</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最近0.05: </span><span class="si">{</span><span class="nf">round_to_nearest</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  最近0.25: </span><span class="si">{</span><span class="nf">round_to_nearest</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  与π接近: </span><span class="si">{</span><span class="nf">is_close</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mf">3.14159</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级应用和最佳实践">高级应用和最佳实践</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 高级应用和最佳实践
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">round()函数高级应用和最佳实践:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 1. 批量数据处理
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 批量数据处理:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="n">random</span>
+
+<span class="c1"># 生成模拟数据
+</span><span class="n">random</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">原始数据:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 批量四舍五入
+</span><span class="n">rounded_data</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">四舍五入后 (保留2位):</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">rounded</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rounded_data</span><span class="p">)):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">original</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用map进行批量处理
+</span><span class="n">rounded_data_map</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">使用map四舍五入 (保留3位):</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rounded</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">rounded_data_map</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 2. 条件四舍五入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 条件四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">smart_round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_precision</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_precision</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">智能四舍五入：根据数值大小选择精度</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="nf">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_precision</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nf">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_precision</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nf">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_precision</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nf">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_precision</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_precision</span><span class="p">)</span>
+
+<span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.123456</span><span class="p">,</span> <span class="mf">1.23456</span><span class="p">,</span> <span class="mf">12.3456</span><span class="p">,</span> <span class="mf">123.456</span><span class="p">,</span> <span class="mf">1234.56</span><span class="p">,</span> <span class="mf">12345.6</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">智能四舍五入结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="n">smart_rounded</span> <span class="o">=</span> <span class="nf">smart_round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="mf">10.6</span><span class="n">f</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">smart_rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 3. 统计数据的四舍五入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 统计数据四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">StatisticsRounder</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">统计数据四舍五入器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">precision</span> <span class="o">=</span> <span class="n">precision</span>
+    
+    <span class="k">def</span> <span class="nf">round_statistics</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算并四舍五入统计数据</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        
+        <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">variance</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">std_dev</span> <span class="o">=</span> <span class="n">variance</span> <span class="o">**</span> <span class="mf">0.5</span>
+        
+        <span class="c1"># 计算其他统计量
+</span>        <span class="n">sorted_data</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_data</span><span class="p">[</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">sorted_data</span><span class="p">[(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">min_val</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">max_val</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">range_val</span> <span class="o">=</span> <span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">count</span><span class="sh">'</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">mean</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">median</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">median</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">variance</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">variance</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">std_dev</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">std_dev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">max_val</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">range</span><span class="sh">'</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">range_val</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">precision</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># 测试统计四舍五入
+</span><span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">23.456</span><span class="p">,</span> <span class="mf">24.123</span><span class="p">,</span> <span class="mf">22.987</span><span class="p">,</span> <span class="mf">25.345</span><span class="p">,</span> <span class="mf">23.876</span><span class="p">,</span> <span class="mf">24.567</span><span class="p">,</span> <span class="mf">23.234</span><span class="p">,</span> <span class="mf">25.123</span><span class="p">]</span>
+<span class="n">stats_rounder</span> <span class="o">=</span> <span class="nc">StatisticsRounder</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">stats_rounder</span><span class="p">.</span><span class="nf">round_statistics</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">统计数据四舍五入结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 4. 金融计算中的四舍五入
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 金融计算四舍五入:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">FinancialCalculator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">金融计算器</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">复利计算</span><span class="sh">"""</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">time</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">monthly_payment</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">annual_rate</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">月供计算</span><span class="sh">"""</span>
+        <span class="n">monthly_rate</span> <span class="o">=</span> <span class="n">annual_rate</span> <span class="o">/</span> <span class="mi">12</span>
+        <span class="n">num_payments</span> <span class="o">=</span> <span class="n">years</span> <span class="o">*</span> <span class="mi">12</span>
+        
+        <span class="k">if</span> <span class="n">monthly_rate</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">payment</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">/</span> <span class="n">num_payments</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">payment</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="n">monthly_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthly_rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">num_payments</span><span class="p">)</span> <span class="o">/</span> \
+                      <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthly_rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">num_payments</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">investment_return</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="n">final</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">投资回报率计算</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">years</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">initial</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">annual_return</span> <span class="o">=</span> <span class="p">(</span><span class="n">final</span> <span class="o">/</span> <span class="n">initial</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">years</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">annual_return</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>  <span class="c1"># 返回百分比
+</span>
+<span class="c1"># 测试金融计算
+</span><span class="n">calc</span> <span class="o">=</span> <span class="nc">FinancialCalculator</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">金融计算示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 复利计算
+</span><span class="n">principal</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># 5%
+</span><span class="n">time</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">final_amount</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">复利计算: 本金$</span><span class="si">{</span><span class="n">principal</span><span class="si">}</span><span class="s">, 利率</span><span class="si">{</span><span class="n">rate</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s">%, </span><span class="si">{</span><span class="n">time</span><span class="si">}</span><span class="s">年后 = $</span><span class="si">{</span><span class="n">final_amount</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 月供计算
+</span><span class="n">loan_amount</span> <span class="o">=</span> <span class="mi">300000</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># 4%
+</span><span class="n">years</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">monthly_payment</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">monthly_payment</span><span class="p">(</span><span class="n">loan_amount</span><span class="p">,</span> <span class="n">annual_rate</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">月供计算: 贷款$</span><span class="si">{</span><span class="n">loan_amount</span><span class="si">}</span><span class="s">, 年利率</span><span class="si">{</span><span class="n">annual_rate</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s">%, </span><span class="si">{</span><span class="n">years</span><span class="si">}</span><span class="s">年 = $</span><span class="si">{</span><span class="n">monthly_payment</span><span class="si">}</span><span class="s">/月</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 投资回报率
+</span><span class="n">initial_investment</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">final_value</span> <span class="o">=</span> <span class="mi">25000</span>
+<span class="n">investment_years</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">return_rate</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">investment_return</span><span class="p">(</span><span class="n">initial_investment</span><span class="p">,</span> <span class="n">final_value</span><span class="p">,</span> <span class="n">investment_years</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">投资回报: 初始$</span><span class="si">{</span><span class="n">initial_investment</span><span class="si">}</span><span class="s">, 最终$</span><span class="si">{</span><span class="n">final_value</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">investment_years</span><span class="si">}</span><span class="s">年 = </span><span class="si">{</span><span class="n">return_rate</span><span class="si">}</span><span class="s">%年化收益</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 5. 性能优化技巧
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 性能优化技巧:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="n">time</span>
+
+<span class="c1"># 创建大量测试数据
+</span><span class="n">large_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
+
+<span class="c1"># 方法1: 使用列表推导式
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">rounded_list_comp</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">large_data</span><span class="p">]</span>
+<span class="n">time_list_comp</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法2: 使用map函数
+</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">rounded_map</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">large_data</span><span class="p">))</span>
+<span class="n">time_map</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 方法3: 使用numpy (如果可用)
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+    <span class="n">np_array</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">large_data</span><span class="p">)</span>
+    
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">rounded_numpy</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="n">np_array</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">time_numpy</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">NumPy方法: </span><span class="si">{</span><span class="n">time_numpy</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">ImportError</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">NumPy未安装，跳过NumPy测试</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">time_numpy</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">large_data</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> 个数字</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">列表推导式: </span><span class="si">{</span><span class="n">time_list_comp</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">map函数: </span><span class="si">{</span><span class="n">time_map</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">time_numpy</span><span class="p">:</span>
+    <span class="n">fastest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">time_list_comp</span><span class="p">,</span> <span class="n">time_map</span><span class="p">,</span> <span class="n">time_numpy</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fastest</span> <span class="o">==</span> <span class="n">time_list_comp</span><span class="p">:</span>
+        <span class="n">fastest_method</span> <span class="o">=</span> <span class="sh">"</span><span class="s">列表推导式</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="n">fastest</span> <span class="o">==</span> <span class="n">time_map</span><span class="p">:</span>
+        <span class="n">fastest_method</span> <span class="o">=</span> <span class="sh">"</span><span class="s">map函数</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fastest_method</span> <span class="o">=</span> <span class="sh">"</span><span class="s">NumPy</span><span class="sh">"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">fastest</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">time_list_comp</span><span class="p">,</span> <span class="n">time_map</span><span class="p">)</span>
+    <span class="n">fastest_method</span> <span class="o">=</span> <span class="sh">"</span><span class="s">列表推导式</span><span class="sh">"</span> <span class="k">if</span> <span class="n">fastest</span> <span class="o">==</span> <span class="n">time_list_comp</span> <span class="k">else</span> <span class="sh">"</span><span class="s">map函数</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最快方法: </span><span class="si">{</span><span class="n">fastest_method</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 6. 错误处理和边界情况
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">6. 错误处理和边界情况:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">safe_round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的四舍五入函数</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ndigits</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+    <span class="nf">except </span><span class="p">(</span><span class="nb">TypeError</span><span class="p">,</span> <span class="nb">ValueError</span><span class="p">,</span> <span class="nb">OverflowError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">四舍五入错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">未知错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c1"># 测试边界情况
+</span><span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">3.14159</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>           <span class="c1"># 正常情况
+</span>    <span class="p">(</span><span class="sh">"</span><span class="s">3.14159</span><span class="sh">"</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>         <span class="c1"># 字符串数字
+</span>    <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>              <span class="c1"># None值
+</span>    <span class="p">(</span><span class="mf">3.14159</span><span class="p">,</span> <span class="sh">"</span><span class="s">2</span><span class="sh">"</span><span class="p">),</span>         <span class="c1"># 字符串精度
+</span>    <span class="p">(</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>      <span class="c1"># 无穷大
+</span>    <span class="p">(</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">nan</span><span class="sh">'</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>      <span class="c1"># NaN
+</span>    <span class="p">(</span><span class="nf">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>     <span class="c1"># 复数
+</span>    <span class="p">(</span><span class="mf">3.14159</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">),</span>        <span class="c1"># 极大负精度
+</span>    <span class="p">(</span><span class="mf">3.14159</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>         <span class="c1"># 极大正精度
+</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">边界情况测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">safe_round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">safe_round(</span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="常见陷阱和最佳实践">常见陷阱和最佳实践</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># round()函数的常见陷阱和最佳实践
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">round()函数常见陷阱和最佳实践:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 陷阱1: 银行家舍入规则
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">陷阱1: 银行家舍入规则</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">很多人期望的传统四舍五入 vs 实际的银行家舍入:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">expected_traditional</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 传统四舍五入
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">}</span><span class="s">, 传统四舍五入期望: </span><span class="si">{</span><span class="n">expected_traditional</span><span class="si">}</span><span class="s">, 一致: </span><span class="si">{</span><span class="n">rounded</span> <span class="o">==</span> <span class="n">expected_traditional</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">解决方案: 如果需要传统四舍五入，可以自定义函数</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">traditional_round</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">传统四舍五入</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="nf">int</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">传统四舍五入结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="n">trad_rounded</span> <span class="o">=</span> <span class="nf">traditional_round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">bank_rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">: 传统=</span><span class="si">{</span><span class="n">trad_rounded</span><span class="si">}</span><span class="s">, 银行家=</span><span class="si">{</span><span class="n">bank_rounded</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 陷阱2: 浮点数精度问题
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">陷阱2: 浮点数精度问题</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 看似简单的计算可能产生意外结果
+</span><span class="n">problematic_values</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">2.675</span><span class="p">,</span>   <span class="c1"># 期望四舍五入到2.68，但可能得到2.67
+</span>    <span class="mf">1.005</span><span class="p">,</span>   <span class="c1"># 期望四舍五入到1.01，但可能得到1.0
+</span>    <span class="mf">0.545</span><span class="p">,</span>   <span class="c1"># 期望四舍五入到0.55，但可能得到0.54
+</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">浮点数精度导致的意外结果:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">problematic_values</span><span class="p">:</span>
+    <span class="n">rounded_2</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s">, 2) = </span><span class="si">{</span><span class="n">rounded_2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  内部表示: </span><span class="si">{</span><span class="nf">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  期望结果: </span><span class="si">{</span><span class="n">value</span> <span class="o">+</span> <span class="mf">0.005</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> (可能不同)</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">解决方案: 使用Decimal进行精确计算</span><span class="sh">"</span><span class="p">)</span>
+<span class="kn">from</span> <span class="n">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">ROUND_HALF_UP</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">problematic_values</span><span class="p">:</span>
+    <span class="n">decimal_value</span> <span class="o">=</span> <span class="nc">Decimal</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="n">rounded_decimal</span> <span class="o">=</span> <span class="n">decimal_value</span><span class="p">.</span><span class="nf">quantize</span><span class="p">(</span><span class="nc">Decimal</span><span class="p">(</span><span class="sh">'</span><span class="s">0.01</span><span class="sh">'</span><span class="p">),</span> <span class="n">rounding</span><span class="o">=</span><span class="n">ROUND_HALF_UP</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Decimal(</span><span class="sh">'</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">'</span><span class="s">).quantize(0.01) = </span><span class="si">{</span><span class="n">rounded_decimal</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 陷阱3: 返回类型的变化
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">陷阱3: 返回类型的变化</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">test_number</span> <span class="o">=</span> <span class="mf">3.7</span>
+
+<span class="n">result_no_digits</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">test_number</span><span class="p">)</span>      <span class="c1"># 返回int
+</span><span class="n">result_with_digits</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">test_number</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 返回float
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">test_number</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">result_no_digits</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">result_no_digits</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">test_number</span><span class="si">}</span><span class="s">, 1) = </span><span class="si">{</span><span class="n">result_with_digits</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">result_with_digits</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">注意: 即使ndigits=0，返回类型也是float</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">result_zero_digits</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">test_number</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">test_number</span><span class="si">}</span><span class="s">, 0) = </span><span class="si">{</span><span class="n">result_zero_digits</span><span class="si">}</span><span class="s"> (类型: </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">result_zero_digits</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 陷阱4: 负数精度的理解
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">陷阱4: 负数精度的理解</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">test_value</span> <span class="o">=</span> <span class="mf">1234.5678</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始值: </span><span class="si">{</span><span class="n">test_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ndigits</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">rounded</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">test_value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">round(</span><span class="si">{</span><span class="n">test_value</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">ndigits</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">) = </span><span class="si">{</span><span class="n">rounded</span><span class="si">:</span><span class="mf">10.4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">负数精度说明:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-3: 四舍五入到千位 (1000的倍数)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-2: 四舍五入到百位 (100的倍数)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-1: 四舍五入到十位 (10的倍数)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"> 0: 四舍五入到个位 (整数)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"> 1: 保留1位小数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"> 2: 保留2位小数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"> 3: 保留3位小数</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 陷阱5: 链式四舍五入的累积误差
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">陷阱5: 链式四舍五入的累积误差</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">original_value</span> <span class="o">=</span> <span class="mf">1.23456789</span>
+
+<span class="c1"># 逐步四舍五入
+</span><span class="n">step1</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">original_value</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">step2</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">step1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">step3</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">step2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">step4</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">step3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 直接四舍五入
+</span><span class="n">direct</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">original_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始值: </span><span class="si">{</span><span class="n">original_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">逐步四舍五入: </span><span class="si">{</span><span class="n">original_value</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">step1</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">step2</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">step3</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">step4</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">直接四舍五入: </span><span class="si">{</span><span class="n">original_value</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">direct</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="n">step4</span> <span class="o">==</span> <span class="n">direct</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 更明显的例子
+</span><span class="n">problematic_value</span> <span class="o">=</span> <span class="mf">2.5555</span>
+<span class="n">step_by_step</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">problematic_value</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">direct_round</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">problematic_value</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">更明显的例子:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">原始值: </span><span class="si">{</span><span class="n">problematic_value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">逐步: </span><span class="si">{</span><span class="n">problematic_value</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="n">problematic_value</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="nf">round</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">problematic_value</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">step_by_step</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">直接: </span><span class="si">{</span><span class="n">problematic_value</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">direct_round</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="n">step_by_step</span> <span class="o">==</span> <span class="n">direct_round</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 最佳实践总结
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">最佳实践总结:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 了解银行家舍入规则，必要时使用自定义函数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. 对于精确的十进制计算，使用Decimal类</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. 注意round()函数的返回类型变化</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">4. 理解负数精度的含义</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">5. 避免链式四舍五入，直接四舍五入到目标精度</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">6. 在金融计算中，考虑使用专门的金融库</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">7. 测试边界情况和特殊值</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">8. 文档化你的舍入策略和精度要求</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-性能优化">🔧 性能优化</h2>
+
+<h3 id="round-性能优化技巧">round() 性能优化技巧</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># round() 性能优化技巧
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">round() 性能优化技巧:</span><span class="sh">"</span><span class="p">)</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">random</span>
+
+<span class="c1"># 创建测试数据
+</span><span class="n">random</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">测试数据量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> 个数字</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 优化技巧1: 避免重复的精度参数
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">1. 避免重复的精度参数:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 低效方式：每次调用都传递精度参数
+</span><span class="k">def</span> <span class="nf">slow_round_list</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">precision</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="c1"># 高效方式：使用functools.partial预设精度
+</span><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="k">def</span> <span class="nf">fast_round_list</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">precision</span><span class="p">):</span>
+    <span class="n">round_func</span> <span class="o">=</span> <span class="nf">partial</span><span class="p">(</span><span class="nb">round</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">round_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="c1"># 性能测试
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="nf">slow_round_list</span><span class="p">(</span><span class="n">test_data</span><span class="p">[:</span><span class="mi">10000</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="nf">fast_round_list</span><span class="p">(</span><span class="n">test_data</span><span class="p">[:</span><span class="mi">10000</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">传统方式: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">partial方式: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="p">(</span><span class="n">time1</span><span class="o">/</span><span class="n">time2</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">x</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="n">result1</span> <span class="o">==</span> <span class="n">result2</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 优化技巧2: 使用numpy进行批量操作
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2. 使用numpy进行批量操作:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+    
+    <span class="c1"># 转换为numpy数组
+</span>    <span class="n">np_data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">test_data</span><span class="p">[:</span><span class="mi">50000</span><span class="p">])</span>
+    
+    <span class="c1"># Python原生方法
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">python_result</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">[:</span><span class="mi">50000</span><span class="p">]]</span>
+    <span class="n">python_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="c1"># NumPy方法
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">numpy_result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="n">np_data</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">numpy_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Python原生: </span><span class="si">{</span><span class="n">python_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">NumPy方法: </span><span class="si">{</span><span class="n">numpy_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="p">(</span><span class="n">python_time</span><span class="o">/</span><span class="n">numpy_time</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">x</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 验证结果一致性（允许小的浮点误差）
+</span>    <span class="n">max_diff</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">python_result</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">numpy_result</span><span class="p">[:</span><span class="mi">100</span><span class="p">]))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最大差异: </span><span class="si">{</span><span class="n">max_diff</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+<span class="k">except</span> <span class="nb">ImportError</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">NumPy未安装，跳过NumPy性能测试</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 优化技巧3: 缓存常用的四舍五入结果
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">3. 缓存常用的四舍五入结果:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">RoundCache</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">四舍五入缓存器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">max_cache_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">max_cache_size</span> <span class="o">=</span> <span class="n">max_cache_size</span>
+    
+    <span class="k">def</span> <span class="nf">round_cached</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">带缓存的四舍五入</span><span class="sh">"""</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+        
+        <span class="c1"># 简单的缓存大小控制
+</span>        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">max_cache_size</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="nf">clear_cache</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">清空缓存</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+
+<span class="c1"># 创建重复数据进行测试
+</span><span class="n">repeated_data</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">50</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">repeated_data</span><span class="p">)</span>
+
+<span class="n">cache_rounder</span> <span class="o">=</span> <span class="nc">RoundCache</span><span class="p">()</span>
+
+<span class="c1"># 无缓存测试
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">no_cache_result</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">repeated_data</span><span class="p">]</span>
+<span class="n">no_cache_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="c1"># 有缓存测试
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">cache_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">cache_rounder</span><span class="p">.</span><span class="nf">round_cached</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">repeated_data</span><span class="p">]</span>
+<span class="n">cache_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据量: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">repeated_data</span><span class="p">)</span><span class="si">:</span><span class="p">,</span><span class="si">}</span><span class="s"> (包含重复)</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">缓存大小: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">cache_rounder</span><span class="p">.</span><span class="n">cache</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">无缓存: </span><span class="si">{</span><span class="n">no_cache_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">有缓存: </span><span class="si">{</span><span class="n">cache_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能提升: </span><span class="si">{</span><span class="p">(</span><span class="n">no_cache_time</span><span class="o">/</span><span class="n">cache_time</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">x</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">结果一致: </span><span class="si">{</span><span class="n">no_cache_result</span> <span class="o">==</span> <span class="n">cache_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 优化技巧4: 预计算常用精度的乘数
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">4. 预计算精度乘数优化:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">FastRounder</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">快速四舍五入器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 预计算常用精度的乘数
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">multipliers</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">)}</span>
+    
+    <span class="k">def</span> <span class="nf">fast_round</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">优化的四舍五入</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">ndigits</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">multipliers</span><span class="p">:</span>
+            <span class="n">multiplier</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">multipliers</span><span class="p">[</span><span class="n">ndigits</span><span class="p">]</span>
+            <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">)</span> <span class="o">/</span> <span class="n">multiplier</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">)</span>
+
+<span class="n">fast_rounder</span> <span class="o">=</span> <span class="nc">FastRounder</span><span class="p">()</span>
+
+<span class="c1"># 性能测试
+</span><span class="n">test_subset</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[:</span><span class="mi">20000</span><span class="p">]</span>
+
+<span class="c1"># 标准round
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">standard_result</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_subset</span><span class="p">]</span>
+<span class="n">standard_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="c1"># 优化round
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">fast_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">fast_rounder</span><span class="p">.</span><span class="nf">fast_round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_subset</span><span class="p">]</span>
+<span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">标准round: </span><span class="si">{</span><span class="n">standard_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">优化round: </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">性能差异: </span><span class="si">{</span><span class="nf">abs</span><span class="p">(</span><span class="n">standard_time</span> <span class="o">-</span> <span class="n">fast_time</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 验证结果一致性
+</span><span class="n">max_diff</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">standard_result</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">fast_result</span><span class="p">[:</span><span class="mi">100</span><span class="p">]))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">最大差异: </span><span class="si">{</span><span class="n">max_diff</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 优化技巧5: 向量化操作
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">5. 向量化操作对比:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">vectorized_round</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">precision</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">向量化四舍五入</span><span class="sh">"""</span>
+    <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">precision</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">)</span> <span class="o">/</span> <span class="n">multiplier</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">batch_round</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">批量处理四舍五入</span><span class="sh">"""</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">batch_result</span> <span class="o">=</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+        <span class="n">result</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">batch_result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 性能对比
+</span><span class="n">test_subset</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[:</span><span class="mi">30000</span><span class="p">]</span>
+
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">标准方法</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="p">[</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">向量化</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="nf">vectorized_round</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">批量处理</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="nf">batch_round</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span>
+<span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">不同方法性能对比:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">method</span><span class="p">(</span><span class="n">test_subset</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 验证结果一致性
+</span><span class="n">first_result</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">results</span><span class="p">.</span><span class="nf">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">time_taken</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="ow">in</span> <span class="n">results</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="nf">list</span><span class="p">(</span><span class="n">results</span><span class="p">.</span><span class="nf">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">max_diff</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">first_result</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">result</span><span class="p">[:</span><span class="mi">100</span><span class="p">]))</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">与标准方法最大差异: </span><span class="si">{</span><span class="n">max_diff</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">性能优化总结:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. 使用functools.partial预设常用参数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. 对于大量数据，考虑使用NumPy</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. 缓存重复计算的结果</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">4. 预计算常用的精度乘数</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">5. 根据数据特点选择合适的批量处理策略</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">6. 在性能关键的代码中，进行基准测试</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">7. 考虑使用专门的数值计算库</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数和模块">📚 相关函数和模块</h2>
+
+<h3 id="相关内置函数">相关内置函数</h3>
+<ul>
+  <li><a href="./abs.md"><code class="language-plaintext highlighter-rouge">abs()</code></a> - 绝对值函数</li>
+  <li><a href="./int.md"><code class="language-plaintext highlighter-rouge">int()</code></a> - 整数转换函数</li>
+  <li><a href="./float.md"><code class="language-plaintext highlighter-rouge">float()</code></a> - 浮点数转换函数</li>
+  <li><a href="./min.md"><code class="language-plaintext highlighter-rouge">min()</code></a> - 最小值函数</li>
+  <li><a href="./max.md"><code class="language-plaintext highlighter-rouge">max()</code></a> - 最大值函数</li>
+  <li><a href="./sum.md"><code class="language-plaintext highlighter-rouge">sum()</code></a> - 求和函数</li>
+</ul>
+
+<h3 id="相关标准库模块">相关标准库模块</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">decimal</code> - 十进制浮点运算</li>
+  <li><code class="language-plaintext highlighter-rouge">fractions</code> - 分数运算</li>
+  <li><code class="language-plaintext highlighter-rouge">math</code> - 数学函数</li>
+  <li><code class="language-plaintext highlighter-rouge">statistics</code> - 统计函数</li>
+  <li><code class="language-plaintext highlighter-rouge">random</code> - 随机数生成</li>
+</ul>
+
+<h3 id="相关第三方库">相关第三方库</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">numpy</code> - 数值计算</li>
+  <li><code class="language-plaintext highlighter-rouge">pandas</code> - 数据分析</li>
+  <li><code class="language-plaintext highlighter-rouge">scipy</code> - 科学计算</li>
+</ul>
+
+<h2 id="-扩展阅读">🔗 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#round">Python官方文档 - round()</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/floatingpoint.html">Python官方文档 - 浮点运算</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754标准</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Rounding#Round_half_to_even">银行家舍入法</a></li>
+  <li><a href="https://docs.python.org/3/library/decimal.html">Decimal模块文档</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">数学运算</code> <code class="language-plaintext highlighter-rouge">数字处理</code> <code class="language-plaintext highlighter-rouge">精度控制</code> <code class="language-plaintext highlighter-rouge">四舍五入</code> <code class="language-plaintext highlighter-rouge">浮点数</code> <code class="language-plaintext highlighter-rouge">银行家舍入</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

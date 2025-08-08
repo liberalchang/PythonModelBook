@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>抽象基类 - Python知识体系文档</title>
+  <meta name="description" content="系统化整理Python知识体系的开源项目">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>抽象基类 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="抽象基类" />
+<meta name="author" content="Python学习指南" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="系统化整理Python知识体系的开源项目" />
+<meta property="og:description" content="系统化整理Python知识体系的开源项目" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/basics/abstract-classes/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/basics/abstract-classes/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="抽象基类" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python学习指南"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"系统化整理Python知识体系的开源项目","headline":"抽象基类","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/basics/abstract-classes/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/basics/abstract-classes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="page-container">
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">抽象基类</h1>
+      
+      
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb">
+        <a href="/PythonModelBook/" class="breadcrumb-item">
+          <i class="fas fa-home"></i>
+          首页
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">抽象基类</span>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- 页面内容 -->
+  <main class="page-content">
+    <article class="page-article">
+      <h1 id="python抽象基类详解">Python抽象基类详解</h1>
+
+<p>抽象基类（Abstract Base Classes，简称ABC）是Python中一种特殊的类，它不能被直接实例化，主要用于定义接口和规范子类的结构。通过抽象基类，我们可以创建更清晰的继承层次和更强的类型检查。</p>
+
+<h2 id="-学习目标">📚 学习目标</h2>
+
+<p>通过本章学习，你将能够：</p>
+
+<ul>
+  <li>理解抽象基类的概念和作用</li>
+  <li>掌握abc模块的使用方法</li>
+  <li>学会定义和实现抽象基类</li>
+  <li>了解抽象方法、抽象属性的使用</li>
+  <li>掌握虚拟子类的注册机制</li>
+  <li>在实际项目中应用抽象基类设计模式</li>
+</ul>
+
+<h2 id="-抽象基类概述">🔍 抽象基类概述</h2>
+
+<h3 id="什么是抽象基类">什么是抽象基类</h3>
+
+<p>抽象基类是一种不能直接实例化的类，它的主要目的是：</p>
+
+<ul>
+  <li><strong>定义接口</strong>：规定子类必须实现的方法和属性</li>
+  <li><strong>强制实现</strong>：确保子类实现了所有必要的方法</li>
+  <li><strong>类型检查</strong>：提供isinstance()和类型注解的支持</li>
+  <li><strong>代码规范</strong>：作为代码结构的规范和文档</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">动物抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">make_sound</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">发出声音的抽象方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">移动的抽象方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="c1"># 可以包含具体方法
+</span>    <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> is sleeping</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 尝试实例化抽象基类会报错
+# animal = Animal()  # TypeError: Can't instantiate abstract class
+</span></code></pre></div></div>
+
+<h2 id="️-abc模块详解">🏗️ abc模块详解</h2>
+
+<h3 id="核心组件">核心组件</h3>
+
+<p>Python的<code class="language-plaintext highlighter-rouge">abc</code>模块提供了创建抽象基类的工具：</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">ABC</code>类</strong>：所有抽象基类的基类</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">abstractmethod</code></strong>：标记抽象方法的装饰器</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">abstractproperty</code></strong>：标记抽象属性（Python 3.11后废弃）</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">abstractclassmethod</code></strong>：标记抽象类方法</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">abstractstaticmethod</code></strong>：标记抽象静态方法</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">ABCMeta</code></strong>：抽象基类的元类</li>
+</ul>
+
+<h3 id="基本使用方法">基本使用方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span><span class="p">,</span> <span class="n">abstractclassmethod</span><span class="p">,</span> <span class="n">abstractstaticmethod</span>
+
+<span class="k">class</span> <span class="nc">Shape</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">图形抽象基类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算面积的抽象方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算周长的抽象方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractclassmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">shape_str</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">从字符串创建图形的抽象类方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractstaticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_dimensions</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">验证尺寸的抽象静态方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="c1"># 具体方法
+</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">: 面积=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="nf">area</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">, 周长=</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="nf">perimeter</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<h2 id="-实现抽象基类">🎯 实现抽象基类</h2>
+
+<h3 id="具体子类实现">具体子类实现</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">矩形类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="sh">"</span><span class="s">矩形</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">shape_str</span><span class="p">):</span>
+        <span class="c1"># 解析字符串 "rectangle:width,height"
+</span>        <span class="n">parts</span> <span class="o">=</span> <span class="n">shape_str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">rectangle</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不是矩形字符串</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nf">cls</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_dimensions</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">圆形类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="sh">"</span><span class="s">圆形</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+    
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">radius</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">shape_str</span><span class="p">):</span>
+        <span class="c1"># 解析字符串 "circle:radius"
+</span>        <span class="n">parts</span> <span class="o">=</span> <span class="n">shape_str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">circle</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不是圆形字符串</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nf">cls</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_dimensions</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">radius</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">rect</span> <span class="o">=</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="nc">Circle</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="nf">describe</span><span class="p">())</span>  <span class="c1"># 矩形: 面积=15.00, 周长=16.00
+</span><span class="nf">print</span><span class="p">(</span><span class="n">circle</span><span class="p">.</span><span class="nf">describe</span><span class="p">())</span>  <span class="c1"># 圆形: 面积=50.27, 周长=25.13
+</span>
+<span class="c1"># 从字符串创建
+</span><span class="n">rect2</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">.</span><span class="nf">from_string</span><span class="p">(</span><span class="sh">"</span><span class="s">rectangle:10,6</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">rect2</span><span class="p">.</span><span class="nf">describe</span><span class="p">())</span>  <span class="c1"># 矩形: 面积=60.00, 周长=32.00
+</span></code></pre></div></div>
+
+<h2 id="-抽象属性">🔧 抽象属性</h2>
+
+<h3 id="使用property和abstractmethod">使用@property和@abstractmethod</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">Vehicle</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">交通工具抽象基类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_brand</span> <span class="o">=</span> <span class="n">brand</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">max_speed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">最大速度抽象属性</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fuel_type</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">燃料类型抽象属性</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">brand</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_brand</span>
+    
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">brand</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 启动了</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">汽车类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">max_speed</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">brand</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_max_speed</span> <span class="o">=</span> <span class="n">max_speed</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_speed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_max_speed</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fuel_type</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">汽油</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">ElectricCar</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">电动汽车类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">max_speed</span><span class="p">,</span> <span class="n">battery_capacity</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">brand</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_max_speed</span> <span class="o">=</span> <span class="n">max_speed</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">battery_capacity</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_speed</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_max_speed</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fuel_type</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">电力</span><span class="sh">"</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 简单计算续航里程
+</span>        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">battery_capacity</span> <span class="o">*</span> <span class="mi">5</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">car</span> <span class="o">=</span> <span class="nc">Car</span><span class="p">(</span><span class="sh">"</span><span class="s">丰田</span><span class="sh">"</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">electric_car</span> <span class="o">=</span> <span class="nc">ElectricCar</span><span class="p">(</span><span class="sh">"</span><span class="s">特斯拉</span><span class="sh">"</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">car</span><span class="p">.</span><span class="n">brand</span><span class="si">}</span><span class="s">: 最大速度 </span><span class="si">{</span><span class="n">car</span><span class="p">.</span><span class="n">max_speed</span><span class="si">}</span><span class="s">km/h, 燃料类型: </span><span class="si">{</span><span class="n">car</span><span class="p">.</span><span class="n">fuel_type</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">electric_car</span><span class="p">.</span><span class="n">brand</span><span class="si">}</span><span class="s">: 最大速度 </span><span class="si">{</span><span class="n">electric_car</span><span class="p">.</span><span class="n">max_speed</span><span class="si">}</span><span class="s">km/h, 燃料类型: </span><span class="si">{</span><span class="n">electric_car</span><span class="p">.</span><span class="n">fuel_type</span><span class="si">}</span><span class="s">, 续航: </span><span class="si">{</span><span class="n">electric_car</span><span class="p">.</span><span class="nb">range</span><span class="si">}</span><span class="s">km</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-类型检查和虚拟子类">🔍 类型检查和虚拟子类</h2>
+
+<h3 id="isinstance检查">isinstance()检查</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">Drawable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">可绘制对象抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="n">Drawable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">绘制矩形</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Drawable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">绘制圆形</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">render_shape</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">渲染图形</span><span class="sh">"""</span>
+    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">Drawable</span><span class="p">):</span>
+        <span class="n">shape</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">对象不可绘制</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">rect</span> <span class="o">=</span> <span class="nc">Rectangle</span><span class="p">()</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="nc">Circle</span><span class="p">()</span>
+
+<span class="nf">render_shape</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>    <span class="c1"># 绘制矩形
+</span><span class="nf">render_shape</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>  <span class="c1"># 绘制圆形
+</span><span class="nf">render_shape</span><span class="p">(</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 对象不可绘制
+</span></code></pre></div></div>
+
+<h3 id="虚拟子类注册">虚拟子类注册</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">Serializable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">可序列化抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">JSONData</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">JSON数据类（不继承Serializable）</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+    
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="n">json</span>
+        <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># 注册为虚拟子类
+</span><span class="n">Serializable</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="n">JSONData</span><span class="p">)</span>
+
+<span class="c1"># 现在JSONData被认为是Serializable的子类
+</span><span class="n">json_data</span> <span class="o">=</span> <span class="nc">JSONData</span><span class="p">({</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">age</span><span class="sh">"</span><span class="p">:</span> <span class="mi">25</span><span class="p">})</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">))</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="n">json_data</span><span class="p">.</span><span class="nf">serialize</span><span class="p">())</span>  <span class="c1"># {"name": "张三", "age": 25}
+</span>
+<span class="c1"># 也可以使用装饰器形式
+</span><span class="nd">@Serializable.register</span>
+<span class="k">class</span> <span class="nc">XMLData</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+    
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># 简单的XML序列化
+</span>        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">&lt;data&gt;</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">&lt;/data&gt;</span><span class="sh">"</span>
+
+<span class="n">xml_data</span> <span class="o">=</span> <span class="nc">XMLData</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello World</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">xml_data</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">))</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="n">xml_data</span><span class="p">.</span><span class="nf">serialize</span><span class="p">())</span>  <span class="c1"># &lt;data&gt;Hello World&lt;/data&gt;
+</span></code></pre></div></div>
+
+<h2 id="-实际应用案例">🎨 实际应用案例</h2>
+
+<h3 id="案例1数据库连接器">案例1：数据库连接器</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnector</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">数据库连接器抽象基类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">连接数据库</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">断开连接</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sh">"""</span><span class="s">执行查询</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">执行命令</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">检查连接状态</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">connect</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">self</span>
+    
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">disconnect</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">MySQLConnector</span><span class="p">(</span><span class="n">DatabaseConnector</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">MySQL连接器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">连接到MySQL数据库: </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">host</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">database</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">mysql://</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">host</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">database</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">断开MySQL连接</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行MySQL查询: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># 模拟查询结果
+</span>        <span class="k">return</span> <span class="p">[{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">张三</span><span class="sh">"</span><span class="p">},</span> <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">李四</span><span class="sh">"</span><span class="p">}]</span>
+    
+    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行MySQL命令: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">PostgreSQLConnector</span><span class="p">(</span><span class="n">DatabaseConnector</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">PostgreSQL连接器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">连接到PostgreSQL数据库: </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">host</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">database</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">postgresql://</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">host</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">database</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">断开PostgreSQL连接</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行PostgreSQL查询: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># 模拟查询结果
+</span>        <span class="k">return</span> <span class="p">[{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">admin</span><span class="sh">"</span><span class="p">},</span> <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">}]</span>
+    
+    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">执行PostgreSQL命令: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+
+<span class="c1"># 数据库管理器
+</span><span class="k">class</span> <span class="nc">DatabaseManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">connector</span><span class="p">:</span> <span class="n">DatabaseConnector</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">connector</span> <span class="o">=</span> <span class="n">connector</span>
+    
+    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取用户列表</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">is_connected</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="nf">connect</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="nf">execute_query</span><span class="p">(</span><span class="sh">"</span><span class="s">SELECT * FROM users</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">创建用户</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">is_connected</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="nf">connect</span><span class="p">()</span>
+        
+        <span class="n">command</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">INSERT INTO users (username) VALUES (</span><span class="sh">'</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="sh">'</span><span class="s">)</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="nf">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">mysql_conn</span> <span class="o">=</span> <span class="nc">MySQLConnector</span><span class="p">(</span><span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span> <span class="mi">3306</span><span class="p">,</span> <span class="sh">"</span><span class="s">myapp</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">postgres_conn</span> <span class="o">=</span> <span class="nc">PostgreSQLConnector</span><span class="p">(</span><span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span> <span class="mi">5432</span><span class="p">,</span> <span class="sh">"</span><span class="s">myapp</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用上下文管理器
+</span><span class="k">with</span> <span class="n">mysql_conn</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="n">manager</span> <span class="o">=</span> <span class="nc">DatabaseManager</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">get_users</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">MySQL用户: </span><span class="si">{</span><span class="n">users</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">postgres_conn</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="n">manager</span> <span class="o">=</span> <span class="nc">DatabaseManager</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">get_users</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">PostgreSQL用户: </span><span class="si">{</span><span class="n">users</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="案例2消息处理系统">案例2：消息处理系统</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">class</span> <span class="nc">MessageProcessor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">消息处理器抽象基类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">processed_count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">处理消息</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">validate_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">验证消息格式</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">handle_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">处理消息的模板方法</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">] 开始处理消息: </span><span class="si">{</span><span class="n">message</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">unknown</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="nf">validate_message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">] 消息验证失败</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">process</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">processed_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">] 消息处理成功</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">] 消息处理失败</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">] 处理异常: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">get_stats</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取处理统计</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">processor</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">processed_count</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">processed_count</span>
+        <span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">EmailProcessor</span><span class="p">(</span><span class="n">MessageProcessor</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">邮件处理器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="sh">"</span><span class="s">邮件处理器</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">validate_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">to</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">subject</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">body</span><span class="sh">'</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nf">all</span><span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="n">message</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 模拟发送邮件
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">发送邮件到: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">to</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">主题: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">subject</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内容: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">body</span><span class="sh">'</span><span class="p">][</span><span class="si">:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s">...</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">class</span> <span class="nc">SMSProcessor</span><span class="p">(</span><span class="n">MessageProcessor</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">短信处理器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="sh">"</span><span class="s">短信处理器</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">validate_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="s">phone</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">message</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">text</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">message</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">text</span><span class="sh">'</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">160</span>
+    
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 模拟发送短信
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">发送短信到: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">phone</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内容: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">text</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">class</span> <span class="nc">PushNotificationProcessor</span><span class="p">(</span><span class="n">MessageProcessor</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">推送通知处理器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="sh">"</span><span class="s">推送通知处理器</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">validate_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="s">device_id</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">message</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">title</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">message</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">body</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">message</span>
+    
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 模拟发送推送通知
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">发送推送到设备: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">device_id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">标题: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">title</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">内容: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="sh">'</span><span class="s">body</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># 消息分发器
+</span><span class="k">class</span> <span class="nc">MessageDispatcher</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">processors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MessageProcessor</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">register_processor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">processor</span><span class="p">:</span> <span class="n">MessageProcessor</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">注册消息处理器</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">processors</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">processor</span>
+    
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">分发消息</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">message_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">processors</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">未找到类型为 </span><span class="si">{</span><span class="n">message_type</span><span class="si">}</span><span class="s"> 的处理器</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="n">processor</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">processors</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">processor</span><span class="p">.</span><span class="nf">handle_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_all_stats</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">获取所有处理器的统计信息</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">msg_type</span><span class="p">:</span> <span class="n">processor</span><span class="p">.</span><span class="nf">get_stats</span><span class="p">()</span> 
+                <span class="k">for</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">processor</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">processors</span><span class="p">.</span><span class="nf">items</span><span class="p">()}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">dispatcher</span> <span class="o">=</span> <span class="nc">MessageDispatcher</span><span class="p">()</span>
+
+<span class="c1"># 注册处理器
+</span><span class="n">dispatcher</span><span class="p">.</span><span class="nf">register_processor</span><span class="p">(</span><span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">,</span> <span class="nc">EmailProcessor</span><span class="p">())</span>
+<span class="n">dispatcher</span><span class="p">.</span><span class="nf">register_processor</span><span class="p">(</span><span class="sh">"</span><span class="s">sms</span><span class="sh">"</span><span class="p">,</span> <span class="nc">SMSProcessor</span><span class="p">())</span>
+<span class="n">dispatcher</span><span class="p">.</span><span class="nf">register_processor</span><span class="p">(</span><span class="sh">"</span><span class="s">push</span><span class="sh">"</span><span class="p">,</span> <span class="nc">PushNotificationProcessor</span><span class="p">())</span>
+
+<span class="c1"># 处理不同类型的消息
+</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">email_001</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">to</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user@example.com</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">subject</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">欢迎注册</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">body</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">感谢您注册我们的服务，请点击链接激活账户...</span><span class="sh">"</span>
+    <span class="p">}),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">sms</span><span class="sh">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">sms_001</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">phone</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">+86138****8888</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">您的验证码是: 123456</span><span class="sh">"</span>
+    <span class="p">}),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">push</span><span class="sh">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">push_001</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">device_id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">device_12345</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">新消息</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">body</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">您有一条新的私信</span><span class="sh">"</span>
+    <span class="p">})</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+    <span class="n">dispatcher</span><span class="p">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># 查看统计信息
+</span><span class="n">stats</span> <span class="o">=</span> <span class="n">dispatcher</span><span class="p">.</span><span class="nf">get_all_stats</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">msg_type</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">stat</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-最佳实践">📝 最佳实践</h2>
+
+<h3 id="1-设计原则">1. 设计原则</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="c1"># ✅ 好的设计：职责单一，接口清晰
+</span><span class="k">class</span> <span class="nc">Validator</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">验证器抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">验证数据</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_error_message</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取错误信息</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+
+<span class="c1"># ❌ 不好的设计：职责混乱
+</span><span class="k">class</span> <span class="nc">BadProcessor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h3 id="2-错误处理">2. 错误处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">DataProcessor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">数据处理器抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">处理数据</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">safe_process</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">安全处理数据</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">NotImplementedError</span><span class="p">:</span>
+            <span class="k">raise</span>  <span class="c1"># 重新抛出抽象方法未实现错误
+</span>        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">处理数据时发生错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h3 id="3-文档和类型提示">3. 文档和类型提示</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Repository</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="sh">"""</span><span class="s">通用仓储抽象基类
+    
+    Args:
+        T: 实体类型
+    </span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">保存实体
+        
+        Args:
+            entity: 要保存的实体
+            
+        Returns:
+            保存后的实体
+            
+        Raises:
+            RepositoryError: 保存失败时抛出
+        </span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">find_by_id</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span> <span class="o">|</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">根据ID查找实体
+        
+        Args:
+            entity_id: 实体ID
+            
+        Returns:
+            找到的实体，如果不存在则返回None
+        </span><span class="sh">"""</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h2 id="-扩展阅读">🔗 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/abc.html">Python官方文档 - abc模块</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-3119/">PEP 3119 - 抽象基类介绍</a></li>
+  <li><a href="https://refactoring.guru/design-patterns/template-method">设计模式 - 模板方法模式</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Interface_segregation_principle">SOLID原则 - 接口隔离原则</a></li>
+</ul>
+
+<hr />
+
+<p>抽象基类是Python面向对象编程中的重要工具，它帮助我们创建更清晰的接口定义和更强的类型约束。通过合理使用抽象基类，可以提高代码的可维护性、可扩展性和可读性。</p>
+
+    </article>
+    
+    <!-- 页面侧边栏 -->
+    
+    <aside class="page-sidebar">
+      <!-- 目录导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-list"></i>
+          页面目录
+        </h3>
+        <div id="page-toc" class="page-toc">
+          <!-- 目录将通过JavaScript自动生成 -->
+        </div>
+      </div>
+      
+      <!-- 相关链接 -->
+      
+      
+      <!-- 快速导航 -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <i class="fas fa-compass"></i>
+          快速导航
+        </h3>
+        <ul class="quick-nav">
+          <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+          <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+          <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+          <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+  </main>
+  
+  <!-- 页面底部操作 -->
+  <footer class="page-footer">
+    <div class="page-actions">
+      
+      
+      <a href="https://github.com/username/PythonModelBook/issues/new" class="btn btn-outline" target="_blank">
+        <i class="fas fa-bug"></i>
+        报告问题
+      </a>
+      
+      <button id="share-page" class="btn btn-outline">
+        <i class="fas fa-share"></i>
+        分享页面
+      </button>
+    </div>
+    
+    <!-- 页面信息 -->
+    <div class="page-meta">
+      
+      <span class="meta-item">
+        <i class="fas fa-calendar"></i>
+        发布时间：2024年01月01日
+      </span>
+      
+      
+      
+      
+      
+      <span class="meta-item">
+        <i class="fas fa-user"></i>
+        作者：Python学习指南
+      </span>
+      
+    </div>
+  </footer>
+</div>
+
+<!-- 页面特定的样式 -->
+<style>
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-item:hover {
+  color: var(--primary-color);
+}
+
+.breadcrumb-item.current {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.page-article {
+  min-width: 0;
+}
+
+.page-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+.sidebar-section {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.page-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.page-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+  
+  .page-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .page-sidebar {
+    position: static;
+    order: -1;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-actions {
+    justify-content: center;
+  }
+  
+  .page-meta {
+    justify-content: center;
+    text-align: center;
+  }
+}
+</style>
+
+<!-- 页面特定的JavaScript -->
+<script>
+// 自动生成页面目录
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('page-toc');
+  if (!tocContainer) return;
+  
+  const headings = document.querySelectorAll('.page-article h2, .page-article h3, .page-article h4');
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="no-toc">此页面没有标题</p>';
+    return;
+  }
+  
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  
+  headings.forEach((heading, index) => {
+    const id = heading.id || `heading-${index}`;
+    heading.id = id;
+    
+    const li = document.createElement('li');
+    li.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
+    
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = heading.textContent;
+    link.className = 'toc-link';
+    
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+  
+  tocContainer.appendChild(tocList);
+});
+
+// 分享功能
+document.getElementById('share-page')?.addEventListener('click', function() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    });
+  } else {
+    // 复制链接到剪贴板
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('页面链接已复制到剪贴板');
+    });
+  }
+});
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+  <script src="/PythonModelBook/assets/js/docs.js"></script>
+  
+</body>
+
+</html>

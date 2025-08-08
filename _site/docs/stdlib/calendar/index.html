@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calendar模块 - Python知识体系文档</title>
+  <meta name="description" content="Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>calendar模块 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="calendar模块" />
+<meta name="author" content="Python文档团队" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能" />
+<meta property="og:description" content="Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/calendar/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/stdlib/calendar/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="calendar模块" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档团队"},"dateModified":"2024-01-01T00:00:00+08:00","datePublished":"2024-01-01T00:00:00+08:00","description":"Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能","headline":"calendar模块","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/stdlib/calendar/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/stdlib/calendar/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">calendar模块</h1>
+        
+        
+        <p class="doc-description">Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: stdlib</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 初级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-01</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">日历</span>
+          
+          <span class="tag">月历</span>
+          
+          <span class="tag">年历</span>
+          
+          <span class="tag">标准库</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="calendar模块">calendar模块</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p>calendar模块提供了与日历相关的实用函数，可以生成文本和HTML格式的日历，进行日期计算，以及处理与星期、月份相关的各种操作。该模块遵循理想化的日历，当前的公历向前和向后无限延伸。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握日历的生成和显示</li>
+  <li>学会日期和星期的计算</li>
+  <li>了解闰年判断和月份天数计算</li>
+  <li>掌握日历的自定义和格式化</li>
+  <li>学会HTML日历的生成</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>基本的日期时间概念</li>
+  <li>了解公历系统</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本日历函数">基本日历函数</h3>
+
+<h4 id="日历显示">日历显示</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">calendar</span>
+
+<span class="c1"># 显示整年日历
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2024年日历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">calendar</span><span class="p">.</span><span class="nf">calendar</span><span class="p">(</span><span class="mi">2024</span><span class="p">))</span>
+
+<span class="c1"># 显示指定月份的日历
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2024年1月日历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">calendar</span><span class="p">.</span><span class="nf">month</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 设置日历格式
+</span><span class="n">calendar</span><span class="p">.</span><span class="nf">setfirstweekday</span><span class="p">(</span><span class="n">calendar</span><span class="p">.</span><span class="n">MONDAY</span><span class="p">)</span>  <span class="c1"># 设置周一为一周的第一天
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">以周一为首的2024年1月日历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">calendar</span><span class="p">.</span><span class="nf">month</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 恢复默认设置（周日为首）
+</span><span class="n">calendar</span><span class="p">.</span><span class="nf">setfirstweekday</span><span class="p">(</span><span class="n">calendar</span><span class="p">.</span><span class="n">SUNDAY</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="日历信息获取">日历信息获取</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 获取月份的日历矩阵
+</span><span class="n">month_calendar</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthcalendar</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2024年1月日历矩阵:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">month_calendar</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">week</span><span class="p">)</span>
+<span class="c1"># 输出: [[0, 1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13], ...]
+# 注意: 0表示不属于当月的日期
+</span>
+<span class="c1"># 获取月份范围
+</span><span class="n">first_weekday</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2024年1月第一天是星期</span><span class="si">{</span><span class="n">first_weekday</span><span class="si">}</span><span class="s">，共有</span><span class="si">{</span><span class="n">days_in_month</span><span class="si">}</span><span class="s">天</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># first_weekday: 0=周一, 1=周二, ..., 6=周日
+</span>
+<span class="c1"># 获取指定日期是星期几
+</span><span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">2024年1月1日是星期</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 0=周一, 1=周二, ..., 6=周日
+</span></code></pre></div></div>
+
+<h3 id="日期计算函数">日期计算函数</h3>
+
+<h4 id="闰年和天数计算">闰年和天数计算</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 判断是否为闰年
+</span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2022</span><span class="p">,</span> <span class="mi">2023</span><span class="p">,</span> <span class="mi">2024</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+    <span class="n">is_leap</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">isleap</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">年是</span><span class="si">{</span><span class="sh">'</span><span class="s">闰年</span><span class="sh">'</span> <span class="k">if</span> <span class="n">is_leap</span> <span class="k">else</span> <span class="sh">'</span><span class="s">平年</span><span class="sh">'</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 计算指定年份范围内的闰年数量
+</span><span class="n">leap_count</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">leapdays</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2025</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2020-2024年间有</span><span class="si">{</span><span class="n">leap_count</span><span class="si">}</span><span class="s">个闰年</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取月份天数
+</span><span class="n">months</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
+    <span class="n">days</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">年</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s">月有</span><span class="si">{</span><span class="n">days</span><span class="si">}</span><span class="s">天</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="星期相关计算">星期相关计算</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 星期名称
+</span><span class="n">weekday_names</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="sh">'</span><span class="s">周一</span><span class="sh">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="sh">'</span><span class="s">周二</span><span class="sh">'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="sh">'</span><span class="s">周三</span><span class="sh">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="sh">'</span><span class="s">周四</span><span class="sh">'</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="sh">'</span><span class="s">周五</span><span class="sh">'</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="sh">'</span><span class="s">周六</span><span class="sh">'</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="sh">'</span><span class="s">周日</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="c1"># 计算一年中每个月1号是星期几
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2024年各月1号的星期:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">month_name</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">month_name</span><span class="si">}</span><span class="s">1日: </span><span class="si">{</span><span class="n">weekday_names</span><span class="p">[</span><span class="n">weekday</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取星期和月份的名称
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">星期名称:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">calendar</span><span class="p">.</span><span class="n">day_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">calendar</span><span class="p">.</span><span class="n">day_abbr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">月份名称:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">calendar</span><span class="p">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">calendar</span><span class="p">.</span><span class="n">month_abbr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="自定义日历类">自定义日历类</h3>
+
+<h4 id="textcalendar类">TextCalendar类</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建自定义文本日历
+</span><span class="n">text_cal</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nc">TextCalendar</span><span class="p">(</span><span class="n">firstweekday</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 周一为首
+</span>
+<span class="c1"># 生成月份日历
+</span><span class="n">month_str</span> <span class="o">=</span> <span class="n">text_cal</span><span class="p">.</span><span class="nf">formatmonth</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">自定义月历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">month_str</span><span class="p">)</span>
+
+<span class="c1"># 生成年度日历
+</span><span class="n">year_str</span> <span class="o">=</span> <span class="n">text_cal</span><span class="p">.</span><span class="nf">formatyear</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">自定义年历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">year_str</span><span class="p">)</span>
+
+<span class="c1"># 迭代月份中的日期
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">2024年1月的所有日期:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">text_cal</span><span class="p">.</span><span class="nf">monthdays2calendar</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">day</span><span class="p">,</span> <span class="n">weekday</span> <span class="ow">in</span> <span class="n">week</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">day</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s">日(</span><span class="si">{</span><span class="n">weekday_names</span><span class="p">[</span><span class="n">weekday</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">"</span><span class="s">  </span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>  <span class="c1"># 换行
+</span></code></pre></div></div>
+
+<h4 id="htmlcalendar类">HTMLCalendar类</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 创建HTML日历
+</span><span class="n">html_cal</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nc">HTMLCalendar</span><span class="p">(</span><span class="n">firstweekday</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 生成HTML月历
+</span><span class="n">html_month</span> <span class="o">=</span> <span class="n">html_cal</span><span class="p">.</span><span class="nf">formatmonth</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">HTML月历:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">html_month</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="sh">"</span><span class="s">...</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 只显示前200个字符
+</span>
+<span class="c1"># 生成HTML年历
+</span><span class="n">html_year</span> <span class="o">=</span> <span class="n">html_cal</span><span class="p">.</span><span class="nf">formatyear</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">HTML年历长度: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">html_year</span><span class="p">)</span><span class="si">}</span><span class="s"> 字符</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 保存HTML日历到文件
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">calendar_2024.html</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="sh">"""</span><span class="s">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;2024年日历&lt;/title&gt;
+    &lt;meta charset=</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="s">&gt;
+    &lt;style&gt;
+        table </span><span class="si">{</span> <span class="n">border</span><span class="o">-</span><span class="n">collapse</span><span class="si">:</span> <span class="n">collapse</span><span class="p">;</span> <span class="n">margin</span><span class="si">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span> <span class="si">}</span><span class="s">
+        th, td </span><span class="si">{</span> <span class="n">border</span><span class="si">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ccc; padding</span><span class="si">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span> <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="si">:</span> <span class="n">center</span><span class="p">;</span> <span class="si">}</span><span class="s">
+        th </span><span class="si">{</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="si">:</span> <span class="c1">#f0f0f0; </span><span class="si">}</span><span class="s">
+        .today </span><span class="si">{</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="si">:</span> <span class="c1">#ffeb3b; </span><span class="si">}</span><span class="s">
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;2024年日历&lt;/h1&gt;
+    </span><span class="si">{</span><span class="n">html_year</span><span class="si">}</span><span class="s">
+&lt;/body&gt;
+&lt;/html&gt;
+    </span><span class="sh">"""</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">HTML日历已保存到 calendar_2024.html</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="日历格式化选项">日历格式化选项</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>firstweekday</td>
+      <td>一周的第一天 (0=周一, 6=周日)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>w</td>
+      <td>日期列宽</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>每周行数</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>月份间距</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td>每行月份数</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-实际应用">💡 实际应用</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_month_info</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">获取指定月份的详细信息</span><span class="sh">"""</span>
+    <span class="c1"># 基本信息
+</span>    <span class="n">first_weekday</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+    <span class="n">month_name</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+    
+    <span class="c1"># 计算工作日和周末天数
+</span>    <span class="n">workdays</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">weekends</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weekday</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># 周一到周五
+</span>            <span class="n">workdays</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># 周六周日
+</span>            <span class="n">weekends</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">年份</span><span class="sh">'</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">月份</span><span class="sh">'</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s">月 (</span><span class="si">{</span><span class="n">month_name</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">总天数</span><span class="sh">'</span><span class="p">:</span> <span class="n">days_in_month</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">工作日</span><span class="sh">'</span><span class="p">:</span> <span class="n">workdays</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">周末</span><span class="sh">'</span><span class="p">:</span> <span class="n">weekends</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">第一天星期</span><span class="sh">'</span><span class="p">:</span> <span class="n">weekday_names</span><span class="p">[</span><span class="n">first_weekday</span><span class="p">],</span>
+        <span class="sh">'</span><span class="s">是否闰年</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">是</span><span class="sh">'</span> <span class="k">if</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">isleap</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="k">else</span> <span class="sh">'</span><span class="s">否</span><span class="sh">'</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">info</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">month_info</span> <span class="o">=</span> <span class="nf">get_month_info</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">月份信息:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">month_info</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="高级用法">高级用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CustomCalendar</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">自定义日历类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">locale</span><span class="o">=</span><span class="sh">'</span><span class="s">zh_CN</span><span class="sh">'</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">locale</span> <span class="o">=</span> <span class="n">locale</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">holidays</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># 存储节假日
+</span>        
+        <span class="c1"># 中文星期和月份名称
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">cn_weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">一</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">二</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">三</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">四</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">五</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">六</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">日</span><span class="sh">'</span><span class="p">]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">cn_months</span> <span class="o">=</span> <span class="p">[</span><span class="sh">''</span><span class="p">,</span> <span class="sh">'</span><span class="s">一月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">二月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">三月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">四月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">五月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">六月</span><span class="sh">'</span><span class="p">,</span>
+                         <span class="sh">'</span><span class="s">七月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">八月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">九月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">十月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">十一月</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">十二月</span><span class="sh">'</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">add_holiday</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加节假日</span><span class="sh">"""</span>
+        <span class="n">date_key</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="sh">"</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">[</span><span class="n">date_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+    
+    <span class="k">def</span> <span class="nf">is_holiday</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">检查是否为节假日</span><span class="sh">"""</span>
+        <span class="n">date_key</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="n">date_key</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">holidays</span>
+    
+    <span class="k">def</span> <span class="nf">get_holiday_name</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取节假日名称</span><span class="sh">"""</span>
+        <span class="n">date_key</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">date_key</span><span class="p">,</span> <span class="sh">''</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">format_chinese_month</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">生成中文格式的月历</span><span class="sh">"""</span>
+        <span class="n">month_cal</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthcalendar</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+        <span class="n">month_name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">cn_months</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">年</span><span class="si">{</span><span class="n">month_name</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">  </span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s">  </span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">cn_weekdays</span><span class="p">)</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">month_cal</span><span class="p">:</span>
+            <span class="n">week_str</span> <span class="o">=</span> <span class="sh">""</span>
+            <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">week</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">day</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">week_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">  </span><span class="sh">"</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_holiday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+                        <span class="n">week_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">*</span><span class="sh">"</span>  <span class="c1"># 节假日标记*
+</span>                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">week_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s"> </span><span class="sh">"</span>
+                <span class="n">week_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">week_str</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="c1"># 添加节假日说明
+</span>        <span class="n">holidays_in_month</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_holiday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+                <span class="n">holiday_name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_holiday_name</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+                <span class="n">holidays_in_month</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s">日: </span><span class="si">{</span><span class="n">holiday_name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">holidays_in_month</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="sh">"</span><span class="se">\n</span><span class="s">节假日:</span><span class="se">\n</span><span class="sh">"</span>
+            <span class="k">for</span> <span class="n">holiday</span> <span class="ow">in</span> <span class="n">holidays_in_month</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">holiday</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="nf">get_year_statistics</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取年度统计信息</span><span class="sh">"""</span>
+        <span class="n">total_days</span> <span class="o">=</span> <span class="mi">366</span> <span class="k">if</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">isleap</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="k">else</span> <span class="mi">365</span>
+        <span class="n">total_workdays</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_weekends</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_holidays</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+            <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_holiday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+                    <span class="n">total_holidays</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">weekday</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># 周一到周五
+</span>                    <span class="n">total_workdays</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># 周六周日
+</span>                    <span class="n">total_weekends</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">总天数</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_days</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">工作日</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_workdays</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">周末</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_weekends</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">节假日</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_holidays</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">是否闰年</span><span class="sh">'</span><span class="p">:</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">isleap</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">cal</span> <span class="o">=</span> <span class="nc">CustomCalendar</span><span class="p">()</span>
+
+<span class="c1"># 添加一些节假日
+</span><span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">元旦</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="sh">'</span><span class="s">春节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="sh">'</span><span class="s">春节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="sh">'</span><span class="s">春节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">劳动节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">国庆节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">国庆节</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">cal</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">'</span><span class="s">国庆节</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># 显示中文月历
+</span><span class="nf">print</span><span class="p">(</span><span class="n">cal</span><span class="p">.</span><span class="nf">format_chinese_month</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">cal</span><span class="p">.</span><span class="nf">format_chinese_month</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># 显示年度统计
+</span><span class="n">stats</span> <span class="o">=</span> <span class="n">cal</span><span class="p">.</span><span class="nf">get_year_statistics</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2024年统计信息:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="实际案例">实际案例</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">calendar</span>
+<span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">class</span> <span class="nc">WorkdayCalculator</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">工作日计算器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">holidays</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>  <span class="c1"># 存储节假日
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">workdays</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># 默认周一到周五为工作日
+</span>    
+    <span class="k">def</span> <span class="nf">add_holiday</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">添加节假日</span><span class="sh">"""</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">remove_holiday</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">移除节假日</span><span class="sh">"""</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">.</span><span class="nf">discard</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">set_workdays</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">workdays</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">设置工作日（0=周一, 6=周日）</span><span class="sh">"""</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">workdays</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">workdays</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">is_workday</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">判断是否为工作日</span><span class="sh">"""</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        
+        <span class="c1"># 如果是节假日，不是工作日
+</span>        <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="c1"># 检查是否在工作日范围内
+</span>        <span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">weekday</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">workdays</span>
+    
+    <span class="k">def</span> <span class="nf">count_workdays</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">start_month</span><span class="p">,</span> <span class="n">start_day</span><span class="p">,</span> 
+                      <span class="n">end_year</span><span class="p">,</span> <span class="n">end_month</span><span class="p">,</span> <span class="n">end_day</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算两个日期之间的工作日数量</span><span class="sh">"""</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">start_month</span><span class="p">,</span> <span class="n">start_day</span><span class="p">)</span>
+        <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">end_year</span><span class="p">,</span> <span class="n">end_month</span><span class="p">,</span> <span class="n">end_day</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">start_date</span> <span class="o">&gt;</span> <span class="n">end_date</span><span class="p">:</span>
+            <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">start_date</span>
+        
+        <span class="n">workday_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">current_date</span> <span class="o">=</span> <span class="n">start_date</span>
+        
+        <span class="k">while</span> <span class="n">current_date</span> <span class="o">&lt;=</span> <span class="n">end_date</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_workday</span><span class="p">(</span><span class="n">current_date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="n">current_date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="n">current_date</span><span class="p">.</span><span class="n">day</span><span class="p">):</span>
+                <span class="n">workday_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">current_date</span> <span class="o">+=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">workday_count</span>
+    
+    <span class="k">def</span> <span class="nf">get_month_workdays</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取指定月份的工作日列表</span><span class="sh">"""</span>
+        <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">workdays</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_workday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+                <span class="n">weekday</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">weekday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+                <span class="n">workdays</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                    <span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">:</span> <span class="n">day</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">weekday</span><span class="sh">'</span><span class="p">:</span> <span class="n">weekday</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">weekday_name</span><span class="sh">'</span><span class="p">:</span> <span class="n">weekday_names</span><span class="p">[</span><span class="n">weekday</span><span class="p">]</span>
+                <span class="p">})</span>
+        
+        <span class="k">return</span> <span class="n">workdays</span>
+    
+    <span class="k">def</span> <span class="nf">generate_work_calendar</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">生成工作日历</span><span class="sh">"""</span>
+        <span class="n">month_cal</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="nf">monthcalendar</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+        <span class="n">month_name</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">年</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s">月工作日历</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">周一 周二 周三 周四 周五 周六 周日</span><span class="se">\n</span><span class="sh">"</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">28</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">month_cal</span><span class="p">:</span>
+            <span class="n">week_str</span> <span class="o">=</span> <span class="sh">""</span>
+            <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">week</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">day</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">week_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">   </span><span class="sh">"</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_workday</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+                        <span class="n">week_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">W</span><span class="sh">"</span>  <span class="c1"># W表示工作日
+</span>                    <span class="k">elif</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">holidays</span><span class="p">:</span>
+                        <span class="n">week_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s">H</span><span class="sh">"</span>  <span class="c1"># H表示节假日
+</span>                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">week_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="mi">2</span><span class="n">d</span><span class="si">}</span><span class="s"> </span><span class="sh">"</span>  <span class="c1"># 普通周末
+</span>                <span class="n">week_str</span> <span class="o">+=</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">week_str</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="c1"># 统计信息
+</span>        <span class="n">workdays</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_month_workdays</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">本月工作日: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">workdays</span><span class="p">)</span><span class="si">}</span><span class="s">天</span><span class="se">\n</span><span class="sh">"</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># 使用示例
+</span><span class="n">calc</span> <span class="o">=</span> <span class="nc">WorkdayCalculator</span><span class="p">()</span>
+
+<span class="c1"># 添加节假日
+</span><span class="n">calc</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 元旦
+</span><span class="n">calc</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 劳动节
+</span><span class="n">calc</span><span class="p">.</span><span class="nf">add_holiday</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 国庆节
+</span>
+<span class="c1"># 生成工作日历
+</span><span class="nf">print</span><span class="p">(</span><span class="n">calc</span><span class="p">.</span><span class="nf">generate_work_calendar</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">calc</span><span class="p">.</span><span class="nf">generate_work_calendar</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># 计算工作日
+</span><span class="n">workdays</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">count_workdays</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">2024年1月工作日总数: </span><span class="si">{</span><span class="n">workdays</span><span class="si">}</span><span class="s">天</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 获取月份工作日详情
+</span><span class="n">january_workdays</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="nf">get_month_workdays</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">2024年1月工作日详情 (共</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">january_workdays</span><span class="p">)</span><span class="si">}</span><span class="s">天):</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">workday</span> <span class="ow">in</span> <span class="n">january_workdays</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># 只显示前5个
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">workday</span><span class="p">[</span><span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">workday</span><span class="p">[</span><span class="sh">'</span><span class="s">weekday_name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">january_workdays</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  ... 还有</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">january_workdays</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="si">}</span><span class="s">个工作日</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<ul>
+  <li><strong>日历系统</strong>: calendar模块使用理想化的公历，不考虑历史上的日历改革</li>
+  <li><strong>星期编号</strong>: Python中周一为0，周日为6，与某些系统不同</li>
+  <li><strong>时区</strong>: calendar模块不处理时区，只处理日期</li>
+  <li><strong>本地化</strong>: 月份和星期名称默认为英文，需要自定义中文显示</li>
+  <li><strong>性能</strong>: 对于大量日期计算，考虑使用datetime模块</li>
+  <li><strong>闰秒</strong>: calendar模块不考虑闰秒</li>
+</ul>
+
+<h2 id="-相关内容">🔗 相关内容</h2>
+
+<ul>
+  <li><a href="datetime/">datetime模块</a> - 更强大的日期时间处理</li>
+  <li><a href="time/">time模块</a> - 时间相关的基础功能</li>
+  <li><a href="../builtins/">内置函数</a> - 了解相关的内置函数</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/calendar.html">Python calendar模块官方文档</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Gregorian_calendar">公历系统详解</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601日期标准</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">日历</code> <code class="language-plaintext highlighter-rouge">月历</code> <code class="language-plaintext highlighter-rouge">年历</code> <code class="language-plaintext highlighter-rouge">工作日</code> <code class="language-plaintext highlighter-rouge">节假日</code> <code class="language-plaintext highlighter-rouge">标准库</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-01<br />
+<strong>作者</strong>: Python文档团队<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档团队</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

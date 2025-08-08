@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>issubclass() - 子类检查函数 - Python知识体系文档</title>
+  <meta name="description" content="检查一个类是否是另一个类的子类">
+
+  <!-- SEO标签 -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>issubclass() - 子类检查函数 | Python知识体系文档</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="issubclass() - 子类检查函数" />
+<meta name="author" content="Python文档工程师" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="检查一个类是否是另一个类的子类" />
+<meta property="og:description" content="检查一个类是否是另一个类的子类" />
+<link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/issubclass/" />
+<meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/issubclass/" />
+<meta property="og:site_name" content="Python知识体系文档" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="issubclass() - 子类检查函数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python文档工程师"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"检查一个类是否是另一个类的子类","headline":"issubclass() - 子类检查函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/issubclass/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/issubclass/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/main.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/light-theme.css">
+  <link rel="stylesheet" href="/PythonModelBook/assets/css/dark-theme.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 搜索功能 -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/PythonModelBook/" class="brand-link">
+          <i class="fab fa-python"></i>
+          <span>Python知识体系文档</span>
+        </a>
+      </div>
+
+      <!-- 搜索框 -->
+      <div class="nav-search">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="搜索文档..." class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="nav-menu">
+        <a href="/PythonModelBook/" class="nav-link">首页</a>
+        <a href="/PythonModelBook/docs/" class="nav-link">文档</a>
+        <a href="/PythonModelBook/about/" class="nav-link">关于</a>
+        <button id="theme-toggle" class="theme-toggle" title="切换主题">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="main-content">
+    <div class="doc-container">
+  <!-- 文档内容区域 -->
+  <main class="doc-content">
+    <article class="doc-article">
+      <!-- 文档头部信息 -->
+      <header class="doc-header">
+        <h1 class="doc-title">issubclass() - 子类检查函数</h1>
+        
+        
+        <p class="doc-description">检查一个类是否是另一个类的子类</p>
+        
+        
+        <div class="doc-meta">
+          
+          <span class="doc-category">分类: builtins</span>
+          
+          
+          
+          <span class="doc-difficulty">难度: 中级</span>
+          
+          
+          
+          <span class="doc-updated">更新: 2024-01-15</span>
+          
+        </div>
+        
+        
+        <div class="doc-tags">
+          
+          <span class="tag">类型检查</span>
+          
+          <span class="tag">继承</span>
+          
+          <span class="tag">面向对象</span>
+          
+          <span class="tag">反射</span>
+          
+        </div>
+        
+      </header>
+      
+      <!-- 文档正文 -->
+      <div class="doc-body">
+        <h1 id="issubclass---子类检查函数">issubclass() - 子类检查函数</h1>
+
+<h2 id="-概述">📝 概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">issubclass()</code> 是Python中的内置函数，用于检查一个类是否是另一个类的子类。这个函数在面向对象编程中非常有用，特别是在需要进行类型检查、多态处理、框架设计等场景中。它可以帮助开发者在运行时确定类之间的继承关系。</p>
+
+<h2 id="-学习目标">🎯 学习目标</h2>
+
+<ul>
+  <li>掌握issubclass()函数的基本用法和语法</li>
+  <li>理解类继承关系的检查机制</li>
+  <li>学会在实际项目中使用issubclass()进行类型验证</li>
+  <li>了解issubclass()与isinstance()的区别和联系</li>
+  <li>掌握多重继承和抽象基类的子类检查</li>
+</ul>
+
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>面向对象编程概念</li>
+  <li>类的定义和继承</li>
+  <li>多重继承的基本概念</li>
+  <li>抽象基类（ABC）的基本了解</li>
+</ul>
+
+<h2 id="-详细内容">🔍 详细内容</h2>
+
+<h3 id="基本概念">基本概念</h3>
+
+<p><code class="language-plaintext highlighter-rouge">issubclass()</code> 函数用于检查第一个参数（类）是否是第二个参数（类或类的元组）的子类。如果是子类关系，返回 <code class="language-plaintext highlighter-rouge">True</code>，否则返回 <code class="language-plaintext highlighter-rouge">False</code>。需要注意的是，一个类被认为是它自身的子类。</p>
+
+<h3 id="语法格式">语法格式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">issubclass</span><span class="p">(</span><span class="n">class</span><span class="p">,</span> <span class="n">classinfo</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="参数说明">参数说明</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>必需</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>class</td>
+      <td>类对象</td>
+      <td>是</td>
+      <td>无</td>
+      <td>要检查的类</td>
+    </tr>
+    <tr>
+      <td>classinfo</td>
+      <td>类对象或类的元组</td>
+      <td>是</td>
+      <td>无</td>
+      <td>基类或基类的元组</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="返回值">返回值</h3>
+
+<ul>
+  <li><strong>类型</strong>: bool</li>
+  <li><strong>内容</strong>: 如果class是classinfo的子类则返回True，否则返回False</li>
+</ul>
+
+<h2 id="-代码示例">💡 代码示例</h2>
+
+<h3 id="基本用法">基本用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 定义基本的类层次结构
+</span><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">动物基类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Mammal</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">哺乳动物类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">fur_color</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">fur_color</span> <span class="o">=</span> <span class="n">fur_color</span>
+    
+    <span class="k">def</span> <span class="nf">give_birth</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">生育幼崽</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Mammal</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">狗类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">breed</span><span class="p">,</span> <span class="n">fur_color</span><span class="o">=</span><span class="sh">"</span><span class="s">brown</span><span class="sh">"</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fur_color</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">breed</span> <span class="o">=</span> <span class="n">breed</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">汪汪!</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">捡球</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Mammal</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">猫类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">fur_color</span><span class="o">=</span><span class="sh">"</span><span class="s">gray</span><span class="sh">"</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fur_color</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">喵喵!</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">climb</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">爬树</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Bird</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">鸟类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">wing_span</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wing_span</span> <span class="o">=</span> <span class="n">wing_span</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">啾啾!</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">飞翔</span><span class="sh">"</span>
+
+<span class="c1"># 基本的子类检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">基本子类检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog是Mammal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Cat是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Bird是Mammal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Bird</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Mammal是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Mammal</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 自身检查（一个类是它自身的子类）
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">自身检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog是Dog的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Dog</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Animal是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 错误的检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">错误的继承关系:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Animal是Dog的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Dog</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Cat是Dog的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="n">Dog</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog是Bird的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Bird</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span></code></pre></div></div>
+
+<h3 id="多重继承检查">多重继承检查</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 多重继承示例
+</span><span class="k">class</span> <span class="nc">Flyable</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">可飞行的混入类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">在空中飞行</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Swimmable</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">可游泳的混入类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">swim</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">在水中游泳</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Walkable</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">可行走的混入类</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">在地面行走</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Duck</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">,</span> <span class="n">Walkable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">鸭子类 - 多重继承</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">嘎嘎!</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Penguin</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">,</span> <span class="n">Walkable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">企鹅类 - 不能飞但能游泳和走路</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">嘎嘎嘎!</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Bat</span><span class="p">(</span><span class="n">Mammal</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">蝙蝠类 - 哺乳动物但能飞</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="sh">"</span><span class="s">black</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">吱吱!</span><span class="sh">"</span>
+
+<span class="c1"># 多重继承的子类检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">多重继承检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Duck是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Duck</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Duck是Flyable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Duck</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Duck是Swimmable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Duck</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Duck是Walkable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Duck</span><span class="p">,</span> <span class="n">Walkable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">Penguin是Flyable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Penguin</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Penguin是Swimmable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Penguin</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">Bat是Mammal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Bat</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Bat是Flyable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Bat</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Bat是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Bat</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True（通过Mammal继承）
+</span>
+<span class="c1"># 检查多个基类（使用元组）
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">多基类检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Duck是(Animal, Flyable)之一的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Duck</span><span class="p">,</span> <span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">))</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Penguin是(Flyable, Swimmable)之一的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Penguin</span><span class="p">,</span> <span class="p">(</span><span class="n">Flyable</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">))</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Cat是(Flyable, Swimmable)之一的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="p">(</span><span class="n">Flyable</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">))</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span></code></pre></div></div>
+
+<h3 id="抽象基类检查">抽象基类检查</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="n">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sized</span><span class="p">,</span> <span class="n">Container</span>
+
+<span class="c1"># 定义抽象基类
+</span><span class="k">class</span> <span class="nc">Shape</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">形状抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算面积</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">计算周长</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">描述形状</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">这是一个面积为</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="nf">area</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">，周长为</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="nf">perimeter</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">的形状</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Drawable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">可绘制抽象基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">绘制方法</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">,</span> <span class="n">Drawable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">矩形类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">width</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">绘制一个</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">width</span><span class="si">}</span><span class="s">x</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">height</span><span class="si">}</span><span class="s">的矩形</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">,</span> <span class="n">Drawable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">圆形类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+    
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">radius</span>
+    
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">绘制一个半径为</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">radius</span><span class="si">}</span><span class="s">的圆形</span><span class="sh">"</span>
+
+<span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="n">Drawable</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">点类 - 只实现Drawable，不是Shape</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">绘制点(</span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+
+<span class="c1"># 抽象基类的子类检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">抽象基类检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Rectangle是Shape的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">,</span> <span class="n">Shape</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Rectangle是Drawable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">,</span> <span class="n">Drawable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Circle是Shape的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Circle</span><span class="p">,</span> <span class="n">Shape</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Point是Shape的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="n">Shape</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Point是Drawable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="n">Drawable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 内置抽象基类检查
+</span><span class="k">class</span> <span class="nc">MyList</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">自定义列表类</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nf">iter</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_items</span>
+    
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_items</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># 注册为抽象基类的子类
+</span><span class="n">Iterable</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="n">MyList</span><span class="p">)</span>
+<span class="n">Sized</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="n">MyList</span><span class="p">)</span>
+<span class="n">Container</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="n">MyList</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">内置抽象基类检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">MyList是Iterable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">MyList</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">MyList是Sized的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">MyList</span><span class="p">,</span> <span class="n">Sized</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">MyList是Container的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">MyList</span><span class="p">,</span> <span class="n">Container</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list是Iterable的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">dict是Container的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">Container</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span></code></pre></div></div>
+
+<h3 id="内置类型检查">内置类型检查</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 内置类型的继承关系检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">内置类型继承关系:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 数值类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">int是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">float是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bool是int的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bool是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 序列类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">序列类型:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">tuple是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">str是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bytes是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 映射类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">映射类型:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">dict是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 集合类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">集合类型:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">set是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">frozenset是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 异常类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">异常类型:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ValueError是Exception的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">,</span> <span class="nb">Exception</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">TypeError是Exception的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">TypeError</span><span class="p">,</span> <span class="nb">Exception</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Exception是BaseException的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">Exception</span><span class="p">,</span> <span class="nb">BaseException</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">KeyboardInterrupt是BaseException的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">KeyboardInterrupt</span><span class="p">,</span> <span class="nb">BaseException</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">KeyboardInterrupt是Exception的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">KeyboardInterrupt</span><span class="p">,</span> <span class="nb">Exception</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span>
+<span class="c1"># 函数和类型
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">函数和类型:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">type是object的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">function是object的子类: </span><span class="si">{</span><span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="k">lambda</span><span class="si">:</span> <span class="bp">None</span><span class="p">),</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># 检查多个类型
+</span><span class="n">numeric_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
+<span class="n">sequence_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">多类型检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bool是数值类型之一: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">numeric_types</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bytearray是序列类型之一: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">,</span> <span class="n">sequence_types</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># False
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list是序列类型之一: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">sequence_types</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span></code></pre></div></div>
+
+<h2 id="-高级应用">🚀 高级应用</h2>
+
+<h3 id="类型验证装饰器">类型验证装饰器</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="c1"># 类型验证装饰器
+</span><span class="k">def</span> <span class="nf">validate_subclass</span><span class="p">(</span><span class="o">*</span><span class="n">expected_classes</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">验证参数是否为指定类的子类的装饰器</span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># 检查位置参数
+</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">expected_class</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expected_classes</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>  <span class="c1"># 如果参数是类
+</span>                    <span class="k">if</span> <span class="ow">not</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">expected_class</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">参数 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s"> 必须是 </span><span class="si">{</span><span class="n">expected_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 的子类，</span><span class="sh">"</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">但得到了 </span><span class="si">{</span><span class="n">arg</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># 如果参数是实例
+</span>                    <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">expected_class</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">参数 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s"> 必须是 </span><span class="si">{</span><span class="n">expected_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 的实例，</span><span class="sh">"</span>
+                            <span class="sa">f</span><span class="sh">"</span><span class="s">但得到了 </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">arg</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+                        <span class="p">)</span>
+            
+            <span class="k">return</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="c1"># 使用类型验证装饰器
+</span><span class="nd">@validate_subclass</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_pet_comparison</span><span class="p">(</span><span class="n">animal_class</span><span class="p">,</span> <span class="n">mammal_class</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">创建宠物比较</span><span class="sh">"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">比较 </span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 和 </span><span class="si">{</span><span class="n">mammal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">mammal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 是 </span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">mammal_class</span><span class="p">,</span> <span class="n">animal_class</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="sh">"</span><span class="s">比较完成: </span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> vs </span><span class="si">{</span><span class="n">mammal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 测试类型验证
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">类型验证装饰器测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">create_pet_comparison</span><span class="p">(</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Dog</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">成功: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">create_pet_comparison</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span>  <span class="c1"># 这会失败
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">预期错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 工厂模式中的类型检查
+</span><span class="k">class</span> <span class="nc">AnimalFactory</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">动物工厂类</span><span class="sh">"""</span>
+    
+    <span class="n">_registered_animals</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">register_animal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">animal_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Animal</span><span class="p">]):</span>
+        <span class="sh">"""</span><span class="s">注册动物类</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">animal_class</span><span class="p">,</span> <span class="n">Animal</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 必须是 Animal 的子类</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">cls</span><span class="p">.</span><span class="n">_registered_animals</span><span class="p">[</span><span class="n">name</span><span class="p">.</span><span class="nf">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">animal_class</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">已注册动物类: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_animal</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">animal_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">创建动物实例</span><span class="sh">"""</span>
+        <span class="n">animal_type</span> <span class="o">=</span> <span class="n">animal_type</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">animal_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">_registered_animals</span><span class="p">:</span>
+            <span class="n">available</span> <span class="o">=</span> <span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">_registered_animals</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">未知的动物类型: </span><span class="si">{</span><span class="n">animal_type</span><span class="si">}</span><span class="s">。可用类型: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">animal_class</span> <span class="o">=</span> <span class="n">cls</span><span class="p">.</span><span class="n">_registered_animals</span><span class="p">[</span><span class="n">animal_type</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nf">animal_class</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">list_animals</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">列出所有注册的动物类</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">已注册的动物类:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">animal_class</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">_registered_animals</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">animal_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    是Animal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">animal_class</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    是Mammal的子类: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">animal_class</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用工厂模式
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">工厂模式示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 注册动物类
+</span><span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">register_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">dog</span><span class="sh">"</span><span class="p">,</span> <span class="n">Dog</span><span class="p">)</span>
+<span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">register_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">cat</span><span class="sh">"</span><span class="p">,</span> <span class="n">Cat</span><span class="p">)</span>
+<span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">register_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">bird</span><span class="sh">"</span><span class="p">,</span> <span class="n">Bird</span><span class="p">)</span>
+
+<span class="c1"># 尝试注册非Animal子类
+</span><span class="k">class</span> <span class="nc">Robot</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">register_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">robot</span><span class="sh">"</span><span class="p">,</span> <span class="n">Robot</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">注册失败: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建动物实例
+</span><span class="n">dog</span> <span class="o">=</span> <span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">create_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">dog</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Buddy</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Golden Retriever</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">create_animal</span><span class="p">(</span><span class="sh">"</span><span class="s">cat</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Whiskers</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">创建的动物:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">狗: </span><span class="si">{</span><span class="n">dog</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, 品种: </span><span class="si">{</span><span class="n">dog</span><span class="p">.</span><span class="n">breed</span><span class="si">}</span><span class="s">, 叫声: </span><span class="si">{</span><span class="n">dog</span><span class="p">.</span><span class="nf">speak</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">猫: </span><span class="si">{</span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, 叫声: </span><span class="si">{</span><span class="n">cat</span><span class="p">.</span><span class="nf">speak</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 列出所有动物
+</span><span class="n">AnimalFactory</span><span class="p">.</span><span class="nf">list_animals</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="插件系统">插件系统</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">importlib</span>
+<span class="kn">import</span> <span class="n">inspect</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="c1"># 插件基类
+</span><span class="k">class</span> <span class="nc">Plugin</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">插件基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">插件名称</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">插件版本</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">执行插件功能</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">初始化插件</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">清理插件资源</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">DataProcessor</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">数据处理插件基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">处理数据</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Validator</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">验证器插件基类</span><span class="sh">"""</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">验证数据</span><span class="sh">"""</span>
+        <span class="k">pass</span>
+
+<span class="c1"># 具体插件实现
+</span><span class="k">class</span> <span class="nc">TextProcessor</span><span class="p">(</span><span class="n">DataProcessor</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">文本处理插件</span><span class="sh">"""</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">Text Processor</span><span class="sh">"</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">1.0.0</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">process_data</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">处理文本数据</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">upper</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">NumberValidator</span><span class="p">(</span><span class="n">Validator</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">数字验证插件</span><span class="sh">"""</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">Number Validator</span><span class="sh">"</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">1.0.0</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">validate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">验证是否为数字</span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nf">float</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="nf">except </span><span class="p">(</span><span class="nb">ValueError</span><span class="p">,</span> <span class="nb">TypeError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">EmailValidator</span><span class="p">(</span><span class="n">Validator</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">邮箱验证插件</span><span class="sh">"""</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">Email Validator</span><span class="sh">"</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">1.0.0</span><span class="sh">"</span>
+    
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">validate</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">简单的邮箱验证</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">@</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">data</span>
+
+<span class="c1"># 插件管理器
+</span><span class="k">class</span> <span class="nc">PluginManager</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">插件管理器</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_plugin_types</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Plugin</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Plugin</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">register_plugin</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">plugin</span><span class="p">:</span> <span class="n">Plugin</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">注册插件</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">issubclass</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">plugin</span><span class="p">),</span> <span class="n">Plugin</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">plugin</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 必须是 Plugin 的子类</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">plugin_name</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">警告: 插件 </span><span class="sh">'</span><span class="si">{</span><span class="n">plugin_name</span><span class="si">}</span><span class="sh">'</span><span class="s"> 已存在，将被覆盖</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">[</span><span class="n">plugin_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">plugin</span>
+        
+        <span class="c1"># 按类型分组
+</span>        <span class="n">plugin_type</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">base_class</span> <span class="ow">in</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">getmro</span><span class="p">(</span><span class="n">plugin_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">base_class</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">)</span> <span class="ow">and</span> <span class="n">base_class</span> <span class="o">!=</span> <span class="n">Plugin</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">base_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugin_types</span><span class="p">:</span>
+                    <span class="n">self</span><span class="p">.</span><span class="n">_plugin_types</span><span class="p">[</span><span class="n">base_class</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="n">plugin</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugin_types</span><span class="p">[</span><span class="n">base_class</span><span class="p">]:</span>
+                    <span class="n">self</span><span class="p">.</span><span class="n">_plugin_types</span><span class="p">[</span><span class="n">base_class</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+        
+        <span class="n">plugin</span><span class="p">.</span><span class="nf">initialize</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">已注册插件: </span><span class="si">{</span><span class="n">plugin_name</span><span class="si">}</span><span class="s"> v</span><span class="si">{</span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_plugin</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Plugin</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取插件</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">未找到插件: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_plugins_by_type</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">plugin_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Plugin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Plugin</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">按类型获取插件</span><span class="sh">"""</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nf">issubclass</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">plugin</span><span class="p">),</span> <span class="n">plugin_type</span><span class="p">):</span>
+                <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="nf">list_plugins</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">列出所有插件</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">已注册的插件:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">plugin_type</span> <span class="o">=</span> <span class="nf">type</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+            <span class="n">base_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">cls</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">inspect</span><span class="p">.</span><span class="nf">getmro</span><span class="p">(</span><span class="n">plugin_type</span><span class="p">)</span> 
+                          <span class="k">if</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cls</span> <span class="o">!=</span> <span class="n">Plugin</span> <span class="ow">and</span> <span class="n">cls</span> <span class="o">!=</span> <span class="n">plugin_type</span><span class="p">]</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> v</span><span class="si">{</span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    类型: </span><span class="si">{</span><span class="n">plugin_type</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    继承: </span><span class="si">{</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">base_classes</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    是DataProcessor: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">plugin_type</span><span class="p">,</span> <span class="n">DataProcessor</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">    是Validator: </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">plugin_type</span><span class="p">,</span> <span class="n">Validator</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">execute_plugin</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">执行插件</span><span class="sh">"""</span>
+        <span class="n">plugin</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_plugin</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">plugin</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">cleanup_all</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">清理所有插件</span><span class="sh">"""</span>
+        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_plugins</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+            <span class="n">plugin</span><span class="p">.</span><span class="nf">cleanup</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">已清理所有插件</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 使用插件系统
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">插件系统示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 创建插件管理器
+</span><span class="n">manager</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="p">()</span>
+
+<span class="c1"># 注册插件
+</span><span class="n">manager</span><span class="p">.</span><span class="nf">register_plugin</span><span class="p">(</span><span class="nc">TextProcessor</span><span class="p">())</span>
+<span class="n">manager</span><span class="p">.</span><span class="nf">register_plugin</span><span class="p">(</span><span class="nc">NumberValidator</span><span class="p">())</span>
+<span class="n">manager</span><span class="p">.</span><span class="nf">register_plugin</span><span class="p">(</span><span class="nc">EmailValidator</span><span class="p">())</span>
+
+<span class="c1"># 列出插件
+</span><span class="n">manager</span><span class="p">.</span><span class="nf">list_plugins</span><span class="p">()</span>
+
+<span class="c1"># 按类型获取插件
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">按类型获取插件:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">data_processors</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">get_plugins_by_type</span><span class="p">(</span><span class="n">DataProcessor</span><span class="p">)</span>
+<span class="n">validators</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">get_plugins_by_type</span><span class="p">(</span><span class="n">Validator</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据处理器: </span><span class="si">{</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">data_processors</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">验证器: </span><span class="si">{</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">validators</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 执行插件
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">执行插件:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">text_result</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">execute_plugin</span><span class="p">(</span><span class="sh">"</span><span class="s">Text Processor</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">  hello world  </span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">文本处理结果: </span><span class="sh">'</span><span class="si">{</span><span class="n">text_result</span><span class="si">}</span><span class="sh">'"</span><span class="p">)</span>
+
+<span class="n">number_valid</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">execute_plugin</span><span class="p">(</span><span class="sh">"</span><span class="s">Number Validator</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">123.45</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数字验证结果: </span><span class="si">{</span><span class="n">number_valid</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">email_valid</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">execute_plugin</span><span class="p">(</span><span class="sh">"</span><span class="s">Email Validator</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">user@example.com</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">邮箱验证结果: </span><span class="si">{</span><span class="n">email_valid</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 清理
+</span><span class="n">manager</span><span class="p">.</span><span class="nf">cleanup_all</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="动态类型检查">动态类型检查</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">get_origin</span><span class="p">,</span> <span class="n">get_args</span>
+
+<span class="c1"># 动态类型检查工具
+</span><span class="k">class</span> <span class="nc">TypeChecker</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">动态类型检查工具</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_subclass_of_any</span><span class="p">(</span><span class="n">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span> <span class="o">*</span><span class="n">base_classes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">检查类是否是任意基类的子类</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">any</span><span class="p">(</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span> <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">base_classes</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_subclasses</span><span class="p">(</span><span class="n">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取类的所有子类</span><span class="sh">"""</span>
+        <span class="n">subclasses</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="nf">__subclasses__</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="nf">list</span><span class="p">(</span><span class="n">subclasses</span><span class="p">):</span>
+            <span class="n">subclasses</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_all_subclasses</span><span class="p">(</span><span class="n">subclass</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">subclasses</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">find_common_base</span><span class="p">(</span><span class="n">cls1</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span> <span class="n">cls2</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">找到两个类的最近公共基类</span><span class="sh">"""</span>
+        <span class="n">mro1</span> <span class="o">=</span> <span class="n">cls1</span><span class="p">.</span><span class="n">__mro__</span>
+        <span class="n">mro2</span> <span class="o">=</span> <span class="n">cls2</span><span class="p">.</span><span class="n">__mro__</span>
+        
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">mro1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">mro2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">base</span>
+        
+        <span class="k">return</span> <span class="nb">object</span>  <span class="c1"># 如果没有找到，返回object
+</span>    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="n">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">获取继承深度</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        
+        <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">ancestor</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">__mro__</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ancestor</span> <span class="o">==</span> <span class="n">base</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">depth</span>
+            <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">analyze_class_hierarchy</span><span class="p">(</span><span class="n">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">分析类的继承层次</span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">类 </span><span class="si">{</span><span class="n">cls</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 的继承分析:</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  MRO: </span><span class="si">{</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">__mro__</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 直接基类
+</span>        <span class="n">direct_bases</span> <span class="o">=</span> <span class="n">cls</span><span class="p">.</span><span class="n">__bases__</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  直接基类: </span><span class="si">{</span><span class="p">[</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">direct_bases</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 所有子类
+</span>        <span class="n">subclasses</span> <span class="o">=</span> <span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_all_subclasses</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">subclasses</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  所有子类: </span><span class="si">{</span><span class="p">[</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">subclasses</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  无子类</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 与常见类型的关系
+</span>        <span class="n">common_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">object</span><span class="p">,</span> <span class="nb">Exception</span><span class="p">,</span> <span class="nb">BaseException</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">common_type</span> <span class="ow">in</span> <span class="n">common_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">common_type</span><span class="p">):</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">common_type</span><span class="p">)</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  是</span><span class="si">{</span><span class="n">common_type</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s">的子类 (深度: </span><span class="si">{</span><span class="n">depth</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 测试动态类型检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">动态类型检查示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 分析不同类的继承层次
+</span><span class="n">classes_to_analyze</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="nb">ValueError</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">classes_to_analyze</span><span class="p">:</span>
+    <span class="n">TypeChecker</span><span class="p">.</span><span class="nf">analyze_class_hierarchy</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+
+<span class="c1"># 查找公共基类
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">公共基类分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog和Cat的公共基类: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">find_common_base</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Cat</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog和Bird的公共基类: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">find_common_base</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Bird</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">list和dict的公共基类: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">find_common_base</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">ValueError和TypeError的公共基类: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">find_common_base</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">,</span> <span class="nb">TypeError</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 继承深度分析
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">继承深度分析:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog到Animal的深度: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Dog到object的深度: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bool到int的深度: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bool到object的深度: </span><span class="si">{</span><span class="n">TypeChecker</span><span class="p">.</span><span class="nf">get_inheritance_depth</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 批量类型检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">批量类型检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">test_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Cat</span><span class="p">,</span> <span class="n">Bird</span><span class="p">,</span> <span class="n">Duck</span><span class="p">,</span> <span class="n">Penguin</span><span class="p">,</span> <span class="n">Bat</span><span class="p">]</span>
+<span class="n">base_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Mammal</span><span class="p">,</span> <span class="n">Flyable</span><span class="p">,</span> <span class="n">Swimmable</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">类型兼容性矩阵:</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="sh">'</span><span class="s">类名</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">10</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="sh">'</span><span class="s">Animal</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">8</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="sh">'</span><span class="s">Mammal</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">8</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="sh">'</span><span class="s">Flyable</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">9</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="sh">'</span><span class="s">Swimmable</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">10</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">-</span><span class="sh">"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">test_class</span> <span class="ow">in</span> <span class="n">test_classes</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">test_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">10</span><span class="si">}</span><span class="sh">"</span>
+    <span class="k">for</span> <span class="n">base_class</span> <span class="ow">in</span> <span class="n">base_classes</span><span class="p">:</span>
+        <span class="n">is_sub</span> <span class="o">=</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">test_class</span><span class="p">,</span> <span class="n">base_class</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">+=</span> <span class="sa">f</span><span class="sh">"</span><span class="s"> </span><span class="si">{</span><span class="sh">'</span><span class="s">✓</span><span class="sh">'</span> <span class="k">if</span> <span class="n">is_sub</span> <span class="k">else</span> <span class="sh">'</span><span class="s">✗</span><span class="sh">'</span><span class="si">:</span><span class="o">&lt;</span><span class="mi">7</span><span class="si">}</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="️-常见陷阱与最佳实践">⚠️ 常见陷阱与最佳实践</h2>
+
+<h3 id="错误处理">错误处理</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 常见错误和解决方案
+</span>
+<span class="c1"># 错误1：传入非类型对象
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">错误处理示例:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 错误：传入实例而不是类
+</span>    <span class="n">dog_instance</span> <span class="o">=</span> <span class="nc">Dog</span><span class="p">(</span><span class="sh">"</span><span class="s">Buddy</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Golden Retriever</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">dog_instance</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span>  <span class="c1"># TypeError
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误1: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">正确做法: issubclass(type(dog_instance), Animal) = </span><span class="si">{</span><span class="nf">issubclass</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">dog_instance</span><span class="p">),</span> <span class="n">Animal</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 错误2：传入None或其他非类型值
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">issubclass</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span>  <span class="c1"># TypeError
+</span><span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">错误2: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 安全的子类检查函数
+</span><span class="k">def</span> <span class="nf">safe_issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">classinfo</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">安全的子类检查</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 如果obj是实例，获取其类型
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="sh">'</span><span class="s">__class__</span><span class="sh">'</span><span class="p">):</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">__class__</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">return</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">classinfo</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c1"># 测试安全检查
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">安全检查测试:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">test_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="nc">Dog</span><span class="p">(</span><span class="sh">"</span><span class="s">Test</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Test</span><span class="sh">"</span><span class="p">),</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">test_objects</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">safe_issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span>
+    <span class="n">obj_repr</span> <span class="o">=</span> <span class="nf">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span><span class="p">.</span><span class="n">__name__</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">safe_issubclass(</span><span class="si">{</span><span class="n">obj_repr</span><span class="si">}</span><span class="s">, Animal) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="性能优化">性能优化</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="c1"># 性能优化示例
+</span><span class="k">class</span> <span class="nc">PerformanceTest</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">性能测试类</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">basic_subclass_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">基本子类检查性能测试</span><span class="sh">"""</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cached_subclass_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">缓存的子类检查</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cached_subclass_check_test</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">缓存子类检查性能测试</span><span class="sh">"""</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">cached_subclass_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">mro_based_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">基于MRO的检查</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">__mro__</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">mro_check_test</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">MRO检查性能测试</span><span class="sh">"""</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">mro_based_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 性能比较
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">性能比较:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="c1"># 测试不同深度的继承
+</span><span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">,</span> <span class="sh">"</span><span class="s">Dog -&gt; Animal (深度2)</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="sh">"</span><span class="s">Dog -&gt; object (深度4)</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="sh">"</span><span class="s">bool -&gt; int (深度1)</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="sh">"</span><span class="s">bool -&gt; object (深度3)</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 基本检查
+</span>    <span class="n">basic_time</span> <span class="o">=</span> <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">basic_subclass_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  基本issubclass: </span><span class="si">{</span><span class="n">basic_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 缓存检查
+</span>    <span class="n">cached_time</span> <span class="o">=</span> <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">cached_subclass_check_test</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  缓存检查: </span><span class="si">{</span><span class="n">cached_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># MRO检查
+</span>    <span class="n">mro_time</span> <span class="o">=</span> <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">mro_check_test</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  MRO检查: </span><span class="si">{</span><span class="n">mro_time</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">秒</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># 验证结果一致性
+</span>    <span class="n">basic_result</span> <span class="o">=</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+    <span class="n">cached_result</span> <span class="o">=</span> <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">cached_subclass_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+    <span class="n">mro_result</span> <span class="o">=</span> <span class="n">PerformanceTest</span><span class="p">.</span><span class="nf">mro_based_check</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  结果一致: </span><span class="si">{</span><span class="n">basic_result</span> <span class="o">==</span> <span class="n">cached_result</span> <span class="o">==</span> <span class="n">mro_result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">basic_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  缓存加速: </span><span class="si">{</span><span class="n">basic_time</span> <span class="o">/</span> <span class="n">cached_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">x</span><span class="sh">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  MRO加速: </span><span class="si">{</span><span class="n">basic_time</span> <span class="o">/</span> <span class="n">mro_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">x</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 清理缓存
+</span><span class="n">PerformanceTest</span><span class="p">.</span><span class="n">cached_subclass_check</span><span class="p">.</span><span class="nf">cache_clear</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="最佳实践">最佳实践</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 最佳实践示例
+</span>
+<span class="c1"># 1. 类型检查的最佳实践
+</span><span class="k">class</span> <span class="nc">BestPractices</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">最佳实践示例</span><span class="sh">"""</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_plugin_class</span><span class="p">(</span><span class="n">plugin_class</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">验证插件类的最佳实践</span><span class="sh">"""</span>
+        <span class="c1"># 检查是否为类
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">plugin_class</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">期望类对象，得到 </span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">plugin_class</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 检查继承关系
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">plugin_class</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">plugin_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 必须继承自 Plugin</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># 检查抽象方法实现
+</span>        <span class="n">abstract_methods</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">plugin_class</span><span class="p">,</span> <span class="sh">'</span><span class="s">__abstractmethods__</span><span class="sh">'</span><span class="p">,</span> <span class="nf">set</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">abstract_methods</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">plugin_class</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s"> 必须实现抽象方法: </span><span class="si">{</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">abstract_methods</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">smart_type_check</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">智能类型检查</span><span class="sh">"""</span>
+        <span class="c1"># 如果obj是类，检查子类关系
+</span>        <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">expected_types</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nf">any</span><span class="p">(</span><span class="nf">issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">expected_types</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span>
+        
+        <span class="c1"># 如果obj是实例，检查实例类型
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">expected_types</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nf">any</span><span class="p">(</span><span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">expected_types</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_type_hierarchy_info</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">获取类型层次信息</span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="nc">TypeError</span><span class="p">(</span><span class="sh">"</span><span class="s">参数必须是类对象</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">:</span> <span class="n">cls</span><span class="p">.</span><span class="n">__name__</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">module</span><span class="sh">'</span><span class="p">:</span> <span class="n">cls</span><span class="p">.</span><span class="n">__module__</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">mro</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">__mro__</span><span class="p">],</span>
+            <span class="sh">'</span><span class="s">direct_bases</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">__bases__</span><span class="p">],</span>
+            <span class="sh">'</span><span class="s">subclasses</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="n">c</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="nf">__subclasses__</span><span class="p">()],</span>
+            <span class="sh">'</span><span class="s">is_abstract</span><span class="sh">'</span><span class="p">:</span> <span class="nf">bool</span><span class="p">(</span><span class="nf">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="sh">'</span><span class="s">__abstractmethods__</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)),</span>
+            <span class="sh">'</span><span class="s">abstract_methods</span><span class="sh">'</span><span class="p">:</span> <span class="nf">list</span><span class="p">(</span><span class="nf">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="sh">'</span><span class="s">__abstractmethods__</span><span class="sh">'</span><span class="p">,</span> <span class="p">[])),</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># 检查与常见类型的关系
+</span>        <span class="n">common_checks</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">is_exception</span><span class="sh">'</span><span class="p">:</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">BaseException</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">is_builtin</span><span class="sh">'</span><span class="p">:</span> <span class="n">cls</span><span class="p">.</span><span class="n">__module__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">builtins</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">is_callable</span><span class="sh">'</span><span class="p">:</span> <span class="nf">issubclass</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">or</span> <span class="nf">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="sh">'</span><span class="s">__call__</span><span class="sh">'</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">info</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">common_checks</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">info</span>
+
+<span class="c1"># 测试最佳实践
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">最佳实践测试:</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 智能类型检查
+</span><span class="n">test_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="nc">Dog</span><span class="p">(</span><span class="sh">"</span><span class="s">Test</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Test</span><span class="sh">"</span><span class="p">),</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">,</span> <span class="n">Animal</span><span class="p">]</span>
+<span class="n">expected_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">Animal</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">智能类型检查:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">test_objects</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">BestPractices</span><span class="p">.</span><span class="nf">smart_type_check</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span>
+    <span class="n">obj_repr</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">__name__</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">type</span><span class="p">(</span><span class="n">obj</span><span class="p">).</span><span class="n">__name__</span><span class="si">}</span><span class="s">实例</span><span class="sh">"</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">obj_repr</span><span class="si">}</span><span class="s"> 匹配 </span><span class="si">{</span><span class="p">[</span><span class="n">t</span><span class="p">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">expected_types</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 类型层次信息
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">类型层次信息:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="nb">ValueError</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">]:</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">BestPractices</span><span class="p">.</span><span class="nf">get_type_hierarchy_info</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="si">{</span><span class="n">cls</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">info</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># 插件验证
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">插件验证:</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">valid_plugins</span> <span class="o">=</span> <span class="p">[</span><span class="n">TextProcessor</span><span class="p">,</span> <span class="n">NumberValidator</span><span class="p">]</span>
+<span class="n">invalid_plugins</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">plugin_cls</span> <span class="ow">in</span> <span class="n">valid_plugins</span> <span class="o">+</span> <span class="n">invalid_plugins</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">BestPractices</span><span class="p">.</span><span class="nf">validate_plugin_class</span><span class="p">(</span><span class="n">plugin_cls</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">plugin_cls</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s">: ✓ 有效插件</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  </span><span class="si">{</span><span class="n">plugin_cls</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="s">: ✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-相关函数">🔗 相关函数</h2>
+
+<h3 id="内置函数">内置函数</h3>
+<ul>
+  <li><strong>isinstance()</strong> - 检查对象是否是指定类的实例</li>
+  <li><strong>type()</strong> - 获取对象的类型</li>
+  <li><strong>hasattr()</strong> - 检查对象是否有指定属性</li>
+  <li><strong>getattr()</strong> - 获取对象的属性值</li>
+  <li><strong>super()</strong> - 访问父类方法</li>
+</ul>
+
+<h3 id="标准库模块">标准库模块</h3>
+<ul>
+  <li><strong>abc</strong> - 抽象基类
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ABC</code> - 抽象基类</li>
+      <li><code class="language-plaintext highlighter-rouge">abstractmethod</code> - 抽象方法装饰器</li>
+    </ul>
+  </li>
+  <li><strong>inspect</strong> - 对象检查
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">getmro()</code> - 获取方法解析顺序</li>
+      <li><code class="language-plaintext highlighter-rouge">getmembers()</code> - 获取对象成员</li>
+    </ul>
+  </li>
+  <li><strong>typing</strong> - 类型提示
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Union</code>, <code class="language-plaintext highlighter-rouge">Optional</code> - 联合类型</li>
+      <li><code class="language-plaintext highlighter-rouge">Type</code> - 类型注解</li>
+    </ul>
+  </li>
+  <li><strong>collections.abc</strong> - 抽象基类集合
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Iterable</code>, <code class="language-plaintext highlighter-rouge">Container</code>, <code class="language-plaintext highlighter-rouge">Sized</code> - 常用抽象基类</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="第三方库">第三方库</h3>
+<ul>
+  <li><strong>attrs</strong> - 类定义简化</li>
+  <li><strong>dataclasses</strong> - 数据类</li>
+  <li><strong>pydantic</strong> - 数据验证</li>
+  <li><strong>mypy</strong> - 静态类型检查</li>
+</ul>
+
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/functions.html#issubclass">Python官方文档 - issubclass()</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/classes.html">Python官方文档 - 类和实例</a></li>
+  <li><a href="https://docs.python.org/3/library/abc.html">Python官方文档 - 抽象基类</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">方法解析顺序(MRO)详解</a></li>
+  <li><a href="https://docs.python.org/3/library/typing.html">Python类型系统指南</a></li>
+</ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">类型检查</code> <code class="language-plaintext highlighter-rouge">继承</code> <code class="language-plaintext highlighter-rouge">面向对象</code> <code class="language-plaintext highlighter-rouge">反射</code> <code class="language-plaintext highlighter-rouge">多态</code> <code class="language-plaintext highlighter-rouge">抽象基类</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python文档工程师<br />
+<strong>版本</strong>: 1.0</p>
+
+      </div>
+      
+      <!-- 文档底部 -->
+      <footer class="doc-footer">
+        
+        <p class="doc-author">作者: Python文档工程师</p>
+        
+        
+        
+        <p class="doc-version">版本: 1.0</p>
+        
+      </footer>
+    </article>
+  </main>
+  
+  <!-- 右侧导航栏 -->
+  <aside class="doc-sidebar">
+    <div class="toc-container">
+      <h3>目录</h3>
+      <div id="toc"></div>
+    </div>
+    
+    <!-- 相关链接 -->
+    <div class="related-links">
+      <h3>相关内容</h3>
+      <ul>
+        
+        
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- utterances评论系统 -->
+<div class="comments-section">
+  <h3 class="comments-title">
+    <i class="fas fa-comments"></i>
+    讨论与反馈
+  </h3>
+  <div class="comments-description">
+    <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
+  </div>
+  <div id="utterances-container">
+    <script src="https://utteranc.es/client.js"
+            repo="username/PythonModelBook"
+            issue-term="pathname"
+            theme="preferred-color-scheme"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  
+
+</div>
+
+<style>
+.doc-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-header {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doc-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.doc-description {
+  font-size: 1.2rem;
+  color: #586069;
+  margin-bottom: 1rem;
+}
+
+.doc-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #586069;
+}
+
+.doc-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.doc-body {
+  line-height: 1.6;
+}
+
+.doc-body h2 {
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.doc-body pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.doc-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.doc-body th,
+.doc-body td {
+  border: 1px solid #d0d7de;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.doc-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.doc-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.toc-container,
+.related-links {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.toc-container h3,
+.related-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.related-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-links li {
+  margin-bottom: 0.5rem;
+}
+
+.related-links a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.related-links a:hover {
+  text-decoration: underline;
+}
+
+.comments-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f6f8fa);
+  border-radius: var(--radius-xl, 12px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #24292e);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.comments-title i {
+  color: var(--primary-color, #0366d6);
+}
+
+.comments-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border-left: 4px solid var(--primary-color, #0366d6);
+}
+
+.comments-description p {
+  margin: 0;
+  color: var(--text-secondary, #586069);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#utterances-container,
+#giscus-container {
+  margin-top: 1rem;
+}
+
+/* 评论系统切换按钮 */
+.comment-system-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.comment-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #586069);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.comment-toggle-btn.active {
+  background: var(--primary-color, #0366d6);
+  color: var(--text-inverse, #ffffff);
+}
+
+.comment-toggle-btn:hover:not(.active) {
+  background: var(--bg-secondary, #f6f8fa);
+  color: var(--text-primary, #24292e);
+}
+
+@media (max-width: 768px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  
+  .doc-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+</style>
+
+<script>
+// 生成目录
+document.addEventListener('DOMContentLoaded', function() {
+  const toc = document.getElementById('toc');
+  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
+  
+  if (headings.length > 0) {
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      const id = 'heading-' + index;
+      heading.id = id;
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    
+    toc.appendChild(tocList);
+  }
+});
+
+// 评论系统切换功能
+function switchCommentSystem(system) {
+  const utterancesContainer = document.getElementById('utterances-container');
+  const giscusContainer = document.getElementById('giscus-container');
+  
+  if (system === 'giscus') {
+    utterancesContainer.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  } else {
+    utterancesContainer.style.display = 'block';
+    giscusContainer.style.display = 'none';
+  }
+}
+</script>
+  </main>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="返回顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Python知识体系文档</h3>
+          <p>系统化整理Python知识体系的开源项目</p>
+        </div>
+        <div class="footer-section">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="/PythonModelBook/docs/basics/">基础语法</a></li>
+            <li><a href="/PythonModelBook/docs/builtins/">内置函数</a></li>
+            <li><a href="/PythonModelBook/docs/stdlib/">标准库</a></li>
+            <li><a href="/PythonModelBook/docs/thirdparty/">第三方库</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="https://github.com/liberalchang/PythonModelBook" target="_blank">GitHub</a></li>
+            <li><a href="/PythonModelBook/CONTRIBUTING/">贡献指南</a></li>
+            <li><a href="/PythonModelBook/about/">关于项目</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Python知识体系文档. 采用 <a href="/PythonModelBook/LICENSE">MIT License</a> 开源协议.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/PythonModelBook/assets/js/main.js"></script>
+  <script src="/PythonModelBook/assets/js/search.js"></script>
+  
+</body>
+
+</html>

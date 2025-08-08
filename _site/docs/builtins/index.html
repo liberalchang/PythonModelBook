@@ -5,24 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>内置函数 - Python知识体系文档</title>
-  <meta name="description" content="系统化整理Python知识体系的开源项目">
+  <meta name="description" content="Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例">
 
   <!-- SEO标签 -->
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>内置函数 | Python知识体系文档</title>
 <meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="内置函数" />
+<meta name="author" content="Python模型书" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="系统化整理Python知识体系的开源项目" />
-<meta property="og:description" content="系统化整理Python知识体系的开源项目" />
+<meta name="description" content="Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例" />
+<meta property="og:description" content="Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例" />
 <link rel="canonical" href="http://0.0.0.0:4000/PythonModelBook/docs/builtins/" />
 <meta property="og:url" content="http://0.0.0.0:4000/PythonModelBook/docs/builtins/" />
 <meta property="og:site_name" content="Python知识体系文档" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-15T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="内置函数" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"系统化整理Python知识体系的开源项目","headline":"内置函数","url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Python模型书"},"dateModified":"2024-01-15T00:00:00+08:00","datePublished":"2024-01-15T00:00:00+08:00","description":"Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例","headline":"内置函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/"},"url":"http://0.0.0.0:4000/PythonModelBook/docs/builtins/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -88,6 +90,8 @@
     <div class="page-header-content">
       <h1 class="page-title">内置函数</h1>
       
+        <p class="page-description">Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例</p>
+      
       
       <!-- 面包屑导航 -->
       <nav class="breadcrumb">
@@ -104,120 +108,212 @@
   <!-- 页面内容 -->
   <main class="page-content">
     <article class="page-article">
-      <h1 id="python内置函数">Python内置函数</h1>
+      <h1 id="python内置函数完整参考">Python内置函数完整参考</h1>
 
-<p>Python内置函数是解释器自带的函数，无需导入任何模块即可直接使用。掌握这些函数是提高Python编程效率的关键。</p>
+<h2 id="-概述">📝 概述</h2>
 
-<h2 id="-本模块内容">📋 本模块内容</h2>
-
-<h3 id="字符串函数"><a href="string-functions/">字符串函数</a></h3>
-<ul>
-  <li>字符串创建和格式化</li>
-  <li>字符串查找和替换</li>
-  <li>字符串分割和连接</li>
-  <li>字符串编码和解码</li>
-  <li>字符串验证函数</li>
-</ul>
-
-<h3 id="数学函数"><a href="math-functions/">数学函数</a></h3>
-<ul>
-  <li>基本数学运算函数</li>
-  <li>数值类型转换</li>
-  <li>数值比较和判断</li>
-  <li>随机数生成</li>
-  <li>数学常量和特殊值</li>
-</ul>
-
-<h3 id="集合函数"><a href="collection-functions/">集合函数</a></h3>
-<ul>
-  <li>列表操作函数</li>
-  <li>字典操作函数</li>
-  <li>集合操作函数</li>
-  <li>元组操作函数</li>
-  <li>迭代器和生成器函数</li>
-</ul>
-
-<h3 id="输入输出函数"><a href="io-functions/">输入输出函数</a></h3>
-<ul>
-  <li>标准输入输出</li>
-  <li>文件读写函数</li>
-  <li>格式化输出</li>
-  <li>二进制数据处理</li>
-  <li>编码转换函数</li>
-</ul>
+<p>Python内置函数是解释器自带的函数，无需导入任何模块即可直接使用。这些函数涵盖了数据类型转换、数学运算、序列操作、输入输出、对象检查等各个方面，是Python编程的基础工具。</p>
 
 <h2 id="-学习目标">🎯 学习目标</h2>
 
 <p>完成本模块学习后，你将能够：</p>
 
 <ul>
-  <li>熟练使用Python常用内置函数</li>
+  <li>熟练使用Python所有常用内置函数</li>
   <li>理解不同数据类型的操作方法</li>
   <li>掌握输入输出的各种方式</li>
-  <li>能够进行高效的数据处理</li>
+  <li>能够进行高效的数据处理和类型转换</li>
   <li>编写更简洁优雅的Python代码</li>
+  <li>理解函数式编程的基本概念</li>
 </ul>
 
-<h2 id="-函数分类概览">📊 函数分类概览</h2>
+<h2 id="-前置知识">📋 前置知识</h2>
+
+<ul>
+  <li>Python基本语法</li>
+  <li>数据类型（字符串、列表、元组、字典等）</li>
+  <li>基本的编程概念（变量、函数、循环等）</li>
+</ul>
+
+<h2 id="-内置函数或方法分类详览">🔍 内置函数或方法分类详览</h2>
+
+<h3 id="-类型转换">🔤 类型转换</h3>
+<ul>
+  <li><a href="int.md">int() - 整数转换函数</a></li>
+  <li><a href="float.md">float() - 浮点数转换函数</a></li>
+  <li><a href="str.md">str() - 字符串转换函数</a></li>
+  <li><a href="bool.md">bool() - 布尔值转换函数</a></li>
+  <li><a href="list.md">list() - 列表构造函数</a></li>
+  <li><a href="tuple.md">tuple() - 元组构造函数</a></li>
+  <li><a href="dict.md">dict() - 字典构造函数</a></li>
+  <li><a href="set.md">set() - 集合构造函数</a></li>
+  <li><a href="frozenset.md">frozenset() - 不可变集合构造函数</a></li>
+  <li><a href="complex.md">complex() - 复数构造函数</a></li>
+  <li><a href="bytes.md">bytes() - 字节对象构造函数</a></li>
+  <li><a href="bytearray.md">bytearray() - 可变字节数组构造函数</a></li>
+</ul>
+
+<h3 id="-数学运算">🔢 数学运算</h3>
+<ul>
+  <li><a href="abs.md">abs() - 绝对值函数</a></li>
+  <li><a href="round.md">round() - 数字四舍五入函数</a></li>
+  <li><a href="min.md">min() - 最小值函数</a></li>
+  <li><a href="max.md">max() - 最大值函数</a></li>
+  <li><a href="sum.md">sum() - 求和函数</a></li>
+  <li><a href="pow.md">pow() - 幂运算函数</a></li>
+  <li><a href="divmod.md">divmod() - 除法和取模运算函数</a></li>
+  <li><a href="round.md">round() - 数字四舍五入函数</a></li>
+</ul>
+
+<h3 id="-序列操作">📊 序列操作</h3>
+<ul>
+  <li><a href="len.md">len() - 长度函数</a></li>
+  <li><a href="sorted.md">sorted() - 排序函数</a></li>
+  <li><a href="reversed.md">reversed() - 反转函数</a></li>
+  <li><a href="range.md">range() - 范围函数</a></li>
+  <li><a href="slice.md">slice() - 切片对象创建函数</a></li>
+</ul>
+
+<h3 id="-迭代工具">🔄 迭代工具</h3>
+<ul>
+  <li><a href="enumerate.md">enumerate() - 枚举函数</a></li>
+  <li><a href="zip.md">zip() - 打包函数</a></li>
+  <li><a href="map.md">map() - 映射函数</a></li>
+  <li><a href="filter.md">filter() - 过滤函数</a></li>
+  <li><a href="iter.md">iter() - 迭代器创建函数</a></li>
+  <li><a href="next.md">next() - 迭代器元素获取函数</a></li>
+</ul>
+
+<h3 id="-逻辑判断">🧠 逻辑判断</h3>
+<ul>
+  <li><a href="any.md">any() - 逻辑或函数</a></li>
+  <li><a href="all.md">all() - 逻辑与函数</a></li>
+</ul>
+
+<h3 id="-对象检查">🔍 对象检查</h3>
+<ul>
+  <li><a href="type.md">type() - 类型函数</a></li>
+  <li><a href="isinstance.md">isinstance() - 实例检查函数</a></li>
+  <li><a href="issubclass.md">issubclass() - 子类检查函数</a></li>
+  <li><a href="hasattr.md">hasattr() - 属性检查函数</a></li>
+</ul>
+
+<h3 id="-输入输出">📥📤 输入输出</h3>
+<ul>
+  <li><a href="print.md">print() - 输出函数</a></li>
+  <li><a href="input.md">input() - 输入函数</a></li>
+  <li><a href="open.md">open() - 文件操作函数</a></li>
+</ul>
+
+<h3 id="-高级功能">🔧 高级功能</h3>
+<ul>
+  <li><a href="eval.md">eval() - 表达式求值函数</a></li>
+  <li><a href="exec.md">exec() - 代码执行函数</a></li>
+  <li><a href="compile.md">compile() - 代码编译函数</a></li>
+  <li><a href="globals.md">globals() - 全局命名空间函数</a></li>
+  <li><a href="locals.md">locals() - 局部命名空间函数</a></li>
+  <li><a href="vars.md">vars() - 对象属性字典获取函数</a></li>
+  <li><a href="memoryview.md">memoryview() - 内存视图对象构造函数</a></li>
+  <li><a href="help.md">help() - 帮助系统函数</a></li>
+  <li><a href="format.md">format() - 格式化函数</a></li>
+  <li><a href="f-string.md">f-string - 格式化字符串字面量</a></li>
+  <li><a href="repr.md">repr() - 对象字符串表示函数</a></li>
+  <li><a href="ascii.md">ascii() - ASCII字符串表示函数</a></li>
+</ul>
+
+<h3 id="-进制转换">🔢 进制转换</h3>
+<ul>
+  <li><a href="bin.md">bin() - 二进制转换函数</a></li>
+  <li><a href="oct.md">oct() - 八进制转换函数</a></li>
+  <li><a href="hex.md">hex() - 十六进制转换函数</a></li>
+  <li><a href="ord.md">ord() - Unicode码点获取函数</a></li>
+  <li><a href="chr.md">chr() - Unicode字符生成函数</a></li>
+</ul>
+
+<h2 id="️-注意事项">⚠️ 注意事项</h2>
+
+<h3 id="性能考虑">性能考虑</h3>
+<ul>
+  <li><strong>内置函数优先</strong>：内置函数通常比自定义函数更高效，因为它们是用C语言实现的</li>
+  <li><strong>避免重复转换</strong>：不要在循环中重复进行类型转换</li>
+  <li><strong>合理使用生成器</strong>：对于大数据集，考虑使用生成器表达式而不是列表推导式</li>
+</ul>
+
+<h3 id="常见错误">常见错误</h3>
+<ul>
+  <li><strong>类型错误</strong>：确保传递给函数的参数类型正确</li>
+  <li><strong>空序列处理</strong>：使用min()、max()等函数时要注意空序列会引发异常</li>
+  <li><strong>浮点数精度</strong>：使用round()函数时要注意浮点数精度问题</li>
+</ul>
+
+<h3 id="最佳实践">最佳实践</h3>
+<ol>
+  <li><strong>函数组合</strong>：学会将多个内置函数组合使用以实现复杂功能</li>
+  <li><strong>错误处理</strong>：在使用可能引发异常的函数时添加适当的错误处理</li>
+  <li><strong>代码可读性</strong>：虽然内置函数很强大，但要保持代码的可读性</li>
+  <li><strong>文档查阅</strong>：遇到问题时查阅官方文档获取准确信息</li>
+</ol>
+
+<h2 id="-函数使用频率统计">📊 函数使用频率统计</h2>
 
 <table>
   <thead>
     <tr>
-      <th>分类</th>
-      <th>主要函数</th>
-      <th>用途</th>
+      <th>使用频率</th>
+      <th>函数列表</th>
+      <th>应用场景</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>类型转换</td>
-      <td>int(), float(), str(), bool()</td>
-      <td>数据类型转换</td>
+      <td>极高频</td>
+      <td>print(), len(), type(), str(), int()</td>
+      <td>日常编程必备</td>
     </tr>
     <tr>
-      <td>数学运算</td>
-      <td>abs(), round(), min(), max()</td>
-      <td>数值计算</td>
+      <td>高频</td>
+      <td>list(), dict(), range(), enumerate(), zip()</td>
+      <td>数据结构操作</td>
     </tr>
     <tr>
-      <td>序列操作</td>
-      <td>len(), sum(), sorted(), reversed()</td>
-      <td>序列处理</td>
+      <td>中频</td>
+      <td>map(), filter(), sorted(), any(), all()</td>
+      <td>数据处理和验证</td>
     </tr>
     <tr>
-      <td>迭代工具</td>
-      <td>enumerate(), zip(), map(), filter()</td>
-      <td>迭代和映射</td>
-    </tr>
-    <tr>
-      <td>输入输出</td>
-      <td>print(), input(), open()</td>
-      <td>数据交互</td>
-    </tr>
-    <tr>
-      <td>对象操作</td>
-      <td>type(), isinstance(), hasattr()</td>
-      <td>对象检查</td>
+      <td>低频</td>
+      <td>eval(), exec(), compile(), globals(), locals()</td>
+      <td>高级编程和元编程</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="-使用建议">💡 使用建议</h2>
+<h2 id="相关模块">相关模块</h2>
+<ul>
+  <li><a href="../basics/index.md">Python基础语法</a> - Python编程基础</li>
+  <li><a href="../stdlib/index.md">Python标准库</a> - 标准库函数和模块</li>
+  <li><a href="../thirdparty/index.md">第三方库</a> - 常用第三方库</li>
+</ul>
 
-<ol>
-  <li><strong>优先使用内置函数</strong>：内置函数通常比自定义函数更高效</li>
-  <li><strong>理解函数特性</strong>：了解每个函数的参数、返回值和副作用</li>
-  <li><strong>组合使用</strong>：学会将多个内置函数组合使用</li>
-  <li><strong>查阅文档</strong>：遇到问题时查阅官方文档</li>
-</ol>
-
-<h2 id="-相关资源">🔗 相关资源</h2>
+<h2 id="-扩展阅读">📚 扩展阅读</h2>
 
 <ul>
   <li><a href="https://docs.python.org/3/library/functions.html">Python内置函数官方文档</a></li>
-  <li><a href="https://docs.python.org/3/reference/datamodel.html">Python数据模型</a></li>
+  <li><a href="https://docs.python.org/3/reference/datamodel.html">Python数据模型官方文档</a></li>
   <li><a href="https://docs.python.org/3/library/index.html">Python标准库概览</a></li>
+  <li><a href="https://docs.python.org/3/howto/functional.html">Python函数式编程指南</a></li>
+  <li><a href="https://wiki.python.org/moin/PythonSpeed/PerformanceTips">Python性能优化技巧</a></li>
 </ul>
+
+<h2 id="️-标签">🏷️ 标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Python</code> <code class="language-plaintext highlighter-rouge">内置函数</code> <code class="language-plaintext highlighter-rouge">builtins</code> <code class="language-plaintext highlighter-rouge">基础编程</code> <code class="language-plaintext highlighter-rouge">数据处理</code> <code class="language-plaintext highlighter-rouge">类型转换</code> <code class="language-plaintext highlighter-rouge">函数式编程</code></p>
+
+<hr />
+
+<p><strong>最后更新</strong>: 2024-01-15<br />
+<strong>作者</strong>: Python模型书<br />
+<strong>版本</strong>: 2.0</p>
 
     </article>
     
@@ -274,9 +370,24 @@
     <!-- 页面信息 -->
     <div class="page-meta">
       
+      <span class="meta-item">
+        <i class="fas fa-calendar"></i>
+        发布时间：2024年01月15日
+      </span>
       
       
       
+      <span class="meta-item">
+        <i class="fas fa-clock"></i>
+        更新时间：2024年01月15日
+      </span>
+      
+      
+      
+      <span class="meta-item">
+        <i class="fas fa-user"></i>
+        作者：Python模型书
+      </span>
       
     </div>
   </footer>
