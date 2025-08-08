@@ -130,9 +130,22 @@ layout: default
 <!-- 页面特定的样式 -->
 <style>
   .page-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
+  }
+
+  /* 响应式宽度优化 */
+  @media (min-width: 1920px) {
+    .page-container {
+      max-width: 1600px;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .page-container {
+      max-width: 1800px;
+    }
   }
 
   .page-header {

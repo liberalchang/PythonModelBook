@@ -21,6 +21,8 @@ exclude:
   - Gemfile.lock
   - node_modules/
   - vendor/
+  - tmp/
+  - image/
 
 # 集合配置
 collections:

@@ -114,9 +114,9 @@ permalink: /docs/
                     <a href="builtins/ord/" class="doc-link section-link">ord() - Unicode码点获取函数</a>
                     <a href="builtins/chr/" class="doc-link section-link">chr() - Unicode字符生成函数</a>
                     <div class="section-title">最佳实践</div>
-                    <a href="builtins/../basics/index/" class="doc-link section-link">Python基础语法</a>
-                    <a href="builtins/../stdlib/index/" class="doc-link section-link">Python标准库</a>
-                    <a href="builtins/../thirdparty/index/" class="doc-link section-link">第三方库</a>
+                    <a href="builtins/../basics/" class="doc-link section-link">Python基础语法</a>
+                    <a href="builtins/../stdlib/" class="doc-link section-link">Python标准库</a>
+                    <a href="builtins/../thirdparty/" class="doc-link section-link">第三方库</a>
             </div>
         </div>
 
@@ -128,15 +128,15 @@ permalink: /docs/
             <p class="category-description">Python标准库模块</p>
             <div class="doc-links">
                     <div class="section-title">日期时间</div>
-                    <a href="stdlib/time/" class="doc-link section-link">time模块</a>
-                    <a href="stdlib/calendar/" class="doc-link section-link">calendar模块</a>
-                    <a href="stdlib/datetime/" class="doc-link section-link">datetime模块</a>
+                    <a href="stdlib/time/" class="doc-link section-link">time模块 - 基础时间处理功能</a>
+                    <a href="stdlib/calendar/" class="doc-link section-link">calendar模块 - 日历相关功能</a>
+                    <a href="stdlib/datetime/" class="doc-link section-link">datetime模块 - 高级日期时间处理</a>
                     <div class="section-title">函数式编程</div>
-                    <a href="stdlib/operator/" class="doc-link section-link">operator模块</a>
-                    <a href="stdlib/copy/" class="doc-link section-link">copy模块</a>
-                    <a href="stdlib/inspect/" class="doc-link section-link">inspect模块</a>
-                    <a href="stdlib/enum/" class="doc-link section-link">enum模块</a>
-                    <a href="stdlib/typing/" class="doc-link section-link">typing模块</a>
+                    <a href="stdlib/operator/" class="doc-link section-link">operator模块 - 运算符函数映射</a>
+                    <a href="stdlib/copy/" class="doc-link section-link">copy模块 - 对象拷贝功能</a>
+                    <a href="stdlib/inspect/" class="doc-link section-link">inspect模块 - 对象检查和反射功能</a>
+                    <a href="stdlib/enum/" class="doc-link section-link">enum模块 - 枚举类型和常量定义</a>
+                    <a href="stdlib/typing/" class="doc-link section-link">typing模块 - 类型提示和静态类型检查</a>
             </div>
         </div>
 
@@ -147,7 +147,8 @@ permalink: /docs/
             </div>
             <p class="category-description">常用第三方库和框架</p>
             <div class="doc-links">
-                    <a href="thirdparty/pendulum/" class="doc-link">Pendulum</a>
+                    <div class="section-title">日期时间处理</div>
+                    <a href="thirdparty/pendulum/" class="doc-link section-link">Pendulum - 更好的日期时间处理库</a>
             </div>
         </div>
 
@@ -175,9 +176,12 @@ permalink: /docs/
 <style>
 .docs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
+    justify-content: center;
+    align-content: start;
+    max-width: 100%;
 }
 
 .category-card {
@@ -187,6 +191,7 @@ permalink: /docs/
     padding: 1.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-left: auto;
 }
 
 .category-card:hover {
@@ -219,8 +224,8 @@ permalink: /docs/
 }
 
 .doc-links {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 0.5rem;
 }
 
@@ -247,11 +252,77 @@ permalink: /docs/
     padding: 0.25rem 0.75rem;
     font-size: 0.9rem;
     border-bottom: 1px solid var(--border-color, #e1e4e8);
+    grid-column: 1 / -1;
 }
 
 .section-link {
     margin-left: 1rem;
     font-size: 0.9rem;
+}
+
+/* 响应式布局优化 */
+@media (min-width: 1400px) {
+    .docs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+    
+    .doc-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3rem 1rem;
+    }
+    
+    .section-link {
+        margin-left: 0.5rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .docs-grid {
+        max-width: 1600px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .docs-grid {
+        max-width: 1800px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .docs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        justify-content: end;
+    }
+    
+    .doc-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3rem 0.8rem;
+    }
+    
+    .section-link {
+        margin-left: 0.5rem;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .docs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        justify-content: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 899px) {
+    .docs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .category-card {
+        margin-left: 0;
+    }
 }
 
 /* 深色主题支持 */
@@ -279,21 +350,61 @@ permalink: /docs/
     }
 }
 
+/* 响应式布局优化 - 单行最多显示两块 */
+@media (min-width: 1200px) {
+    .docs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 2.5rem;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .docs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 899px) {
+    .docs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .category-card {
+        margin-left: 0;
+    }
+}
+
 /* 移动端适配 */
 @media (max-width: 768px) {
     .docs-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
         margin: 1rem 0;
+        justify-content: stretch;
     }
     
     .category-card {
         padding: 1rem;
+        margin-left: 0;
     }
     
     .category-icon {
         font-size: 1.5rem;
         margin-right: 0.5rem;
+    }
+    
+    .doc-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-link {
+        margin-left: 1rem;
     }
 }
 </style>
