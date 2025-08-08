@@ -1031,6 +1031,7 @@ print(f"\n循环模板:")
 print(template_engine.render_template(loop_template, loop_context))
 
 # 条件模板
+{% raw %}
 conditional_template = """
 {# 这是注释，不会显示 #}
 系统状态报告
@@ -1062,6 +1063,7 @@ else:
     print_to_template("\n✅ 无警告信息")
 %}
 """
+{% endraw %}
 
 conditional_context = {
     'system_status': 'healthy',
@@ -1083,6 +1085,7 @@ print(f"\n条件模板:")
 print(template_engine.render_template(conditional_template, conditional_context))
 
 # 复杂数据处理模板
+{% raw %}
 complex_template = """
 HTML报告生成
 =============
