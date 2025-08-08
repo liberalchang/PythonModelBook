@@ -5,30 +5,30 @@ permalink: /docs/builtins/globals/
 category: builtins
 tags: [命名空间, 全局变量, 作用域, 变量管理]
 description: 返回当前全局命名空间的字典
-author: Python文档工程师
+author: Python 文档工程师
 date: 2024-01-15
 updated: 2024-01-15
 version: 1.0
-difficulty: 中级
+difficulty: "中级"
 ---
 
 # globals() - 全局命名空间函数
 
 ## 📝 概述
 
-`globals()` 是Python中的内置函数，用于返回当前全局命名空间的字典。这个字典包含了当前模块中所有全局变量、函数、类和导入的模块。通过 `globals()` 可以动态访问、修改和管理全局变量，这在元编程、调试和动态代码执行中非常有用。
+`globals()` 是 Python 中的内置函数，用于返回当前全局命名空间的字典。这个字典包含了当前模块中所有全局变量、函数、类和导入的模块。通过 `globals()` 可以动态访问、修改和管理全局变量，这在元编程、调试和动态代码执行中非常有用。
 
 ## 🎯 学习目标
 
-- 掌握globals()函数的基本用法和特性
+- 掌握 globals()函数的基本用法和特性
 - 理解全局命名空间的概念和作用
 - 学会动态访问和修改全局变量
-- 掌握globals()在调试和元编程中的应用
+- 掌握 globals()在调试和元编程中的应用
 - 了解命名空间管理的最佳实践
 
 ## 📋 前置知识
 
-- Python基本语法
+- Python 基本语法
 - 变量作用域的概念
 - 字典操作基础
 - 函数定义和调用
@@ -38,7 +38,7 @@ difficulty: 中级
 
 ### 基本概念
 
-全局命名空间是Python中存储全局变量的字典，包括：
+全局命名空间是 Python 中存储全局变量的字典，包括：
 1. 模块级别定义的变量
 2. 函数定义
 3. 类定义
@@ -67,10 +67,10 @@ globals()
 ### 基本用法
 
 ```python
-# 基本用法示例
+## 基本用法示例
 print("globals()基本用法:")
 
-# 定义一些全局变量
+## 定义一些全局变量
 global_var1 = "Hello"
 global_var2 = 42
 global_list = [1, 2, 3]
@@ -84,55 +84,55 @@ class GlobalClass:
     def __init__(self):
         self.value = "I'm a global class"
 
-# 获取全局命名空间
+## 获取全局命名空间
 global_namespace = globals()
 
 print(f"全局命名空间类型: {type(global_namespace)}")
 print(f"全局变量数量: {len(global_namespace)}")
 
-# 查看一些特殊的全局变量
+## 查看一些特殊的全局变量
 special_vars = ['__name__', '__file__', '__doc__']
-print(f"\n特殊全局变量:")
+print(f"\n 特殊全局变量:")
 for var in special_vars:
     if var in global_namespace:
         print(f"  {var}: {global_namespace[var]}")
 
-# 查看我们定义的全局变量
+## 查看我们定义的全局变量
 our_vars = ['global_var1', 'global_var2', 'global_list', 'global_function', 'GlobalClass']
-print(f"\n我们定义的全局变量:")
+print(f"\n 我们定义的全局变量:")
 for var in our_vars:
     if var in global_namespace:
         value = global_namespace[var]
         print(f"  {var}: {value} (类型: {type(value).__name__})")
 
-# 动态访问全局变量
-print(f"\n动态访问全局变量:")
+## 动态访问全局变量
+print(f"\n 动态访问全局变量:")
 var_name = 'global_var1'
 if var_name in global_namespace:
     print(f"  {var_name} = {global_namespace[var_name]}")
 
-# 检查变量是否存在
-print(f"\n变量存在性检查:")
+## 检查变量是否存在
+print(f"\n 变量存在性检查:")
 vars_to_check = ['global_var1', 'nonexistent_var', 'global_function']
 for var in vars_to_check:
     exists = var in global_namespace
     print(f"  {var}: {'存在' if exists else '不存在'}")
 
-# 列出所有用户定义的全局变量（排除内置变量）
-print(f"\n用户定义的全局变量:")
+## 列出所有用户定义的全局变量(排除内置变量)
+print(f"\n 用户定义的全局变量:")
 user_defined = {k: v for k, v in global_namespace.items() 
                 if not k.startswith('__') and not k.startswith('_')}
-for name, value in list(user_defined.items())[:10]:  # 只显示前10个
+for name, value in list(user_defined.items())[:10]:  # 只显示前 10 个
     print(f"  {name}: {type(value).__name__}")
 ```
 
 ### 动态变量操作
 
 ```python
-# 动态变量操作示例
-print("\n动态变量操作示例:")
+## 动态变量操作示例
+print("\n 动态变量操作示例:")
 
-# 动态创建全局变量
+## 动态创建全局变量
 print("1. 动态创建全局变量:")
 variable_names = ['dynamic_var1', 'dynamic_var2', 'dynamic_var3']
 variable_values = ['Hello World', 123, [1, 2, 3, 4, 5]]
@@ -141,47 +141,47 @@ for name, value in zip(variable_names, variable_values):
     globals()[name] = value
     print(f"  创建变量 {name} = {value}")
 
-# 验证变量已创建
-print(f"\n验证动态创建的变量:")
+## 验证变量已创建
+print(f"\n 验证动态创建的变量:")
 for name in variable_names:
     if name in globals():
         print(f"  {name} = {globals()[name]}")
 
-# 动态修改全局变量
+## 动态修改全局变量
 print(f"\n2. 动态修改全局变量:")
 original_value = global_var1
 globals()['global_var1'] = "Modified Value"
 print(f"  global_var1: {original_value} -> {global_var1}")
 
-# 动态删除全局变量
+## 动态删除全局变量
 print(f"\n3. 动态删除全局变量:")
 if 'dynamic_var1' in globals():
     del globals()['dynamic_var1']
     print(f"  已删除 dynamic_var1")
     print(f"  dynamic_var1 存在: {'dynamic_var1' in globals()}")
 
-# 批量操作全局变量
+## 批量操作全局变量
 print(f"\n4. 批量操作全局变量:")
 
-# 批量创建变量
+## 批量创建变量
 batch_vars = {f'batch_var_{i}': i * 10 for i in range(1, 6)}
 for name, value in batch_vars.items():
     globals()[name] = value
 
 print(f"  批量创建了 {len(batch_vars)} 个变量")
 
-# 批量查询变量
+## 批量查询变量
 batch_names = [f'batch_var_{i}' for i in range(1, 6)]
 batch_values = [globals().get(name, 'Not Found') for name in batch_names]
 print(f"  批量查询结果: {dict(zip(batch_names, batch_values))}")
 
-# 批量删除变量
+## 批量删除变量
 for name in batch_names:
     if name in globals():
         del globals()[name]
 print(f"  已批量删除变量")
 
-# 条件性变量操作
+## 条件性变量操作
 print(f"\n5. 条件性变量操作:")
 
 def set_global_if_not_exists(name, value):
@@ -199,7 +199,7 @@ def update_global_if_exists(name, value):
         return old_value
     return None
 
-# 测试条件性操作
+## 测试条件性操作
 test_vars = [
     ('conditional_var1', 'First Value'),
     ('global_var2', 999),  # 这个变量已存在
@@ -215,45 +215,45 @@ for name, value in test_vars:
         print(f"  更新现有变量: {name} = {old_value} -> {value}")
 ```
 
-### 函数中的globals()使用
+### 函数中的 globals()使用
 
 ```python
-# 函数中的globals()使用示例
-print("\n函数中的globals()使用示例:")
+## 函数中的 globals()使用示例
+print("\n 函数中的 globals()使用示例:")
 
-# 全局变量
+## 全局变量
 function_global_var = "Original Global Value"
 counter = 0
 
 def demonstrate_globals_in_function():
-    """演示在函数中使用globals()"""
-    print(f"\n在函数中使用globals():")
+    """演示在函数中使用 globals()"""
+    print(f"\n 在函数中使用 globals():")
     
-    # 访问全局变量
+#    # 访问全局变量
     print(f"  访问全局变量: function_global_var = {globals()['function_global_var']}")
     
-    # 修改全局变量
+#    # 修改全局变量
     globals()['function_global_var'] = "Modified in Function"
     print(f"  修改后: function_global_var = {globals()['function_global_var']}")
     
-    # 创建新的全局变量
+#    # 创建新的全局变量
     globals()['new_global_from_function'] = "Created in Function"
     print(f"  创建新全局变量: new_global_from_function")
     
-    # 访问和修改计数器
+#    # 访问和修改计数器
     globals()['counter'] += 1
     print(f"  计数器递增: counter = {globals()['counter']}")
     
-    # 检查函数本身是否在全局命名空间中
+#    # 检查函数本身是否在全局命名空间中
     func_name = 'demonstrate_globals_in_function'
     if func_name in globals():
         print(f"  函数 {func_name} 在全局命名空间中")
 
 def global_variable_manager():
     """全局变量管理器"""
-    print(f"\n全局变量管理器:")
+    print(f"\n 全局变量管理器:")
     
-    # 获取所有用户定义的全局变量
+#    # 获取所有用户定义的全局变量
     user_globals = {k: v for k, v in globals().items() 
                    if not k.startswith('_') and not callable(v) and k != 'user_globals'}
     
@@ -277,24 +277,24 @@ def safe_global_update(var_name, new_value):
         globals()[var_name] = new_value
         return None
 
-# 测试函数
+## 测试函数
 print(f"调用前: function_global_var = {function_global_var}")
 demonstrate_globals_in_function()
 print(f"调用后: function_global_var = {function_global_var}")
 print(f"新创建的全局变量: new_global_from_function = {globals().get('new_global_from_function', 'Not Found')}")
 
-# 测试全局变量管理器
+## 测试全局变量管理器
 managed_vars = global_variable_manager()
 
-# 测试安全访问函数
-print(f"\n安全访问测试:")
+## 测试安全访问函数
+print(f"\n 安全访问测试:")
 test_vars = ['counter', 'nonexistent_var', 'function_global_var']
 for var in test_vars:
     value = safe_global_access(var, 'DEFAULT')
     print(f"  {var}: {value}")
 
-# 测试安全更新函数
-print(f"\n安全更新测试:")
+## 测试安全更新函数
+print(f"\n 安全更新测试:")
 old_value = safe_global_update('counter', 100)
 print(f"  counter: {old_value} -> {counter}")
 
@@ -309,7 +309,7 @@ import sys
 import types
 from typing import Dict, Any, List, Tuple
 
-# 命名空间分析工具
+## 命名空间分析工具
 class NamespaceAnalyzer:
     """命名空间分析工具"""
     
@@ -373,10 +373,10 @@ class NamespaceAnalyzer:
                 size = sys.getsizeof(value)
                 total_size += size
                 
-                if size > 1000:  # 大于1KB的对象
+                if size > 1000:  # 大于 1KB 的对象
                     large_objects.append((name, size))
             except (TypeError, AttributeError):
-                # 某些对象可能无法获取大小
+#                # 某些对象可能无法获取大小
                 pass
         
         return {
@@ -417,7 +417,7 @@ class NamespaceAnalyzer:
                 if snap1[key] != snap2[key]:
                     modified.append((key, snap1[key], snap2[key]))
             except (TypeError, ValueError):
-                # 某些对象可能无法比较
+#                # 某些对象可能无法比较
                 pass
         
         return modified
@@ -429,8 +429,8 @@ class NamespaceAnalyzer:
         
         print(f"总变量数: {analysis['total_count']}")
         
-        # 分类统计
-        print(f"\n变量分类:")
+#        # 分类统计
+        print(f"\n 变量分类:")
         categories = analysis['categories']
         for category, items in categories.items():
             if items:
@@ -440,33 +440,33 @@ class NamespaceAnalyzer:
                 else:
                     print(f"    {', '.join(items[:5])}... (还有{len(items)-5}个)")
         
-        # 新增变量
+#        # 新增变量
         new_vars = analysis['new_variables']
         if new_vars:
-            print(f"\n新增变量 ({len(new_vars)} 个):")
+            print(f"\n 新增变量 ({len(new_vars)} 个):")
             print(f"  {', '.join(new_vars)}")
         
-        # 内存使用
+#        # 内存使用
         memory = analysis['memory_usage']
-        print(f"\n内存使用:")
+        print(f"\n 内存使用:")
         print(f"  总大小: {memory['total_size_kb']:.2f} KB")
         if memory['large_objects']:
             print(f"  大对象 (>1KB):")
             for name, size in memory['large_objects'][:5]:
                 print(f"    {name}: {size/1024:.2f} KB")
         
-        # 类型分布
+#        # 类型分布
         types_dist = analysis['type_distribution']
-        print(f"\n类型分布 (前10个):")
+        print(f"\n 类型分布 (前 10 个):")
         for type_name, count in list(types_dist.items())[:10]:
             print(f"  {type_name}: {count}")
 
-# 测试命名空间分析
-print("\n命名空间分析示例:")
+## 测试命名空间分析
+print("\n 命名空间分析示例:")
 
 analyzer = NamespaceAnalyzer()
 
-# 创建一些测试变量
+## 创建一些测试变量
 test_string = "This is a test string" * 100  # 大字符串
 test_list = list(range(1000))  # 大列表
 test_dict = {f'key_{i}': f'value_{i}' for i in range(100)}  # 大字典
@@ -482,24 +482,24 @@ class TestClass:
 
 test_instance = TestClass()
 
-# 分析当前命名空间
+## 分析当前命名空间
 analysis = analyzer.analyze_globals()
 analyzer.print_analysis(analysis)
 
-# 创建命名空间快照
-print(f"\n创建命名空间快照...")
+## 创建命名空间快照
+print(f"\n 创建命名空间快照...")
 snapshot1 = dict(globals())
 
-# 修改一些变量
+## 修改一些变量
 test_string = "Modified string"
 new_variable = "This is new"
 del test_list  # 删除一个变量
 
-# 创建第二个快照
+## 创建第二个快照
 snapshot2 = dict(globals())
 
-# 比较快照
-print(f"\n比较命名空间变化:")
+## 比较快照
+print(f"\n 比较命名空间变化:")
 comparison = analyzer.compare_namespaces(snapshot1, snapshot2)
 
 print(f"新增变量: {comparison['added']}")
@@ -518,7 +518,7 @@ import importlib
 import sys
 from typing import Dict, Any, Optional, List
 
-# 动态模块加载器
+## 动态模块加载器
 class DynamicModuleLoader:
     """动态模块加载器"""
     
@@ -530,18 +530,18 @@ class DynamicModuleLoader:
                    add_to_globals: bool = True) -> Any:
         """动态加载模块"""
         try:
-            # 加载模块
+#            # 加载模块
             module = importlib.import_module(module_name)
             
-            # 确定模块在全局命名空间中的名称
+#            # 确定模块在全局命名空间中的名称
             global_name = alias or module_name.split('.')[-1]
             
-            # 添加到全局命名空间
+#            # 添加到全局命名空间
             if add_to_globals:
                 globals()[global_name] = module
                 print(f"模块 {module_name} 已加载为 {global_name}")
             
-            # 记录加载的模块
+#            # 记录加载的模块
             self.loaded_modules[global_name] = module
             if alias:
                 self.module_aliases[alias] = module_name
@@ -584,7 +584,7 @@ class DynamicModuleLoader:
             if module_name in self.loaded_modules:
                 del self.loaded_modules[module_name]
             
-            # 检查是否是别名
+#            # 检查是否是别名
             if module_name in self.module_aliases:
                 del self.module_aliases[module_name]
             
@@ -609,7 +609,7 @@ class DynamicModuleLoader:
                 module = self.loaded_modules[module_name]
                 reloaded_module = importlib.reload(module)
                 
-                # 更新全局命名空间
+#                # 更新全局命名空间
                 globals()[module_name] = reloaded_module
                 self.loaded_modules[module_name] = reloaded_module
                 
@@ -639,28 +639,28 @@ class DynamicModuleLoader:
         else:
             return {'error': f'Module {module_name} not loaded'}
 
-# 测试动态模块加载器
-print("\n动态模块加载器示例:")
+## 测试动态模块加载器
+print("\n 动态模块加载器示例:")
 
 loader = DynamicModuleLoader()
 
-# 加载标准库模块
+## 加载标准库模块
 print("1. 加载标准库模块:")
 loader.load_module('json', 'json_module')
 loader.load_module('datetime', 'dt')
 loader.load_module('collections')
 
-# 从模块加载特定项目
+## 从模块加载特定项目
 print("\n2. 从模块加载特定项目:")
 math_items = loader.load_from_module('math', ['sqrt', 'pi', 'sin', 'cos'])
 print(f"加载的数学函数: {list(math_items.keys())}")
 
-# 测试加载的模块
+## 测试加载的模块
 print("\n3. 测试加载的模块:")
 if 'json_module' in globals():
     test_data = {'name': 'Alice', 'age': 30}
     json_str = json_module.dumps(test_data)
-    print(f"JSON序列化: {json_str}")
+    print(f"JSON 序列化: {json_str}")
 
 if 'dt' in globals():
     now = dt.datetime.now()
@@ -670,13 +670,13 @@ if 'sqrt' in globals():
     print(f"sqrt(16) = {sqrt(16)}")
     print(f"pi = {pi}")
 
-# 列出已加载的模块
+## 列出已加载的模块
 print("\n4. 已加载的模块:")
 loaded = loader.list_loaded_modules()
 for name, file_path in loaded.items():
     print(f"  {name}: {file_path}")
 
-# 获取模块信息
+## 获取模块信息
 print("\n5. 模块信息:")
 info = loader.get_module_info('json_module')
 for key, value in info.items():
@@ -685,7 +685,7 @@ for key, value in info.items():
     else:
         print(f"  {key}: {value}")
 
-# 卸载模块
+## 卸载模块
 print("\n6. 卸载模块:")
 loader.unload_module('collections')
 print(f"collections 在全局命名空间: {'collections' in globals()}")
@@ -699,7 +699,7 @@ import os
 from typing import Dict, Any, Optional, Union
 from pathlib import Path
 
-# 全局配置管理器
+## 全局配置管理器
 class GlobalConfigManager:
     """全局配置管理器"""
     
@@ -715,7 +715,7 @@ class GlobalConfigManager:
             with open(file_path, 'r', encoding='utf-8') as f:
                 config_data = json.load(f)
             
-            # 将配置加载到全局命名空间
+#            # 将配置加载到全局命名空间
             for key, value in config_data.items():
                 global_key = f"{self.config_prefix}{key.upper()}"
                 globals()[global_key] = value
@@ -724,7 +724,7 @@ class GlobalConfigManager:
             self.config_file = file_path
             self.auto_save = auto_save
             
-            # 保存配置历史
+#            # 保存配置历史
             self._save_config_snapshot()
             
             return True
@@ -741,13 +741,13 @@ class GlobalConfigManager:
             return False
         
         try:
-            # 收集所有配置变量
+#            # 收集所有配置变量
             config_data = self.get_all_config()
             
-            # 确保目录存在
+#            # 确保目录存在
             Path(target_file).parent.mkdir(parents=True, exist_ok=True)
             
-            # 保存到文件
+#            # 保存到文件
             with open(target_file, 'w', encoding='utf-8') as f:
                 json.dump(config_data, f, indent=2, ensure_ascii=False)
             
@@ -766,11 +766,11 @@ class GlobalConfigManager:
         globals()[global_key] = value
         print(f"设置配置: {global_key} = {value}")
         
-        # 记录变更
+#        # 记录变更
         if old_value != value:
             self._record_config_change(global_key, old_value, value)
         
-        # 自动保存
+#        # 自动保存
         if save_immediately or (save_immediately is None and self.auto_save):
             self.save_config_to_file()
     
@@ -785,7 +785,7 @@ class GlobalConfigManager:
         
         for key, value in globals().items():
             if key.startswith(self.config_prefix):
-                # 移除前缀并转换为小写
+#                # 移除前缀并转换为小写
                 config_key = key[len(self.config_prefix):].lower()
                 config_data[config_key] = value
         
@@ -800,10 +800,10 @@ class GlobalConfigManager:
             del globals()[global_key]
             print(f"删除配置: {global_key}")
             
-            # 记录变更
+#            # 记录变更
             self._record_config_change(global_key, old_value, None)
             
-            # 自动保存
+#            # 自动保存
             if save_immediately or (save_immediately is None and self.auto_save):
                 self.save_config_to_file()
             
@@ -832,7 +832,7 @@ class GlobalConfigManager:
         
         print(f"已重置 {len(config_keys)} 个配置项")
         
-        # 保存配置历史
+#        # 保存配置历史
         self._save_config_snapshot()
     
     def _save_config_snapshot(self) -> None:
@@ -843,7 +843,7 @@ class GlobalConfigManager:
         }
         self.config_history.append(snapshot)
         
-        # 限制历史记录数量
+#        # 限制历史记录数量
         if len(self.config_history) > 10:
             self.config_history.pop(0)
     
@@ -862,7 +862,7 @@ class GlobalConfigManager:
         
         self.change_log.append(change_record)
         
-        # 限制变更日志数量
+#        # 限制变更日志数量
         if len(self.change_log) > 50:
             self.change_log.pop(0)
     
@@ -914,39 +914,39 @@ class GlobalConfigManager:
             print(f"创建配置模板失败: {e}")
             return False
 
-# 测试全局配置管理器
-print("\n全局配置管理器示例:")
+## 测试全局配置管理器
+print("\n 全局配置管理器示例:")
 
 config_manager = GlobalConfigManager()
 
-# 创建配置模板
+## 创建配置模板
 print("1. 创建配置模板:")
 template_file = "config_template.json"
 config_manager.create_config_template(template_file)
 
-# 手动设置一些配置
+## 手动设置一些配置
 print("\n2. 手动设置配置:")
 config_manager.set_config('app_name', 'MyApplication')
 config_manager.set_config('version', '1.0.0')
 config_manager.set_config('debug', True)
 config_manager.set_config('max_users', 1000)
 
-# 列出当前配置
+## 列出当前配置
 print("\n3. 当前配置:")
 config_manager.list_config()
 
-# 保存配置到文件
+## 保存配置到文件
 print("\n4. 保存配置:")
 config_file = "app_config.json"
 config_manager.save_config_to_file(config_file)
 
-# 修改配置
+## 修改配置
 print("\n5. 修改配置:")
 config_manager.set_config('debug', False)
 config_manager.set_config('max_users', 2000)
 config_manager.set_config('new_feature', 'enabled')
 
-# 获取特定配置
+## 获取特定配置
 print("\n6. 获取配置:")
 app_name = config_manager.get_config('app_name')
 debug_mode = config_manager.get_config('debug')
@@ -956,58 +956,58 @@ print(f"应用名称: {app_name}")
 print(f"调试模式: {debug_mode}")
 print(f"不存在的配置: {nonexistent}")
 
-# 查看变更日志
+## 查看变更日志
 print("\n7. 配置变更日志:")
 change_log = config_manager.get_change_log()
-for change in change_log[-5:]:  # 显示最近5个变更
+for change in change_log[-5:]:  # 显示最近 5 个变更
     print(f"  {change['timestamp']}: {change['action']} {change['key']}")
     if change['action'] != 'create':
         print(f"    {change['old_value']} -> {change['new_value']}")
 
-# 删除配置
+## 删除配置
 print("\n8. 删除配置:")
 config_manager.remove_config('new_feature')
 
-# 最终配置状态
+## 最终配置状态
 print("\n9. 最终配置状态:")
 config_manager.list_config()
 
-# 验证全局变量
+## 验证全局变量
 print("\n10. 验证全局变量:")
 config_vars = [key for key in globals().keys() if key.startswith('CONFIG_')]
 print(f"全局配置变量: {config_vars}")
 
-# 清理测试文件
+## 清理测试文件
 try:
     os.remove(template_file)
     os.remove(config_file)
-    print(f"\n已清理测试文件")
+    print(f"\n 已清理测试文件")
 except:
     pass
 ```
 
 ## ⚠️ 常见陷阱与最佳实践
 
-### 安全使用globals()
+### 安全使用 globals()
 
 ```python
-# 安全使用globals()的最佳实践
-print("\n安全使用globals()的最佳实践:")
+## 安全使用 globals()的最佳实践
+print("\n 安全使用 globals()的最佳实践:")
 
-# 1. 避免意外覆盖重要变量
+## 1. 避免意外覆盖重要变量
 print("1. 避免意外覆盖:")
 
-# 危险的做法
+## 危险的做法
 def dangerous_global_modification():
     """危险的全局变量修改"""
-    # 可能意外覆盖重要的内置函数
+#    # 可能意外覆盖重要的内置函数
     globals()['len'] = lambda x: 0  # 危险！覆盖了内置函数
-    globals()['print'] = lambda *args: None  # 危险！覆盖了print函数
+    globals()['print'] = lambda *args: None  # 危险！覆盖了 print 函数
 
-# 安全的做法
+## 安全的做法
 def safe_global_modification():
     """安全的全局变量修改"""
-    # 检查是否会覆盖重要变量
+#    # 检查是否会覆盖重要变量
     important_names = {'len', 'print', 'input', 'open', 'range', 'list', 'dict', 'str', 'int'}
     
     def safe_set_global(name, value):
@@ -1022,17 +1022,17 @@ def safe_global_modification():
         globals()[name] = value
         return True
     
-    # 安全设置变量
+#    # 安全设置变量
     safe_set_global('my_custom_var', 'safe value')
     safe_set_global('len', 'dangerous value')  # 会被阻止
 
-print("  测试危险操作（已注释）:")
-# dangerous_global_modification()  # 不要运行这个！
+print("  测试危险操作(已注释):")
+## dangerous_global_modification()  # 不要运行这个！
 
 print("  测试安全操作:")
 safe_global_modification()
 
-# 2. 命名空间污染防护
+## 2. 命名空间污染防护
 print("\n2. 命名空间污染防护:")
 
 class NamespaceProtector:
@@ -1089,7 +1089,7 @@ class NamespaceProtector:
             'protected_count': len(self.protected_names)
         }
 
-# 测试命名空间保护器
+## 测试命名空间保护器
 protector = NamespaceProtector()
 
 print("  测试安全设置:")
@@ -1098,44 +1098,44 @@ protector.safe_set_global('safe_var2', [1, 2, 3])
 protector.safe_set_global('len', 'dangerous')  # 会被拒绝
 protector.safe_set_global('__special__', 'special')  # 会被拒绝
 
-# 获取命名空间报告
+## 获取命名空间报告
 report = protector.get_namespace_report()
 print(f"\n  命名空间报告:")
 print(f"    总变量数: {report['total_variables']}")
 print(f"    新增变量数: {report['added_count']}")
-print(f"    新增变量: {report['added_names'][:5]}...")  # 只显示前5个
+print(f"    新增变量: {report['added_names'][:5]}...")  # 只显示前 5 个
 
-# 清理命名空间
+## 清理命名空间
 print(f"\n  清理命名空间:")
 cleaned = protector.cleanup_namespace()
 print(f"    已清理 {len(cleaned)} 个变量")
 
-# 3. 性能考虑
+## 3. 性能考虑
 print("\n3. 性能考虑:")
 
 import time
 
 def performance_comparison():
     """性能比较"""
-    # 直接访问 vs globals()访问
+#    # 直接访问 vs globals()访问
     test_var = "test_value"
     globals()['test_global'] = "test_value"
     
     iterations = 100000
     
-    # 直接访问
+#    # 直接访问
     start_time = time.time()
     for _ in range(iterations):
         value = test_var
     direct_time = time.time() - start_time
     
-    # globals()访问
+#    # globals()访问
     start_time = time.time()
     for _ in range(iterations):
         value = globals()['test_global']
     globals_time = time.time() - start_time
     
-    # globals().get()访问
+#    # globals().get()访问
     start_time = time.time()
     for _ in range(iterations):
         value = globals().get('test_global')
@@ -1146,12 +1146,12 @@ def performance_comparison():
     print(f"    globals()访问: {globals_time:.4f}秒 (慢 {globals_time/direct_time:.1f}倍)")
     print(f"    globals().get()访问: {globals_get_time:.4f}秒 (慢 {globals_get_time/direct_time:.1f}倍)")
     
-    # 清理
+#    # 清理
     del globals()['test_global']
 
 performance_comparison()
 
-# 4. 调试和监控
+## 4. 调试和监控
 print("\n4. 调试和监控:")
 
 class GlobalsMonitor:
@@ -1191,7 +1191,7 @@ class GlobalsMonitor:
             }
             self.changes.append(change_record)
             
-            # 更新基线
+#            # 更新基线
             self.baseline = current
         
         return {
@@ -1222,23 +1222,23 @@ class GlobalsMonitor:
             latest = self.changes[-1]
             print(f"    最近变化: +{len(latest['added'])} -{len(latest['removed'])}")
 
-# 测试监控器
+## 测试监控器
 monitor = GlobalsMonitor()
 monitor.start_monitoring()
 
-# 进行一些变化
+## 进行一些变化
 test_monitoring_var1 = "value1"
 test_monitoring_var2 = "value2"
 
-# 检查变化
+## 检查变化
 changes = monitor.check_changes()
 print(f"  检测到变化: +{len(changes['added'])} -{len(changes['removed'])}")
 print(f"  新增变量: {changes['added']}")
 
-# 删除一个变量
+## 删除一个变量
 del test_monitoring_var1
 
-# 再次检查
+## 再次检查
 changes = monitor.check_changes()
 print(f"  再次检测: +{len(changes['added'])} -{len(changes['removed'])}")
 print(f"  删除变量: {changes['removed']}")
@@ -1246,7 +1246,7 @@ print(f"  删除变量: {changes['removed']}")
 monitor.stop_monitoring()
 monitor.print_summary()
 
-# 清理
+## 清理
 if 'test_monitoring_var2' in globals():
     del globals()['test_monitoring_var2']
 ```
@@ -1276,9 +1276,9 @@ if 'test_monitoring_var2' in globals():
 
 ## 📚 扩展阅读
 
-- [Python命名空间和作用域](https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces)
+- [Python 命名空间和作用域](https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces)
 - [内置函数文档](https://docs.python.org/3/library/functions.html#globals)
-- [Python数据模型](https://docs.python.org/3/reference/datamodel.html)
+- [Python 数据模型](https://docs.python.org/3/reference/datamodel.html)
 - [动态导入指南](https://docs.python.org/3/library/importlib.html)
 
 ## 🏷️ 标签

@@ -2,14 +2,14 @@
 layout: doc
 title: "类的继承"
 permalink: /docs/basics/class-inheritance/
-category: "Python基础"
+category: "Python 基础"
 tags: ["面向对象", "继承", "多态", "方法重写"]
-description: "深入理解Python类的继承机制，包括单继承、多继承、方法重写、super()函数的使用以及继承中的初始化过程"
-author: "Python教程"
+description: "深入理解 Python 类的继承机制，包括单继承、多继承、方法重写、super()函数的使用以及继承中的初始化过程"
+author: "Python 教程"
 version: "1.0"
 last_updated: "2024-01-20"
 difficulty: "中级"
-estimated_time: "45分钟"
+estimated_time: "45 分钟"
 prerequisites: ["类的定义", "面向对象基础"]
 related_topics: ["多态", "封装", "抽象类"]
 ---
@@ -18,14 +18,14 @@ related_topics: ["多态", "封装", "抽象类"]
 
 ## 概述
 
-继承是面向对象编程的三大特性之一，它允许一个类（子类）从另一个类（父类）获取属性和方法。通过继承，我们可以实现代码复用，建立类之间的层次关系，并支持多态性。Python支持单继承和多继承，为面向对象设计提供了强大的工具。
+继承是面向对象编程的三大特性之一，它允许一个类（子类）从另一个类（父类）获取属性和方法。通过继承，我们可以实现代码复用，建立类之间的层次关系，并支持多态性。Python 支持单继承和多继承，为面向对象设计提供了强大的工具。
 
 ## 学习目标
 
 通过本章学习，你将能够：
 
 - 理解继承的基本概念和语法
-- 掌握方法重写和super()函数的使用
+- 掌握方法重写和 super()函数的使用
 - 了解继承中的初始化过程
 - 理解访问控制在继承中的表现
 - 掌握多继承的概念和方法解析顺序（MRO）
@@ -33,7 +33,7 @@ related_topics: ["多态", "封装", "抽象类"]
 
 ## 前置知识
 
-- Python类的定义和基本使用
+- Python 类的定义和基本使用
 - 实例属性和类属性的区别
 - 方法的定义和调用
 - 面向对象编程基础概念
@@ -48,12 +48,12 @@ related_topics: ["多态", "封装", "抽象类"]
 
 ```python
 class 子类名(父类名):
-    # 子类的定义
+#    # 子类的定义
     pass
 
-# 多继承语法
-class 子类名(父类1, 父类2, ...):
-    # 子类的定义
+## 多继承语法
+class 子类名(父类 1, 父类 2, ...):
+#    # 子类的定义
     pass
 ```
 
@@ -78,7 +78,7 @@ class Cat(Animal):
     def speak(self):
         print(f"{self.name} 喵喵叫")
 
-# 使用示例
+## 使用示例
 dog = Dog("小黑")
 cat = Cat("小白")
 
@@ -115,16 +115,16 @@ class Child(Parent):
     def test_access(self):
         print(self.public_attr)        # ✓ 可以访问
         print(self._protected_attr)    # ✓ 可以访问
-        # print(self.__private_attr)   # ✗ 不能直接访问
+#        # print(self.__private_attr)   # ✗ 不能直接访问
         
         self.public_method()            # ✓ 可以调用
         self._protected_method()        # ✓ 可以调用
-        # self.__private_method()       # ✗ 不能直接调用
+#        # self.__private_method()       # ✗ 不能直接调用
         
-        # 通过父类的公有方法间接访问私有成员
+#        # 通过父类的公有方法间接访问私有成员
         print(self.access_private())    # ✓ 可以调用
 
-# 使用示例
+## 使用示例
 child = Child()
 child.test_access()
 ```
@@ -155,7 +155,7 @@ class Bicycle(Vehicle):
         print(f"{self.brand} 自行车开始骑行")
         print("踩踏板")
 
-# 使用示例
+## 使用示例
 car = Car("奔驰")
 bike = Bicycle("捷安特")
 
@@ -175,7 +175,7 @@ class Animal:
         self.age = age
     
     def introduce(self):
-        print(f"我是 {self.name}，{self.age} 岁")
+        print(f"我是 {self.name},{self.age} 岁")
 
 class Dog(Animal):
     def __init__(self, name, age, breed):
@@ -183,18 +183,18 @@ class Dog(Animal):
         self.breed = breed
     
     def introduce(self):
-        super().introduce()  # 调用父类的introduce方法
+        super().introduce()  # 调用父类的 introduce 方法
         print(f"我是 {self.breed} 品种的狗")
     
     def bark(self):
         print(f"{self.name} 在汪汪叫")
 
-# 使用示例
+## 使用示例
 dog = Dog("旺财", 3, "金毛")
 dog.introduce()
-# 输出：
-# 我是 旺财，3 岁
-# 我是 金毛 品种的狗
+## 输出:
+## 我是 旺财,3 岁
+## 我是 金毛 品种的狗
 ```
 
 ### 继承中的初始化
@@ -205,15 +205,15 @@ dog.introduce()
 class Parent:
     def __init__(self, value):
         self.parent_value = value
-        print(f"Parent初始化: {value}")
+        print(f"Parent 初始化: {value}")
 
 class Child(Parent):
     def __init__(self, value, child_value):
         super().__init__(value)  # 必须显式调用父类的__init__
         self.child_value = child_value
-        print(f"Child初始化: {child_value}")
+        print(f"Child 初始化: {child_value}")
 
-# 正确的初始化
+## 正确的初始化
 child = Child("父类值", "子类值")
 print(child.parent_value)  # 父类值
 print(child.child_value)   # 子类值
@@ -230,14 +230,14 @@ class Parent:
 class Child(Parent):
     pass  # 没有定义__init__
 
-# 会自动调用父类的__init__
+## 会自动调用父类的__init__
 child = Child()  # 输出: 父类初始化
 print(child.value)  # 来自父类
 ```
 
 ### 多继承
 
-Python支持多继承，但需要注意方法解析顺序（MRO）：
+Python 支持多继承，但需要注意方法解析顺序（MRO）：
 
 ```python
 class Flyable:
@@ -255,18 +255,18 @@ class Duck(Animal, Flyable, Swimmable):
     def speak(self):
         print(f"{self.name} 嘎嘎叫")
 
-# 使用示例
+## 使用示例
 duck = Duck("唐老鸭")
 duck.speak()  # 唐老鸭 嘎嘎叫
 duck.fly()    # 我可以飞行
 duck.swim()   # 我可以游泳
-duck.move()   # 唐老鸭 在移动（继承自Animal）
+duck.move()   # 唐老鸭 在移动(继承自 Animal)
 
-# 查看方法解析顺序
+## 查看方法解析顺序
 print(Duck.__mro__)
-# (<class '__main__.Duck'>, <class '__main__.Animal'>, 
-#  <class '__main__.Flyable'>, <class '__main__.Swimmable'>, 
-#  <class 'object'>)
+## (<class '__main__.Duck'>, <class '__main__.Animal'>, 
+##  <class '__main__.Flyable'>, <class '__main__.Swimmable'>, 
+##  <class 'object'>)
 ```
 
 ### 继承相关的特殊属性
@@ -281,13 +281,13 @@ class B(A):
 class C(B):
     pass
 
-# 查看继承关系
+## 查看继承关系
 print(C.__bases__)      # 直接父类: (<class '__main__.B'>,)
 print(C.__mro__)        # 方法解析顺序
 print(C.mro())          # 同上
-print(A.__subclasses__()) # A的子类: [<class '__main__.B'>]
+print(A.__subclasses__()) # A 的子类: [<class '__main__.B'>]
 
-# 实例检查
+## 实例检查
 c = C()
 print(isinstance(c, C))  # True
 print(isinstance(c, B))  # True
@@ -297,7 +297,7 @@ print(issubclass(C, A))  # True
 
 ## 实际应用案例
 
-### 案例1：员工管理系统
+### 案例 1：员工管理系统
 
 ```python
 class Employee:
@@ -311,7 +311,7 @@ class Employee:
         return f"员工: {self.name}, ID: {self.employee_id}, 薪资: {self.salary}"
     
     def calculate_bonus(self):
-        return self.salary * 0.1  # 基础奖金10%
+        return self.salary * 0.1  # 基础奖金 10%
 
 class Manager(Employee):
     """经理类"""
@@ -321,7 +321,7 @@ class Manager(Employee):
     
     def calculate_bonus(self):
         base_bonus = super().calculate_bonus()
-        team_bonus = self.team_size * 1000  # 每个团队成员1000奖金
+        team_bonus = self.team_size * 1000  # 每个团队成员 1000 奖金
         return base_bonus + team_bonus
     
     def get_info(self):
@@ -336,7 +336,7 @@ class Developer(Employee):
     
     def calculate_bonus(self):
         base_bonus = super().calculate_bonus()
-        skill_bonus = len(self.programming_languages) * 500  # 每种语言500奖金
+        skill_bonus = len(self.programming_languages) * 500  # 每种语言 500 奖金
         return base_bonus + skill_bonus
     
     def get_info(self):
@@ -344,7 +344,7 @@ class Developer(Employee):
         languages = ", ".join(self.programming_languages)
         return f"{base_info}, 技能: {languages}"
 
-# 使用示例
+## 使用示例
 manager = Manager("张三", "M001", 15000, 5)
 developer = Developer("李四", "D001", 12000, ["Python", "Java", "JavaScript"])
 
@@ -355,7 +355,7 @@ print(developer.get_info())
 print(f"开发者奖金: {developer.calculate_bonus()}")
 ```
 
-### 案例2：图形绘制系统
+### 案例 2：图形绘制系统
 
 ```python
 import math
@@ -366,10 +366,10 @@ class Shape:
         self.color = color
     
     def area(self):
-        raise NotImplementedError("子类必须实现area方法")
+        raise NotImplementedError("子类必须实现 area 方法")
     
     def perimeter(self):
-        raise NotImplementedError("子类必须实现perimeter方法")
+        raise NotImplementedError("子类必须实现 perimeter 方法")
     
     def describe(self):
         return f"这是一个{self.color}色的图形"
@@ -388,7 +388,7 @@ class Circle(Shape):
     
     def describe(self):
         base_desc = super().describe()
-        return f"{base_desc}，半径为{self.radius}的圆形"
+        return f"{base_desc},半径为{self.radius}的圆形"
 
 class Rectangle(Shape):
     """矩形类"""
@@ -405,18 +405,18 @@ class Rectangle(Shape):
     
     def describe(self):
         base_desc = super().describe()
-        return f"{base_desc}，宽{self.width}高{self.height}的矩形"
+        return f"{base_desc},宽{self.width}高{self.height}的矩形"
 
 class Square(Rectangle):
-    """正方形类（继承自矩形）"""
+    """正方形类(继承自矩形)"""
     def __init__(self, side, color="black"):
         super().__init__(side, side, color)  # 正方形的宽高相等
         self.side = side
     
     def describe(self):
-        return f"这是一个{self.color}色的，边长为{self.side}的正方形"
+        return f"这是一个{self.color}色的,边长为{self.side}的正方形"
 
-# 使用示例
+## 使用示例
 shapes = [
     Circle(5, "红"),
     Rectangle(4, 6, "蓝"),
@@ -434,7 +434,7 @@ for shape in shapes:
 
 1. **合理使用继承**：继承应该表示"是一个"的关系，而不是"有一个"的关系
 2. **避免过深的继承层次**：过深的继承会增加代码复杂性
-3. **谨慎使用多继承**：多继承可能导致钻石问题，需要理解MRO
+3. **谨慎使用多继承**：多继承可能导致钻石问题，需要理解 MRO
 4. **正确调用父类初始化**：在子类的`__init__`中记得调用`super().__init__()`
 5. **遵循里氏替换原则**：子类对象应该能够替换父类对象而不影响程序正确性
 
@@ -447,7 +447,7 @@ for shape in shapes:
 
 ## 扩展阅读
 
-- Python官方文档：类的继承
+- Python 官方文档：类的继承
 - 《Effective Python》中关于继承的最佳实践
-- 面向对象设计原则（SOLID原则）
-- 组合vs继承的选择策略
+- 面向对象设计原则（SOLID 原则）
+- 组合 vs 继承的选择策略

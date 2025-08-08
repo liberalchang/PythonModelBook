@@ -1,10 +1,10 @@
 ---
 layout: doc
-title: match-case语句
+title: match-case 语句
 permalink: /docs/basics/match-case/
 ---
 
-# match-case语句
+# match-case 语句
 
 ## 概述
 
@@ -90,19 +90,19 @@ def analyze_point(point):
         case (0, 0):
             print("坐标原点")
         case (0, y):
-            print(f"Y轴上的点，Y={y}")
+            print(f"Y 轴上的点,Y={y}")
         case (x, 0):
-            print(f"X轴上的点，X={x}")
+            print(f"X 轴上的点,X={x}")
         case (x, y) if x > 0 and y > 0:
-            print(f"第一象限的点：({x}, {y})")
+            print(f"第一象限的点:({x}, {y})")
         case (x, y):
-            print(f"其他象限的点：({x}, {y})")
+            print(f"其他象限的点:({x}, {y})")
         case _:
             print("不是二维坐标点")
 
 analyze_point((0, 0))    # 坐标原点
-analyze_point((3, 4))    # 第一象限的点：(3, 4)
-analyze_point([0, 5])    # Y轴上的点，Y=5
+analyze_point((3, 4))    # 第一象限的点:(3, 4)
+analyze_point([0, 5])    # Y 轴上的点,Y=5
 ```
 
 #### 通配符使用
@@ -140,7 +140,7 @@ def process_user(user_data):
             print("无效的用户数据")
 
 process_user({'name': 'Alice', 'age': 25, 'city': 'Beijing'})
-# 输出: 成年用户: Alice, 年龄: 25
+## 输出: 成年用户: Alice, 年龄: 25
 ```
 
 ### 类型匹配
@@ -155,15 +155,15 @@ def process_data(data):
         case str() if len(data) > 0:
             print(f"非空字符串: {data}")
         case list() as items:
-            print(f"列表，包含 {len(items)} 个元素")
+            print(f"列表,包含 {len(items)} 个元素")
         case dict() as mapping:
-            print(f"字典，包含 {len(mapping)} 个键")
+            print(f"字典,包含 {len(mapping)} 个键")
         case _:
             print(f"其他类型: {type(data)}")
 
 process_data(42)        # 正整数: 42
 process_data("hello")   # 非空字符串: hello
-process_data([1, 2, 3]) # 列表，包含 3 个元素
+process_data([1, 2, 3]) # 列表,包含 3 个元素
 ```
 
 ### 自定义类匹配
@@ -186,14 +186,14 @@ def analyze_shape(shape):
         case Point(x=x, y=y):
             print(f"点坐标: ({x}, {y})")
         case Circle(center=Point(x=0, y=0), radius=r):
-            print(f"以原点为圆心，半径为 {r} 的圆")
+            print(f"以原点为圆心,半径为 {r} 的圆")
         case Circle(center=center, radius=r):
-            print(f"圆心在 ({center.x}, {center.y})，半径为 {r} 的圆")
+            print(f"圆心在 ({center.x}, {center.y}),半径为 {r} 的圆")
         case _:
             print("未知形状")
 
 analyze_shape(Point(3, 4))  # 点坐标: (3, 4)
-analyze_shape(Circle(Point(0, 0), 5))  # 以原点为圆心，半径为 5 的圆
+analyze_shape(Circle(Point(0, 0), 5))  # 以原点为圆心,半径为 5 的圆
 ```
 
 ### AS 模式
@@ -213,7 +213,7 @@ def process_nested_data(data):
             print("其他数据")
 
 process_nested_data({'user': {'name': 'Bob', 'age': 30}})
-# 输出: 用户信息 - 姓名: Bob, 年龄: 30
+## 输出: 用户信息 - 姓名: Bob, 年龄: 30
 ```
 
 ### 条件匹配
@@ -258,7 +258,7 @@ def handle_command(command):
             print("未知命令")
 
 handle_command(['create', 'myproject', '--type', 'web'])
-# 输出: 创建类型为 web 的 myproject
+## 输出: 创建类型为 web 的 myproject
 ```
 
 ### 2. JSON 数据处理
@@ -315,13 +315,13 @@ sm.process_event('resume')  # 状态机恢复
 ### 1. 变量绑定注意事项
 
 ```python
-# 错误：变量不能作为匹配模式
-# error_code = 500
-# match status:
-#     case error_code:  # 这会报错
-#         return "Server Error"
+## 错误:变量不能作为匹配模式
+## error_code = 500
+## match status:
+##     case error_code:  # 这会报错
+##         return "Server Error"
 
-# 正确：使用常量或条件
+## 正确:使用常量或条件
 match status:
     case x if x == 500:
         return "Server Error"
@@ -339,7 +339,7 @@ def check_number(x):
         case n if n < 0:
             return "负数"
 
-# 正确的顺序
+## 正确的顺序
 def check_number_correct(x):
     match x:
         case 0:
@@ -353,7 +353,7 @@ def check_number_correct(x):
 ### 3. 性能考虑
 
 ```python
-# 对于简单的值匹配，match-case 比 if-elif 更高效
+## 对于简单的值匹配,match-case 比 if-elif 更高效
 def handle_status_match(status):
     match status:
         case 200: return "OK"
@@ -361,7 +361,7 @@ def handle_status_match(status):
         case 500: return "Server Error"
         case _: return "Unknown"
 
-# 但对于复杂条件，if-elif 可能更清晰
+## 但对于复杂条件,if-elif 可能更清晰
 def handle_complex_condition(data):
     if isinstance(data, dict) and 'user' in data and data['user'].get('active'):
         return "Active user"

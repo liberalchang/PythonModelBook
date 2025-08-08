@@ -1,22 +1,22 @@
 ---
 layout: doc
-title: calendar模块
+title: calendar 模块
 permalink: /docs/stdlib/calendar/
 category: stdlib
 tags: [日历, 月历, 年历, 标准库]
-description: Python calendar模块的完整指南，包含日历生成、日期计算、节假日处理等功能
-author: Python文档团队
+description: Python calendar 模块的完整指南，包含日历生成、日期计算、节假日处理等功能
+author: Python 文档团队
 date: 2024-01-01
 updated: 2024-01-01
 version: 1.0
-difficulty: 初级
+difficulty: "初级"
 ---
 
-# calendar模块
+# calendar 模块
 
 ## 📝 概述
 
-calendar模块提供了与日历相关的实用函数，可以生成文本和HTML格式的日历，进行日期计算，以及处理与星期、月份相关的各种操作。该模块遵循理想化的日历，当前的公历向前和向后无限延伸。
+calendar 模块提供了与日历相关的实用函数，可以生成文本和 HTML 格式的日历，进行日期计算，以及处理与星期、月份相关的各种操作。该模块遵循理想化的日历，当前的公历向前和向后无限延伸。
 
 ## 🎯 学习目标
 
@@ -24,11 +24,11 @@ calendar模块提供了与日历相关的实用函数，可以生成文本和HTM
 - 学会日期和星期的计算
 - 了解闰年判断和月份天数计算
 - 掌握日历的自定义和格式化
-- 学会HTML日历的生成
+- 学会 HTML 日历的生成
 
 ## 📋 前置知识
 
-- Python基本语法
+- Python 基本语法
 - 基本的日期时间概念
 - 了解公历系统
 
@@ -41,43 +41,43 @@ calendar模块提供了与日历相关的实用函数，可以生成文本和HTM
 ```python
 import calendar
 
-# 显示整年日历
-print("2024年日历:")
+## 显示整年日历
+print("2024 年日历:")
 print(calendar.calendar(2024))
 
-# 显示指定月份的日历
-print("\n2024年1月日历:")
+## 显示指定月份的日历
+print("\n2024 年 1 月日历:")
 print(calendar.month(2024, 1))
 
-# 设置日历格式
+## 设置日历格式
 calendar.setfirstweekday(calendar.MONDAY)  # 设置周一为一周的第一天
-print("\n以周一为首的2024年1月日历:")
+print("\n 以周一为首的 2024 年 1 月日历:")
 print(calendar.month(2024, 1))
 
-# 恢复默认设置（周日为首）
+## 恢复默认设置(周日为首)
 calendar.setfirstweekday(calendar.SUNDAY)
 ```
 
 #### 日历信息获取
 
 ```python
-# 获取月份的日历矩阵
+## 获取月份的日历矩阵
 month_calendar = calendar.monthcalendar(2024, 1)
-print("2024年1月日历矩阵:")
+print("2024 年 1 月日历矩阵:")
 for week in month_calendar:
     print(week)
-# 输出: [[0, 1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13], ...]
-# 注意: 0表示不属于当月的日期
+## 输出: [[0, 1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13], ...]
+## 注意: 0 表示不属于当月的日期
 
-# 获取月份范围
+## 获取月份范围
 first_weekday, days_in_month = calendar.monthrange(2024, 1)
-print(f"\n2024年1月第一天是星期{first_weekday}，共有{days_in_month}天")
-# first_weekday: 0=周一, 1=周二, ..., 6=周日
+print(f"\n2024 年 1 月第一天是星期{first_weekday},共有{days_in_month}天")
+## first_weekday: 0=周一, 1=周二, ..., 6=周日
 
-# 获取指定日期是星期几
+## 获取指定日期是星期几
 weekday = calendar.weekday(2024, 1, 1)
-print(f"2024年1月1日是星期{weekday}")
-# 0=周一, 1=周二, ..., 6=周日
+print(f"2024 年 1 月 1 日是星期{weekday}")
+## 0=周一, 1=周二, ..., 6=周日
 ```
 
 ### 日期计算函数
@@ -85,17 +85,17 @@ print(f"2024年1月1日是星期{weekday}")
 #### 闰年和天数计算
 
 ```python
-# 判断是否为闰年
+## 判断是否为闰年
 years = [2020, 2021, 2022, 2023, 2024]
 for year in years:
     is_leap = calendar.isleap(year)
     print(f"{year}年是{'闰年' if is_leap else '平年'}")
 
-# 计算指定年份范围内的闰年数量
+## 计算指定年份范围内的闰年数量
 leap_count = calendar.leapdays(2020, 2025)
-print(f"\n2020-2024年间有{leap_count}个闰年")
+print(f"\n2020-2024 年间有{leap_count}个闰年")
 
-# 获取月份天数
+## 获取月份天数
 months = [(2024, 2), (2023, 2), (2024, 4), (2024, 12)]
 for year, month in months:
     days = calendar.monthrange(year, month)[1]
@@ -105,49 +105,49 @@ for year, month in months:
 #### 星期相关计算
 
 ```python
-# 星期名称
+## 星期名称
 weekday_names = {
     0: '周一', 1: '周二', 2: '周三', 3: '周四',
     4: '周五', 5: '周六', 6: '周日'
 }
 
-# 计算一年中每个月1号是星期几
-print("2024年各月1号的星期:")
+## 计算一年中每个月 1 号是星期几
+print("2024 年各月 1 号的星期:")
 for month in range(1, 13):
     weekday = calendar.weekday(2024, month, 1)
     month_name = calendar.month_name[month]
-    print(f"{month_name}1日: {weekday_names[weekday]}")
+    print(f"{month_name}1 日: {weekday_names[weekday]}")
 
-# 获取星期和月份的名称
-print("\n星期名称:")
+## 获取星期和月份的名称
+print("\n 星期名称:")
 for i in range(7):
     print(f"{i}: {calendar.day_name[i]} ({calendar.day_abbr[i]})")
 
-print("\n月份名称:")
+print("\n 月份名称:")
 for i in range(1, 13):
     print(f"{i}: {calendar.month_name[i]} ({calendar.month_abbr[i]})")
 ```
 
 ### 自定义日历类
 
-#### TextCalendar类
+#### TextCalendar 类
 
 ```python
-# 创建自定义文本日历
+## 创建自定义文本日历
 text_cal = calendar.TextCalendar(firstweekday=0)  # 周一为首
 
-# 生成月份日历
+## 生成月份日历
 month_str = text_cal.formatmonth(2024, 1)
 print("自定义月历:")
 print(month_str)
 
-# 生成年度日历
+## 生成年度日历
 year_str = text_cal.formatyear(2024, w=2, l=1, c=6, m=3)
-print("\n自定义年历:")
+print("\n 自定义年历:")
 print(year_str)
 
-# 迭代月份中的日期
-print("\n2024年1月的所有日期:")
+## 迭代月份中的日期
+print("\n2024 年 1 月的所有日期:")
 for week in text_cal.monthdays2calendar(2024, 1):
     for day, weekday in week:
         if day != 0:
@@ -155,28 +155,28 @@ for week in text_cal.monthdays2calendar(2024, 1):
     print()  # 换行
 ```
 
-#### HTMLCalendar类
+#### HTMLCalendar 类
 
 ```python
-# 创建HTML日历
+## 创建 HTML 日历
 html_cal = calendar.HTMLCalendar(firstweekday=0)
 
-# 生成HTML月历
+## 生成 HTML 月历
 html_month = html_cal.formatmonth(2024, 1)
-print("HTML月历:")
-print(html_month[:200] + "...")  # 只显示前200个字符
+print("HTML 月历:")
+print(html_month[:200] + "...")  # 只显示前 200 个字符
 
-# 生成HTML年历
+## 生成 HTML 年历
 html_year = html_cal.formatyear(2024)
-print(f"\nHTML年历长度: {len(html_year)} 字符")
+print(f"\nHTML 年历长度: {len(html_year)} 字符")
 
-# 保存HTML日历到文件
+## 保存 HTML 日历到文件
 with open('calendar_2024.html', 'w', encoding='utf-8') as f:
     f.write(f"""
 <!DOCTYPE html>
 <html>
 <head>
-    <title>2024年日历</title>
+    <title>2024 年日历</title>
     <meta charset="utf-8">
     <style>
         table { border-collapse: collapse; margin: 20px; }
@@ -186,12 +186,12 @@ with open('calendar_2024.html', 'w', encoding='utf-8') as f:
     </style>
 </head>
 <body>
-    <h1>2024年日历</h1>
+    <h1>2024 年日历</h1>
     {html_year}
 </body>
 </html>
     """)
-print("HTML日历已保存到 calendar_2024.html")
+print("HTML 日历已保存到 calendar_2024.html")
 ```
 
 ### 日历格式化选项
@@ -211,11 +211,11 @@ print("HTML日历已保存到 calendar_2024.html")
 ```python
 def get_month_info(year, month):
     """获取指定月份的详细信息"""
-    # 基本信息
+#    # 基本信息
     first_weekday, days_in_month = calendar.monthrange(year, month)
     month_name = calendar.month_name[month]
     
-    # 计算工作日和周末天数
+#    # 计算工作日和周末天数
     workdays = 0
     weekends = 0
     
@@ -238,7 +238,7 @@ def get_month_info(year, month):
     
     return info
 
-# 使用示例
+## 使用示例
 month_info = get_month_info(2024, 2)
 print("月份信息:")
 for key, value in month_info.items():
@@ -255,7 +255,7 @@ class CustomCalendar:
         self.locale = locale
         self.holidays = {}  # 存储节假日
         
-        # 中文星期和月份名称
+#        # 中文星期和月份名称
         self.cn_weekdays = ['一', '二', '三', '四', '五', '六', '日']
         self.cn_months = ['', '一月', '二月', '三月', '四月', '五月', '六月',
                          '七月', '八月', '九月', '十月', '十一月', '十二月']
@@ -297,7 +297,7 @@ class CustomCalendar:
                 week_str += " "
             result += week_str + "\n"
         
-        # 添加节假日说明
+#        # 添加节假日说明
         holidays_in_month = []
         for day in range(1, calendar.monthrange(year, month)[1] + 1):
             if self.is_holiday(year, month, day):
@@ -305,7 +305,7 @@ class CustomCalendar:
                 holidays_in_month.append(f"{day}日: {holiday_name}")
         
         if holidays_in_month:
-            result += "\n节假日:\n"
+            result += "\n 节假日:\n"
             for holiday in holidays_in_month:
                 result += f"  {holiday}\n"
         
@@ -338,10 +338,10 @@ class CustomCalendar:
             '是否闰年': calendar.isleap(year)
         }
 
-# 使用示例
+## 使用示例
 cal = CustomCalendar()
 
-# 添加一些节假日
+## 添加一些节假日
 cal.add_holiday(2024, 1, 1, '元旦')
 cal.add_holiday(2024, 2, 10, '春节')
 cal.add_holiday(2024, 2, 11, '春节')
@@ -351,13 +351,13 @@ cal.add_holiday(2024, 10, 1, '国庆节')
 cal.add_holiday(2024, 10, 2, '国庆节')
 cal.add_holiday(2024, 10, 3, '国庆节')
 
-# 显示中文月历
+## 显示中文月历
 print(cal.format_chinese_month(2024, 1))
 print(cal.format_chinese_month(2024, 10))
 
-# 显示年度统计
+## 显示年度统计
 stats = cal.get_year_statistics(2024)
-print("2024年统计信息:")
+print("2024 年统计信息:")
 for key, value in stats.items():
     print(f"{key}: {value}")
 ```
@@ -386,18 +386,18 @@ class WorkdayCalculator:
         self.holidays.discard(date)
     
     def set_workdays(self, workdays):
-        """设置工作日（0=周一, 6=周日）"""
+        """设置工作日(0=周一, 6=周日)"""
         self.workdays = set(workdays)
     
     def is_workday(self, year, month, day):
         """判断是否为工作日"""
         date = datetime.date(year, month, day)
         
-        # 如果是节假日，不是工作日
+#        # 如果是节假日,不是工作日
         if date in self.holidays:
             return False
         
-        # 检查是否在工作日范围内
+#        # 检查是否在工作日范围内
         weekday = calendar.weekday(year, month, day)
         return weekday in self.workdays
     
@@ -453,40 +453,40 @@ class WorkdayCalculator:
                     week_str += "   "
                 else:
                     if self.is_workday(year, month, day):
-                        week_str += f"{day:2d}W"  # W表示工作日
+                        week_str += f"{day:2d}W"  # W 表示工作日
                     elif datetime.date(year, month, day) in self.holidays:
-                        week_str += f"{day:2d}H"  # H表示节假日
+                        week_str += f"{day:2d}H"  # H 表示节假日
                     else:
                         week_str += f"{day:2d} "  # 普通周末
                 week_str += " "
             result += week_str + "\n"
         
-        # 统计信息
+#        # 统计信息
         workdays = self.get_month_workdays(year, month)
-        result += f"\n本月工作日: {len(workdays)}天\n"
+        result += f"\n 本月工作日: {len(workdays)}天\n"
         
         return result
 
-# 使用示例
+## 使用示例
 calc = WorkdayCalculator()
 
-# 添加节假日
+## 添加节假日
 calc.add_holiday(2024, 1, 1)  # 元旦
 calc.add_holiday(2024, 5, 1)  # 劳动节
 calc.add_holiday(2024, 10, 1) # 国庆节
 
-# 生成工作日历
+## 生成工作日历
 print(calc.generate_work_calendar(2024, 1))
 print(calc.generate_work_calendar(2024, 5))
 
-# 计算工作日
+## 计算工作日
 workdays = calc.count_workdays(2024, 1, 1, 2024, 1, 31)
-print(f"2024年1月工作日总数: {workdays}天")
+print(f"2024 年 1 月工作日总数: {workdays}天")
 
-# 获取月份工作日详情
+## 获取月份工作日详情
 january_workdays = calc.get_month_workdays(2024, 1)
-print(f"\n2024年1月工作日详情 (共{len(january_workdays)}天):")
-for workday in january_workdays[:5]:  # 只显示前5个
+print(f"\n2024 年 1 月工作日详情 (共{len(january_workdays)}天):")
+for workday in january_workdays[:5]:  # 只显示前 5 个
     print(f"  {workday['date']} ({workday['weekday_name']})")
 if len(january_workdays) > 5:
     print(f"  ... 还有{len(january_workdays) - 5}个工作日")
@@ -494,24 +494,24 @@ if len(january_workdays) > 5:
 
 ## ⚠️ 注意事项
 
-- **日历系统**: calendar模块使用理想化的公历，不考虑历史上的日历改革
-- **星期编号**: Python中周一为0，周日为6，与某些系统不同
-- **时区**: calendar模块不处理时区，只处理日期
+- **日历系统**: calendar 模块使用理想化的公历，不考虑历史上的日历改革
+- **星期编号**: Python 中周一为 0，周日为 6，与某些系统不同
+- **时区**: calendar 模块不处理时区，只处理日期
 - **本地化**: 月份和星期名称默认为英文，需要自定义中文显示
-- **性能**: 对于大量日期计算，考虑使用datetime模块
-- **闰秒**: calendar模块不考虑闰秒
+- **性能**: 对于大量日期计算，考虑使用 datetime 模块
+- **闰秒**: calendar 模块不考虑闰秒
 
 ## 🔗 相关内容
 
-- [datetime模块](datetime/) - 更强大的日期时间处理
-- [time模块](time/) - 时间相关的基础功能
+- [datetime 模块](datetime/) - 更强大的日期时间处理
+- [time 模块](time/) - 时间相关的基础功能
 - [内置函数](../builtins/) - 了解相关的内置函数
 
 ## 📚 扩展阅读
 
-- [Python calendar模块官方文档](https://docs.python.org/3/library/calendar.html)
+- [Python calendar 模块官方文档](https://docs.python.org/3/library/calendar.html)
 - [公历系统详解](https://en.wikipedia.org/wiki/Gregorian_calendar)
-- [ISO 8601日期标准](https://en.wikipedia.org/wiki/ISO_8601)
+- [ISO 8601 日期标准](https://en.wikipedia.org/wiki/ISO_8601)
 
 ## 🏷️ 标签
 
@@ -520,5 +520,5 @@ if len(january_workdays) > 5:
 ---
 
 **最后更新**: 2024-01-01  
-**作者**: Python文档团队  
+**作者**: Python 文档团队  
 **版本**: 1.0

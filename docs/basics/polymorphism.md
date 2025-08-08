@@ -2,14 +2,14 @@
 layout: doc
 title: "多态性"
 permalink: /docs/basics/polymorphism/
-category: "Python基础"
+category: "Python 基础"
 tags: ["面向对象", "多态", "继承", "方法重写"]
-description: "深入理解Python中的多态性概念，包括方法重写、动态方法调用、鸭子类型以及多态在实际开发中的应用"
-author: "Python教程"
+description: "深入理解 Python 中的多态性概念，包括方法重写、动态方法调用、鸭子类型以及多态在实际开发中的应用"
+author: "Python 教程"
 version: "1.0"
 last_updated: "2024-01-20"
 difficulty: "中级"
-estimated_time: "40分钟"
+estimated_time: "40 分钟"
 prerequisites: ["类的定义", "类的继承", "方法重写"]
 related_topics: ["继承", "抽象类", "接口设计"]
 ---
@@ -18,7 +18,7 @@ related_topics: ["继承", "抽象类", "接口设计"]
 
 ## 概述
 
-多态性（Polymorphism）是面向对象编程的核心特性之一，它允许不同类的对象对同一消息做出不同的响应。在Python中，多态性主要通过方法重写和鸭子类型来实现，使得代码更加灵活、可扩展和易于维护。
+多态性（Polymorphism）是面向对象编程的核心特性之一，它允许不同类的对象对同一消息做出不同的响应。在 Python 中，多态性主要通过方法重写和鸭子类型来实现，使得代码更加灵活、可扩展和易于维护。
 
 ## 学习目标
 
@@ -26,14 +26,14 @@ related_topics: ["继承", "抽象类", "接口设计"]
 
 - 理解多态性的基本概念和原理
 - 掌握通过继承和方法重写实现多态
-- 了解Python的鸭子类型特性
-- 学会使用isinstance()和hasattr()进行类型检查
+- 了解 Python 的鸭子类型特性
+- 学会使用 isinstance()和 hasattr()进行类型检查
 - 能够设计支持多态的类结构
 - 理解多态在实际开发中的应用场景
 
 ## 前置知识
 
-- Python类的定义和实例化
+- Python 类的定义和实例化
 - 类的继承机制
 - 方法的定义和重写
 - 面向对象编程基础概念
@@ -69,24 +69,24 @@ class Bird(Animal):
     def move(self):
         print("鸟儿在飞翔")
 
-# 多态的体现
+## 多态的体现
 def make_animal_speak(animal):
-    """这个函数可以接受任何Animal类型的对象"""
+    """这个函数可以接受任何 Animal 类型的对象"""
     print(animal.speak())
     animal.move()
 
-# 使用示例
+## 使用示例
 animals = [Dog(), Cat(), Bird()]
 
 for animal in animals:
     make_animal_speak(animal)
-# 输出：
-# 汪汪!
-# 动物在移动
-# 喵喵!
-# 动物在移动
-# 啾啾!
-# 鸟儿在飞翔
+## 输出:
+## 汪汪!
+## 动物在移动
+## 喵喵!
+## 动物在移动
+## 啾啾!
+## 鸟儿在飞翔
 ```
 
 ### 方法重写实现多态
@@ -100,10 +100,10 @@ class Shape:
         self.name = name
     
     def area(self):
-        raise NotImplementedError("子类必须实现area方法")
+        raise NotImplementedError("子类必须实现 area 方法")
     
     def perimeter(self):
-        raise NotImplementedError("子类必须实现perimeter方法")
+        raise NotImplementedError("子类必须实现 perimeter 方法")
     
     def describe(self):
         return f"这是一个{self.name}"
@@ -139,14 +139,14 @@ class Triangle(Shape):
         self.c = c
     
     def area(self):
-        # 使用海伦公式计算面积
+#        # 使用海伦公式计算面积
         s = (self.a + self.b + self.c) / 2
         return (s * (s - self.a) * (s - self.b) * (s - self.c)) ** 0.5
     
     def perimeter(self):
         return self.a + self.b + self.c
 
-# 多态函数
+## 多态函数
 def print_shape_info(shape):
     """打印图形信息的通用函数"""
     print(shape.describe())
@@ -154,7 +154,7 @@ def print_shape_info(shape):
     print(f"周长: {shape.perimeter():.2f}")
     print("-" * 30)
 
-# 使用示例
+## 使用示例
 shapes = [
     Rectangle(5, 3),
     Circle(4),
@@ -167,7 +167,7 @@ for shape in shapes:
 
 ### 鸭子类型
 
-Python支持鸭子类型（Duck Typing）："如果它走起来像鸭子，叫起来像鸭子，那它就是鸭子"。这意味着对象的类型不重要，重要的是它是否具有所需的方法。
+Python 支持鸭子类型（Duck Typing）："如果它走起来像鸭子，叫起来像鸭子，那它就是鸭子"。这意味着对象的类型不重要，重要的是它是否具有所需的方法。
 
 ```python
 class Duck:
@@ -188,22 +188,22 @@ class Dog:
     def bark(self):
         print("汪汪!")
 
-# 鸭子类型的体现
+## 鸭子类型的体现
 def make_it_fly(obj):
-    """只要对象有fly方法就可以调用"""
+    """只要对象有 fly 方法就可以调用"""
     if hasattr(obj, 'fly'):
         obj.fly()
     else:
         print(f"{obj.__class__.__name__} 不能飞")
 
 def make_it_quack(obj):
-    """只要对象有quack方法就可以调用"""
+    """只要对象有 quack 方法就可以调用"""
     if hasattr(obj, 'quack'):
         obj.quack()
     else:
         print(f"{obj.__class__.__name__} 不会嘎嘎叫")
 
-# 使用示例
+## 使用示例
 objects = [Duck(), Airplane(), Dog()]
 
 for obj in objects:
@@ -231,7 +231,7 @@ class Car(Vehicle):
         self.doors = doors
     
     def start(self):
-        print(f"{self.brand} 汽车启动，有{self.doors}个门")
+        print(f"{self.brand} 汽车启动,有{self.doors}个门")
     
     def honk(self):
         print("滴滴!")
@@ -242,17 +242,17 @@ class Motorcycle(Vehicle):
         self.engine_size = engine_size
     
     def start(self):
-        print(f"{self.brand} 摩托车启动，{self.engine_size}cc引擎")
+        print(f"{self.brand} 摩托车启动,{self.engine_size}cc 引擎")
     
     def wheelie(self):
         print("摩托车翘头!")
 
 def operate_vehicle(vehicle):
     """操作交通工具的通用函数"""
-    # 多态调用
+#    # 多态调用
     vehicle.start()
     
-    # 类型检查和特定操作
+#    # 类型检查和特定操作
     if isinstance(vehicle, Car):
         vehicle.honk()
         print("这是一辆汽车")
@@ -260,14 +260,14 @@ def operate_vehicle(vehicle):
         vehicle.wheelie()
         print("这是一辆摩托车")
     
-    # 检查是否有特定方法
+#    # 检查是否有特定方法
     if hasattr(vehicle, 'honk'):
         print("这个交通工具可以鸣笛")
     
     print(f"品牌: {vehicle.brand}")
     print("-" * 30)
 
-# 使用示例
+## 使用示例
 vehicles = [
     Car("奔驰", 4),
     Motorcycle("哈雷", 1200),
@@ -290,16 +290,16 @@ class Drawable(ABC):
     
     @abstractmethod
     def draw(self):
-        """绘制方法，子类必须实现"""
+        """绘制方法,子类必须实现"""
         pass
     
     @abstractmethod
     def get_area(self):
-        """获取面积，子类必须实现"""
+        """获取面积,子类必须实现"""
         pass
     
     def display_info(self):
-        """显示信息，通用方法"""
+        """显示信息,通用方法"""
         print(f"绘制 {self.__class__.__name__}")
         self.draw()
         print(f"面积: {self.get_area()}")
@@ -324,7 +324,7 @@ class Circle(Drawable):
     def get_area(self):
         return 3.14159 * self.radius ** 2
 
-# 多态函数
+## 多态函数
 def render_shapes(shapes):
     """渲染图形列表"""
     total_area = 0
@@ -335,14 +335,14 @@ def render_shapes(shapes):
     
     print(f"总面积: {total_area:.2f}")
 
-# 使用示例
+## 使用示例
 shapes = [Square(5), Circle(3), Square(2)]
 render_shapes(shapes)
 ```
 
 ## 实际应用案例
 
-### 案例1：支付系统
+### 案例 1：支付系统
 
 ```python
 from abc import ABC, abstractmethod
@@ -368,7 +368,7 @@ class CreditCardProcessor(PaymentProcessor):
         return True
     
     def validate_payment_info(self, payment_info):
-        # 验证信用卡信息
+#        # 验证信用卡信息
         card_number = payment_info.get('card_number', '')
         if len(card_number) == 16:
             print("信用卡信息验证通过")
@@ -379,12 +379,12 @@ class CreditCardProcessor(PaymentProcessor):
 class AlipayProcessor(PaymentProcessor):
     def process_payment(self, amount):
         print(f"使用支付宝支付 ¥{amount}")
-        print("调用支付宝API...")
+        print("调用支付宝 API...")
         print("支付成功!")
         return True
     
     def validate_payment_info(self, payment_info):
-        # 验证支付宝信息
+#        # 验证支付宝信息
         account = payment_info.get('account', '')
         if '@' in account or len(account) == 11:
             print("支付宝账户验证通过")
@@ -395,12 +395,12 @@ class AlipayProcessor(PaymentProcessor):
 class WechatPayProcessor(PaymentProcessor):
     def process_payment(self, amount):
         print(f"使用微信支付 ¥{amount}")
-        print("调用微信支付API...")
+        print("调用微信支付 API...")
         print("支付成功!")
         return True
     
     def validate_payment_info(self, payment_info):
-        # 验证微信支付信息
+#        # 验证微信支付信息
         openid = payment_info.get('openid', '')
         if len(openid) > 10:
             print("微信支付信息验证通过")
@@ -426,19 +426,19 @@ class PaymentService:
             print(f"不支持的支付方式: {payment_method}")
             return False
         
-        print(f"开始处理支付，方式: {payment_method}")
+        print(f"开始处理支付,方式: {payment_method}")
         
-        # 多态调用：不同的处理器有不同的实现
+#        # 多态调用:不同的处理器有不同的实现
         if processor.validate_payment_info(payment_info):
             return processor.process_payment(amount)
         else:
             print("支付信息验证失败")
             return False
 
-# 使用示例
+## 使用示例
 payment_service = PaymentService()
 
-# 不同的支付方式
+## 不同的支付方式
 orders = [
     {
         'method': 'credit_card',
@@ -468,7 +468,7 @@ for order in orders:
     print()
 ```
 
-### 案例2：文件处理系统
+### 案例 2：文件处理系统
 
 ```python
 from abc import ABC, abstractmethod
@@ -500,17 +500,17 @@ class JSONProcessor(FileProcessor):
             with open(filepath, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"读取JSON文件失败: {e}")
+            print(f"读取 JSON 文件失败: {e}")
             return None
     
     def write_file(self, filepath, data):
         try:
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-            print(f"JSON文件写入成功: {filepath}")
+            print(f"JSON 文件写入成功: {filepath}")
             return True
         except Exception as e:
-            print(f"写入JSON文件失败: {e}")
+            print(f"写入 JSON 文件失败: {e}")
             return False
     
     def get_file_type(self):
@@ -526,7 +526,7 @@ class CSVProcessor(FileProcessor):
                     data.append(dict(row))
             return data
         except Exception as e:
-            print(f"读取CSV文件失败: {e}")
+            print(f"读取 CSV 文件失败: {e}")
             return None
     
     def write_file(self, filepath, data):
@@ -538,10 +538,10 @@ class CSVProcessor(FileProcessor):
                 writer = csv.DictWriter(f, fieldnames=data[0].keys())
                 writer.writeheader()
                 writer.writerows(data)
-            print(f"CSV文件写入成功: {filepath}")
+            print(f"CSV 文件写入成功: {filepath}")
             return True
         except Exception as e:
-            print(f"写入CSV文件失败: {e}")
+            print(f"写入 CSV 文件失败: {e}")
             return False
     
     def get_file_type(self):
@@ -554,11 +554,11 @@ class XMLProcessor(FileProcessor):
             root = tree.getroot()
             return self._xml_to_dict(root)
         except Exception as e:
-            print(f"读取XML文件失败: {e}")
+            print(f"读取 XML 文件失败: {e}")
             return None
     
     def _xml_to_dict(self, element):
-        """将XML元素转换为字典"""
+        """将 XML 元素转换为字典"""
         result = {}
         for child in element:
             if len(child) == 0:
@@ -573,14 +573,14 @@ class XMLProcessor(FileProcessor):
             self._dict_to_xml(root, data)
             tree = ET.ElementTree(root)
             tree.write(filepath, encoding='utf-8', xml_declaration=True)
-            print(f"XML文件写入成功: {filepath}")
+            print(f"XML 文件写入成功: {filepath}")
             return True
         except Exception as e:
-            print(f"写入XML文件失败: {e}")
+            print(f"写入 XML 文件失败: {e}")
             return False
     
     def _dict_to_xml(self, parent, data):
-        """将字典转换为XML元素"""
+        """将字典转换为 XML 元素"""
         if isinstance(data, dict):
             for key, value in data.items():
                 child = ET.SubElement(parent, str(key))
@@ -617,7 +617,7 @@ class FileManager:
         
         print(f"使用{processor.get_file_type()}处理器")
         
-        # 多态调用：不同处理器有不同的读取方式
+#        # 多态调用:不同处理器有不同的读取方式
         data = processor.read_file(input_path)
         
         if data is None:
@@ -626,34 +626,34 @@ class FileManager:
         print(f"成功读取{processor.get_file_type()}文件")
         print(f"数据内容: {data}")
         
-        # 如果指定了输出路径，则写入文件
+#        # 如果指定了输出路径,则写入文件
         if output_path:
             output_processor = self.get_processor(output_path)
             if output_processor:
-                # 多态调用：不同处理器有不同的写入方式
+#                # 多态调用:不同处理器有不同的写入方式
                 return output_processor.write_file(output_path, data)
         
         return True
 
-# 使用示例（需要实际的文件来测试）
+## 使用示例(需要实际的文件来测试)
 file_manager = FileManager()
 
-# 示例数据
+## 示例数据
 sample_data = [
     {"name": "张三", "age": 25, "city": "北京"},
     {"name": "李四", "age": 30, "city": "上海"}
 ]
 
-# 演示多态性
+## 演示多态性
 processors = [JSONProcessor(), CSVProcessor(), XMLProcessor()]
 
 for processor in processors:
     print(f"\n=== {processor.get_file_type()} 处理器 ===")
     filename = f"test.{processor.get_file_type().lower()}"
     
-    # 多态调用：每个处理器都有自己的写入实现
+#    # 多态调用:每个处理器都有自己的写入实现
     if processor.write_file(filename, sample_data):
-        # 多态调用：每个处理器都有自己的读取实现
+#        # 多态调用:每个处理器都有自己的读取实现
         read_data = processor.read_file(filename)
         print(f"读取的数据: {read_data}")
 ```
@@ -662,7 +662,7 @@ for processor in processors:
 
 1. **接口一致性**：多态要求子类保持与父类相同的接口
 2. **里氏替换原则**：子类对象应该能够替换父类对象而不影响程序正确性
-3. **避免类型检查**：尽量避免使用isinstance()进行类型检查，优先使用鸭子类型
+3. **避免类型检查**：尽量避免使用 isinstance()进行类型检查，优先使用鸭子类型
 4. **合理使用抽象类**：使用抽象基类可以更好地定义多态接口
 5. **性能考虑**：多态调用可能比直接调用稍慢，但通常可以忽略
 
@@ -675,7 +675,7 @@ for processor in processors:
 
 ## 扩展阅读
 
-- Python官方文档：多态和鸭子类型
+- Python 官方文档：多态和鸭子类型
 - 《设计模式》中关于多态的应用
-- SOLID原则中的开闭原则和里氏替换原则
+- SOLID 原则中的开闭原则和里氏替换原则
 - 函数式编程中的多态概念

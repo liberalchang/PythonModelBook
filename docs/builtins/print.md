@@ -4,30 +4,30 @@ title: print() - 输出函数
 permalink: /docs/builtins/print/
 category: builtins
 tags: [输出, 格式化, 调试]
-description: Python内置输出函数，用于将对象打印到文本流
-author: Python文档工程师
+description: Python 内置输出函数，用于将对象打印到文本流
+author: Python 文档工程师
 date: 2024-01-15
 updated: 2024-01-15
 version: 1.0
-difficulty: 初级
+difficulty: "初级"
 ---
 
 # print() - 输出函数
 
 ## 📝 概述
 
-`print()` 是Python中最常用的内置函数之一，用于将对象打印到文本流文件，通常是标准输出（控制台）。它支持多种参数和格式化选项，是调试和输出信息的重要工具。<mcreference link="https://docs.python.org/3/library/functions.html" index="1">1</mcreference>
+`print()` 是 Python 中最常用的内置函数之一，用于将对象打印到文本流文件，通常是标准输出（控制台）。它支持多种参数和格式化选项，是调试和输出信息的重要工具。<mcreference link="https://docs.python.org/3/library/functions.html" index="1">1</mcreference>
 
 ## 🎯 学习目标
 
-- 掌握print()函数的基本用法
-- 理解print()函数的各种参数
-- 学会使用print()进行格式化输出
+- 掌握 print()函数的基本用法
+- 理解 print()函数的各种参数
+- 学会使用 print()进行格式化输出
 - 了解输出重定向的方法
 
 ## 📋 前置知识
 
-- Python基本语法
+- Python 基本语法
 - 字符串的基本概念
 - 文件操作基础
 
@@ -64,53 +64,53 @@ print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
 ### 基础用法
 
 ```python
-# 基本输出
+## 基本输出
 print("Hello, World!")
-# 输出: Hello, World!
+## 输出: Hello, World!
 
-# 输出多个对象
+## 输出多个对象
 print("姓名:", "张三", "年龄:", 25)
-# 输出: 姓名: 张三 年龄: 25
+## 输出: 姓名: 张三 年龄: 25
 
-# 输出变量
+## 输出变量
 name = "李四"
 age = 30
 print("姓名:", name, "年龄:", age)
-# 输出: 姓名: 李四 年龄: 30
+## 输出: 姓名: 李四 年龄: 30
 ```
 
 ### 高级用法
 
 ```python
-# 自定义分隔符
+## 自定义分隔符
 print("苹果", "香蕉", "橙子", sep="-")
-# 输出: 苹果-香蕉-橙子
+## 输出: 苹果-香蕉-橙子
 
-# 自定义结束符
+## 自定义结束符
 print("第一行", end="")
 print("第二行")
-# 输出: 第一行第二行
+## 输出: 第一行第二行
 
-# 输出到文件
+## 输出到文件
 with open("output.txt", "w", encoding="utf-8") as f:
     print("这是写入文件的内容", file=f)
 
-# 强制刷新缓冲区
+## 强制刷新缓冲区
 import time
 for i in range(5):
     print(f"计数: {i}", flush=True)
-    time.sleep(1)  # 立即显示，不等待缓冲区满
+    time.sleep(1)  # 立即显示,不等待缓冲区满
 ```
 
 ### 实际案例
 
 ```python
-# 格式化输出学生信息
+## 格式化输出学生信息
 def print_student_info(students):
     """打印学生信息表"""
     print("学生信息表")
     print("=" * 30)
-    print("姓名\t年龄\t成绩")
+    print("姓名\t 年龄\t 成绩")
     print("-" * 30)
     
     for student in students:
@@ -118,7 +118,7 @@ def print_student_info(students):
     
     print("=" * 30)
 
-# 使用示例
+## 使用示例
 students = [
     {"name": "张三", "age": 20, "score": 85},
     {"name": "李四", "age": 21, "score": 92},
@@ -143,8 +143,8 @@ print_student_info(students)
 
 ## 📚 扩展阅读
 
-- [Python官方文档 - print()](https://docs.python.org/3/library/functions.html#print)
-- [Python输入输出教程](https://docs.python.org/3/tutorial/inputoutput.html)
+- [Python 官方文档 - print()](https://docs.python.org/3/library/functions.html#print)
+- [Python 输入输出教程](https://docs.python.org/3/tutorial/inputoutput.html)
 
 ## 🏷️ 标签
 
@@ -153,5 +153,5 @@ print_student_info(students)
 ---
 
 **最后更新**: 2024-01-15  
-**作者**: Python文档工程师  
+**作者**: Python 文档工程师  
 **版本**: 1.0

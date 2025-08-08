@@ -1,34 +1,34 @@
 ---
 layout: doc
-title: enum模块：枚举类型
+title: enum 模块：枚举类型
 permalink: /docs/stdlib/enum/
 category: stdlib
 tags: [enum, 枚举, 常量, 类型安全]
-description: Python enum模块提供创建枚举类型的功能，提高代码可读性和安全性
-author: Python文档团队
+description: Python enum 模块提供创建枚举类型的功能，提高代码可读性和安全性
+author: Python 文档团队
 date: 2024-01-15
 updated: 2024-01-15
 version: 1.0
-difficulty: 初级
+difficulty: "初级"
 ---
 
-# enum模块：枚举类型
+# enum 模块：枚举类型
 
 ## 📝 概述
 
-Python的`enum`模块提供了创建枚举类型的功能，这是一种将符号名称绑定到唯一常量值的类。枚举类型可以显著提高代码的可读性、安全性和可维护性，特别适用于处理有限的、预定义的选项集。
+Python 的`enum`模块提供了创建枚举类型的功能，这是一种将符号名称绑定到唯一常量值的类。枚举类型可以显著提高代码的可读性、安全性和可维护性，特别适用于处理有限的、预定义的选项集。
 
 ## 🎯 学习目标
 
 - 理解枚举类型的概念和优势
-- 掌握Enum和IntEnum的使用方法
-- 学会使用auto()函数自动赋值
+- 掌握 Enum 和 IntEnum 的使用方法
+- 学会使用 auto()函数自动赋值
 - 了解枚举成员的比较和别名机制
-- 掌握@unique装饰器确保值的唯一性
+- 掌握@unique 装饰器确保值的唯一性
 
 ## 📋 前置知识
 
-- Python基础语法
+- Python 基础语法
 - 类和对象的概念
 - 装饰器的基本使用
 
@@ -65,18 +65,18 @@ Python的`enum`模块提供了创建枚举类型的功能，这是一种将符�
 ```python
 from enum import Enum
 
-# 创建基本枚举
+## 创建基本枚举
 class Color(Enum):
     RED = 1
     GREEN = 2
     BLUE = 3
 
-# 访问枚举成员
+## 访问枚举成员
 print(Color.RED)        # Color.RED
 print(Color.RED.name)   # RED
 print(Color.RED.value)  # 1
 
-# 枚举迭代
+## 枚举迭代
 print("所有颜色:")
 for color in Color:
     print(f"{color.name}: {color.value}")
@@ -96,12 +96,12 @@ class Weekday(Enum):
     SATURDAY = "Sat"
     SUNDAY = "Sun"
 
-# 使用字符串值
+## 使用字符串值
 today = Weekday.MONDAY
 print(f"今天是: {today.value}")  # 今天是: Mon
 ```
 
-### IntEnum的使用
+### IntEnum 的使用
 
 ```python
 from enum import IntEnum
@@ -111,11 +111,11 @@ class Permission(IntEnum):
     WRITE = 2
     EXECUTE = 4
 
-# IntEnum支持数值运算
+## IntEnum 支持数值运算
 full_permission = Permission.READ | Permission.WRITE | Permission.EXECUTE
 print(f"完整权限值: {full_permission}")  # 完整权限值: 7
 
-# 可以与整数比较
+## 可以与整数比较
 print(Permission.READ == 1)  # True
 print(Permission.READ < Permission.WRITE)  # True
 ```
@@ -131,13 +131,13 @@ class Shape(Enum):
     TRIANGLE = auto()
     RECTANGLE = auto()
 
-# auto()自动生成唯一值
+## auto()自动生成唯一值
 for shape in Shape:
     print(f"{shape.name}: {shape.value}")
-# CIRCLE: 1
-# SQUARE: 2
-# TRIANGLE: 3
-# RECTANGLE: 4
+## CIRCLE: 1
+## SQUARE: 2
+## TRIANGLE: 3
+## RECTANGLE: 4
 ```
 
 ### 唯一性检查
@@ -152,7 +152,7 @@ class ErrorCode(Enum):
     PERMISSION_DENIED = 2
     NETWORK_ERROR = 3
 
-# 如果有重复值，@unique会抛出ValueError
+## 如果有重复值,@unique 会抛出 ValueError
 print("所有错误码:")
 for code in ErrorCode:
     print(f"{code.name}: {code.value}")
@@ -165,21 +165,21 @@ from enum import Enum
 
 class State(Enum):
     RUNNING = 1
-    ACTIVE = 1      # ACTIVE是RUNNING的别名
+    ACTIVE = 1      # ACTIVE 是 RUNNING 的别名
     STOPPED = 2
-    INACTIVE = 2    # INACTIVE是STOPPED的别名
+    INACTIVE = 2    # INACTIVE 是 STOPPED 的别名
 
-# 别名指向同一个枚举成员
+## 别名指向同一个枚举成员
 print(State.RUNNING)    # State.RUNNING
 print(State.ACTIVE)     # State.RUNNING
 print(State.RUNNING is State.ACTIVE)  # True
 
-# 迭代时只返回主要成员
+## 迭代时只返回主要成员
 print("主要状态:")
 for state in State:
     print(state.name)
-# RUNNING
-# STOPPED
+## RUNNING
+## STOPPED
 ```
 
 ### 枚举比较
@@ -192,15 +192,15 @@ class Priority(Enum):
     MEDIUM = 2
     HIGH = 3
 
-# 枚举成员比较
+## 枚举成员比较
 print(Priority.LOW == Priority.LOW)     # True
 print(Priority.LOW is Priority.LOW)     # True
 print(Priority.LOW == Priority.HIGH)    # False
 
-# 不能与其他类型直接比较
+## 不能与其他类型直接比较
 print(Priority.LOW == 1)                # False
 
-# 但IntEnum可以与整数比较
+## 但 IntEnum 可以与整数比较
 from enum import IntEnum
 
 class IntPriority(IntEnum):
@@ -211,34 +211,34 @@ class IntPriority(IntEnum):
 print(IntPriority.LOW == 1)             # True
 ```
 
-### 实际案例：HTTP状态码
+### 实际案例：HTTP 状态码
 
 ```python
 from enum import IntEnum
 
 class HTTPStatus(IntEnum):
-    # 成功状态码
+#    # 成功状态码
     OK = 200
     CREATED = 201
     ACCEPTED = 202
     
-    # 重定向状态码
+#    # 重定向状态码
     MOVED_PERMANENTLY = 301
     FOUND = 302
     
-    # 客户端错误
+#    # 客户端错误
     BAD_REQUEST = 400
     UNAUTHORIZED = 401
     FORBIDDEN = 403
     NOT_FOUND = 404
     
-    # 服务器错误
+#    # 服务器错误
     INTERNAL_SERVER_ERROR = 500
     BAD_GATEWAY = 502
     SERVICE_UNAVAILABLE = 503
 
 def handle_response(status_code):
-    """处理HTTP响应状态码"""
+    """处理 HTTP 响应状态码"""
     if status_code == HTTPStatus.OK:
         return "请求成功"
     elif status_code == HTTPStatus.NOT_FOUND:
@@ -250,7 +250,7 @@ def handle_response(status_code):
     else:
         return "其他状态"
 
-# 使用示例
+## 使用示例
 print(handle_response(HTTPStatus.OK))        # 请求成功
 print(handle_response(HTTPStatus.NOT_FOUND)) # 资源未找到
 print(handle_response(500))                  # 服务器错误
@@ -277,7 +277,7 @@ class TrafficLight(Enum):
         return transitions[self]
     
     def duration(self):
-        """获取当前灯的持续时间（秒）"""
+        """获取当前灯的持续时间(秒)"""
         durations = {
             TrafficLight.RED: 30,
             TrafficLight.YELLOW: 5,
@@ -289,19 +289,19 @@ def simulate_traffic_light():
     """模拟交通灯运行"""
     current_light = TrafficLight.RED
     
-    for cycle in range(3):  # 运行3个周期
+    for cycle in range(3):  # 运行 3 个周期
         print(f"\n=== 周期 {cycle + 1} ===")
-        for _ in range(3):  # 每个周期3个灯
+        for _ in range(3):  # 每个周期 3 个灯
             print(f"当前状态: {current_light.value}")
             print(f"持续时间: {current_light.duration()}秒")
             
-            # 模拟等待（实际应用中会真正等待）
-            # time.sleep(current_light.duration())
+#            # 模拟等待(实际应用中会真正等待)
+#            # time.sleep(current_light.duration())
             
             current_light = current_light.next_light()
             print("-" * 20)
 
-# 运行模拟
+## 运行模拟
 simulate_traffic_light()
 ```
 
@@ -326,14 +326,14 @@ class Planet(Enum):
         G = 6.67300E-11  # 万有引力常数
         return G * self.mass / (self.radius * self.radius)
 
-# 使用功能枚举
+## 使用功能枚举
 earth = Planet.EARTH
 print(f"地球质量: {earth.mass:.2e} kg")
 print(f"地球半径: {earth.radius:.2e} m")
 print(f"地球表面重力: {earth.surface_gravity:.2f} m/s²")
 
-# 比较所有行星的重力
-print("\n各行星表面重力:")
+## 比较所有行星的重力
+print("\n 各行星表面重力:")
 for planet in Planet:
     print(f"{planet.name}: {planet.surface_gravity:.2f} m/s²")
 ```
@@ -341,20 +341,20 @@ for planet in Planet:
 ## ⚠️ 注意事项
 
 - 枚举成员一旦创建就不可修改
-- 普通Enum不能与其他类型进行数值比较，但IntEnum可以
-- 使用@unique装饰器可以防止意外的重复值
+- 普通 Enum 不能与其他类型进行数值比较，但 IntEnum 可以
+- 使用@unique 装饰器可以防止意外的重复值
 - 枚举成员的值可以是任何类型，但建议保持一致性
 - 别名成员在迭代时不会出现，只有主要成员会被迭代
 
 ## 🔗 相关内容
 
-- [dataclasses模块](../dataclasses/) - 数据类与枚举的结合使用
-- [typing模块](../typing/) - 类型提示与枚举
-- [collections模块](../collections/) - 其他数据结构
+- [dataclasses 模块](../dataclasses/) - 数据类与枚举的结合使用
+- [typing 模块](../typing/) - 类型提示与枚举
+- [collections 模块](../collections/) - 其他数据结构
 
 ## 📚 扩展阅读
 
-- [Python官方文档 - enum模块](https://docs.python.org/3/library/enum.html)
+- [Python 官方文档 - enum 模块](https://docs.python.org/3/library/enum.html)
 - [PEP 435 - Adding an Enum type to the Python standard library](https://www.python.org/dev/peps/pep-0435/)
 - [Real Python - Python Enum Guide](https://realpython.com/python-enum/)
 
@@ -365,5 +365,5 @@ for planet in Planet:
 ---
 
 **最后更新**: 2024-01-15  
-**作者**: Python文档团队  
+**作者**: Python 文档团队  
 **版本**: 1.0

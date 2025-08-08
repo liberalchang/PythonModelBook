@@ -45,17 +45,17 @@ bin(x)
 #### 基本用法
 
 ```python
-# 基本的二进制转换
+## 基本的二进制转换
 print(bin(10))    # 输出: 0b1010
 print(bin(255))   # 输出: 0b11111111
 print(bin(0))     # 输出: 0b0
 print(bin(1))     # 输出: 0b1
 
-# 负数的二进制表示
+## 负数的二进制表示
 print(bin(-10))   # 输出: -0b1010
 print(bin(-1))    # 输出: -0b1
 
-# 大数的二进制转换
+## 大数的二进制转换
 print(bin(1024))  # 输出: 0b10000000000
 print(bin(2**16)) # 输出: 0b10000000000000000
 ```
@@ -63,7 +63,7 @@ print(bin(2**16)) # 输出: 0b10000000000000000
 #### 去除前缀的方法
 
 ```python
-# 去除 '0b' 前缀
+## 去除 '0b' 前缀
 def pure_binary(num):
     """返回不带前缀的二进制字符串"""
     return bin(num)[2:] if num >= 0 else bin(num)[3:]
@@ -71,14 +71,14 @@ def pure_binary(num):
 print(pure_binary(10))   # 输出: 1010
 print(pure_binary(-10))  # 输出: 1010
 
-# 使用字符串方法去除前缀
+## 使用字符串方法去除前缀
 num = 42
 binary_str = bin(num).replace('0b', '')
 print(f"{num} 的二进制: {binary_str}")  # 输出: 42 的二进制: 101010
 
-# 使用 format 函数
+## 使用 format 函数
 print(f"{42:b}")  # 输出: 101010
-print(f"{42:08b}")  # 输出: 00101010 (8位，前面补零)
+print(f"{42:08b}")  # 输出: 00101010 (8 位,前面补零)
 ```
 
 #### 二进制工具类
@@ -126,20 +126,20 @@ class BinaryConverter:
         print(f"AND 结果: {bin(num1 & num2)}")
         print(f"OR 结果: {bin(num1 | num2)}")
 
-# 使用示例
+## 使用示例
 converter = BinaryConverter()
 
-# 基本转换
+## 基本转换
 print(converter.to_binary(42))        # 输出: 0b101010
 print(converter.to_binary(42, 8))     # 输出: 00101010
 print(converter.to_pure_binary(42))   # 输出: 101010
 
-# 获取详细信息
+## 获取详细信息
 info = converter.binary_info(16)
 print(info)
-# 输出: {'number': 16, 'binary': '0b10000', 'pure_binary': '10000', 'bit_count': 5, 'is_power_of_2': True}
+## 输出: {'number': 16, 'binary': '0b10000', 'pure_binary': '10000', 'bit_count': 5, 'is_power_of_2': True}
 
-# 比较两个数字
+## 比较两个数字
 converter.compare_binary(10, 15)
 ```
 
@@ -151,7 +151,7 @@ converter.compare_binary(10, 15)
 class PermissionSystem:
     """基于位操作的权限系统"""
     
-    # 权限常量
+#    # 权限常量
     READ = 1      # 0b001
     WRITE = 2     # 0b010
     EXECUTE = 4   # 0b100
@@ -191,19 +191,19 @@ class PermissionSystem:
         print(f"  写权限: {'是' if perm & self.WRITE else '否'}")
         print(f"  执行权限: {'是' if perm & self.EXECUTE else '否'}")
 
-# 使用示例
+## 使用示例
 perm_sys = PermissionSystem()
 
-# 授予权限
+## 授予权限
 perm_sys.grant_permission('alice', PermissionSystem.READ)
 perm_sys.grant_permission('alice', PermissionSystem.WRITE)
 perm_sys.grant_permission('bob', PermissionSystem.READ | PermissionSystem.EXECUTE)
 
-# 检查权限
+## 检查权限
 print(perm_sys.has_permission('alice', PermissionSystem.READ))   # True
 print(perm_sys.has_permission('alice', PermissionSystem.EXECUTE)) # False
 
-# 显示权限详情
+## 显示权限详情
 perm_sys.show_permissions('alice')
 perm_sys.show_permissions('bob')
 ```
@@ -267,25 +267,25 @@ class BinaryAnalyzer:
             bar = '█' * count
             print(f"{length:2d} 位: {bar} ({count})")
 
-# 使用示例
+## 使用示例
 analyzer = BinaryAnalyzer()
 
-# 分析单个数字
+## 分析单个数字
 result = analyzer.analyze_number(42)
 print("数字 42 的分析结果:")
 for key, value in result.items():
     print(f"  {key}: {value}")
 
-# 查找位模式
+## 查找位模式
 numbers = [1, 3, 5, 7, 15, 31, 63, 127]
 patterns = analyzer.find_bit_patterns(numbers)
-print("\n位模式分析:")
+print("\n 位模式分析:")
 for bit_count, nums in patterns.items():
     print(f"{bit_count} 个设置位:")
     for num, binary in nums:
         print(f"  {num} -> {binary}")
 
-# 生成直方图
+## 生成直方图
 test_numbers = [1, 2, 4, 8, 16, 32, 64, 128, 255, 256, 512, 1024]
 analyzer.binary_histogram(test_numbers)
 ```
@@ -302,9 +302,9 @@ class SafeBinaryConverter:
     def safe_bin(value):
         """安全的二进制转换"""
         try:
-            # 检查是否为整数类型
+#            # 检查是否为整数类型
             if not isinstance(value, int):
-                # 尝试转换为整数
+#                # 尝试转换为整数
                 if isinstance(value, (float, str)):
                     value = int(value)
                 else:
@@ -327,12 +327,12 @@ class SafeBinaryConverter:
             binary = bin(value)
             bit_length = len(binary) - 2 if value >= 0 else len(binary) - 3
             
-            # 检查位数限制
+#            # 检查位数限制
             if min_bits and bit_length < min_bits:
-                return f"错误: 需要至少 {min_bits} 位，实际 {bit_length} 位"
+                return f"错误: 需要至少 {min_bits} 位,实际 {bit_length} 位"
             
             if max_bits and bit_length > max_bits:
-                return f"错误: 超过最大 {max_bits} 位，实际 {bit_length} 位"
+                return f"错误: 超过最大 {max_bits} 位,实际 {bit_length} 位"
             
             return {
                 'success': True,
@@ -347,23 +347,23 @@ class SafeBinaryConverter:
                 'error': str(e)
             }
 
-# 使用示例
+## 使用示例
 converter = SafeBinaryConverter()
 
-# 安全转换
+## 安全转换
 print(converter.safe_bin(42))      # 0b101010
 print(converter.safe_bin("42"))    # 0b101010
 print(converter.safe_bin(3.14))    # 0b11
 print(converter.safe_bin([1, 2]))  # 类型错误: 无法将 list 转换为二进制
 
-# 验证和转换
+## 验证和转换
 result = converter.validate_and_convert(255, min_bits=8, max_bits=16)
 print(result)
-# {'success': True, 'binary': '0b11111111', 'bit_length': 8, 'value': 255}
+## {'success': True, 'binary': '0b11111111', 'bit_length': 8, 'value': 255}
 
 result = converter.validate_and_convert(7, min_bits=8)
 print(result)
-# 错误: 需要至少 8 位，实际 3 位
+## 错误: 需要至少 8 位,实际 3 位
 ```
 
 #### 性能优化
@@ -384,12 +384,12 @@ class BinaryPerformance:
     @staticmethod
     def format_vs_bin_benchmark(numbers):
         """比较 format 和 bin 的性能"""
-        # 使用 bin() 函数
+#        # 使用 bin() 函数
         start_time = time.time()
         bin_results = [bin(num) for num in numbers]
         bin_time = time.time() - start_time
         
-        # 使用 format() 函数
+#        # 使用 format() 函数
         start_time = time.time()
         format_results = [f'0b{num:b}' for num in numbers]
         format_time = time.time() - start_time
@@ -403,36 +403,36 @@ class BinaryPerformance:
     @staticmethod
     def memory_efficient_binary_processing(numbers):
         """内存高效的二进制处理"""
-        # 使用生成器避免创建大列表
+#        # 使用生成器避免创建大列表
         def binary_generator(nums):
             for num in nums:
                 yield bin(num)
         
-        # 处理大量数据时使用生成器
+#        # 处理大量数据时使用生成器
         binary_gen = binary_generator(numbers)
         
-        # 逐个处理，避免内存占用过大
+#        # 逐个处理,避免内存占用过大
         processed_count = 0
         for binary in binary_gen:
-            # 这里可以进行实际的处理
+#            # 这里可以进行实际的处理
             processed_count += 1
             if processed_count % 10000 == 0:
                 print(f"已处理 {processed_count} 个数字")
         
         return processed_count
 
-# 性能测试
+## 性能测试
 perf = BinaryPerformance()
 
-# 生成测试数据
+## 生成测试数据
 test_numbers = list(range(1, 10001))
 
-# 性能比较
+## 性能比较
 print("性能比较测试:")
 perf.format_vs_bin_benchmark(test_numbers[:1000])
 
-# 缓存测试
-print("\n缓存效果测试:")
+## 缓存测试
+print("\n 缓存效果测试:")
 start_time = time.time()
 for _ in range(100):
     for num in range(1, 101):

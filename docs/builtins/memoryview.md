@@ -48,7 +48,7 @@ memoryview(obj)
 ```python
 import array
 
-# 从字节串创建内存视图
+## 从字节串创建内存视图
 data = b'Hello, World!'
 mv = memoryview(data)
 print(f"内存视图: {mv}")
@@ -56,32 +56,32 @@ print(f"内存视图类型: {type(mv)}")
 print(f"内存视图长度: {len(mv)}")
 print(f"内存视图内容: {mv.tobytes()}")
 
-# 从字节数组创建内存视图
+## 从字节数组创建内存视图
 bytearray_data = bytearray(b'Python Programming')
 mv_bytearray = memoryview(bytearray_data)
-print(f"\n字节数组内存视图: {mv_bytearray}")
+print(f"\n 字节数组内存视图: {mv_bytearray}")
 print(f"可写性: {mv_bytearray.readonly}")
 
-# 从数组创建内存视图
+## 从数组创建内存视图
 int_array = array.array('i', [1, 2, 3, 4, 5])
 mv_array = memoryview(int_array)
-print(f"\n数组内存视图: {mv_array}")
+print(f"\n 数组内存视图: {mv_array}")
 print(f"格式: {mv_array.format}")
 print(f"项目大小: {mv_array.itemsize}")
 print(f"形状: {mv_array.shape}")
 
-# 内存视图的索引和切片
-print(f"\n索引操作:")
+## 内存视图的索引和切片
+print(f"\n 索引操作:")
 print(f"mv[0]: {mv[0]}")
 print(f"mv[7:12]: {mv[7:12].tobytes()}")
 
-# 修改可写内存视图
-print(f"\n修改前: {bytearray_data}")
+## 修改可写内存视图
+print(f"\n 修改前: {bytearray_data}")
 mv_bytearray[0] = ord('J')  # 将 'P' 改为 'J'
 print(f"修改后: {bytearray_data}")
 
-# 内存视图的属性
-print(f"\n内存视图属性:")
+## 内存视图的属性
+print(f"\n 内存视图属性:")
 print(f"obj: {mv.obj}")
 print(f"nbytes: {mv.nbytes}")
 print(f"readonly: {mv.readonly}")
@@ -201,15 +201,15 @@ class MemoryViewProcessor:
             result.extend(view)
         return result
 
-# 使用示例
+## 使用示例
 processor = MemoryViewProcessor()
 
-# 创建测试数据
+## 创建测试数据
 test_bytes = b'Hello, Python World!'
 test_bytearray = bytearray(b'Memory View Test')
 test_array = array.array('i', [10, 20, 30, 40, 50])
 
-# 创建内存视图
+## 创建内存视图
 mv_bytes = processor.create_view(test_bytes)
 mv_bytearray = processor.create_view(test_bytearray)
 mv_array = processor.create_view(test_array)
@@ -221,39 +221,39 @@ for name, mv in [('bytes', mv_bytes), ('bytearray', mv_bytearray), ('array', mv_
     for key, value in info.items():
         print(f"  {key}: {value}")
 
-# 切片操作
+## 切片操作
 print("\n=== 切片操作 ===")
 sliced_mv = processor.slice_view(mv_bytes, 7, 13)
 print(f"切片结果: {sliced_mv.tobytes()}")
 
-# 比较内存视图
+## 比较内存视图
 print("\n=== 内存视图比较 ===")
 mv_copy = memoryview(test_bytes)
 comparison = processor.compare_views(mv_bytes, mv_copy)
 print(f"比较结果: {comparison}")
 
-# 格式转换
+## 格式转换
 print("\n=== 格式转换 ===")
 original_format = mv_array.format
 print(f"原始格式: {original_format}")
 
-# 转换为字节格式
+## 转换为字节格式
 byte_view = processor.convert_format(mv_array, 'B')
 print(f"转换为字节格式: {processor.view_info(byte_view)}")
 
-# 数据提取
+## 数据提取
 print("\n=== 数据提取 ===")
 print(f"字节数据: {processor.extract_data(mv_bytes, 'bytes')}")
 print(f"列表数据: {processor.extract_data(mv_array, 'list')}")
 print(f"十六进制: {processor.extract_data(mv_bytes, 'hex')}")
 
-# 模式查找
+## 模式查找
 print("\n=== 模式查找 ===")
 pattern = b'o'
 positions = processor.find_pattern(mv_bytes, pattern)
 print(f"模式 '{pattern.decode()}' 的位置: {positions}")
 
-# 合并内存视图
+## 合并内存视图
 print("\n=== 合并内存视图 ===")
 merged = processor.merge_views(mv_bytes[:5], mv_bytearray[:6])
 print(f"合并结果: {merged}")
@@ -399,7 +399,7 @@ class LargeFileProcessor:
         if not self._memoryview:
             raise RuntimeError("文件未打开")
         
-        # 字节频率统计
+#        # 字节频率统计
         byte_counts = [0] * 256
         chunk_size = 1024 * 1024
         
@@ -408,7 +408,7 @@ class LargeFileProcessor:
             for byte_val in chunk:
                 byte_counts[byte_val] += 1
         
-        # 计算熵
+#        # 计算熵
         total_bytes = len(self._memoryview)
         entropy = 0.0
         for count in byte_counts:
@@ -434,7 +434,7 @@ class BinaryDataAnalyzer:
         if len(data) < 10:
             return {'error': '数据太短'}
         
-        # 检查常见图像格式
+#        # 检查常见图像格式
         header = data[:10].tobytes()
         
         if header.startswith(b'\xff\xd8\xff'):
@@ -457,7 +457,7 @@ class BinaryDataAnalyzer:
         current_string = bytearray()
         
         for byte_val in data:
-            if 32 <= byte_val <= 126:  # 可打印ASCII字符
+            if 32 <= byte_val <= 126:  # 可打印 ASCII 字符
                 current_string.append(byte_val)
             else:
                 if len(current_string) >= min_length:
@@ -467,7 +467,7 @@ class BinaryDataAnalyzer:
                         pass
                 current_string = bytearray()
         
-        # 处理最后一个字符串
+#        # 处理最后一个字符串
         if len(current_string) >= min_length:
             try:
                 strings.append(current_string.decode(encoding))
@@ -491,7 +491,7 @@ class BinaryDataAnalyzer:
             else:
                 pattern_counts[pattern] = 1
         
-        # 过滤出现次数少的模式
+#        # 过滤出现次数少的模式
         frequent_patterns = {}
         for pattern, count in pattern_counts.items():
             if count >= min_occurrences:
@@ -515,12 +515,12 @@ class BinaryDataAnalyzer:
             if len(block) == 0:
                 continue
             
-            # 计算字节频率
+#            # 计算字节频率
             byte_counts = [0] * 256
             for byte_val in block:
                 byte_counts[byte_val] += 1
             
-            # 计算熵
+#            # 计算熵
             entropy = 0.0
             block_length = len(block)
             
@@ -533,72 +533,72 @@ class BinaryDataAnalyzer:
         
         return entropy_values
 
-# 使用示例
+## 使用示例
 print("=== 大文件处理示例 ===")
 
-# 创建测试文件
+## 创建测试文件
 test_filename = 'test_large_file.bin'
 with open(test_filename, 'wb') as f:
-    # 写入一些测试数据
-    f.write(b'\x89PNG\r\n\x1a\n')  # PNG头
+#    # 写入一些测试数据
+    f.write(b'\x89PNG\r\n\x1a\n')  # PNG 头
     f.write(b'Hello, World! ' * 1000)  # 重复文本
     f.write(struct.pack('10i', *range(10)) * 100)  # 二进制数据
-    f.write(b'\xff\xd8\xff')  # JPEG头
+    f.write(b'\xff\xd8\xff')  # JPEG 头
     f.write(b'Test string for extraction' * 50)
 
 try:
-    # 使用大文件处理器
+#    # 使用大文件处理器
     with LargeFileProcessor(test_filename) as processor:
         print(f"文件大小: {processor.file_size} 字节")
         
-        # 读取文件块
+#        # 读取文件块
         chunk = processor.read_chunk(0, 100)
-        print(f"前100字节: {chunk.tobytes()[:50]}...")
+        print(f"前 100 字节: {chunk.tobytes()[:50]}...")
         
-        # 查找模式
+#        # 查找模式
         pattern_positions = processor.find_pattern(b'Hello')
-        print(f"'Hello' 模式位置: {pattern_positions[:10]}...")  # 只显示前10个
+        print(f"'Hello' 模式位置: {pattern_positions[:10]}...")  # 只显示前 10 个
         
-        # 计算校验和
+#        # 计算校验和
         checksum = processor.calculate_checksum('md5')
-        print(f"MD5校验和: {checksum}")
+        print(f"MD5 校验和: {checksum}")
         
-        # 分析二进制结构
+#        # 分析二进制结构
         binary_data = processor.analyze_binary_structure('i', 20)
-        print(f"二进制整数数据: {binary_data[:5]}...")  # 只显示前5个
+        print(f"二进制整数数据: {binary_data[:5]}...")  # 只显示前 5 个
         
-        # 获取文件统计
+#        # 获取文件统计
         stats = processor.get_file_statistics()
         print(f"文件统计: 大小={stats['file_size']}, 唯一字节={stats['unique_bytes']}, 熵={stats['entropy']:.2f}")
     
-    # 使用二进制数据分析器
+#    # 使用二进制数据分析器
     with open(test_filename, 'rb') as f:
         file_data = f.read()
         mv_data = memoryview(file_data)
         
         analyzer = BinaryDataAnalyzer()
         
-        # 分析图像头
+#        # 分析图像头
         image_info = analyzer.analyze_image_header(mv_data)
-        print(f"\n图像头分析: {image_info}")
+        print(f"\n 图像头分析: {image_info}")
         
-        # 提取字符串
+#        # 提取字符串
         strings = analyzer.extract_strings(mv_data, min_length=6)
-        print(f"提取的字符串: {strings[:5]}...")  # 只显示前5个
+        print(f"提取的字符串: {strings[:5]}...")  # 只显示前 5 个
         
-        # 查找重复模式
+#        # 查找重复模式
         patterns = analyzer.find_repeating_patterns(mv_data, pattern_length=4, min_occurrences=5)
-        print(f"重复模式: {list(patterns.keys())[:3]}...")  # 只显示前3个
+        print(f"重复模式: {list(patterns.keys())[:3]}...")  # 只显示前 3 个
         
-        # 分析熵分布
+#        # 分析熵分布
         entropy_dist = analyzer.analyze_entropy_distribution(mv_data, block_size=512)
         print(f"熵分布: 平均={sum(entropy_dist)/len(entropy_dist):.2f}, 最大={max(entropy_dist):.2f}, 最小={min(entropy_dist):.2f}")
 
 finally:
-    # 清理测试文件
+#    # 清理测试文件
     if os.path.exists(test_filename):
         os.remove(test_filename)
-        print(f"\n已删除测试文件: {test_filename}")
+        print(f"\n 已删除测试文件: {test_filename}")
 ```
 
 ### 网络数据处理和协议解析
@@ -618,7 +618,7 @@ class NetworkPacketAnalyzer:
         if len(data) < 14:
             return {'error': '数据长度不足'}
         
-        # 以太网头格式: 目标MAC(6) + 源MAC(6) + 类型(2)
+#        # 以太网头格式: 目标 MAC(6) + 源 MAC(6) + 类型(2)
         eth_header = struct.unpack('!6s6sH', data[:14])
         
         return {
@@ -630,11 +630,11 @@ class NetworkPacketAnalyzer:
     
     @staticmethod
     def parse_ip_header(data: memoryview) -> dict:
-        """解析IP头"""
+        """解析 IP 头"""
         if len(data) < 20:
             return {'error': '数据长度不足'}
         
-        # IP头格式（简化）
+#        # IP 头格式(简化)
         ip_header = struct.unpack('!BBHHHBBH4s4s', data[:20])
         
         version_ihl = ip_header[0]
@@ -659,11 +659,11 @@ class NetworkPacketAnalyzer:
     
     @staticmethod
     def parse_tcp_header(data: memoryview) -> dict:
-        """解析TCP头"""
+        """解析 TCP 头"""
         if len(data) < 20:
             return {'error': '数据长度不足'}
         
-        # TCP头格式（简化）
+#        # TCP 头格式(简化)
         tcp_header = struct.unpack('!HHLLBBHHH', data[:20])
         
         data_offset = (tcp_header[4] >> 4) * 4
@@ -683,11 +683,11 @@ class NetworkPacketAnalyzer:
     
     @staticmethod
     def parse_udp_header(data: memoryview) -> dict:
-        """解析UDP头"""
+        """解析 UDP 头"""
         if len(data) < 8:
             return {'error': '数据长度不足'}
         
-        # UDP头格式
+#        # UDP 头格式
         udp_header = struct.unpack('!HHHH', data[:8])
         
         return {
@@ -708,14 +708,14 @@ class NetworkPacketAnalyzer:
         
         offset = 0
         
-        # 解析以太网层
+#        # 解析以太网层
         if len(packet_data) >= 14:
             eth_info = NetworkPacketAnalyzer.parse_ethernet_header(packet_data[offset:])
             if 'error' not in eth_info:
                 analysis['layers'].append(('Ethernet', eth_info))
                 offset += eth_info['payload_offset']
                 
-                # 根据以太网类型解析下一层
+#                # 根据以太网类型解析下一层
                 if eth_info['ethertype'] == '0x0800':  # IPv4
                     if offset < len(packet_data):
                         ip_info = NetworkPacketAnalyzer.parse_ip_header(packet_data[offset:])
@@ -723,7 +723,7 @@ class NetworkPacketAnalyzer:
                             analysis['layers'].append(('IPv4', ip_info))
                             offset += ip_info['payload_offset']
                             
-                            # 根据协议类型解析传输层
+#                            # 根据协议类型解析传输层
                             if ip_info['protocol'] == 6:  # TCP
                                 if offset < len(packet_data):
                                     tcp_info = NetworkPacketAnalyzer.parse_tcp_header(packet_data[offset:])
@@ -738,7 +738,7 @@ class NetworkPacketAnalyzer:
                                         analysis['layers'].append(('UDP', udp_info))
                                         offset += udp_info['payload_offset']
         
-        # 添加载荷信息
+#        # 添加载荷信息
         if offset < len(packet_data):
             payload = packet_data[offset:]
             analysis['payload'] = {
@@ -762,11 +762,11 @@ class ProtocolBuffer:
         """写入数据"""
         data_len = len(data)
         
-        # 检查是否需要扩展缓冲区
+#        # 检查是否需要扩展缓冲区
         if self.write_pos + data_len > len(self.buffer):
             self._expand_buffer(self.write_pos + data_len)
         
-        # 写入数据
+#        # 写入数据
         self.buffer[self.write_pos:self.write_pos + data_len] = data
         self.write_pos += data_len
         
@@ -783,7 +783,7 @@ class ProtocolBuffer:
         return data
     
     def peek_data(self, size: int, offset: int = 0) -> memoryview:
-        """预览数据（不移动读取位置）"""
+        """预览数据(不移动读取位置)"""
         start_pos = self.read_pos + offset
         end_pos = min(start_pos + size, self.write_pos)
         
@@ -794,7 +794,7 @@ class ProtocolBuffer:
         return self.write_pos - self.read_pos
     
     def compact(self):
-        """压缩缓冲区（移除已读数据）"""
+        """压缩缓冲区(移除已读数据)"""
         if self.read_pos > 0:
             remaining_data = self.write_pos - self.read_pos
             if remaining_data > 0:
@@ -840,7 +840,7 @@ class ProtocolBuffer:
         }
 
 class HTTPParser:
-    """HTTP协议解析器"""
+    """HTTP 协议解析器"""
     
     def __init__(self):
         self.buffer = ProtocolBuffer()
@@ -880,7 +880,7 @@ class HTTPParser:
                 
                 header_line = line_data.tobytes().decode('utf-8', errors='ignore')
                 
-                if header_line == '':  # 空行，头部结束
+                if header_line == '':  # 空行,头部结束
                     content_length = int(self.current_request['headers'].get('Content-Length', '0'))
                     if content_length > 0:
                         self.state = 'reading_body'
@@ -906,24 +906,24 @@ class HTTPParser:
         
         return requests
 
-# 使用示例
+## 使用示例
 print("=== 网络数据处理示例 ===")
 
-# 创建模拟网络数据包
+## 创建模拟网络数据包
 def create_mock_packet() -> bytearray:
     """创建模拟数据包"""
     packet = bytearray()
     
-    # 以太网头 (14字节)
+#    # 以太网头 (14 字节)
     dst_mac = bytes.fromhex('001122334455')
     src_mac = bytes.fromhex('aabbccddeeff')
     ethertype = struct.pack('!H', 0x0800)  # IPv4
     packet.extend(dst_mac + src_mac + ethertype)
     
-    # IP头 (20字节)
-    version_ihl = (4 << 4) | 5  # IPv4, 20字节头长度
+#    # IP 头 (20 字节)
+    version_ihl = (4 << 4) | 5  # IPv4, 20 字节头长度
     tos = 0
-    total_length = 20 + 20 + 12  # IP头 + TCP头 + 数据
+    total_length = 20 + 20 + 12  # IP 头 + TCP 头 + 数据
     identification = 12345
     flags_fragment = 0
     ttl = 64
@@ -937,12 +937,12 @@ def create_mock_packet() -> bytearray:
                            flags_fragment, ttl, protocol, checksum, src_ip, dst_ip)
     packet.extend(ip_header)
     
-    # TCP头 (20字节)
+#    # TCP 头 (20 字节)
     src_port = 12345
     dst_port = 80
     seq_num = 1000000
     ack_num = 2000000
-    data_offset_flags = (5 << 4) | 0x18  # 20字节头长度, PSH+ACK标志
+    data_offset_flags = (5 << 4) | 0x18  # 20 字节头长度, PSH+ACK 标志
     window_size = 8192
     tcp_checksum = 0
     urgent_ptr = 0
@@ -952,13 +952,13 @@ def create_mock_packet() -> bytearray:
                             data_offset_flags, 0, window_size, tcp_checksum, urgent_ptr)
     packet.extend(tcp_header)
     
-    # 数据载荷
+#    # 数据载荷
     payload = b'Hello, World!'
     packet.extend(payload)
     
     return packet
 
-# 分析数据包
+## 分析数据包
 packet_data = create_mock_packet()
 packet_mv = memoryview(packet_data)
 
@@ -974,17 +974,17 @@ for layer_name, layer_info in analysis['layers']:
             print(f"  {key}: {value}")
 
 if 'payload' in analysis:
-    print(f"\n载荷信息:")
+    print(f"\n 载荷信息:")
     print(f"  大小: {analysis['payload']['size']} 字节")
     print(f"  预览: {analysis['payload']['data_preview']}")
     print(f"  是否为文本: {analysis['payload']['is_text']}")
 
-# 协议缓冲区示例
+## 协议缓冲区示例
 print("\n=== 协议缓冲区示例 ===")
 
 protocol_buffer = ProtocolBuffer()
 
-# 写入数据
+## 写入数据
 test_data1 = b"First chunk of data\r\n"
 test_data2 = b"Second chunk\r\n"
 test_data3 = b"Third chunk without newline"
@@ -995,23 +995,23 @@ protocol_buffer.write_data(test_data3)
 
 print(f"缓冲区统计: {protocol_buffer.get_stats()}")
 
-# 按行读取
+## 按行读取
 while True:
     line = protocol_buffer.read_until_delimiter(b'\r\n')
     if line is None:
         break
     print(f"读取行: {line.tobytes()}")
 
-# 读取剩余数据
+## 读取剩余数据
 remaining = protocol_buffer.read_data(protocol_buffer.available_data())
 print(f"剩余数据: {remaining.tobytes()}")
 
-# HTTP解析器示例
-print("\n=== HTTP解析器示例 ===")
+## HTTP 解析器示例
+print("\n=== HTTP 解析器示例 ===")
 
 http_parser = HTTPParser()
 
-# 模拟HTTP请求数据
+## 模拟 HTTP 请求数据
 http_request = (
     b"GET /index.html HTTP/1.1\r\n"
     b"Host: example.com\r\n"
@@ -1021,14 +1021,14 @@ http_request = (
     b"Hello, World!"
 )
 
-# 分块输入数据（模拟网络接收）
+## 分块输入数据(模拟网络接收)
 chunk_size = 20
 for i in range(0, len(http_request), chunk_size):
     chunk = http_request[i:i + chunk_size]
     requests = http_parser.feed_data(chunk)
     
     for request in requests:
-        print(f"解析到HTTP请求:")
+        print(f"解析到 HTTP 请求:")
         print(f"  方法: {request['method']}")
         print(f"  路径: {request['path']}")
         print(f"  版本: {request['version']}")
@@ -1146,13 +1146,13 @@ class MemoryViewPerformance:
     @staticmethod
     def benchmark_copy_vs_view(data_size: int = 1024*1024) -> dict:
         """比较复制和内存视图的性能"""
-        # 创建测试数据
+#        # 创建测试数据
         test_data = bytearray(range(256)) * (data_size // 256 + 1)
         test_data = test_data[:data_size]
         
         results = {}
         
-        # 测试数据复制
+#        # 测试数据复制
         start_time = time.time()
         for _ in range(100):
             copied_data = test_data[:data_size//2]
@@ -1160,7 +1160,7 @@ class MemoryViewPerformance:
         copy_time = time.time() - start_time
         results['copy_time'] = copy_time
         
-        # 测试内存视图
+#        # 测试内存视图
         start_time = time.time()
         for _ in range(100):
             with SafeMemoryView(test_data) as mv:
@@ -1176,11 +1176,11 @@ class MemoryViewPerformance:
     @staticmethod
     def benchmark_slice_operations(iterations: int = 10000) -> dict:
         """测试切片操作性能"""
-        test_data = bytearray(range(256)) * 1000  # 256KB数据
+        test_data = bytearray(range(256)) * 1000  # 256KB 数据
         
         results = {}
         
-        # 测试列表切片
+#        # 测试列表切片
         test_list = list(test_data)
         start_time = time.time()
         for i in range(iterations):
@@ -1188,14 +1188,14 @@ class MemoryViewPerformance:
         list_time = time.time() - start_time
         results['list_slice_time'] = list_time
         
-        # 测试字节数组切片
+#        # 测试字节数组切片
         start_time = time.time()
         for i in range(iterations):
             slice_data = test_data[i % 100:(i % 100) + 50]
         bytearray_time = time.time() - start_time
         results['bytearray_slice_time'] = bytearray_time
         
-        # 测试内存视图切片
+#        # 测试内存视图切片
         with SafeMemoryView(test_data) as mv:
             start_time = time.time()
             for i in range(iterations):
@@ -1215,20 +1215,20 @@ class MemoryViewPerformance:
             test_data = bytearray(range(256)) * (size // 256 + 1)
             test_data = test_data[:size]
             
-            # 测量基础内存使用
+#            # 测量基础内存使用
             gc.collect()
             base_memory = sys.getsizeof(test_data)
             
-            # 测量复制后的内存使用
+#            # 测量复制后的内存使用
             copied_data = test_data.copy()
             copy_memory = sys.getsizeof(copied_data)
             del copied_data
             
-            # 测量内存视图的内存使用
+#            # 测量内存视图的内存使用
             with SafeMemoryView(test_data) as mv:
                 view_memory = sys.getsizeof(mv)
                 
-                # 测量切片视图的内存使用
+#                # 测量切片视图的内存使用
                 slice_view = mv[:size//2]
                 slice_memory = sys.getsizeof(slice_view)
             
@@ -1258,14 +1258,14 @@ class MemoryViewValidator:
             'properties': {}
         }
         
-        # 检查是否有缓冲区协议支持
+#        # 检查是否有缓冲区协议支持
         result['has_buffer_protocol'] = hasattr(obj, '__buffer__') or hasattr(obj, '__array_interface__')
         
         try:
             mv = memoryview(obj)
             result['compatible'] = True
             
-            # 获取内存视图属性
+#            # 获取内存视图属性
             result['properties'] = {
                 'readonly': mv.readonly,
                 'format': mv.format,
@@ -1295,28 +1295,28 @@ class MemoryViewValidator:
         }
         
         try:
-            # 检查是否已释放
+#            # 检查是否已释放
             _ = len(mv)
         except ValueError:
             safety_check['safe'] = False
             safety_check['errors'].append('内存视图已释放')
             return safety_check
         
-        # 检查大小
+#        # 检查大小
         if mv.nbytes > 100 * 1024 * 1024:  # 100MB
             safety_check['warnings'].append(f'内存视图很大: {mv.nbytes / (1024*1024):.1f} MB')
         
-        # 检查格式
+#        # 检查格式
         if mv.format not in ['B', 'b', 'c', 'h', 'H', 'i', 'I', 'l', 'L', 'q', 'Q', 'f', 'd']:
             safety_check['warnings'].append(f'非标准格式: {mv.format}')
         
-        # 检查维度
+#        # 检查维度
         if mv.ndim > 3:
             safety_check['warnings'].append(f'高维数据: {mv.ndim} 维')
         
-        # 检查连续性
+#        # 检查连续性
         if not mv.c_contiguous and not mv.f_contiguous:
-            safety_check['warnings'].append('数据不连续，可能影响性能')
+            safety_check['warnings'].append('数据不连续,可能影响性能')
         
         return safety_check
     
@@ -1332,7 +1332,7 @@ class MemoryViewValidator:
         
         mv_len = len(mv)
         
-        # 检查参数范围
+#        # 检查参数范围
         if start < 0:
             start = max(0, mv_len + start)
             validation['warnings'].append(f'负数起始索引已调整为: {start}')
@@ -1351,71 +1351,71 @@ class MemoryViewValidator:
         
         if step == 0:
             validation['valid'] = False
-            validation['errors'].append('步长不能为0')
+            validation['errors'].append('步长不能为 0')
         
         if step < 0:
             validation['warnings'].append('负步长可能导致意外结果')
         
         if start >= stop and step > 0:
-            validation['warnings'].append('起始索引大于等于结束索引，将返回空切片')
+            validation['warnings'].append('起始索引大于等于结束索引,将返回空切片')
         
         validation['adjusted_params'] = (start, stop, step)
         return validation
 
-# 使用示例
+## 使用示例
 print("=== 内存管理和性能优化示例 ===")
 
-# 内存视图管理器
+## 内存视图管理器
 manager = MemoryViewManager()
 
-# 创建测试数据
+## 创建测试数据
 test_data = bytearray(b'Hello, World! ' * 1000)
 
-# 创建和管理内存视图
+## 创建和管理内存视图
 mv1 = manager.create_view(test_data)
 mv2 = manager.create_view(test_data[100:200])
 
 print(f"管理器统计: {manager.get_stats()}")
 
-# 安全内存视图使用
+## 安全内存视图使用
 print("\n=== 安全内存视图使用 ===")
 with SafeMemoryView(test_data) as safe_mv:
     print(f"内存视图长度: {len(safe_mv)}")
-    print(f"前20字节: {safe_mv[:20].tobytes()}")
+    print(f"前 20 字节: {safe_mv[:20].tobytes()}")
     print(f"是否只读: {safe_mv.readonly}")
 
-# 性能基准测试
+## 性能基准测试
 print("\n=== 性能基准测试 ===")
 perf_tester = MemoryViewPerformance()
 
-# 复制vs内存视图性能比较
-copy_vs_view = perf_tester.benchmark_copy_vs_view(1024*1024)  # 1MB数据
-print(f"复制vs内存视图 (1MB数据):")
+## 复制 vs 内存视图性能比较
+copy_vs_view = perf_tester.benchmark_copy_vs_view(1024*1024)  # 1MB 数据
+print(f"复制 vs 内存视图 (1MB 数据):")
 print(f"  复制时间: {copy_vs_view['copy_time']:.4f}秒")
 print(f"  内存视图时间: {copy_vs_view['view_time']:.4f}秒")
 print(f"  性能提升: {copy_vs_view['speedup']:.2f}倍")
 
-# 切片操作性能比较
+## 切片操作性能比较
 slice_perf = perf_tester.benchmark_slice_operations(1000)
-print(f"\n切片操作性能 (1000次):")
+print(f"\n 切片操作性能 (1000 次):")
 print(f"  列表切片: {slice_perf['list_slice_time']:.4f}秒")
 print(f"  字节数组切片: {slice_perf['bytearray_slice_time']:.4f}秒")
 print(f"  内存视图切片: {slice_perf['memoryview_slice_time']:.4f}秒")
 
-# 内存使用比较
+## 内存使用比较
 memory_comp = perf_tester.memory_usage_comparison([1024, 10240, 102400])
-print(f"\n内存使用比较:")
+print(f"\n 内存使用比较:")
 for measurement in memory_comp['measurements']:
     print(f"  数据大小: {measurement['size']} 字节")
     print(f"    基础内存: {measurement['base_memory']} 字节")
     print(f"    复制开销: {measurement['copy_overhead']} 字节")
     print(f"    视图开销: {measurement['view_overhead']} 字节")
 
-# 对象兼容性验证
+## 对象兼容性验证
 print("\n=== 对象兼容性验证 ===")
 validator = MemoryViewValidator()
 
-# 测试不同类型的对象
+## 测试不同类型的对象
 test_objects = [
     b'bytes object',
     bytearray(b'bytearray object'),
@@ -1433,7 +1433,7 @@ for obj in test_objects:
     if compatibility['properties']:
         print(f"  属性: {compatibility['properties']}")
 
-# 内存视图安全检查
+## 内存视图安全检查
 print("\n=== 内存视图安全检查 ===")
 with SafeMemoryView(test_data) as safe_mv:
     safety = validator.check_view_safety(safe_mv)
@@ -1444,18 +1444,18 @@ with SafeMemoryView(test_data) as safe_mv:
     if safety['errors']:
         print(f"  错误: {safety['errors']}")
 
-# 切片参数验证
+## 切片参数验证
 with SafeMemoryView(test_data) as safe_mv:
     slice_validation = validator.validate_slice_parameters(safe_mv, -10, 50, 2)
-    print(f"\n切片参数验证:")
+    print(f"\n 切片参数验证:")
     print(f"  有效: {slice_validation['valid']}")
     print(f"  调整后参数: {slice_validation['adjusted_params']}")
     if slice_validation['warnings']:
         print(f"  警告: {slice_validation['warnings']}")
 
-# 清理资源
+## 清理资源
 manager.cleanup()
-print(f"\n清理后管理器统计: {manager.get_stats()}")
+print(f"\n 清理后管理器统计: {manager.get_stats()}")
 ```
 
 ## 相关函数和模块
@@ -1471,15 +1471,15 @@ print(f"\n清理后管理器统计: {manager.get_stats()}")
 - `array` - 高效的数值数组
 - `struct` - 二进制数据打包和解包
 - `mmap` - 内存映射文件支持
-- `io` - 核心I/O工具
-- `ctypes` - C数据类型的Python接口
+- `io` - 核心 I/O 工具
+- `ctypes` - C 数据类型的 Python 接口
 - `numpy` - 科学计算库（第三方）
 
 ### 第三方库
 - `numpy` - 多维数组和数学函数
 - `pandas` - 数据分析和操作
 - `pillow` - 图像处理库
-- `h5py` - HDF5文件格式支持
+- `h5py` - HDF5 文件格式支持
 
 ## 扩展阅读
 
@@ -1487,7 +1487,7 @@ print(f"\n清理后管理器统计: {manager.get_stats()}")
 - [Python 缓冲区协议](https://docs.python.org/3/c-api/buffer.html)
 - [内存管理和性能优化](https://docs.python.org/3/c-api/memory.html)
 - [数组和缓冲区接口](https://numpy.org/doc/stable/reference/arrays.interface.html)
-- [高性能Python编程](https://www.oreilly.com/library/view/high-performance-python/9781449361747/)
+- [高性能 Python 编程](https://www.oreilly.com/library/view/high-performance-python/9781449361747/)
 
 ## 标签
 

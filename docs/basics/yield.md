@@ -1,10 +1,10 @@
 ---
 layout: doc
-title: yield关键字
+title: yield 关键字
 permalink: /docs/basics/yield/
 ---
 
-# yield关键字
+# yield 关键字
 
 ## 概述
 
@@ -43,16 +43,16 @@ def simple_generator():
     yield 3
     print("生成器结束")
 
-# 创建生成器对象
+## 创建生成器对象
 gen = simple_generator()
 print(f"生成器对象: {gen}")
 
-# 逐步获取值
+## 逐步获取值
 print(f"第一个值: {next(gen)}")
 print(f"第二个值: {next(gen)}")
 print(f"第三个值: {next(gen)}")
 
-# 尝试获取下一个值会引发 StopIteration
+## 尝试获取下一个值会引发 StopIteration
 try:
     next(gen)
 except StopIteration:
@@ -70,12 +70,12 @@ def countdown(n):
         n -= 1
     print("倒计时结束")
 
-# 使用生成器
+## 使用生成器
 for num in countdown(5):
     print(f"倒计时: {num}")
 
-print("\n使用列表推导式对比:")
-# 生成器表达式
+print("\n 使用列表推导式对比:")
+## 生成器表达式
 gen_expr = (x * 2 for x in range(5))
 print(f"生成器表达式: {gen_expr}")
 print(f"生成器内容: {list(gen_expr)}")
@@ -107,8 +107,8 @@ def prime_numbers():
             yield n
         n += 1
 
-# 使用无限生成器
-print("前10个斐波那契数:")
+## 使用无限生成器
+print("前 10 个斐波那契数:")
 fib_gen = fibonacci()
 for i, num in enumerate(fib_gen):
     if i >= 10:
@@ -116,7 +116,7 @@ for i, num in enumerate(fib_gen):
     print(num, end=" ")
 print()
 
-print("\n前10个质数:")
+print("\n 前 10 个质数:")
 prime_gen = prime_numbers()
 for i, prime in enumerate(prime_gen):
     if i >= 10:
@@ -148,7 +148,7 @@ def interactive_generator():
     
     print("生成器结束")
 
-# 使用 send() 方法
+## 使用 send() 方法
 gen = interactive_generator()
 print(next(gen))  # 启动生成器
 
@@ -156,7 +156,7 @@ print(gen.send("hello"))
 print(gen.send(42))
 print(gen.send([1, 2, 3]))
 
-# 结束生成器
+## 结束生成器
 try:
     gen.send(None)
 except StopIteration:
@@ -184,23 +184,23 @@ def robust_generator():
     
     except GeneratorExit:
         print("生成器被关闭")
-        # 不能在 GeneratorExit 处理中使用 yield
+#        # 不能在 GeneratorExit 处理中使用 yield
     
     finally:
         print("生成器清理")
 
-# 测试异常处理
+## 测试异常处理
 gen = robust_generator()
 print(f"第一个值: {next(gen)}")
 
-# 向生成器抛出异常
+## 向生成器抛出异常
 try:
     result = gen.throw(ValueError, "测试异常")
     print(f"异常处理结果: {result}")
 except StopIteration:
     print("生成器在异常处理后结束")
 
-# 测试关闭生成器
+## 测试关闭生成器
 gen2 = robust_generator()
 print(f"第一个值: {next(gen2)}")
 gen2.close()  # 关闭生成器
@@ -213,22 +213,22 @@ gen2.close()  # 关闭生成器
 ```python
 def sub_generator():
     """子生成器"""
-    yield "来自子生成器的值1"
-    yield "来自子生成器的值2"
-    yield "来自子生成器的值3"
+    yield "来自子生成器的值 1"
+    yield "来自子生成器的值 2"
+    yield "来自子生成器的值 3"
     return "子生成器返回值"
 
 def delegating_generator():
     """委托生成器"""
     yield "开始"
     
-    # 使用 yield from 委托给子生成器
+#    # 使用 yield from 委托给子生成器
     result = yield from sub_generator()
     print(f"子生成器返回: {result}")
     
     yield "结束"
 
-# 使用委托生成器
+## 使用委托生成器
 for value in delegating_generator():
     print(value)
 ```
@@ -249,12 +249,12 @@ def chain_generators(*generators):
     for gen in generators:
         yield from gen
 
-# 测试扁平化
+## 测试扁平化
 nested = [1, [2, 3], [4, [5, 6]], 7]
 flat_list = list(flatten(nested))
 print(f"扁平化结果: {flat_list}")
 
-# 测试生成器链接
+## 测试生成器链接
 def gen1():
     yield 1
     yield 2
@@ -306,11 +306,11 @@ def data_processor():
         else:
             print(f"忽略非数字值: {value}")
 
-# 使用协程
+## 使用协程
 coro = data_processor()
 next(coro)  # 启动协程
 
-# 发送数据
+## 发送数据
 coro.send(10)
 coro.send(20)
 coro.send("hello")  # 非数字值
@@ -322,7 +322,7 @@ coro.send(None)  # 结束协程
 
 ```python
 def coroutine_decorator(func):
-    """协程装饰器，自动启动协程"""
+    """协程装饰器,自动启动协程"""
     def wrapper(*args, **kwargs):
         gen = func(*args, **kwargs)
         next(gen)  # 自动启动
@@ -340,7 +340,7 @@ def auto_started_coroutine():
             break
         print(f"处理: {value}")
 
-# 使用自动启动的协程
+## 使用自动启动的协程
 coro = auto_started_coroutine()
 coro.send("第一个值")
 coro.send("第二个值")
@@ -375,7 +375,7 @@ def process_log_file(filename):
             for line in file:
                 line_count += 1
                 
-                # 处理每一行
+#                # 处理每一行
                 if 'ERROR' in line.upper():
                     error_count += 1
                     yield {
@@ -390,11 +390,11 @@ def process_log_file(filename):
                         'type': 'warning'
                     }
                 
-                # 每处理1000行报告一次进度
+#                # 每处理 1000 行报告一次进度
                 if line_count % 1000 == 0:
                     yield {
                         'line_number': line_count,
-                        'content': f"已处理 {line_count} 行，发现 {error_count} 个错误",
+                        'content': f"已处理 {line_count} 行,发现 {error_count} 个错误",
                         'type': 'progress'
                     }
     
@@ -405,7 +405,7 @@ def process_log_file(filename):
             'type': 'error'
         }
 
-# 创建示例日志文件
+## 创建示例日志文件
 sample_log = """INFO: 应用启动
 DEBUG: 连接数据库
 ERROR: 数据库连接失败
@@ -417,7 +417,7 @@ INFO: 应用关闭"""
 with open('sample.log', 'w', encoding='utf-8') as f:
     f.write(sample_log)
 
-# 处理日志文件
+## 处理日志文件
 print("处理日志文件:")
 for event in process_log_file('sample.log'):
     print(f"[{event['type'].upper()}] 行 {event['line_number']}: {event['content']}")
@@ -453,7 +453,7 @@ def data_source(count=10):
 def filter_processor(data_stream):
     """过滤处理器"""
     for item in data_stream:
-        if item['value'] % 4 == 0:  # 只保留值能被4整除的项
+        if item['value'] % 4 == 0:  # 只保留值能被 4 整除的项
             yield item
 
 def transform_processor(data_stream):
@@ -466,20 +466,20 @@ def transform_processor(data_stream):
 def validate_processor(data_stream):
     """验证处理器"""
     for item in data_stream:
-        if item['value'] < 1000:  # 验证值小于1000
+        if item['value'] < 1000:  # 验证值小于 1000
             item['status'] = 'valid'
             yield item
         else:
             item['status'] = 'invalid'
             print(f"验证失败: {item}")
 
-# 构建数据处理管道
+## 构建数据处理管道
 pipeline = DataPipeline()
 pipeline.add_processor(filter_processor)
 pipeline.add_processor(transform_processor)
 pipeline.add_processor(validate_processor)
 
-# 处理数据
+## 处理数据
 print("数据处理管道结果:")
 for result in pipeline.process(data_source(20)):
     print(result)
@@ -501,14 +501,14 @@ class StateMachine:
         state_gen = self.state(self.context)
         
         try:
-            # 启动状态
+#            # 启动状态
             next(state_gen)
             
             for event in events:
                 try:
                     new_state = state_gen.send(event)
                     if new_state is not None:
-                        # 状态转换
+#                        # 状态转换
                         print(f"状态转换: {self.state.__name__} -> {new_state.__name__}")
                         self.state = new_state
                         state_gen = self.state(self.context)
@@ -545,7 +545,7 @@ def working_state(context):
         
         if event == 'work':
             context['work_count'] += 1
-            print(f"完成工作，总计: {context['work_count']}")
+            print(f"完成工作,总计: {context['work_count']}")
         elif event == 'pause':
             yield paused_state
         elif event == 'stop':
@@ -574,7 +574,7 @@ def shutdown_state(context):
     print(f"最终工作计数: {context.get('work_count', 0)}")
     return  # 结束状态机
 
-# 使用状态机
+## 使用状态机
 events = ['start', 'work', 'work', 'pause', 'resume', 'work', 'stop', 'shutdown']
 
 sm = StateMachine()
@@ -601,7 +601,7 @@ def url_generator(base_urls, max_depth=2):
         visited.add(url)
         yield url, depth
         
-        # 模拟发现新链接
+#        # 模拟发现新链接
         if depth < max_depth:
             for i in range(random.randint(1, 3)):
                 new_url = f"{url}/page{i}"
@@ -613,10 +613,10 @@ def web_crawler(urls, delay=1):
     for url, depth in url_generator(urls):
         print(f"正在爬取 (深度 {depth}): {url}")
         
-        # 模拟网络请求
+#        # 模拟网络请求
         time.sleep(delay)
         
-        # 模拟响应
+#        # 模拟响应
         response = {
             'url': url,
             'depth': depth,
@@ -627,7 +627,7 @@ def web_crawler(urls, delay=1):
         
         yield response
 
-# 使用爬虫
+## 使用爬虫
 base_urls = ['https://example.com', 'https://test.com']
 
 print("开始爬取:")
@@ -643,7 +643,7 @@ for i, page_data in enumerate(web_crawler(base_urls, delay=0.1)):
 ### 1. 生成器的一次性使用
 
 ```python
-# ✗ 错误：尝试多次使用同一个生成器
+## ✗ 错误:尝试多次使用同一个生成器
 def bad_example():
     gen = (x * 2 for x in range(5))
     
@@ -655,7 +655,7 @@ def bad_example():
     for value in gen:  # 这里不会输出任何内容
         print(value)
 
-# ✓ 正确：每次创建新的生成器
+## ✓ 正确:每次创建新的生成器
 def good_example():
     def create_generator():
         return (x * 2 for x in range(5))
@@ -681,15 +681,15 @@ import sys
 def memory_comparison():
     """内存使用对比"""
     
-    # 列表方式（占用大量内存）
+#    # 列表方式(占用大量内存)
     large_list = [x * 2 for x in range(1000000)]
     print(f"列表大小: {sys.getsizeof(large_list)} bytes")
     
-    # 生成器方式（占用很少内存）
+#    # 生成器方式(占用很少内存)
     large_gen = (x * 2 for x in range(1000000))
     print(f"生成器大小: {sys.getsizeof(large_gen)} bytes")
     
-    # 使用生成器处理大数据
+#    # 使用生成器处理大数据
     def process_large_data():
         total = 0
         count = 0
@@ -698,13 +698,13 @@ def memory_comparison():
             total += value
             count += 1
             
-            if count >= 1000:  # 只处理前1000个
+            if count >= 1000:  # 只处理前 1000 个
                 break
         
         return total / count
     
     avg = process_large_data()
-    print(f"前1000个数的平均值: {avg}")
+    print(f"前 1000 个数的平均值: {avg}")
 
 memory_comparison()
 ```
@@ -713,14 +713,14 @@ memory_comparison()
 
 ```python
 def safe_generator(data):
-    """安全的生成器，包含异常处理"""
+    """安全的生成器,包含异常处理"""
     try:
         for item in data:
             if item is None:
                 continue
             
             try:
-                # 尝试处理每个项目
+#                # 尝试处理每个项目
                 if isinstance(item, str):
                     yield item.upper()
                 elif isinstance(item, (int, float)):
@@ -729,18 +729,18 @@ def safe_generator(data):
                     yield f"未知类型: {type(item).__name__}"
             
             except Exception as e:
-                # 处理单个项目的异常
+#                # 处理单个项目的异常
                 yield f"处理错误: {e}"
     
     except Exception as e:
-        # 处理整体异常
+#        # 处理整体异常
         print(f"生成器异常: {e}")
         yield "生成器发生错误"
     
     finally:
         print("生成器清理")
 
-# 测试异常处理
+## 测试异常处理
 test_data = ["hello", 42, None, [1, 2, 3], "world"]
 
 print("安全生成器测试:")
@@ -784,7 +784,7 @@ def lazy_generator_approach(n):
                 yield x * 2
     return gen()
 
-# 性能测试
+## 性能测试
 n = 100000
 
 print("性能对比测试:")
@@ -792,10 +792,10 @@ list_result = list_approach(n)
 generator_result = generator_approach(n)
 lazy_gen = lazy_generator_approach(n)
 
-print(f"\n结果长度对比:")
+print(f"\n 结果长度对比:")
 print(f"列表长度: {len(list_result)}")
 print(f"生成器转列表长度: {len(generator_result)}")
-print(f"惰性生成器前10个: {[next(lazy_gen) for _ in range(10)]}")
+print(f"惰性生成器前 10 个: {[next(lazy_gen) for _ in range(10)]}")
 ```
 
 ## 相关函数与模块

@@ -1,4 +1,4 @@
-# chr() - Unicode字符生成函数
+# chr() - Unicode 字符生成函数
 
 ## 概述
 
@@ -49,30 +49,30 @@ chr(i)
 #### 基本用法
 
 ```python
-# ASCII 字符生成
+## ASCII 字符生成
 print(chr(65))     # 输出: A
 print(chr(97))     # 输出: a
 print(chr(48))     # 输出: 0
 print(chr(32))     # 输出:   (空格)
 print(chr(10))     # 输出: \n (换行符)
 
-# 特殊字符生成
+## 特殊字符生成
 print(chr(33))     # 输出: !
 print(chr(64))     # 输出: @
 print(chr(35))     # 输出: #
 
-# 中文字符生成
+## 中文字符生成
 print(chr(20013))  # 输出: 中
 print(chr(25991))  # 输出: 文
 print(chr(20320))  # 输出: 你
 print(chr(22909))  # 输出: 好
 
-# 其他语言字符
+## 其他语言字符
 print(chr(945))    # 输出: α (希腊字母 alpha)
 print(chr(946))    # 输出: β (希腊字母 beta)
 print(chr(960))    # 输出: π (希腊字母 pi)
 
-# Emoji 字符
+## Emoji 字符
 print(chr(128013)) # 输出: 🐍 (蛇)
 print(chr(127757)) # 输出: 🌍 (地球)
 print(chr(128640)) # 输出: 🚀 (火箭)
@@ -86,7 +86,7 @@ class CharacterGenerator:
     
     @staticmethod
     def generate_ascii_range(start_char, end_char):
-        """生成ASCII字符范围"""
+        """生成 ASCII 字符范围"""
         start_code = ord(start_char)
         end_code = ord(end_char)
         
@@ -97,14 +97,14 @@ class CharacterGenerator:
     
     @staticmethod
     def generate_unicode_block(start_code, end_code, max_chars=50):
-        """生成Unicode块中的字符"""
+        """生成 Unicode 块中的字符"""
         chars = []
         count = 0
         
         for code in range(start_code, min(end_code + 1, start_code + max_chars)):
             try:
                 char = chr(code)
-                # 只包含可打印字符
+#                # 只包含可打印字符
                 if char.isprintable():
                     chars.append({
                         'char': char,
@@ -173,12 +173,12 @@ class CharacterGenerator:
         
         return symbols
 
-# 使用示例
+## 使用示例
 import unicodedata
 
 generator = CharacterGenerator()
 
-# 生成ASCII字符范围
+## 生成 ASCII 字符范围
 uppercase = generator.generate_ascii_range('A', 'Z')
 lowercase = generator.generate_ascii_range('a', 'z')
 digits = generator.generate_ascii_range('0', '9')
@@ -187,26 +187,26 @@ print(f"大写字母: {''.join(uppercase)}")
 print(f"小写字母: {''.join(lowercase)}")
 print(f"数字: {''.join(digits)}")
 
-# 生成Unicode块
-print("\n希腊字母 (部分):")
+## 生成 Unicode 块
+print("\n 希腊字母 (部分):")
 greek_chars = generator.generate_unicode_block(945, 970, 10)
 for char_info in greek_chars:
     print(f"  {char_info['char']} ({char_info['code']}) - {char_info['name']}")
 
-# 创建字母表
-print("\n可用的字母表:")
+## 创建字母表
+print("\n 可用的字母表:")
 available_alphabets = generator.create_alphabet()
 for alphabet_name in available_alphabets:
     alphabet = generator.create_alphabet(alphabet_name)
     print(f"  {alphabet_name}: {''.join(alphabet[:10])}{'...' if len(alphabet) > 10 else ''}")
 
-# 生成符号
-print("\n数学符号 (部分):")
+## 生成符号
+print("\n 数学符号 (部分):")
 math_symbols = generator.generate_symbols('math')
 for symbol in math_symbols[:10]:
     print(f"  {symbol['char']} ({symbol['hex']})")
 
-print("\nEmoji表情 (部分):")
+print("\nEmoji 表情 (部分):")
 emoji_symbols = generator.generate_symbols('emoji_emoticons')
 for emoji in emoji_symbols[:10]:
     print(f"  {emoji['char']} ({emoji['hex']})")
@@ -222,7 +222,7 @@ class CharacterConverter:
     def from_hex_string(hex_str):
         """从十六进制字符串生成字符"""
         try:
-            # 移除可能的前缀
+#            # 移除可能的前缀
             hex_str = hex_str.replace('0x', '').replace('U+', '').replace('\\u', '').replace('\\U', '')
             code_point = int(hex_str, 16)
             return chr(code_point)
@@ -242,7 +242,7 @@ class CharacterConverter:
     def from_binary_string(binary_str):
         """从二进制字符串生成字符"""
         try:
-            # 移除可能的前缀
+#            # 移除可能的前缀
             binary_str = binary_str.replace('0b', '')
             code_point = int(binary_str, 2)
             return chr(code_point)
@@ -253,7 +253,7 @@ class CharacterConverter:
     def from_octal_string(octal_str):
         """从八进制字符串生成字符"""
         try:
-            # 移除可能的前缀
+#            # 移除可能的前缀
             octal_str = octal_str.replace('0o', '')
             code_point = int(octal_str, 8)
             return chr(code_point)
@@ -262,9 +262,9 @@ class CharacterConverter:
     
     @staticmethod
     def from_unicode_escape(escape_str):
-        """从Unicode转义序列生成字符"""
+        """从 Unicode 转义序列生成字符"""
         try:
-            # 处理不同的转义格式
+#            # 处理不同的转义格式
             if escape_str.startswith('\\u'):
                 hex_part = escape_str[2:]
                 if len(hex_part) == 4:
@@ -281,7 +281,7 @@ class CharacterConverter:
             raise ValueError(f"不支持的转义格式: {escape_str}")
             
         except (ValueError, OverflowError) as e:
-            raise ValueError(f"无效的Unicode转义序列: {escape_str}, 错误: {e}")
+            raise ValueError(f"无效的 Unicode 转义序列: {escape_str}, 错误: {e}")
     
     @staticmethod
     def batch_convert(values, input_format='decimal'):
@@ -348,19 +348,19 @@ class CharacterConverter:
                     current_row = []
                     
             except ValueError:
-                # 无效码点跳过
+#                # 无效码点跳过
                 continue
         
-        # 添加最后一行（如果不完整）
+#        # 添加最后一行(如果不完整)
         if current_row:
             table.append(current_row)
         
         return table
 
-# 使用示例
+## 使用示例
 converter = CharacterConverter()
 
-# 从不同格式转换
+## 从不同格式转换
 print("从不同格式转换字符:")
 test_conversions = [
     ('65', 'decimal'),
@@ -389,8 +389,8 @@ for value, format_type in test_conversions:
     except Exception as e:
         print(f"  {value} ({format_type}) -> 错误: {e}")
 
-# 批量转换
-print("\n批量转换 (十六进制):")
+## 批量转换
+print("\n 批量转换 (十六进制):")
 hex_values = ['41', '42', '43', '4E2D', '6587']
 batch_results = converter.batch_convert(hex_values, 'hex')
 for result in batch_results:
@@ -399,8 +399,8 @@ for result in batch_results:
     else:
         print(f"  {result['input']} -> 错误: {result['error']}")
 
-# 创建字符表
-print("\nASCII字符表 (65-90):")
+## 创建字符表
+print("\nASCII 字符表 (65-90):")
 ascii_table = converter.create_character_table(65, 90, 6)
 for row in ascii_table:
     row_str = "  "
@@ -422,7 +422,7 @@ class TextGenerator:
         """生成随机密码"""
         import random
         
-        # 定义字符集
+#        # 定义字符集
         lowercase = [chr(i) for i in range(97, 123)]  # a-z
         uppercase = [chr(i) for i in range(65, 91)]   # A-Z
         digits = [chr(i) for i in range(48, 58)]      # 0-9
@@ -430,11 +430,11 @@ class TextGenerator:
         char_pool = lowercase + uppercase + digits
         
         if include_symbols:
-            # 添加常用符号
+#            # 添加常用符号
             symbols = [chr(i) for i in [33, 35, 36, 37, 38, 42, 43, 45, 61, 63, 64, 94, 95, 126]]
             char_pool.extend(symbols)
         
-        # 确保密码包含各种类型的字符
+#        # 确保密码包含各种类型的字符
         password = []
         password.append(random.choice(lowercase))
         password.append(random.choice(uppercase))
@@ -443,11 +443,11 @@ class TextGenerator:
         if include_symbols:
             password.append(random.choice(symbols))
         
-        # 填充剩余长度
+#        # 填充剩余长度
         for _ in range(length - len(password)):
             password.append(random.choice(char_pool))
         
-        # 打乱顺序
+#        # 打乱顺序
         random.shuffle(password)
         
         return ''.join(password)
@@ -455,7 +455,7 @@ class TextGenerator:
     @staticmethod
     def create_box_drawing(text, style='single'):
         """创建文本框"""
-        # 不同样式的框线字符
+#        # 不同样式的框线字符
         box_chars = {
             'single': {
                 'top_left': chr(9484),     # ┌
@@ -490,19 +490,19 @@ class TextGenerator:
         lines = text.split('\n')
         max_width = max(len(line) for line in lines) if lines else 0
         
-        # 构建框架
+#        # 构建框架
         result = []
         
-        # 顶部
+#        # 顶部
         top_line = chars['top_left'] + chars['horizontal'] * (max_width + 2) + chars['top_right']
         result.append(top_line)
         
-        # 内容行
+#        # 内容行
         for line in lines:
             content_line = chars['vertical'] + ' ' + line.ljust(max_width) + ' ' + chars['vertical']
             result.append(content_line)
         
-        # 底部
+#        # 底部
         bottom_line = chars['bottom_left'] + chars['horizontal'] * (max_width + 2) + chars['bottom_right']
         result.append(bottom_line)
         
@@ -556,8 +556,8 @@ class TextGenerator:
     
     @staticmethod
     def generate_unicode_art(text, style='block'):
-        """生成Unicode艺术字"""
-        # 简单的块字符映射（仅支持数字和部分字母）
+        """生成 Unicode 艺术字"""
+#        # 简单的块字符映射(仅支持数字和部分字母)
         block_patterns = {
             '0': ['███', '█ █', '█ █', '█ █', '███'],
             '1': [' █ ', '██ ', ' █ ', ' █ ', '███'],
@@ -584,44 +584,44 @@ class TextGenerator:
                 for i in range(height):
                     result_lines[i] += pattern[i] + ' '
             else:
-                # 未知字符用问号表示
+#                # 未知字符用问号表示
                 unknown_pattern = ['███', '█ █', ' ██', '   ', ' █ ']
                 for i in range(height):
                     result_lines[i] += unknown_pattern[i] + ' '
         
         return '\n'.join(result_lines)
 
-# 使用示例
+## 使用示例
 generator = TextGenerator()
 
-# 生成密码
+## 生成密码
 print("生成的密码:")
 for i in range(3):
     password = generator.generate_password(12, True)
     print(f"  密码 {i+1}: {password}")
 
-# 创建文本框
-print("\n文本框示例:")
-sample_text = "Hello World!\n你好，世界！\nPython 编程"
+## 创建文本框
+print("\n 文本框示例:")
+sample_text = "Hello World!\n 你好,世界！\nPython 编程"
 for style in ['single', 'double', 'rounded']:
     print(f"\n{style.capitalize()} 样式:")
     boxed_text = generator.create_box_drawing(sample_text, style)
     print(boxed_text)
 
-# 进度条
-print("\n进度条示例:")
+## 进度条
+print("\n 进度条示例:")
 for percent in [0, 25, 50, 75, 100]:
     progress = generator.generate_progress_bar(percent, 30)
     print(f"  {progress}")
 
-# 分隔线
-print("\n分隔线示例:")
+## 分隔线
+print("\n 分隔线示例:")
 for pattern in ['single', 'double', 'dotted', 'wave', 'mixed']:
     separator = generator.create_separator(40, None, pattern)
     print(f"  {pattern}: {separator}")
 
-# Unicode艺术字
-print("\nUnicode艺术字:")
+## Unicode 艺术字
+print("\nUnicode 艺术字:")
 art_text = generator.generate_unicode_art("ABC 123")
 print(art_text)
 ```
@@ -634,7 +634,7 @@ class DataEncoder:
     
     @staticmethod
     def encode_to_unicode_points(data):
-        """将数据编码为Unicode码点序列"""
+        """将数据编码为 Unicode 码点序列"""
         if isinstance(data, str):
             return [ord(char) for char in data]
         elif isinstance(data, bytes):
@@ -646,7 +646,7 @@ class DataEncoder:
     
     @staticmethod
     def decode_from_unicode_points(points):
-        """从Unicode码点序列解码数据"""
+        """从 Unicode 码点序列解码数据"""
         try:
             return ''.join(chr(point) for point in points)
         except (ValueError, TypeError) as e:
@@ -658,7 +658,7 @@ class DataEncoder:
         if len(set(alphabet)) != len(alphabet):
             raise ValueError("字母表中不能有重复字符")
         
-        # 创建编码和解码映射
+#        # 创建编码和解码映射
         encode_map = {char: i for i, char in enumerate(alphabet)}
         decode_map = {i: char for i, char in enumerate(alphabet)}
         
@@ -671,16 +671,16 @@ class DataEncoder:
     
     @staticmethod
     def base_n_encode(number, base, custom_alphabet=None):
-        """N进制编码"""
+        """N 进制编码"""
         if base < 2 or base > 1114112:
-            raise ValueError(f"进制必须在2-1114112之间，实际: {base}")
+            raise ValueError(f"进制必须在 2-1114112 之间,实际: {base}")
         
         if custom_alphabet:
             if len(custom_alphabet) != base:
                 raise ValueError(f"自定义字母表长度必须等于进制数: {len(custom_alphabet)} != {base}")
             alphabet = custom_alphabet
         else:
-            # 使用Unicode字符作为默认字母表
+#            # 使用 Unicode 字符作为默认字母表
             alphabet = [chr(i) for i in range(base)]
         
         if number == 0:
@@ -695,11 +695,11 @@ class DataEncoder:
     
     @staticmethod
     def base_n_decode(encoded_str, base, custom_alphabet=None):
-        """N进制解码"""
+        """N 进制解码"""
         if custom_alphabet:
             if len(custom_alphabet) != base:
                 raise ValueError(f"自定义字母表长度必须等于进制数: {len(custom_alphabet)} != {base}")
-            # 创建字符到值的映射
+#            # 创建字符到值的映射
             char_to_value = {char: i for i, char in enumerate(custom_alphabet)}
         else:
             char_to_value = {chr(i): i for i in range(base)}
@@ -714,26 +714,26 @@ class DataEncoder:
     
     @staticmethod
     def compress_text_with_unicode(text):
-        """使用Unicode字符压缩文本"""
-        # 统计字符频率
+        """使用 Unicode 字符压缩文本"""
+#        # 统计字符频率
         char_freq = {}
         for char in text:
             char_freq[char] = char_freq.get(char, 0) + 1
         
-        # 按频率排序
+#        # 按频率排序
         sorted_chars = sorted(char_freq.items(), key=lambda x: x[1], reverse=True)
         
-        # 创建压缩映射（高频字符使用低码点）
+#        # 创建压缩映射(高频字符使用低码点)
         compress_map = {}
         decompress_map = {}
         
         for i, (char, freq) in enumerate(sorted_chars):
-            # 使用私用区字符避免冲突
+#            # 使用私用区字符避免冲突
             compressed_char = chr(0xE000 + i)
             compress_map[char] = compressed_char
             decompress_map[compressed_char] = char
         
-        # 压缩文本
+#        # 压缩文本
         compressed = ''.join(compress_map[char] for char in text)
         
         return {
@@ -747,7 +747,7 @@ class DataEncoder:
     
     @staticmethod
     def decompress_text_with_unicode(compressed_data):
-        """解压缩Unicode压缩的文本"""
+        """解压缩 Unicode 压缩的文本"""
         compressed = compressed_data['compressed']
         mapping = compressed_data['mapping']
         
@@ -755,42 +755,42 @@ class DataEncoder:
             decompressed = ''.join(mapping[char] for char in compressed)
             return decompressed
         except KeyError as e:
-            raise ValueError(f"解压缩失败，找不到字符映射: {e}")
+            raise ValueError(f"解压缩失败,找不到字符映射: {e}")
 
-# 使用示例
+## 使用示例
 encoder = DataEncoder()
 
-# Unicode码点编码/解码
+## Unicode 码点编码/解码
 test_text = "Hello 世界! 🌍"
 print(f"原文: {test_text}")
 
-# 编码为码点
+## 编码为码点
 code_points = encoder.encode_to_unicode_points(test_text)
 print(f"码点序列: {code_points}")
 
-# 从码点解码
+## 从码点解码
 decoded_text = encoder.decode_from_unicode_points(code_points)
 print(f"解码结果: {decoded_text}")
 print(f"编码正确: {test_text == decoded_text}")
 
-# 自定义编码
-print("\n自定义编码示例:")
+## 自定义编码
+print("\n 自定义编码示例:")
 custom_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 encoding_system = encoder.create_custom_encoding(custom_alphabet)
 print(f"自定义字母表: {custom_alphabet}")
 print(f"进制: {encoding_system['base']}")
 
-# N进制编码
+## N 进制编码
 test_number = 12345
 encoded = encoder.base_n_encode(test_number, 36, custom_alphabet)
 decoded_number = encoder.base_n_decode(encoded, 36, custom_alphabet)
-print(f"\n数字 {test_number} 的36进制编码: {encoded}")
+print(f"\n 数字 {test_number} 的 36 进制编码: {encoded}")
 print(f"解码结果: {decoded_number}")
 print(f"编码正确: {test_number == decoded_number}")
 
-# Unicode压缩
-print("\nUnicode文本压缩:")
-repeat_text = "这是一个测试文本，这个文本包含重复的字符和词汇。测试文本用于验证压缩效果。"
+## Unicode 压缩
+print("\nUnicode 文本压缩:")
+repeat_text = "这是一个测试文本,这个文本包含重复的字符和词汇。测试文本用于验证压缩效果。"
 compressed_result = encoder.compress_text_with_unicode(repeat_text)
 decompressed_text = encoder.decompress_text_with_unicode(compressed_result)
 
@@ -800,8 +800,8 @@ print(f"唯一字符数: {compressed_result['unique_chars']}")
 print(f"压缩比: {compressed_result['compression_ratio']:.2%}")
 print(f"解压正确: {repeat_text == decompressed_text}")
 
-# 显示压缩映射（前几个）
-print("\n压缩映射 (前10个):")
+## 显示压缩映射(前几个)
+print("\n 压缩映射 (前 10 个):")
 for i, (compressed_char, original_char) in enumerate(list(compressed_result['mapping'].items())[:10]):
     print(f"  '{original_char}' -> '{compressed_char}' (码点: {ord(compressed_char)})")
 ```
@@ -818,7 +818,7 @@ class InternationalizationHelper:
     @staticmethod
     def generate_locale_characters(locale_name='en_US'):
         """生成特定区域的字符集"""
-        # 不同区域的字符范围
+#        # 不同区域的字符范围
         locale_ranges = {
             'en_US': [(65, 90), (97, 122)],           # 英文
             'zh_CN': [(0x4E00, 0x9FFF)],              # 中文汉字
@@ -899,7 +899,7 @@ class InternationalizationHelper:
     @staticmethod
     def analyze_text_language(text):
         """分析文本的语言特征"""
-        # 定义语言字符范围
+#        # 定义语言字符范围
         language_ranges = {
             'Latin': [(0x0000, 0x007F), (0x0080, 0x00FF), (0x0100, 0x017F)],
             'Chinese': [(0x4E00, 0x9FFF), (0x3400, 0x4DBF)],
@@ -927,14 +927,14 @@ class InternationalizationHelper:
                             language_counts[language] += 1
                             break
         
-        # 计算百分比
+#        # 计算百分比
         language_percentages = {}
         if total_chars > 0:
             for language, count in language_counts.items():
                 if count > 0:
                     language_percentages[language] = (count / total_chars) * 100
         
-        # 确定主要语言
+#        # 确定主要语言
         primary_language = max(language_percentages.items(), key=lambda x: x[1]) if language_percentages else ("Unknown", 0)
         
         return {
@@ -948,7 +948,7 @@ class InternationalizationHelper:
     
     @staticmethod
     def create_unicode_font_test():
-        """创建Unicode字体测试文本"""
+        """创建 Unicode 字体测试文本"""
         test_sections = [
             {
                 'name': '基本拉丁字母',
@@ -976,7 +976,7 @@ class InternationalizationHelper:
                 'sample': '∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳∴∵∶∷∸∹∺∻∼∽∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⋲⋳⋴⋵⋶⋷⋸⋹⋺⋻⋼⋽⋾⋿'
             },
             {
-                'name': 'Emoji表情',
+                'name': 'Emoji 表情',
                 'range': (0x1F600, 0x1F64F),
                 'sample': '😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀🙁🙂🙃🙄🙅🙆🙇🙈🙉🙊🙋🙌🙍🙎🙏'
             }
@@ -991,24 +991,24 @@ class InternationalizationHelper:
         
         return '\n'.join(font_test)
 
-# 使用示例
+## 使用示例
 i18n_helper = InternationalizationHelper()
 
-# 生成特定区域字符
+## 生成特定区域字符
 print("中文字符示例:")
 zh_chars = i18n_helper.generate_locale_characters('zh_CN')
-for char_info in zh_chars[:10]:  # 只显示前10个
+for char_info in zh_chars[:10]:  # 只显示前 10 个
     print(f"  {char_info['char']} ({char_info['hex']}) - {char_info['name']}")
 
-# 多语言问候语
-print("\n多语言问候语:")
+## 多语言问候语
+print("\n 多语言问候语:")
 greetings = i18n_helper.create_multilingual_greeting()
-for greeting_info in greetings[:8]:  # 显示前8个
+for greeting_info in greetings[:8]:  # 显示前 8 个
     print(f"  {greeting_info['language_name']}: {greeting_info['greeting']} "
           f"({greeting_info['char_count']}字符, {greeting_info['unique_chars']}唯一字符)")
 
-# 文本语言分析
-print("\n文本语言分析:")
+## 文本语言分析
+print("\n 文本语言分析:")
 test_texts = [
     "Hello World!",
     "你好世界！",
@@ -1027,8 +1027,8 @@ for text in test_texts:
         print(f"    语言分布: {', '.join([f'{lang}({pct:.1f}%)' for lang, pct in top_languages])}")
     print()
 
-# Unicode字体测试
-print("Unicode字体测试文本:")
+## Unicode 字体测试
+print("Unicode 字体测试文本:")
 font_test = i18n_helper.create_unicode_font_test()
 print(font_test[:500] + "..." if len(font_test) > 500 else font_test)  # 限制输出长度
 ```
@@ -1041,7 +1041,7 @@ print(font_test[:500] + "..." if len(font_test) > 500 else font_test)  # 限制�
 class SafeChrProcessor:
     """安全的 chr() 处理器"""
     
-    # Unicode有效范围常量
+#    # Unicode 有效范围常量
     MIN_UNICODE = 0
     MAX_UNICODE = 0x10FFFF  # 1,114,111
     
@@ -1049,7 +1049,7 @@ class SafeChrProcessor:
     def safe_chr(code_point):
         """安全的 chr() 调用"""
         try:
-            # 类型检查
+#            # 类型检查
             if not isinstance(code_point, int):
                 try:
                     code_point = int(code_point)
@@ -1061,7 +1061,7 @@ class SafeChrProcessor:
                         'code_point': None
                     }
             
-            # 范围检查
+#            # 范围检查
             if not (SafeChrProcessor.MIN_UNICODE <= code_point <= SafeChrProcessor.MAX_UNICODE):
                 return {
                     'success': False,
@@ -1070,16 +1070,16 @@ class SafeChrProcessor:
                     'code_point': code_point
                 }
             
-            # 代理对检查（UTF-16代理对在Python中无效）
+#            # 代理对检查(UTF-16 代理对在 Python 中无效)
             if 0xD800 <= code_point <= 0xDFFF:
                 return {
                     'success': False,
-                    'error': f"码点 {code_point} 是UTF-16代理对，在Python中无效",
+                    'error': f"码点 {code_point} 是 UTF-16 代理对,在 Python 中无效",
                     'character': None,
                     'code_point': code_point
                 }
             
-            # 执行转换
+#            # 执行转换
             character = chr(code_point)
             
             return {
@@ -1160,7 +1160,7 @@ class SafeChrProcessor:
         
         for i, code_point in enumerate(code_points):
             try:
-                # 基本有效性检查
+#                # 基本有效性检查
                 if not isinstance(code_point, int):
                     validation_result['issues'].append({
                         'index': i,
@@ -1171,33 +1171,33 @@ class SafeChrProcessor:
                     validation_result['statistics']['invalid_points'] += 1
                     continue
                 
-                # 范围检查
+#                # 范围检查
                 if not (0 <= code_point <= 0x10FFFF):
                     validation_result['issues'].append({
                         'index': i,
                         'code_point': code_point,
-                        'issue': f"超出Unicode范围 [0, 1114111]"
+                        'issue': f"超出 Unicode 范围 [0, 1114111]"
                     })
                     validation_result['is_valid'] = False
                     validation_result['statistics']['invalid_points'] += 1
                     continue
                 
-                # 代理对检查
+#                # 代理对检查
                 if 0xD800 <= code_point <= 0xDFFF:
                     validation_result['issues'].append({
                         'index': i,
                         'code_point': code_point,
-                        'issue': "UTF-16代理对，在Python中无效"
+                        'issue': "UTF-16 代理对,在 Python 中无效"
                     })
                     validation_result['is_valid'] = False
                     validation_result['statistics']['surrogate_pairs'] += 1
                     continue
                 
-                # 尝试转换为字符
+#                # 尝试转换为字符
                 char = chr(code_point)
                 validation_result['statistics']['valid_points'] += 1
                 
-                # 字符类型统计
+#                # 字符类型统计
                 if 0xE000 <= code_point <= 0xF8FF or 0xF0000 <= code_point <= 0xFFFFD or 0x100000 <= code_point <= 0x10FFFD:
                     validation_result['statistics']['private_use'] += 1
                 elif code_point < 32 or code_point == 127:
@@ -1226,14 +1226,14 @@ class SafeChrProcessor:
         except (ValueError, TypeError):
             return ["输入必须是整数"]
         
-        # 超出范围的处理
+#        # 超出范围的处理
         if code_point < 0:
             suggestions.append(f"使用绝对值: {abs(code_point)}")
             if abs(code_point) <= 0x10FFFF:
                 suggestions.append(f"对应字符: '{chr(abs(code_point))}'")
         
         elif code_point > 0x10FFFF:
-            # 建议模运算
+#            # 建议模运算
             mod_result = code_point % 0x110000
             suggestions.append(f"使用模运算: {code_point} % 1114112 = {mod_result}")
             if mod_result != 0:
@@ -1242,23 +1242,23 @@ class SafeChrProcessor:
                 except ValueError:
                     pass
         
-        # 代理对的处理
+#        # 代理对的处理
         elif 0xD800 <= code_point <= 0xDFFF:
-            suggestions.append("这是UTF-16代理对，Python不支持")
+            suggestions.append("这是 UTF-16 代理对,Python 不支持")
             suggestions.append(f"尝试使用相近的有效码点: {0xD7FF} 或 {0xE000}")
             suggestions.append(f"U+D7FF: '{chr(0xD7FF)}'")
             suggestions.append(f"U+E000: '{chr(0xE000)}'")
         
-        # 其他情况
+#        # 其他情况
         else:
-            suggestions.append("码点在有效范围内，但可能有其他问题")
+            suggestions.append("码点在有效范围内,但可能有其他问题")
         
         return suggestions
 
-# 使用示例
+## 使用示例
 safe_processor = SafeChrProcessor()
 
-# 安全的 chr() 调用测试
+## 安全的 chr() 调用测试
 test_cases = [65, 20013, -1, 1114112, 0xD800, "65", 3.14, None]
 print("安全 chr() 测试:")
 for test_case in test_cases:
@@ -1268,25 +1268,25 @@ for test_case in test_cases:
     else:
         print(f"  {test_case} -> 错误: {result['error']}")
 
-# 批量处理
+## 批量处理
 code_points = [65, 66, 67, -1, 20013, 1114112, 0xD800, 128013]
 batch_result = safe_processor.batch_chr_safe(code_points)
-print(f"\n批量处理结果:")
+print(f"\n 批量处理结果:")
 print(f"  成功: {batch_result['summary']['success_count']} 个")
 print(f"  失败: {batch_result['summary']['error_count']} 个")
 
-# 显示成功的结果
+## 显示成功的结果
 for item in batch_result['successful'][:5]:
     print(f"    {item['code_point']} -> '{item['character']}' ({item['hex_code']})")
 
-# 显示失败的结果
+## 显示失败的结果
 for item in batch_result['failed']:
     print(f"    错误: {item['code_point']} - {item['error']}")
 
-# 码点序列验证
+## 码点序列验证
 test_sequence = [65, 66, 67, -1, 20013, 0xD800, 128013, "invalid"]
 validation = safe_processor.validate_code_point_sequence(test_sequence)
-print(f"\n序列验证结果:")
+print(f"\n 序列验证结果:")
 print(f"  有效: {validation['is_valid']}")
 print(f"  统计: 总数{validation['statistics']['total_points']}, "
       f"有效{validation['statistics']['valid_points']}, "
@@ -1294,11 +1294,11 @@ print(f"  统计: 总数{validation['statistics']['total_points']}, "
 
 if validation['issues']:
     print("  问题:")
-    for issue in validation['issues'][:3]:  # 只显示前3个问题
+    for issue in validation['issues'][:3]:  # 只显示前 3 个问题
         print(f"    位置{issue['index']}: {issue['issue']}")
 
-# 替代方案建议
-print("\n无效码点的替代建议:")
+## 替代方案建议
+print("\n 无效码点的替代建议:")
 invalid_points = [-1, 1114112, 0xD800]
 for point in invalid_points:
     suggestions = safe_processor.suggest_alternatives(point)
@@ -1327,7 +1327,7 @@ class ChrPerformance:
     
     @lru_cache(maxsize=10000)
     def cached_chr(self, code_point):
-        """使用LRU缓存的 chr() 调用"""
+        """使用 LRU 缓存的 chr() 调用"""
         return chr(code_point)
     
     def manual_cached_chr(self, code_point):
@@ -1341,9 +1341,9 @@ class ChrPerformance:
         self._stats['cache_misses'] += 1
         result = chr(code_point)
         
-        # 限制缓存大小
+#        # 限制缓存大小
         if len(self._cache) >= 5000:
-            # 移除最旧的条目
+#            # 移除最旧的条目
             oldest_key = next(iter(self._cache))
             del self._cache[oldest_key]
         
@@ -1376,15 +1376,15 @@ class ChrPerformance:
         perf = ChrPerformance()
         
         methods = {
-            '普通chr()': lambda points: [chr(p) for p in points],
-            'LRU缓存chr()': lambda points: [perf.cached_chr(p) for p in points],
-            '手动缓存chr()': lambda points: [perf.manual_cached_chr(p) for p in points]
+            '普通 chr()': lambda points: [chr(p) for p in points],
+            'LRU 缓存 chr()': lambda points: [perf.cached_chr(p) for p in points],
+            '手动缓存 chr()': lambda points: [perf.manual_cached_chr(p) for p in points]
         }
         
         results = {}
         
         for method_name, method_func in methods.items():
-            # 预热缓存
+#            # 预热缓存
             if '缓存' in method_name:
                 method_func(code_points[:100])
             
@@ -1401,7 +1401,7 @@ class ChrPerformance:
                 'chars_per_second': len(code_points) * iterations / (end_time - start_time)
             }
             
-            # 重置缓存以确保公平比较
+#            # 重置缓存以确保公平比较
             perf.clear_cache()
         
         return results
@@ -1423,7 +1423,7 @@ class ChrPerformance:
             valid_chars += len([c for c in chunk if c.isprintable()])
             
             if total_chars % 10000 == 0:
-                print(f"已生成 {total_chars} 个字符，其中 {valid_chars} 个可打印")
+                print(f"已生成 {total_chars} 个字符,其中 {valid_chars} 个可打印")
         
         return {
             'total_generated': total_chars,
@@ -1431,21 +1431,21 @@ class ChrPerformance:
             'printable_ratio': valid_chars / total_chars if total_chars > 0 else 0
         }
 
-# 性能测试
+## 性能测试
 perf = ChrPerformance()
 
-# 生成测试数据
+## 生成测试数据
 test_codes = list(range(65, 91)) + list(range(97, 123)) + list(range(48, 58))  # A-Z, a-z, 0-9
 test_codes += [20013, 25991, 20320, 22909]  # 一些中文字符
 test_codes *= 10  # 增加重复以测试缓存效果
 
 print(f"测试数据: {len(test_codes)} 个码点")
-print("性能基准测试 (1000次迭代):")
+print("性能基准测试 (1000 次迭代):")
 
-# 运行基准测试
+## 运行基准测试
 benchmark_results = perf.benchmark_chr_methods(test_codes, 1000)
 
-# 按性能排序
+## 按性能排序
 sorted_results = sorted(benchmark_results.items(), key=lambda x: x[1]['time'])
 
 for method, stats in sorted_results:
@@ -1453,18 +1453,18 @@ for method, stats in sorted_results:
           f"(平均: {stats['avg_time']:.8f}秒, "
           f"{stats['chars_per_second']:.0f} 字符/秒)")
 
-# 计算性能提升
+## 计算性能提升
 fastest_time = sorted_results[0][1]['time']
-print("\n性能提升比较:")
+print("\n 性能提升比较:")
 for method, stats in sorted_results:
     speedup = fastest_time / stats['time']
     print(f"  {method:<15}: {speedup:.2f}x")
 
-# 缓存效果测试
-print("\n缓存效果测试:")
+## 缓存效果测试
+print("\n 缓存效果测试:")
 perf.clear_cache()
 
-# 第一次调用（缓存未命中）
+## 第一次调用(缓存未命中)
 for code in test_codes[:50]:
     perf.manual_cached_chr(code)
 
@@ -1472,7 +1472,7 @@ stats_after_first = perf.get_cache_stats()
 print(f"第一次调用后: 命中率 {stats_after_first['hit_rate']:.1f}%, "
       f"缓存大小 {stats_after_first['cache_size']}")
 
-# 第二次调用相同数据（应该有缓存命中）
+## 第二次调用相同数据(应该有缓存命中)
 for code in test_codes[:50]:
     perf.manual_cached_chr(code)
 
@@ -1480,8 +1480,8 @@ stats_after_second = perf.get_cache_stats()
 print(f"第二次调用后: 命中率 {stats_after_second['hit_rate']:.1f}%, "
       f"缓存大小 {stats_after_second['cache_size']}")
 
-# 内存效率测试
-print("\n内存效率测试:")
+## 内存效率测试
+print("\n 内存效率测试:")
 memory_stats = perf.memory_efficient_chr_generation(0, 10000, 1000)
 print(f"生成完成:")
 print(f"  总字符数: {memory_stats['total_generated']}")
@@ -1492,24 +1492,24 @@ print(f"  可打印比例: {memory_stats['printable_ratio']:.2%}")
 ## 相关函数和模块
 
 ### 内置函数
-- `ord()` - 字符转Unicode码点（chr的逆操作）
+- `ord()` - 字符转 Unicode 码点（chr 的逆操作）
 - `hex()` - 整数转十六进制字符串
 - `bin()` - 整数转二进制字符串
 - `int()` - 字符串转整数
 - `str()` - 对象转字符串
 
 ### 标准库
-- `unicodedata` - Unicode字符数据库
+- `unicodedata` - Unicode 字符数据库
 - `codecs` - 编解码器注册和基类
 - `string` - 字符串常量和类
 - `locale` - 国际化服务
 - `re` - 正则表达式操作
 
 ### 第三方库
-- `unidecode` - Unicode文本转ASCII
+- `unidecode` - Unicode 文本转 ASCII
 - `chardet` - 字符编码检测
-- `ftfy` - 修复Unicode文本
-- `emoji` - Emoji处理库
+- `ftfy` - 修复 Unicode 文本
+- `emoji` - Emoji 处理库
 
 ## 扩展阅读
 
@@ -1517,7 +1517,7 @@ print(f"  可打印比例: {memory_stats['printable_ratio']:.2%}")
 - [Unicode 标准](https://unicode.org/standard/standard.html)
 - [UTF-8 编码详解](https://en.wikipedia.org/wiki/UTF-8)
 - [Python Unicode HOWTO](https://docs.python.org/3/howto/unicode.html)
-- [Unicode字符分类](https://www.unicode.org/reports/tr44/)
+- [Unicode 字符分类](https://www.unicode.org/reports/tr44/)
 
 ## 标签
 

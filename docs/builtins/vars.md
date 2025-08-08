@@ -49,27 +49,27 @@ vars(object)  # 返回对象的 __dict__ 属性
 ### 基本用法
 
 ```python
-# 无参数调用 - 返回局部命名空间
+## 无参数调用 - 返回局部命名空间
 def demo_function():
     local_var = 42
     another_var = "hello"
     
-    # 获取局部变量字典
+#    # 获取局部变量字典
     local_vars = vars()
     print(f"局部变量: {local_vars}")
-    # 输出: {'local_var': 42, 'another_var': 'hello'}
+#    # 输出: {'local_var': 42, 'another_var': 'hello'}
     
     return local_vars
 
 result = demo_function()
 print(f"函数返回的局部变量: {result}")
 
-# 在模块级别调用
+## 在模块级别调用
 module_var = "I'm a module variable"
-print(f"模块级别的vars(): {vars()}")
-# 包含所有模块级别的变量和导入的模块
+print(f"模块级别的 vars(): {vars()}")
+## 包含所有模块级别的变量和导入的模块
 
-# 对象属性字典
+## 对象属性字典
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -80,14 +80,14 @@ class Person:
         self.city = city
 
 person = Person("Alice", 30)
-print(f"Person对象的属性: {vars(person)}")
-# 输出: {'name': 'Alice', 'age': 30, 'city': 'Unknown'}
+print(f"Person 对象的属性: {vars(person)}")
+## 输出: {'name': 'Alice', 'age': 30, 'city': 'Unknown'}
 
-# 修改属性
+## 修改属性
 person.set_city("New York")
 person.email = "alice@example.com"  # 动态添加属性
 print(f"修改后的属性: {vars(person)}")
-# 输出: {'name': 'Alice', 'age': 30, 'city': 'New York', 'email': 'alice@example.com'}
+## 输出: {'name': 'Alice', 'age': 30, 'city': 'New York', 'email': 'alice@example.com'}
 ```
 
 ### 对象属性检查器
@@ -112,14 +112,14 @@ class ObjectInspector:
             'class_attributes': {}
         }
         
-        # 获取实例属性
+#        # 获取实例属性
         try:
             instance_vars = vars(obj)
             info['attributes'] = instance_vars.copy()
         except TypeError:
             info['attributes'] = "对象没有 __dict__ 属性"
         
-        # 获取类属性和方法
+#        # 获取类属性和方法
         obj_class = type(obj)
         try:
             class_vars = vars(obj_class)
@@ -145,7 +145,7 @@ class ObjectInspector:
         except TypeError as e:
             return {'error': f'无法获取对象属性: {e}'}
         
-        # 找出差异
+#        # 找出差异
         all_keys = set(vars1.keys()) | set(vars2.keys())
         
         comparison = {
@@ -191,15 +191,15 @@ class ObjectInspector:
         filtered = {}
         
         for name, value in all_vars.items():
-            # 检查私有属性
+#            # 检查私有属性
             if not include_private and name.startswith('_'):
                 continue
             
-            # 检查类型
+#            # 检查类型
             if attribute_type and not isinstance(value, attribute_type):
                 continue
             
-            # 检查名称模式
+#            # 检查名称模式
             if name_pattern:
                 import re
                 if not re.search(name_pattern, name):
@@ -227,7 +227,7 @@ class AttributeTracker:
         except TypeError:
             current_state = {}
         
-        # 记录变化
+#        # 记录变化
         changes = self._detect_changes(self.initial_state, current_state)
         
         snapshot_data = {
@@ -279,7 +279,7 @@ class AttributeTracker:
             self.initial_state = {}
         self.changes = []
 
-# 使用示例
+## 使用示例
 class TestClass:
     class_var = "I'm a class variable"
     
@@ -297,7 +297,7 @@ class TestClass:
     def method_example(self):
         return "This is a method"
 
-# 创建测试对象
+## 创建测试对象
 obj1 = TestClass("Object1")
 obj2 = TestClass("Object2")
 obj2.value = 10
@@ -305,51 +305,51 @@ obj2.extra_attr = "Extra"
 
 inspector = ObjectInspector()
 
-# 获取对象信息
+## 获取对象信息
 print("=== 对象信息检查 ===")
 info = inspector.get_object_info(obj1)
 for key, value in info.items():
     print(f"{key}: {value}")
 
-# 比较对象
+## 比较对象
 print("\n=== 对象比较 ===")
 comparison = inspector.compare_objects(obj1, obj2)
 for category, data in comparison.items():
     if data:
         print(f"{category}: {data}")
 
-# 属性过滤
+## 属性过滤
 print("\n=== 属性过滤 ===")
-# 只获取字符串类型的属性
+## 只获取字符串类型的属性
 string_attrs = inspector.filter_attributes(obj2, attribute_type=str)
 print(f"字符串属性: {string_attrs}")
 
-# 获取包含'name'的属性
+## 获取包含'name'的属性
 name_attrs = inspector.filter_attributes(obj2, name_pattern=r'.*name.*')
 print(f"包含'name'的属性: {name_attrs}")
 
-# 属性变化跟踪
+## 属性变化跟踪
 print("\n=== 属性变化跟踪 ===")
 tracker = inspector.track_attribute_changes(obj1)
 
-# 初始快照
+## 初始快照
 tracker.snapshot("初始状态")
 
-# 修改对象
+## 修改对象
 obj1.value = 5
 obj1.new_attr = "新属性"
 tracker.snapshot("第一次修改")
 
-# 再次修改
+## 再次修改
 obj1.increment()
 del obj1.new_attr
 obj1.another_attr = [1, 2, 3]
 tracker.snapshot("第二次修改")
 
-# 查看变化历史
+## 查看变化历史
 history = tracker.get_change_history()
 for i, change in enumerate(history):
-    print(f"\n快照 {i+1}: {change['label']}")
+    print(f"\n 快照 {i+1}: {change['label']}")
     changes = change['changes_from_initial']
     for change_type, data in changes.items():
         if data:
@@ -392,7 +392,7 @@ class ConfigManager:
             return False
         
         try:
-            # 使用vars()获取所有配置属性
+#            # 使用 vars()获取所有配置属性
             config_data = {}
             for key, value in vars(self).items():
                 if not key.startswith('_') and key != 'config_file':
@@ -441,7 +441,7 @@ class ConfigManager:
         for key, rules in schema.items():
             field_errors = []
             
-            # 检查必需字段
+#            # 检查必需字段
             if rules.get('required', False) and key not in current_config:
                 field_errors.append(f"缺少必需字段: {key}")
                 continue
@@ -449,12 +449,12 @@ class ConfigManager:
             if key in current_config:
                 value = current_config[key]
                 
-                # 类型检查
+#                # 类型检查
                 expected_type = rules.get('type')
                 if expected_type and not isinstance(value, expected_type):
                     field_errors.append(f"类型错误: 期望 {expected_type.__name__}, 得到 {type(value).__name__}")
                 
-                # 值范围检查
+#                # 值范围检查
                 if 'min_value' in rules and isinstance(value, (int, float)):
                     if value < rules['min_value']:
                         field_errors.append(f"值太小: {value} < {rules['min_value']}")
@@ -463,7 +463,7 @@ class ConfigManager:
                     if value > rules['max_value']:
                         field_errors.append(f"值太大: {value} > {rules['max_value']}")
                 
-                # 选择值检查
+#                # 选择值检查
                 if 'choices' in rules and value not in rules['choices']:
                     field_errors.append(f"无效选择: {value}, 可选值: {rules['choices']}")
             
@@ -478,13 +478,13 @@ class ConfigManager:
     
     def restore_from_backup(self, backup: Dict[str, Any]):
         """从备份恢复配置"""
-        # 清除当前配置（除了内部属性）
+#        # 清除当前配置(除了内部属性)
         current_vars = list(vars(self).keys())
         for key in current_vars:
             if not key.startswith('_') and key != 'config_file':
                 delattr(self, key)
         
-        # 恢复备份的配置
+#        # 恢复备份的配置
         self.update_config(backup)
     
     def __str__(self):
@@ -570,13 +570,13 @@ class DynamicObject:
     def __repr__(self):
         return f"DynamicObject({vars(self)})"
 
-# 使用示例
+## 使用示例
 print("=== 配置管理示例 ===")
 
-# 创建配置管理器
+## 创建配置管理器
 config = ConfigManager()
 
-# 设置一些配置
+## 设置一些配置
 config.set_config('database_host', 'localhost')
 config.set_config('database_port', 5432)
 config.set_config('debug_mode', True)
@@ -585,7 +585,7 @@ config.set_config('app_name', 'MyApp')
 
 print(f"当前配置: {config.list_configs()}")
 
-# 配置验证
+## 配置验证
 schema = {
     'database_host': {'required': True, 'type': str},
     'database_port': {'required': True, 'type': int, 'min_value': 1, 'max_value': 65535},
@@ -600,33 +600,33 @@ if validation_errors:
 else:
     print("配置验证通过")
 
-# 创建备份
+## 创建备份
 backup = config.create_backup()
 print(f"配置备份: {backup}")
 
-# 修改配置
+## 修改配置
 config.set_config('database_port', 3306)
 config.set_config('new_feature', True)
 print(f"修改后配置: {config.list_configs()}")
 
-# 从备份恢复
+## 从备份恢复
 config.restore_from_backup(backup)
 print(f"恢复后配置: {config.list_configs()}")
 
 print("\n=== 动态对象示例 ===")
 
-# 创建动态对象
+## 创建动态对象
 dynamic_obj = DynamicObject(name="Dynamic", version=1.0)
 print(f"初始对象: {dynamic_obj}")
 
-# 动态添加属性
+## 动态添加属性
 dynamic_obj.add_attribute('description', '这是一个动态对象')
 dynamic_obj.add_attribute('features', ['feature1', 'feature2'])
 dynamic_obj.add_attribute('config', {'setting1': 'value1', 'setting2': 42})
 
 print(f"添加属性后: {dynamic_obj.list_attributes()}")
 
-# 从字典更新
+## 从字典更新
 update_data = {
     'version': 2.0,
     'author': 'Python Developer',
@@ -635,7 +635,7 @@ update_data = {
 dynamic_obj.from_dict(update_data)
 print(f"从字典更新后: {dynamic_obj.list_attributes()}")
 
-# 复制属性
+## 复制属性
 other_obj = ConfigManager()
 other_obj.source = 'other_object'
 other_obj.data = [1, 2, 3, 4, 5]
@@ -643,7 +643,7 @@ other_obj.data = [1, 2, 3, 4, 5]
 dynamic_obj.copy_attributes_from(other_obj, exclude=['config_file'])
 print(f"复制属性后: {dynamic_obj.list_attributes()}")
 
-# 清除部分属性
+## 清除部分属性
 dynamic_obj.clear_attributes(keep=['name', 'version', 'author'])
 print(f"清除属性后: {dynamic_obj.list_attributes()}")
 ```
@@ -667,7 +667,7 @@ class DebugHelper:
         print(f"\n=== {title} ===")
         
         if obj is None:
-            # 获取调用者的局部变量
+#            # 获取调用者的局部变量
             frame = sys._getframe(1)
             variables = frame.f_locals
         else:
@@ -682,18 +682,18 @@ class DebugHelper:
             return
         
         for name, value in variables.items():
-            # 过滤私有变量
+#            # 过滤私有变量
             if filter_private and name.startswith('_'):
                 continue
             
-            # 过滤可调用对象
+#            # 过滤可调用对象
             if filter_callable and callable(value):
                 continue
             
             value_type = type(value).__name__
             value_str = str(value)
             
-            # 限制显示长度
+#            # 限制显示长度
             if len(value_str) > 100:
                 value_str = value_str[:97] + "..."
             
@@ -724,18 +724,18 @@ class DebugHelper:
                 else:
                     print(f"  ✗ {key}: {vars1[key]} → {vars2[key]} (不同)")
             elif key in vars1:
-                print(f"  - {key}: {vars1[key]} (仅在obj1中)")
+                print(f"  - {key}: {vars1[key]} (仅在 obj1 中)")
             else:
-                print(f"  + {key}: {vars2[key]} (仅在obj2中)")
+                print(f"  + {key}: {vars2[key]} (仅在 obj2 中)")
     
     @staticmethod
     def trace_vars(func: Callable) -> Callable:
-        """装饰器：跟踪函数执行过程中的变量变化"""
+        """装饰器:跟踪函数执行过程中的变量变化"""
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             print(f"\n=== 开始执行 {func.__name__} ===")
             
-            # 执行前的局部变量
+#            # 执行前的局部变量
             print("执行前的参数:")
             if args:
                 print(f"  位置参数: {args}")
@@ -744,11 +744,11 @@ class DebugHelper:
             
             try:
                 result = func(*args, **kwargs)
-                print(f"\n函数 {func.__name__} 执行成功")
+                print(f"\n 函数 {func.__name__} 执行成功")
                 print(f"返回值: {result}")
                 return result
             except Exception as e:
-                print(f"\n函数 {func.__name__} 执行失败")
+                print(f"\n 函数 {func.__name__} 执行失败")
                 print(f"错误: {e}")
                 traceback.print_exc()
                 raise
@@ -768,7 +768,7 @@ class DebugHelper:
         try:
             previous_state = vars(obj).copy()
         except TypeError:
-            print("对象没有 __dict__ 属性，无法监控")
+            print("对象没有 __dict__ 属性,无法监控")
             return
         
         for i in range(max_iterations):
@@ -780,10 +780,10 @@ class DebugHelper:
                 print("对象已失效")
                 break
             
-            # 检查变化
+#            # 检查变化
             changes_detected = False
             
-            # 检查新增和修改的属性
+#            # 检查新增和修改的属性
             for key, value in current_state.items():
                 if key not in previous_state:
                     print(f"[{i+1}] 新增属性: {key} = {value}")
@@ -792,7 +792,7 @@ class DebugHelper:
                     print(f"[{i+1}] 属性变化: {key} = {previous_state[key]} → {value}")
                     changes_detected = True
             
-            # 检查删除的属性
+#            # 检查删除的属性
             for key in previous_state:
                 if key not in current_state:
                     print(f"[{i+1}] 删除属性: {key} = {previous_state[key]}")
@@ -828,13 +828,13 @@ class VarsAnalyzer:
             for name, value in obj_vars.items():
                 value_type = type(value).__name__
                 
-                # 统计类型
+#                # 统计类型
                 if value_type in analysis['attribute_types']:
                     analysis['attribute_types'][value_type] += 1
                 else:
                     analysis['attribute_types'][value_type] = 1
                 
-                # 检查嵌套对象
+#                # 检查嵌套对象
                 if hasattr(value, '__dict__'):
                     analysis['nested_objects'].append({
                         'name': name,
@@ -842,11 +842,11 @@ class VarsAnalyzer:
                         'attribute_count': len(vars(value)) if hasattr(value, '__dict__') else 0
                     })
                 
-                # 检查循环引用
+#                # 检查循环引用
                 if value is obj:
                     analysis['circular_references'].append(name)
             
-            # 估算内存使用
+#            # 估算内存使用
             analysis['memory_usage'] = sys.getsizeof(obj_vars)
             
         except TypeError:
@@ -872,7 +872,7 @@ class VarsAnalyzer:
                         'size_mb': size / (1024 * 1024)
                     })
             
-            # 按大小排序
+#            # 按大小排序
             large_attrs.sort(key=lambda x: x['size'], reverse=True)
             
         except TypeError:
@@ -887,7 +887,7 @@ class VarsAnalyzer:
         report.append(f"对象报告: {type(obj).__name__}")
         report.append("=" * 50)
         
-        # 基本分析
+#        # 基本分析
         analysis = VarsAnalyzer.analyze_object_structure(obj)
         
         if 'error' in analysis:
@@ -897,37 +897,37 @@ class VarsAnalyzer:
         report.append(f"属性数量: {analysis['attribute_count']}")
         report.append(f"内存使用: {analysis['memory_usage']} 字节")
         
-        # 类型统计
+#        # 类型统计
         if analysis['attribute_types']:
-            report.append("\n属性类型分布:")
+            report.append("\n 属性类型分布:")
             for attr_type, count in sorted(analysis['attribute_types'].items()):
                 report.append(f"  {attr_type}: {count}")
         
-        # 嵌套对象
+#        # 嵌套对象
         if analysis['nested_objects']:
-            report.append("\n嵌套对象:")
+            report.append("\n 嵌套对象:")
             for nested in analysis['nested_objects']:
                 report.append(f"  {nested['name']} ({nested['type']}): {nested['attribute_count']} 属性")
         
-        # 循环引用
+#        # 循环引用
         if analysis['circular_references']:
-            report.append("\n循环引用:")
+            report.append("\n 循环引用:")
             for ref in analysis['circular_references']:
                 report.append(f"  {ref}")
         
-        # 大属性
+#        # 大属性
         large_attrs = VarsAnalyzer.find_large_attributes(obj)
         if large_attrs:
-            report.append("\n大属性 (>1KB):")
-            for attr in large_attrs[:5]:  # 只显示前5个
+            report.append("\n 大属性 (>1KB):")
+            for attr in large_attrs[:5]:  # 只显示前 5 个
                 report.append(f"  {attr['name']} ({attr['type']}): {attr['size_mb']:.2f} MB")
         
         return "\n".join(report)
 
-# 使用示例
+## 使用示例
 print("=== 调试工具示例 ===")
 
-# 创建测试类
+## 创建测试类
 class TestObject:
     def __init__(self):
         self.name = "Test Object"
@@ -935,22 +935,22 @@ class TestObject:
         self.config = {'debug': True, 'version': '1.0'}
         self.nested = TestObject.__new__(TestObject)  # 嵌套对象
         self.nested.value = 42
-        # self.circular = self  # 循环引用（注释掉避免问题）
+#        # self.circular = self  # 循环引用(注释掉避免问题)
     
     def process_data(self):
         self.processed = [x * 2 for x in self.data[:10]]
         return self.processed
 
-# 创建测试对象
+## 创建测试对象
 test_obj = TestObject()
 
-# 使用调试助手
+## 使用调试助手
 debug_helper = DebugHelper()
 
-# 打印变量
+## 打印变量
 debug_helper.print_vars(test_obj, "测试对象属性")
 
-# 使用跟踪装饰器
+## 使用跟踪装饰器
 @debug_helper.trace_vars
 def modify_object(obj):
     obj.name = "Modified Object"
@@ -959,18 +959,18 @@ def modify_object(obj):
 
 result = modify_object(test_obj)
 
-# 对象分析
+## 对象分析
 analyzer = VarsAnalyzer()
 analysis = analyzer.analyze_object_structure(test_obj)
-print(f"\n对象分析结果: {analysis}")
+print(f"\n 对象分析结果: {analysis}")
 
-# 生成报告
+## 生成报告
 report = analyzer.generate_object_report(test_obj)
 print(f"\n{report}")
 
-# 查找大属性
+## 查找大属性
 large_attrs = analyzer.find_large_attributes(test_obj, 100)
-print(f"\n大属性: {large_attrs}")
+print(f"\n 大属性: {large_attrs}")
 ```
 
 ## 常见陷阱和最佳实践
@@ -993,7 +993,7 @@ class SafeVarsProcessor:
         
         try:
             if obj is None:
-                # 获取调用者的局部变量
+#                # 获取调用者的局部变量
                 import sys
                 frame = sys._getframe(1)
                 result['vars'] = frame.f_locals.copy()
@@ -1036,14 +1036,14 @@ class SafeVarsProcessor:
             change_info = {'key': key, 'action': None, 'old_value': None, 'new_value': value}
             
             try:
-                # 检查是否为删除操作
+#                # 检查是否为删除操作
                 if value is None and allow_delete and key in obj_vars:
                     change_info['action'] = 'delete'
                     change_info['old_value'] = obj_vars[key]
                     delattr(obj, key)
                     result['applied_changes'].append(change_info)
                 
-                # 检查是否为新增操作
+#                # 检查是否为新增操作
                 elif key not in obj_vars:
                     if allow_new:
                         change_info['action'] = 'add'
@@ -1053,7 +1053,7 @@ class SafeVarsProcessor:
                         change_info['error'] = '不允许添加新属性'
                         result['failed_changes'].append(change_info)
                 
-                # 修改现有属性
+#                # 修改现有属性
                 else:
                     change_info['action'] = 'modify'
                     change_info['old_value'] = obj_vars[key]
@@ -1091,12 +1091,12 @@ class SafeVarsProcessor:
         
         validation_result['summary']['total_attributes'] = len(obj_vars)
         
-        # 验证每个属性
+#        # 验证每个属性
         for attr_name, rules in schema.items():
             attr_errors = []
             attr_warnings = []
             
-            # 检查必需属性
+#            # 检查必需属性
             if rules.get('required', False) and attr_name not in obj_vars:
                 attr_errors.append('缺少必需属性')
                 validation_result['summary']['missing_required'] += 1
@@ -1105,12 +1105,12 @@ class SafeVarsProcessor:
             if attr_name in obj_vars:
                 value = obj_vars[attr_name]
                 
-                # 类型验证
+#                # 类型验证
                 expected_type = rules.get('type')
                 if expected_type and not isinstance(value, expected_type):
                     attr_errors.append(f'类型错误: 期望 {expected_type.__name__}, 得到 {type(value).__name__}')
                 
-                # 值验证
+#                # 值验证
                 validator = rules.get('validator')
                 if validator and callable(validator):
                     try:
@@ -1119,7 +1119,7 @@ class SafeVarsProcessor:
                     except Exception as e:
                         attr_errors.append(f'验证器错误: {e}')
                 
-                # 范围验证
+#                # 范围验证
                 if 'min_value' in rules and hasattr(value, '__lt__'):
                     if value < rules['min_value']:
                         attr_errors.append(f'值太小: {value} < {rules["min_value"]}')
@@ -1128,7 +1128,7 @@ class SafeVarsProcessor:
                     if value > rules['max_value']:
                         attr_errors.append(f'值太大: {value} > {rules["max_value"]}')
                 
-                # 长度验证
+#                # 长度验证
                 if 'min_length' in rules and hasattr(value, '__len__'):
                     if len(value) < rules['min_length']:
                         attr_errors.append(f'长度太短: {len(value)} < {rules["min_length"]}')
@@ -1137,15 +1137,15 @@ class SafeVarsProcessor:
                     if len(value) > rules['max_length']:
                         attr_errors.append(f'长度太长: {len(value)} > {rules["max_length"]}')
                 
-                # 选择验证
+#                # 选择验证
                 if 'choices' in rules and value not in rules['choices']:
                     attr_errors.append(f'无效选择: {value}, 可选值: {rules["choices"]}')
                 
-                # 警告检查
+#                # 警告检查
                 if rules.get('deprecated', False):
                     attr_warnings.append('属性已弃用')
             
-            # 记录验证结果
+#            # 记录验证结果
             if attr_errors:
                 validation_result['errors'][attr_name] = attr_errors
                 validation_result['summary']['invalid_attributes'] += 1
@@ -1185,26 +1185,26 @@ class SafeVarsProcessor:
             try:
                 return json.dumps(obj_vars, default=str, indent=2, ensure_ascii=False)
             except Exception as e:
-                {% raw %}return f'{{"error": "JSON序列化失败: {e}"}}'{% endraw %}
+                {% raw %}return f'{{"error": "JSON 序列化失败: {e}"}}'{% endraw %}
         
         elif format_type.lower() == 'yaml':
             try:
                 import yaml
                 return yaml.dump(obj_vars, default_flow_style=False, allow_unicode=True)
             except ImportError:
-                return 'YAML模块未安装'
+                return 'YAML 模块未安装'
             except Exception as e:
-                return f'YAML序列化失败: {e}'
+                return f'YAML 序列化失败: {e}'
         
         else:
             return str(obj_vars)
 
-# 使用示例
+## 使用示例
 print("=== 安全 vars() 处理示例 ===")
 
 safe_processor = SafeVarsProcessor()
 
-# 创建测试对象
+## 创建测试对象
 class TestValidation:
     def __init__(self):
         self.name = "Test"
@@ -1216,11 +1216,11 @@ class TestValidation:
 
 test_obj = TestValidation()
 
-# 安全获取变量
+## 安全获取变量
 result = safe_processor.safe_vars(test_obj)
 print(f"安全获取变量: {result}")
 
-# 定义验证模式
+## 定义验证模式
 validation_schema = {
     'name': {
         'required': True,
@@ -1256,11 +1256,11 @@ validation_schema = {
     }
 }
 
-# 验证对象
+## 验证对象
 validation_result = safe_processor.validate_object_vars(test_obj, validation_schema)
-print(f"\n验证结果: {validation_result}")
+print(f"\n 验证结果: {validation_result}")
 
-# 安全修改变量
+## 安全修改变量
 modifications = {
     'name': 'Updated Test',
     'new_field': 'New Value',
@@ -1268,17 +1268,17 @@ modifications = {
 }
 
 modify_result = safe_processor.safe_modify_vars(test_obj, modifications)
-print(f"\n修改结果: {modify_result}")
+print(f"\n 修改结果: {modify_result}")
 
-# 序列化变量
+## 序列化变量
 json_str = safe_processor.serialize_vars(test_obj, 'json')
-print(f"\nJSON序列化:\n{json_str}")
+print(f"\nJSON 序列化:\n{json_str}")
 
-# 深度复制
+## 深度复制
 deep_copy = safe_processor.deep_copy_vars(test_obj)
-print(f"\n深度复制: {deep_copy}")
+print(f"\n 深度复制: {deep_copy}")
 
-# 测试没有 __dict__ 的对象
+## 测试没有 __dict__ 的对象
 print("\n=== 测试内置类型 ===")
 int_result = safe_processor.safe_vars(42)
 print(f"整数对象: {int_result}")

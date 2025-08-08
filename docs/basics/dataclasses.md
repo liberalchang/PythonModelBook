@@ -2,15 +2,15 @@
 layout: doc
 title: "数据类 (dataclass)"
 permalink: /docs/basics/dataclasses/
-description: "深入理解Python 3.7+引入的@dataclass装饰器，学习如何简化数据类的创建和管理"
+description: "深入理解 Python 3.7+引入的@dataclass 装饰器，学习如何简化数据类的创建和管理"
 keywords: ["Python", "dataclass", "数据类", "装饰器", "面向对象"]
-author: "Python学习手册"
+author: "Python 学习手册"
 date: "2024-01-20"
 version: "1.0"
 category: "基础语法"
 tags: ["类与对象", "装饰器", "数据结构"]
 difficulty: "中级"
-estimated_reading_time: "25分钟"
+estimated_reading_time: "25 分钟"
 prerequisites: ["类的定义与使用", "魔术方法"]
 ---
 
@@ -21,15 +21,15 @@ prerequisites: ["类的定义与使用", "魔术方法"]
 通过本章学习，你将掌握：
 
 - 理解数据类的概念和应用场景
-- 掌握@dataclass装饰器的使用方法
-- 了解dataclass与传统类定义的区别
-- 学会使用field()函数进行高级配置
+- 掌握@dataclass 装饰器的使用方法
+- 了解 dataclass 与传统类定义的区别
+- 学会使用 field()函数进行高级配置
 - 掌握数据类的比较、序列化和不可变性
-- 了解dataclass的最佳实践和替代方案
+- 了解 dataclass 的最佳实践和替代方案
 
 ## 什么是数据类
 
-数据类是Python 3.7引入的一个强大功能，通过`@dataclass`装饰器自动生成常用的魔术方法（如`__init__`、`__repr__`、`__eq__`等），专门用于存储数据的简单类。
+数据类是 Python 3.7 引入的一个强大功能，通过`@dataclass`装饰器自动生成常用的魔术方法（如`__init__`、`__repr__`、`__eq__`等），专门用于存储数据的简单类。
 
 ### 传统方式 vs 数据类
 
@@ -63,12 +63,12 @@ class Player:
     position: str
     age: int = 18  # 默认值
 
-# 自动生成__init__、__repr__、__eq__等方法
+## 自动生成__init__、__repr__、__eq__等方法
 harden = Player('James Harden', 1, 'PG', 34)
 print(harden)  # Player(name='James Harden', number=1, position='PG', age=34)
 ```
 
-## @dataclass装饰器参数
+## @dataclass 装饰器参数
 
 ```python
 @dataclass(
@@ -91,28 +91,28 @@ class MyClass:
 ```python
 from dataclasses import dataclass
 
-# 启用排序功能
+## 启用排序功能
 @dataclass(order=True)
 class Student:
     name: str
     grade: float
     age: int = 18
 
-# 创建学生实例
+## 创建学生实例
 student1 = Student('Alice', 95.5, 20)
 student2 = Student('Bob', 87.2, 19)
 
-# 自动支持比较（按字段顺序比较）
+## 自动支持比较(按字段顺序比较)
 print(student1 > student2)  # False (因为'Alice' < 'Bob')
 
-# 创建不可变数据类
+## 创建不可变数据类
 @dataclass(frozen=True)
 class Point:
     x: float
     y: float
 
 point = Point(1.0, 2.0)
-# point.x = 3.0  # 会抛出FrozenInstanceError
+## point.x = 3.0  # 会抛出 FrozenInstanceError
 ```
 
 ## 字段配置 - field()函数
@@ -129,14 +129,14 @@ class Team:
     players: List[str] = field(default_factory=list)  # 避免可变默认值问题
     founded_year: int = field(default=2000)
     
-    # 排序时忽略某些字段
+#    # 排序时忽略某些字段
     wins: int = field(default=0, compare=False)
     losses: int = field(default=0, compare=False)
     
-    # 不在repr中显示的字段
+#    # 不在 repr 中显示的字段
     internal_id: str = field(default="", repr=False)
     
-    # 计算字段（不参与初始化）
+#    # 计算字段(不参与初始化)
     win_rate: float = field(init=False)
     
     def __post_init__(self):
@@ -144,7 +144,7 @@ class Team:
         total_games = self.wins + self.losses
         self.win_rate = self.wins / total_games if total_games > 0 else 0.0
 
-# 使用示例
+## 使用示例
 team = Team("Lakers", ["LeBron", "Davis"], 1947, 50, 20)
 print(team.win_rate)  # 0.714...
 ```
@@ -157,25 +157,25 @@ from typing import Any
 
 @dataclass
 class AdvancedExample:
-    # 基本字段
+#    # 基本字段
     name: str
     
-    # 带默认值
+#    # 带默认值
     age: int = 25
     
-    # 使用工厂函数避免可变默认值
+#    # 使用工厂函数避免可变默认值
     hobbies: list = field(default_factory=list)
     
-    # 不参与比较
+#    # 不参与比较
     id: str = field(compare=False, default="")
     
-    # 不在repr中显示
+#    # 不在 repr 中显示
     password: str = field(repr=False, default="")
     
-    # 不参与初始化（计算字段）
+#    # 不参与初始化(计算字段)
     display_name: str = field(init=False)
     
-    # 添加元数据
+#    # 添加元数据
     score: float = field(metadata={"unit": "points", "range": (0, 100)})
     
     def __post_init__(self):
@@ -198,7 +198,7 @@ class Employee(Person):
     department: str
     salary: float = 50000.0
 
-# 子类自动继承父类字段
+## 子类自动继承父类字段
 emp = Employee("John", 30, "E001", "IT", 75000.0)
 print(emp)  # Employee(name='John', age=30, employee_id='E001', department='IT', salary=75000.0)
 ```
@@ -218,7 +218,7 @@ class Person:
     age: int
     address: Address
 
-# 创建嵌套对象
+## 创建嵌套对象
 address = Address("123 Main St", "New York", "10001")
 person = Person("Alice", 25, address)
 print(person)
@@ -237,18 +237,18 @@ class Product:
 
 product = Product("Laptop", 999.99, "Electronics")
 
-# 转换为字典
+## 转换为字典
 product_dict = asdict(product)
 print(product_dict)  # {'name': 'Laptop', 'price': 999.99, 'category': 'Electronics'}
 
-# 转换为元组
+## 转换为元组
 product_tuple = astuple(product)
 print(product_tuple)  # ('Laptop', 999.99, 'Electronics')
 ```
 
 ## 实际应用案例
 
-### 案例1：配置管理
+### 案例 1：配置管理
 
 ```python
 import json
@@ -266,7 +266,7 @@ class DatabaseConfig:
     
     @classmethod
     def from_file(cls, file_path: Path) -> 'DatabaseConfig':
-        """从JSON文件加载配置"""
+        """从 JSON 文件加载配置"""
         if file_path.exists():
             with file_path.open() as f:
                 data = json.load(f)
@@ -274,7 +274,7 @@ class DatabaseConfig:
         return cls()
     
     def save_to_file(self, file_path: Path) -> None:
-        """保存配置到JSON文件"""
+        """保存配置到 JSON 文件"""
         with file_path.open('w') as f:
             json.dump(asdict(self), f, indent=2)
     
@@ -282,12 +282,12 @@ class DatabaseConfig:
         """生成数据库连接字符串"""
         return f"postgresql://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}"
 
-# 使用示例
+## 使用示例
 config = DatabaseConfig.from_file(Path("db_config.json"))
 print(config.get_connection_string())
 ```
 
-### 案例2：数据传输对象(DTO)
+### 案例 2：数据传输对象(DTO)
 
 ```python
 from dataclasses import dataclass
@@ -302,7 +302,7 @@ class OrderStatus(Enum):
     DELIVERED = "delivered"
     CANCELLED = "cancelled"
 
-@dataclass(frozen=True)  # 不可变DTO
+@dataclass(frozen=True)  # 不可变 DTO
 class OrderItem:
     product_id: str
     product_name: str
@@ -329,14 +329,14 @@ class Order:
     
     def add_item(self, item: OrderItem) -> None:
         """添加订单项"""
-        # 由于items是可变的，我们可以修改它
+#        # 由于 items 是可变的,我们可以修改它
         self.items.append(item)
     
     def update_status(self, new_status: OrderStatus) -> None:
         """更新订单状态"""
         self.status = new_status
 
-# 使用示例
+## 使用示例
 items = [
     OrderItem("P001", "Laptop", 1, 999.99),
     OrderItem("P002", "Mouse", 2, 29.99)
@@ -362,7 +362,7 @@ class OptimizedPoint:
     def distance_from_origin(self) -> float:
         return (self.x ** 2 + self.y ** 2) ** 0.5
 
-# 对于Python 3.9及以下版本
+## 对于 Python 3.9 及以下版本
 @dataclass
 class ManualSlotsPoint:
     __slots__ = ['x', 'y']
@@ -422,11 +422,11 @@ class Student:
     age: int = field(compare=False)  # 年龄不参与比较
     
     def __post_init__(self):
-        # 确保成绩在有效范围内
+#        # 确保成绩在有效范围内
         if not 0 <= self.grade <= 100:
-            raise ValueError("成绩必须在0-100之间")
+            raise ValueError("成绩必须在 0-100 之间")
 
-# 学生将按成绩排序
+## 学生将按成绩排序
 students = [
     Student("Alice", 95.5, 20),
     Student("Bob", 87.2, 19),
@@ -445,12 +445,12 @@ print([s.name for s in sorted_students])  # ['Bob', 'Charlie', 'Alice']
 from collections import namedtuple
 from dataclasses import dataclass
 
-# namedtuple - 不可变，轻量级
+## namedtuple - 不可变,轻量级
 PointTuple = namedtuple('Point', ['x', 'y'])
 pt1 = PointTuple(1, 2)
-# pt1.x = 3  # 错误：不可变
+## pt1.x = 3  # 错误:不可变
 
-# dataclass - 可变，功能丰富
+## dataclass - 可变,功能丰富
 @dataclass
 class Point:
     x: float
@@ -466,7 +466,7 @@ pt2.x = 3  # 可以修改
 ### dataclass vs attrs
 
 ```python
-# attrs库提供更多功能
+## attrs 库提供更多功能
 import attr
 
 @attr.s(auto_attribs=True)
@@ -477,9 +477,9 @@ class AttrsPoint:
     @x.validator
     def _validate_x(self, attribute, value):
         if value < 0:
-            raise ValueError("x必须非负")
+            raise ValueError("x 必须非负")
 
-# dataclass更简单，但功能相对有限
+## dataclass 更简单,但功能相对有限
 @dataclass
 class DataclassPoint:
     x: float
@@ -495,12 +495,12 @@ class DataclassPoint:
 ### 1. 可变默认值
 
 ```python
-# 错误做法
+## 错误做法
 @dataclass
 class BadExample:
     items: list = []  # 危险！所有实例共享同一个列表
 
-# 正确做法
+## 正确做法
 @dataclass
 class GoodExample:
     items: list = field(default_factory=list)  # 每个实例都有独立的列表
@@ -516,14 +516,14 @@ class Base:
 
 @dataclass
 class Derived(Base):
-    # 子类的无默认值字段必须在父类有默认值字段之前
+#    # 子类的无默认值字段必须在父类有默认值字段之前
     category: str  # 这会导致错误
-    # 解决方案：给category添加默认值或重新设计继承结构
+#    # 解决方案:给 category 添加默认值或重新设计继承结构
 ```
 
 ## 总结
 
-数据类是Python中处理数据结构的强大工具，它：
+数据类是 Python 中处理数据结构的强大工具，它：
 
 1. **简化代码**：自动生成常用方法，减少样板代码
 2. **类型安全**：支持类型提示，提高代码可读性
@@ -537,11 +537,11 @@ class Derived(Base):
 - 需要自动生成比较和表示方法
 - 要求类型安全和代码可读性
 
-数据类是现代Python开发中不可或缺的工具，掌握它将显著提高你的开发效率和代码质量。
+数据类是现代 Python 开发中不可或缺的工具，掌握它将显著提高你的开发效率和代码质量。
 
 ## 扩展阅读
 
 - [PEP 557 -- Data Classes](https://www.python.org/dev/peps/pep-0557/)
-- [Python官方文档 - dataclasses](https://docs.python.org/3/library/dataclasses.html)
-- [attrs库文档](https://www.attrs.org/)
+- [Python 官方文档 - dataclasses](https://docs.python.org/3/library/dataclasses.html)
+- [attrs 库文档](https://www.attrs.org/)
 - [类型提示最佳实践](https://docs.python.org/3/library/typing.html)

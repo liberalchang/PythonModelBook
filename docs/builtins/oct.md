@@ -24,7 +24,7 @@
 
 ### 基本概念
 
-`oct()` 函数将整数转换为八进制字符串，返回的字符串以 '0o' 开头，后跟八进制数字（0-7）。八进制是以8为基数的数制系统，在某些系统编程和文件权限设置中经常使用。
+`oct()` 函数将整数转换为八进制字符串，返回的字符串以 '0o' 开头，后跟八进制数字（0-7）。八进制是以 8 为基数的数制系统，在某些系统编程和文件权限设置中经常使用。
 
 ### 语法
 
@@ -45,18 +45,18 @@ oct(x)
 #### 基本用法
 
 ```python
-# 基本的八进制转换
+## 基本的八进制转换
 print(oct(8))     # 输出: 0o10
 print(oct(64))    # 输出: 0o100
 print(oct(255))   # 输出: 0o377
 print(oct(0))     # 输出: 0o0
 print(oct(1))     # 输出: 0o1
 
-# 负数的八进制表示
+## 负数的八进制表示
 print(oct(-8))    # 输出: -0o10
 print(oct(-64))   # 输出: -0o100
 
-# 大数的八进制转换
+## 大数的八进制转换
 print(oct(512))   # 输出: 0o1000
 print(oct(4096))  # 输出: 0o10000
 ```
@@ -64,7 +64,7 @@ print(oct(4096))  # 输出: 0o10000
 #### 去除前缀的方法
 
 ```python
-# 去除 '0o' 前缀
+## 去除 '0o' 前缀
 def pure_octal(num):
     """返回不带前缀的八进制字符串"""
     return oct(num)[2:] if num >= 0 else oct(num)[3:]
@@ -72,14 +72,14 @@ def pure_octal(num):
 print(pure_octal(64))   # 输出: 100
 print(pure_octal(-64))  # 输出: 100
 
-# 使用字符串方法去除前缀
+## 使用字符串方法去除前缀
 num = 64
 octal_str = oct(num).replace('0o', '')
 print(f"{num} 的八进制: {octal_str}")  # 输出: 64 的八进制: 100
 
-# 使用 format 函数
+## 使用 format 函数
 print(f"{64:o}")   # 输出: 100
-print(f"{64:08o}") # 输出: 00000100 (8位，前面补零)
+print(f"{64:08o}") # 输出: 00000100 (8 位,前面补零)
 ```
 
 #### 八进制工具类
@@ -124,27 +124,27 @@ class OctalConverter:
         print(f"  八进制: {oct(num)}")
         print(f"  十六进制: {hex(num)}")
         
-        # 计算各进制的位数
+#        # 计算各进制的位数
         binary_digits = len(bin(num)) - 2 if num >= 0 else len(bin(num)) - 3
         octal_digits = len(oct(num)) - 2 if num >= 0 else len(oct(num)) - 3
         hex_digits = len(hex(num)) - 2 if num >= 0 else len(hex(num)) - 3
         
         print(f"  位数比较: 二进制({binary_digits}) > 八进制({octal_digits}) > 十六进制({hex_digits})")
 
-# 使用示例
+## 使用示例
 converter = OctalConverter()
 
-# 基本转换
+## 基本转换
 print(converter.to_octal(64))        # 输出: 0o100
 print(converter.to_octal(64, 6))     # 输出: 000100
 print(converter.to_pure_octal(64))   # 输出: 100
 
-# 获取详细信息
+## 获取详细信息
 info = converter.octal_info(64)
 print(info)
-# 输出: {'number': 64, 'octal': '0o100', 'pure_octal': '100', 'digit_count': 3, 'is_power_of_8': True}
+## 输出: {'number': 64, 'octal': '0o100', 'pure_octal': '100', 'digit_count': 3, 'is_power_of_8': True}
 
-# 比较不同进制
+## 比较不同进制
 converter.compare_bases(255)
 ```
 
@@ -157,9 +157,9 @@ import os
 import stat
 
 class FilePermissionManager:
-    """文件权限管理器（基于八进制）"""
+    """文件权限管理器(基于八进制)"""
     
-    # 权限常量（八进制）
+#    # 权限常量(八进制)
     OWNER_READ = 0o400
     OWNER_WRITE = 0o200
     OWNER_EXEC = 0o100
@@ -235,14 +235,14 @@ class FilePermissionManager:
             file_stat = os.stat(filepath)
             mode = file_stat.st_mode
             
-            # 提取权限位（后9位）
+#            # 提取权限位(后 9 位)
             perm_bits = mode & 0o777
             
             print(f"文件: {filepath}")
             print(f"八进制权限: {oct(perm_bits)}")
             print(f"字符串权限: {FilePermissionManager.permission_to_string(perm_bits)}")
             
-            # 详细权限分析
+#            # 详细权限分析
             permissions = FilePermissionManager.parse_permission(perm_bits)
             for role, perms in permissions.items():
                 perm_list = [k for k, v in perms.items() if v]
@@ -253,23 +253,23 @@ class FilePermissionManager:
         except Exception as e:
             print(f"获取权限失败: {e}")
 
-# 使用示例
+## 使用示例
 perm_manager = FilePermissionManager()
 
-# 解析权限
+## 解析权限
 perms = perm_manager.parse_permission(0o755)
 print("权限 755 解析结果:", perms)
 
-# 权限转字符串
+## 权限转字符串
 print("权限 644 字符串:", perm_manager.permission_to_string(0o644))
 print("权限 755 字符串:", perm_manager.permission_to_string(0o755))
 
-# 创建权限
+## 创建权限
 new_perm = perm_manager.create_permission('rw-', 'r--', 'r--')
 print(f"创建的权限: {oct(new_perm)}")
 
-# 显示文件权限（如果文件存在）
-# perm_manager.show_file_permissions('example.txt')
+## 显示文件权限(如果文件存在)
+## perm_manager.show_file_permissions('example.txt')
 ```
 
 #### 数据编码和解码
@@ -296,7 +296,7 @@ class OctalDataProcessor:
         
         for octal_val in octal_values:
             try:
-                # 将八进制字符串转换为整数
+#                # 将八进制字符串转换为整数
                 ascii_val = int(octal_val, 8)
                 char = chr(ascii_val)
                 decoded.append(char)
@@ -309,10 +309,10 @@ class OctalDataProcessor:
     def analyze_octal_data(data):
         """分析八进制数据"""
         if isinstance(data, str):
-            # 假设是空格分隔的八进制值
+#            # 假设是空格分隔的八进制值
             octal_values = data.split()
         else:
-            # 假设是整数列表
+#            # 假设是整数列表
             octal_values = [oct(x)[2:] for x in data]
         
         analysis = {
@@ -323,14 +323,14 @@ class OctalDataProcessor:
             'value_range': None
         }
         
-        # 统计位数分布
+#        # 统计位数分布
         for val in octal_values:
             digits = len(val)
             if digits not in analysis['digit_distribution']:
                 analysis['digit_distribution'][digits] = 0
             analysis['digit_distribution'][digits] += 1
         
-        # 计算数值范围
+#        # 计算数值范围
         if octal_values:
             decimal_values = [int(val, 8) for val in octal_values]
             analysis['value_range'] = (min(decimal_values), max(decimal_values))
@@ -350,31 +350,31 @@ class OctalDataProcessor:
             except ValueError:
                 continue
         
-        return oct(checksum % 0o1000)  # 限制在3位八进制内
+        return oct(checksum % 0o1000)  # 限制在 3 位八进制内
 
-# 使用示例
+## 使用示例
 processor = OctalDataProcessor()
 
-# 字符串编码
+## 字符串编码
 original_text = "Hello"
 encoded = processor.encode_string_to_octal(original_text)
 print(f"原文: {original_text}")
 print(f"八进制编码: {encoded}")
 
-# 解码
+## 解码
 decoded = processor.decode_octal_to_string(encoded)
 print(f"解码结果: {decoded}")
 
-# 数据分析
+## 数据分析
 test_data = "110 145 154 154 157"  # "Hello" 的八进制编码
 analysis = processor.analyze_octal_data(test_data)
-print("\n数据分析结果:")
+print("\n 数据分析结果:")
 for key, value in analysis.items():
     print(f"  {key}: {value}")
 
-# 校验和计算
+## 校验和计算
 checksum = processor.octal_checksum(test_data)
-print(f"\n校验和: {checksum}")
+print(f"\n 校验和: {checksum}")
 ```
 
 #### 调试和日志工具
@@ -420,7 +420,7 @@ class OctalDebugger:
             
             print(f"{decimal:<10} {octal:<10} {binary:<15} {hexadecimal:<10}")
             
-            # 记录到调试日志
+#            # 记录到调试日志
             self.log_octal_conversion(value, title)
     
     def find_octal_patterns(self, start, end):
@@ -436,24 +436,24 @@ class OctalDebugger:
         for num in range(start, end + 1):
             octal_str = oct(num)[2:]  # 去除 '0o' 前缀
             
-            # 8的幂
+#            # 8 的幂
             if num > 0 and (num & (num - 1)) == 0 and num % 8 == 0:
                 patterns['powers_of_8'].append((num, octal_str))
             
-            # 回文数
+#            # 回文数
             if octal_str == octal_str[::-1] and len(octal_str) > 1:
                 patterns['palindromes'].append((num, octal_str))
             
-            # 相同数字
+#            # 相同数字
             if len(set(octal_str)) == 1 and len(octal_str) > 1:
                 patterns['same_digits'].append((num, octal_str))
             
-            # 递增序列
+#            # 递增序列
             if len(octal_str) > 1 and all(int(octal_str[i]) < int(octal_str[i+1]) 
                                          for i in range(len(octal_str)-1)):
                 patterns['ascending'].append((num, octal_str))
             
-            # 递减序列
+#            # 递减序列
             if len(octal_str) > 1 and all(int(octal_str[i]) > int(octal_str[i+1]) 
                                          for i in range(len(octal_str)-1)):
                 patterns['descending'].append((num, octal_str))
@@ -481,24 +481,24 @@ class OctalDebugger:
         except Exception as e:
             print(f"导出日志失败: {e}")
 
-# 使用示例
+## 使用示例
 debugger = OctalDebugger()
 
-# 比较数值
+## 比较数值
 test_values = [8, 16, 32, 64, 128, 256, 512]
-debugger.compare_values(test_values, "8的幂次")
+debugger.compare_values(test_values, "8 的幂次")
 
-# 查找模式
+## 查找模式
 patterns = debugger.find_octal_patterns(1, 100)
-print("\n八进制模式分析:")
+print("\n 八进制模式分析:")
 for pattern_type, matches in patterns.items():
     if matches:
         print(f"\n{pattern_type}:")
-        for num, octal_str in matches[:5]:  # 只显示前5个
+        for num, octal_str in matches[:5]:  # 只显示前 5 个
             print(f"  {num} -> {octal_str}")
 
-# 导出调试日志
-# debugger.export_debug_log()
+## 导出调试日志
+## debugger.export_debug_log()
 ```
 
 ### 常见陷阱和最佳实践
@@ -513,9 +513,9 @@ class SafeOctalConverter:
     def safe_oct(value):
         """安全的八进制转换"""
         try:
-            # 检查是否为整数类型
+#            # 检查是否为整数类型
             if not isinstance(value, int):
-                # 尝试转换为整数
+#                # 尝试转换为整数
                 if isinstance(value, (float, str)):
                     value = int(value)
                 else:
@@ -534,13 +534,13 @@ class SafeOctalConverter:
         if not isinstance(octal_str, str):
             return False, "输入必须是字符串"
         
-        # 去除可能的前缀
+#        # 去除可能的前缀
         if octal_str.startswith('0o') or octal_str.startswith('0O'):
             octal_str = octal_str[2:]
         elif octal_str.startswith('0') and len(octal_str) > 1:
             octal_str = octal_str[1:]
         
-        # 检查是否只包含八进制数字
+#        # 检查是否只包含八进制数字
         if not octal_str:
             return False, "空字符串"
         
@@ -559,11 +559,11 @@ class SafeOctalConverter:
             octal = oct(value)
             digit_count = len(octal) - 2 if value >= 0 else len(octal) - 3
             
-            # 检查位数限制
+#            # 检查位数限制
             if max_digits and digit_count > max_digits:
                 return {
                     'success': False,
-                    'error': f"超过最大位数限制 {max_digits}，实际 {digit_count} 位"
+                    'error': f"超过最大位数限制 {max_digits},实际 {digit_count} 位"
                 }
             
             return {
@@ -579,26 +579,26 @@ class SafeOctalConverter:
                 'error': str(e)
             }
 
-# 使用示例
+## 使用示例
 converter = SafeOctalConverter()
 
-# 安全转换
+## 安全转换
 print(converter.safe_oct(64))      # 0o100
 print(converter.safe_oct("64"))    # 0o100
 print(converter.safe_oct(3.14))    # 0o3
 print(converter.safe_oct([1, 2]))  # 类型错误: 无法将 list 转换为八进制
 
-# 验证八进制字符串
+## 验证八进制字符串
 valid, msg = converter.validate_octal_string("0o777")
 print(f"0o777 验证结果: {valid}, {msg}")
 
 valid, msg = converter.validate_octal_string("789")
 print(f"789 验证结果: {valid}, {msg}")
 
-# 带验证的转换
+## 带验证的转换
 result = converter.convert_with_validation(511, max_digits=3)
 print(result)
-# {'success': True, 'octal': '0o777', 'digit_count': 3, 'value': 511}
+## {'success': True, 'octal': '0o777', 'digit_count': 3, 'value': 511}
 ```
 
 #### 性能优化和内存管理
@@ -619,23 +619,23 @@ class OctalPerformance:
     @staticmethod
     def batch_convert_optimized(numbers):
         """批量优化转换"""
-        # 使用生成器表达式减少内存占用
+#        # 使用生成器表达式减少内存占用
         return (oct(num) for num in numbers)
     
     @staticmethod
     def performance_comparison(numbers):
         """性能比较测试"""
-        # 测试 oct() 函数
+#        # 测试 oct() 函数
         start_time = time.time()
         oct_results = [oct(num) for num in numbers]
         oct_time = time.time() - start_time
         
-        # 测试 format() 函数
+#        # 测试 format() 函数
         start_time = time.time()
         format_results = [f'0o{num:o}' for num in numbers]
         format_time = time.time() - start_time
         
-        # 测试缓存版本
+#        # 测试缓存版本
         start_time = time.time()
         cached_results = [OctalPerformance.cached_oct(num) for num in numbers]
         cached_time = time.time() - start_time
@@ -658,7 +658,7 @@ class OctalPerformance:
             for num in nums:
                 yield oct(num)
         
-        # 分批处理大数据
+#        # 分批处理大数据
         batch_size = 1000
         processed_count = 0
         
@@ -666,10 +666,10 @@ class OctalPerformance:
             batch = large_numbers[i:i + batch_size]
             octal_gen = octal_generator(batch)
             
-            # 处理当前批次
+#            # 处理当前批次
             for octal in octal_gen:
                 processed_count += 1
-                # 这里可以进行实际的处理操作
+#                # 这里可以进行实际的处理操作
                 pass
             
             if processed_count % 10000 == 0:
@@ -677,18 +677,18 @@ class OctalPerformance:
         
         return processed_count
 
-# 性能测试
+## 性能测试
 perf = OctalPerformance()
 
-# 生成测试数据
+## 生成测试数据
 test_numbers = list(range(1, 5001))
 
-# 性能比较
+## 性能比较
 print("八进制转换性能比较:")
 results = perf.performance_comparison(test_numbers[:1000])
 
-# 内存效率测试
-print("\n内存效率测试:")
+## 内存效率测试
+print("\n 内存效率测试:")
 large_data = list(range(1, 50001))
 processed = perf.memory_efficient_processing(large_data)
 print(f"总共处理了 {processed} 个数字")

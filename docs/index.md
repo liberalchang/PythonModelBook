@@ -20,15 +20,15 @@ permalink: /docs/
                     <a href="basics/variables/" class="doc-link section-link">变量与数据类型</a>
                     <div class="section-title">控制流程</div>
                     <a href="basics/control-flow/" class="doc-link section-link">判断语句与循环语句</a>
-                    <a href="basics/match-case/" class="doc-link section-link">match-case语句 - 结构化模式匹配</a>
-                    <a href="basics/with/" class="doc-link section-link">with语句 - 上下文管理器</a>
+                    <a href="basics/match-case/" class="doc-link section-link">match-case 语句 - 结构化模式匹配</a>
+                    <a href="basics/with/" class="doc-link section-link">with 语句 - 上下文管理器</a>
                     <a href="basics/raise-assert/" class="doc-link section-link">raise/assert - 异常抛出和断言</a>
                     <a href="basics/yield/" class="doc-link section-link">yield - 生成器和协程</a>
                     <div class="section-title">函数</div>
                     <a href="basics/functions/" class="doc-link section-link">函数定义与调用</a>
                     <a href="basics/function-scope/" class="doc-link section-link">函数作用域与闭包</a>
                     <div class="section-title">模块与包</div>
-                    <a href="basics/packages/" class="doc-link section-link">Python包和__init__.py文件</a>
+                    <a href="basics/packages/" class="doc-link section-link">Python 包和__init__.py 文件</a>
                     <div class="section-title">类与对象</div>
                     <a href="basics/class-definition/" class="doc-link section-link">类的定义与使用</a>
                     <a href="basics/class-inheritance/" class="doc-link section-link">类的继承</a>
@@ -106,16 +106,16 @@ permalink: /docs/
                     <a href="builtins/format/" class="doc-link section-link">format() - 格式化函数</a>
                     <a href="builtins/f-string/" class="doc-link section-link">f-string - 格式化字符串字面量</a>
                     <a href="builtins/repr/" class="doc-link section-link">repr() - 对象字符串表示函数</a>
-                    <a href="builtins/ascii/" class="doc-link section-link">ascii() - ASCII字符串表示函数</a>
+                    <a href="builtins/ascii/" class="doc-link section-link">ascii() - ASCII 字符串表示函数</a>
                     <div class="section-title">🔢 进制转换</div>
                     <a href="builtins/bin/" class="doc-link section-link">bin() - 二进制转换函数</a>
                     <a href="builtins/oct/" class="doc-link section-link">oct() - 八进制转换函数</a>
                     <a href="builtins/hex/" class="doc-link section-link">hex() - 十六进制转换函数</a>
-                    <a href="builtins/ord/" class="doc-link section-link">ord() - Unicode码点获取函数</a>
-                    <a href="builtins/chr/" class="doc-link section-link">chr() - Unicode字符生成函数</a>
+                    <a href="builtins/ord/" class="doc-link section-link">ord() - Unicode 码点获取函数</a>
+                    <a href="builtins/chr/" class="doc-link section-link">chr() - Unicode 字符生成函数</a>
                     <div class="section-title">最佳实践</div>
-                    <a href="builtins/../basics/" class="doc-link section-link">Python基础语法</a>
-                    <a href="builtins/../stdlib/" class="doc-link section-link">Python标准库</a>
+                    <a href="builtins/../basics/" class="doc-link section-link">Python 基础语法</a>
+                    <a href="builtins/../stdlib/" class="doc-link section-link">Python 标准库</a>
                     <a href="builtins/../thirdparty/" class="doc-link section-link">第三方库</a>
             </div>
         </div>
@@ -128,15 +128,15 @@ permalink: /docs/
             <p class="category-description">Python标准库模块</p>
             <div class="doc-links">
                     <div class="section-title">日期时间</div>
-                    <a href="stdlib/time/" class="doc-link section-link">time模块 - 基础时间处理功能</a>
-                    <a href="stdlib/calendar/" class="doc-link section-link">calendar模块 - 日历相关功能</a>
-                    <a href="stdlib/datetime/" class="doc-link section-link">datetime模块 - 高级日期时间处理</a>
+                    <a href="stdlib/time/" class="doc-link section-link">time 模块 - 基础时间处理功能</a>
+                    <a href="stdlib/calendar/" class="doc-link section-link">calendar 模块 - 日历相关功能</a>
+                    <a href="stdlib/datetime/" class="doc-link section-link">datetime 模块 - 高级日期时间处理</a>
                     <div class="section-title">函数式编程</div>
-                    <a href="stdlib/operator/" class="doc-link section-link">operator模块 - 运算符函数映射</a>
-                    <a href="stdlib/copy/" class="doc-link section-link">copy模块 - 对象拷贝功能</a>
-                    <a href="stdlib/inspect/" class="doc-link section-link">inspect模块 - 对象检查和反射功能</a>
-                    <a href="stdlib/enum/" class="doc-link section-link">enum模块 - 枚举类型和常量定义</a>
-                    <a href="stdlib/typing/" class="doc-link section-link">typing模块 - 类型提示和静态类型检查</a>
+                    <a href="stdlib/operator/" class="doc-link section-link">operator 模块 - 运算符函数映射</a>
+                    <a href="stdlib/copy/" class="doc-link section-link">copy 模块 - 对象拷贝功能</a>
+                    <a href="stdlib/inspect/" class="doc-link section-link">inspect 模块 - 对象检查和反射功能</a>
+                    <a href="stdlib/enum/" class="doc-link section-link">enum 模块 - 枚举类型和常量定义</a>
+                    <a href="stdlib/typing/" class="doc-link section-link">typing 模块 - 类型提示和静态类型检查</a>
             </div>
         </div>
 
@@ -179,9 +179,8 @@ permalink: /docs/
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
-    justify-content: center;
+    justify-content: end;
     align-content: start;
-    max-width: 100%;
 }
 
 .category-card {
@@ -347,36 +346,6 @@ permalink: /docs/
     .section-title {
         color: #ffffff;
         border-bottom-color: #444;
-    }
-}
-
-/* 响应式布局优化 - 单行最多显示两块 */
-@media (min-width: 1200px) {
-    .docs-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        gap: 2.5rem;
-    }
-}
-
-@media (min-width: 900px) and (max-width: 1199px) {
-    .docs-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        justify-content: center;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 899px) {
-    .docs-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .category-card {
-        margin-left: 0;
     }
 }
 

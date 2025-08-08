@@ -1,46 +1,46 @@
 ---
 layout: doc
-title: Pendulum库
+title: Pendulum 库
 permalink: /docs/thirdparty/pendulum/
 category: thirdparty
 tags: [第三方库, 日期时间, 时区, 解析, 格式化]
-description: Pendulum - Python中更好的日期时间处理库，提供直观的API和强大的时区支持
-author: Python文档团队
+description: Pendulum - Python 中更好的日期时间处理库，提供直观的 API 和强大的时区支持
+author: Python 文档团队
 date: 2024-01-01
 updated: 2024-01-01
 version: 1.0
-difficulty: 中级
+difficulty: "中级"
 ---
 
-# Pendulum库
+# Pendulum 库
 
 ## 📝 概述
 
-Pendulum是一个Python第三方库，旨在成为标准datetime库的替代品。它提供了更直观的API、更好的时区支持、更强大的解析功能和本地化支持。Pendulum完全兼容datetime，但提供了更多便利的功能和更好的性能。
+Pendulum 是一个 Python 第三方库，旨在成为标准 datetime 库的替代品。它提供了更直观的 API、更好的时区支持、更强大的解析功能和本地化支持。Pendulum 完全兼容 datetime，但提供了更多便利的功能和更好的性能。
 
 ## 🎯 学习目标
 
-- 掌握Pendulum库的安装和基本使用
-- 学会使用Pendulum进行日期时间创建和操作
-- 了解Pendulum的时区处理和转换
+- 掌握 Pendulum 库的安装和基本使用
+- 学会使用 Pendulum 进行日期时间创建和操作
+- 了解 Pendulum 的时区处理和转换
 - 掌握日期时间的解析和格式化
-- 学会使用Pendulum进行日期时间计算
+- 学会使用 Pendulum 进行日期时间计算
 - 了解本地化和人性化显示功能
 
 ## 📋 前置知识
 
-- Python基本语法
-- 了解datetime模块的基本概念
-- 包管理工具pip的使用
-- 时区和UTC概念
+- Python 基本语法
+- 了解 datetime 模块的基本概念
+- 包管理工具 pip 的使用
+- 时区和 UTC 概念
 
 ## 🔧 安装
 
 ```bash
-# 使用pip安装
+## 使用 pip 安装
 pip install pendulum
 
-# 或使用conda安装
+## 或使用 conda 安装
 conda install -c conda-forge pendulum
 ```
 
@@ -51,15 +51,15 @@ conda install -c conda-forge pendulum
 ```python
 import pendulum
 
-# 获取当前时间
+## 获取当前时间
 now = pendulum.now()
 print(f"当前时间: {now}")
 
-# 获取UTC时间
+## 获取 UTC 时间
 utc_now = pendulum.now('UTC')
-print(f"UTC时间: {utc_now}")
+print(f"UTC 时间: {utc_now}")
 
-# 获取特定时区的时间
+## 获取特定时区的时间
 beijing_now = pendulum.now('Asia/Shanghai')
 tokyo_now = pendulum.now('Asia/Tokyo')
 newyork_now = pendulum.now('America/New_York')
@@ -68,11 +68,11 @@ print(f"北京时间: {beijing_now}")
 print(f"东京时间: {tokyo_now}")
 print(f"纽约时间: {newyork_now}")
 
-# 获取今天的日期
+## 获取今天的日期
 today = pendulum.today()
 print(f"今天: {today}")
 
-# 获取明天和昨天
+## 获取明天和昨天
 tomorrow = pendulum.tomorrow()
 yesterday = pendulum.yesterday()
 print(f"明天: {tomorrow}")
@@ -82,28 +82,28 @@ print(f"昨天: {yesterday}")
 ### 创建特定日期时间
 
 ```python
-# 创建特定日期时间
+## 创建特定日期时间
 dt = pendulum.datetime(2024, 1, 1, 12, 30, 45)
 print(f"指定日期时间: {dt}")
 
-# 创建带时区的日期时间
+## 创建带时区的日期时间
 dt_with_tz = pendulum.datetime(2024, 1, 1, 12, 30, 45, tz='Asia/Shanghai')
 print(f"带时区的日期时间: {dt_with_tz}")
 
-# 创建日期
+## 创建日期
 date_only = pendulum.date(2024, 1, 1)
 print(f"仅日期: {date_only}")
 
-# 创建时间
+## 创建时间
 time_only = pendulum.time(12, 30, 45)
 print(f"仅时间: {time_only}")
 
-# 从时间戳创建
+## 从时间戳创建
 timestamp = 1704110445
 dt_from_timestamp = pendulum.from_timestamp(timestamp)
 print(f"从时间戳创建: {dt_from_timestamp}")
 
-# 从时间戳创建（指定时区）
+## 从时间戳创建(指定时区)
 dt_from_timestamp_tz = pendulum.from_timestamp(timestamp, tz='Asia/Shanghai')
 print(f"从时间戳创建(带时区): {dt_from_timestamp_tz}")
 ```
@@ -111,26 +111,26 @@ print(f"从时间戳创建(带时区): {dt_from_timestamp_tz}")
 ### 字符串解析
 
 ```python
-# 解析ISO格式字符串
+## 解析 ISO 格式字符串
 iso_dt = pendulum.parse('2024-01-01T12:30:45')
-print(f"解析ISO格式: {iso_dt}")
+print(f"解析 ISO 格式: {iso_dt}")
 
-# 解析带时区的字符串
+## 解析带时区的字符串
 iso_with_tz = pendulum.parse('2024-01-01T12:30:45+08:00')
 print(f"解析带时区: {iso_with_tz}")
 
-# 解析各种格式的字符串
+## 解析各种格式的字符串
 formats = [
     '2024-01-01',
     '2024/01/01',
     '01/01/2024',
     '2024-01-01 12:30:45',
-    '2024年1月1日',
+    '2024 年 1 月 1 日',
     'January 1, 2024',
     '1st January 2024'
 ]
 
-print("\n解析不同格式的字符串:")
+print("\n 解析不同格式的字符串:")
 for fmt in formats:
     try:
         parsed = pendulum.parse(fmt)
@@ -138,13 +138,13 @@ for fmt in formats:
     except Exception as e:
         print(f"{fmt:20} -> 解析失败: {e}")
 
-# 严格模式解析
+## 严格模式解析
 try:
     strict_parse = pendulum.parse('2024-13-01', strict=True)  # 无效月份
 except Exception as e:
     print(f"严格模式解析失败: {e}")
 
-# 指定默认时区
+## 指定默认时区
 default_tz_parse = pendulum.parse('2024-01-01 12:30:45', tz='Asia/Shanghai')
 print(f"指定默认时区: {default_tz_parse}")
 ```
@@ -154,16 +154,16 @@ print(f"指定默认时区: {default_tz_parse}")
 ```python
 dt = pendulum.now('Asia/Shanghai')
 
-# 基本格式化
-print(f"ISO格式: {dt.to_iso8601_string()}")
+## 基本格式化
+print(f"ISO 格式: {dt.to_iso8601_string()}")
 print(f"日期字符串: {dt.to_date_string()}")
 print(f"时间字符串: {dt.to_time_string()}")
 print(f"日期时间字符串: {dt.to_datetime_string()}")
 
-# 自定义格式化
+## 自定义格式化
 formats = {
     '标准格式': 'YYYY-MM-DD HH:mm:ss',
-    '中文格式': 'YYYY年MM月DD日 HH时mm分ss秒',
+    '中文格式': 'YYYY 年 MM 月 DD 日 HH 时 mm 分 ss 秒',
     '美式格式': 'MM/DD/YYYY hh:mm:ss A',
     '欧式格式': 'DD/MM/YYYY HH:mm:ss',
     '简短格式': 'YYMMDD_HHmmss',
@@ -172,23 +172,23 @@ formats = {
     '相对格式': 'YYYY-MM-DD (dddd)'
 }
 
-print("\n自定义格式化:")
+print("\n 自定义格式化:")
 for name, fmt in formats.items():
     formatted = dt.format(fmt)
     print(f"{name}: {formatted}")
 
-# 本地化格式化
+## 本地化格式化
 dt_cn = dt.in_timezone('Asia/Shanghai')
-print(f"\n本地化格式化:")
-print(f"中文: {dt_cn.format('YYYY年MM月DD日 dddd', locale='zh')}")
+print(f"\n 本地化格式化:")
+print(f"中文: {dt_cn.format('YYYY 年 MM 月 DD 日 dddd', locale='zh')}")
 print(f"英文: {dt_cn.format('MMMM Do, YYYY (dddd)', locale='en')}")
-print(f"日文: {dt_cn.format('YYYY年MM月DD日 (dddd)', locale='ja')}")
+print(f"日文: {dt_cn.format('YYYY 年 MM 月 DD 日 (dddd)', locale='ja')}")
 ```
 
 ### 时区操作
 
 ```python
-# 创建不同时区的时间
+## 创建不同时区的时间
 utc_time = pendulum.now('UTC')
 beijing_time = pendulum.now('Asia/Shanghai')
 tokyo_time = pendulum.now('Asia/Tokyo')
@@ -202,9 +202,9 @@ print(f"东京:   {tokyo_time.format('YYYY-MM-DD HH:mm:ss')}")
 print(f"伦敦:   {london_time.format('YYYY-MM-DD HH:mm:ss')}")
 print(f"纽约:   {newyork_time.format('YYYY-MM-DD HH:mm:ss')}")
 
-# 时区转换
+## 时区转换
 base_time = pendulum.now('UTC')
-print(f"\n时区转换 (基准UTC时间: {base_time.format('HH:mm:ss')}):")
+print(f"\n 时区转换 (基准 UTC 时间: {base_time.format('HH:mm:ss')}):")
 
 timezones = [
     'Asia/Shanghai',
@@ -219,55 +219,55 @@ for tz in timezones:
     converted = base_time.in_timezone(tz)
     print(f"{tz:20} {converted.format('HH:mm:ss (Z)')}")
 
-# 获取时区信息
+## 获取时区信息
 dt_with_tz = pendulum.now('Asia/Shanghai')
-print(f"\n时区信息:")
+print(f"\n 时区信息:")
 print(f"时区名称: {dt_with_tz.timezone_name}")
 print(f"时区缩写: {dt_with_tz.timezone.name}")
-print(f"UTC偏移: {dt_with_tz.offset_hours}小时")
+print(f"UTC 偏移: {dt_with_tz.offset_hours}小时")
 print(f"是否夏令时: {dt_with_tz.is_dst()}")
 ```
 
 ### 日期时间计算
 
 ```python
-# 基本加减运算
+## 基本加减运算
 base_dt = pendulum.now()
 print(f"基准时间: {base_dt}")
 
-# 加减时间
-print(f"\n时间加减:")
-print(f"1小时后: {base_dt.add(hours=1)}")
-print(f"30分钟后: {base_dt.add(minutes=30)}")
-print(f"1天后: {base_dt.add(days=1)}")
-print(f"1周后: {base_dt.add(weeks=1)}")
-print(f"1个月后: {base_dt.add(months=1)}")
-print(f"1年后: {base_dt.add(years=1)}")
+## 加减时间
+print(f"\n 时间加减:")
+print(f"1 小时后: {base_dt.add(hours=1)}")
+print(f"30 分钟后: {base_dt.add(minutes=30)}")
+print(f"1 天后: {base_dt.add(days=1)}")
+print(f"1 周后: {base_dt.add(weeks=1)}")
+print(f"1 个月后: {base_dt.add(months=1)}")
+print(f"1 年后: {base_dt.add(years=1)}")
 
-print(f"\n时间减法:")
-print(f"1小时前: {base_dt.subtract(hours=1)}")
-print(f"1天前: {base_dt.subtract(days=1)}")
-print(f"1个月前: {base_dt.subtract(months=1)}")
+print(f"\n 时间减法:")
+print(f"1 小时前: {base_dt.subtract(hours=1)}")
+print(f"1 天前: {base_dt.subtract(days=1)}")
+print(f"1 个月前: {base_dt.subtract(months=1)}")
 
-# 复合运算
+## 复合运算
 complex_add = base_dt.add(years=1, months=2, days=3, hours=4, minutes=5, seconds=6)
-print(f"\n复合加法: {complex_add}")
+print(f"\n 复合加法: {complex_add}")
 
-# 时间差计算
+## 时间差计算
 start_time = pendulum.datetime(2024, 1, 1, 9, 0, 0)
 end_time = pendulum.datetime(2024, 1, 1, 17, 30, 0)
 diff = end_time - start_time
 
-print(f"\n时间差计算:")
+print(f"\n 时间差计算:")
 print(f"开始时间: {start_time}")
 print(f"结束时间: {end_time}")
 print(f"时间差: {diff}")
 print(f"总秒数: {diff.total_seconds()}")
 print(f"总小时数: {diff.total_seconds() / 3600}")
 
-# 使用diff方法
+## 使用 diff 方法
 diff_obj = start_time.diff(end_time)
-print(f"\ndiff对象:")
+print(f"\ndiff 对象:")
 print(f"小时差: {diff_obj.in_hours()}")
 print(f"分钟差: {diff_obj.in_minutes()}")
 print(f"秒差: {diff_obj.in_seconds()}")
@@ -277,7 +277,7 @@ print(f"天差: {diff_obj.in_days()}")
 ### 人性化显示
 
 ```python
-# 相对时间显示
+## 相对时间显示
 base_time = pendulum.now()
 
 times = [
@@ -301,8 +301,8 @@ print("人性化时间显示:")
 for time_obj in times:
     print(f"{time_obj.format('YYYY-MM-DD HH:mm:ss'):20} -> {time_obj.diff_for_humans()}")
 
-# 本地化的人性化显示
-print(f"\n本地化人性化显示:")
+## 本地化的人性化显示
+print(f"\n 本地化人性化显示:")
 for time_obj in times[:5]:
     print(f"英文: {time_obj.diff_for_humans(locale='en')}")
     print(f"中文: {time_obj.diff_for_humans(locale='zh')}")
@@ -329,13 +329,13 @@ print(f"一年中的第几周: {dt.week_of_year}")
 print(f"一月中的第几周: {dt.week_of_month}")
 print(f"季度: {dt.quarter}")
 
-print(f"\n星期和月份名称:")
+print(f"\n 星期和月份名称:")
 print(f"星期名称: {dt.format('dddd')}")
 print(f"月份名称: {dt.format('MMMM')}")
 print(f"星期缩写: {dt.format('ddd')}")
 print(f"月份缩写: {dt.format('MMM')}")
 
-print(f"\n布尔属性:")
+print(f"\n 布尔属性:")
 print(f"是否闰年: {dt.is_leap_year()}")
 print(f"是否夏令时: {dt.is_dst()}")
 print(f"是否过去: {dt.is_past()}")
@@ -346,8 +346,8 @@ print(f"是否明天: {dt.is_tomorrow()}")
 print(f"是否周末: {dt.is_weekend()}")
 print(f"是否工作日: {dt.is_weekday()}")
 
-# 月份和年份的开始/结束
-print(f"\n时间边界:")
+## 月份和年份的开始/结束
+print(f"\n 时间边界:")
 print(f"月初: {dt.start_of('month')}")
 print(f"月末: {dt.end_of('month')}")
 print(f"年初: {dt.start_of('year')}")
@@ -373,7 +373,7 @@ def datetime_formatter():
         '时间戳': str(now.timestamp()),
         '日期': now.to_date_string(),
         '时间': now.to_time_string(),
-        '中文': now.format('YYYY年MM月DD日 HH时mm分ss秒'),
+        '中文': now.format('YYYY 年 MM 月 DD 日 HH 时 mm 分 ss 秒'),
         '文件名': now.format('YYYY-MM-DD_HH-mm-ss'),
         '日志': now.format('[YYYY-MM-DD HH:mm:ss]'),
         '相对时间': now.diff_for_humans()
@@ -385,7 +385,7 @@ def datetime_formatter():
     
     return formats
 
-# 使用示例
+## 使用示例
 datetime_formatter()
 ```
 
@@ -413,10 +413,10 @@ class TimeZoneConverter:
     
     def convert_time(self, time_str, from_tz, to_tz):
         """转换时间到不同时区"""
-        # 解析时间字符串
+#        # 解析时间字符串
         dt = pendulum.parse(time_str, tz=from_tz)
         
-        # 转换到目标时区
+#        # 转换到目标时区
         converted = dt.in_timezone(to_tz)
         
         return {
@@ -447,14 +447,14 @@ class TimeZoneConverter:
     
     def meeting_time_finder(self, participants_tz, duration_hours=1):
         """寻找适合多时区参与者的会议时间"""
-        # 工作时间范围（9:00-18:00）
+#        # 工作时间范围(9:00-18:00)
         work_start = 9
         work_end = 18
         
         base_date = pendulum.tomorrow('UTC').start_of('day')
         suitable_times = []
         
-        # 检查24小时内的每个小时
+#        # 检查 24 小时内的每个小时
         for hour in range(24):
             meeting_time = base_date.add(hours=hour)
             is_suitable = True
@@ -464,12 +464,12 @@ class TimeZoneConverter:
                 local_time = meeting_time.in_timezone(tz)
                 participant_times[participant] = local_time
                 
-                # 检查是否在工作时间内
+#                # 检查是否在工作时间内
                 if not (work_start <= local_time.hour < work_end - duration_hours):
                     is_suitable = False
                     break
                 
-                # 检查是否为工作日
+#                # 检查是否为工作日
                 if local_time.is_weekend():
                     is_suitable = False
                     break
@@ -496,19 +496,19 @@ class TimeZoneConverter:
         
         return world_times
 
-# 使用示例
+## 使用示例
 converter = TimeZoneConverter()
 
-# 显示世界时钟
+## 显示世界时钟
 converter.display_world_clock()
 
-# 时区转换
+## 时区转换
 result = converter.convert_time('2024-01-15 14:30:00', 'Asia/Shanghai', 'America/New_York')
-print(f"\n时区转换:")
+print(f"\n 时区转换:")
 print(f"原时间: {result['original']} ({result['from_tz']})")
 print(f"转换后: {result['converted']} ({result['to_tz']})")
 
-# 寻找会议时间
+## 寻找会议时间
 participants = {
     '张三': 'Asia/Shanghai',
     'John': 'America/New_York',
@@ -517,9 +517,9 @@ participants = {
 }
 
 suitable_times = converter.meeting_time_finder(participants)
-print(f"\n适合的会议时间:")
+print(f"\n 适合的会议时间:")
 for i, time_slot in enumerate(suitable_times[:3], 1):
-    print(f"\n选项 {i}: {time_slot['utc_time'].format('YYYY-MM-DD HH:mm')} UTC")
+    print(f"\n 选项 {i}: {time_slot['utc_time'].format('YYYY-MM-DD HH:mm')} UTC")
     for participant, local_time in time_slot['participant_times'].items():
         print(f"  {participant:8}: {local_time.format('YYYY-MM-DD HH:mm')} ({local_time.timezone_name})")
 ```
@@ -540,13 +540,13 @@ class EventManager:
         if timezone is None:
             timezone = self.default_timezone
         
-        # 解析开始时间
+#        # 解析开始时间
         if isinstance(start_time, str):
             start_dt = pendulum.parse(start_time, tz=timezone)
         else:
             start_dt = start_time
         
-        # 计算结束时间
+#        # 计算结束时间
         if end_time:
             if isinstance(end_time, str):
                 end_dt = pendulum.parse(end_time, tz=timezone)
@@ -556,10 +556,10 @@ class EventManager:
             if isinstance(duration, dict):
                 end_dt = start_dt.add(**duration)
             else:
-                # 假设duration是小时数
+#                # 假设 duration 是小时数
                 end_dt = start_dt.add(hours=duration)
         else:
-            # 默认1小时
+#            # 默认 1 小时
             end_dt = start_dt.add(hours=1)
         
         event = {
@@ -582,7 +582,7 @@ class EventManager:
         if timezone is None:
             timezone = self.default_timezone
         
-        # 解析日期
+#        # 解析日期
         if isinstance(start_date, str):
             start_dt = pendulum.parse(start_date, tz=timezone).start_of('day')
         else:
@@ -599,7 +599,7 @@ class EventManager:
             if start_dt <= event_start <= end_dt:
                 filtered_events.append(event)
         
-        # 按开始时间排序
+#        # 按开始时间排序
         filtered_events.sort(key=lambda x: x['start_time'])
         return filtered_events
     
@@ -625,14 +625,14 @@ class EventManager:
         if timezone is None:
             timezone = self.default_timezone
         
-        # 获取月份的第一天和最后一天
+#        # 获取月份的第一天和最后一天
         first_day = pendulum.datetime(year, month, 1, tz=timezone)
         last_day = first_day.end_of('month')
         
-        # 获取该月的所有事件
+#        # 获取该月的所有事件
         month_events = self.get_events_by_date_range(first_day, last_day, timezone)
         
-        # 按日期分组事件
+#        # 按日期分组事件
         events_by_date = {}
         for event in month_events:
             event_date = event['start_time'].in_timezone(timezone).date()
@@ -640,24 +640,24 @@ class EventManager:
                 events_by_date[event_date] = []
             events_by_date[event_date].append(event)
         
-        # 生成日历
+#        # 生成日历
         calendar_str = f"\n{year}年{month}月 日历\n"
         calendar_str += "=" * 40 + "\n"
         calendar_str += "日  一  二  三  四  五  六\n"
         calendar_str += "-" * 40 + "\n"
         
-        # 获取月份第一天是星期几
-        first_weekday = first_day.day_of_week % 7  # 转换为0=周日的格式
+#        # 获取月份第一天是星期几
+        first_weekday = first_day.day_of_week % 7  # 转换为 0=周日的格式
         
-        # 填充第一周的空白
+#        # 填充第一周的空白
         calendar_str += "   " * first_weekday
         
-        # 填充日期
+#        # 填充日期
         current_date = first_day
         while current_date.month == month:
             day_str = f"{current_date.day:2d}"
             
-            # 检查是否有事件
+#            # 检查是否有事件
             if current_date.date() in events_by_date:
                 day_str += "*"  # 标记有事件的日期
             else:
@@ -665,19 +665,19 @@ class EventManager:
             
             calendar_str += day_str
             
-            # 换行处理
+#            # 换行处理
             if current_date.day_of_week % 7 == 6:  # 周六
                 calendar_str += "\n"
             
             current_date = current_date.add(days=1)
         
-        # 添加事件详情
+#        # 添加事件详情
         if events_by_date:
-            calendar_str += "\n\n事件详情:\n"
+            calendar_str += "\n\n 事件详情:\n"
             calendar_str += "-" * 40 + "\n"
             
             for date, events in sorted(events_by_date.items()):
-                calendar_str += f"\n{date.format('MM月DD日')} ({pendulum.instance(date).format('dddd')}):")
+                calendar_str += f"\n{date.format('MM 月 DD 日')} ({pendulum.instance(date).format('dddd')}):")
                 for event in events:
                     start_time = event['start_time'].in_timezone(timezone)
                     end_time = event['end_time'].in_timezone(timezone)
@@ -688,7 +688,7 @@ class EventManager:
         return calendar_str
     
     def export_to_ical(self, filename):
-        """导出为iCal格式"""
+        """导出为 iCal 格式"""
         ical_content = "BEGIN:VCALENDAR\n"
         ical_content += "VERSION:2.0\n"
         ical_content += "PRODID:-//Event Manager//Event Manager 1.0//EN\n"
@@ -713,16 +713,16 @@ class EventManager:
         
         print(f"日历已导出到 {filename}")
 
-# 使用示例
+## 使用示例
 manager = EventManager()
 
-# 添加一些事件
+## 添加一些事件
 manager.add_event(
     "项目启动会议",
     "2024-01-15 09:00:00",
     duration={'hours': 2},
-    description="新项目启动会议，讨论项目计划和分工",
-    location="会议室A"
+    description="新项目启动会议,讨论项目计划和分工",
+    location="会议室 A"
 )
 
 manager.add_event(
@@ -741,43 +741,43 @@ manager.add_event(
     location="公园"
 )
 
-# 获取即将到来的事件
+## 获取即将到来的事件
 upcoming = manager.get_upcoming_events(days=30)
 print("即将到来的事件:")
 for event in upcoming:
     start_time = event['start_time']
-    print(f"- {event['title']}: {start_time.format('MM月DD日 HH:mm')} ({start_time.diff_for_humans()})")
+    print(f"- {event['title']}: {start_time.format('MM 月 DD 日 HH:mm')} ({start_time.diff_for_humans()})")
 
-# 生成日历视图
+## 生成日历视图
 calendar_view = manager.generate_calendar_view(2024, 1)
 print(calendar_view)
 
-# 导出日历
+## 导出日历
 manager.export_to_ical('events.ics')
 ```
 
 ## ⚠️ 注意事项
 
-- **性能**: Pendulum比标准datetime稍慢，但提供更多功能
-- **依赖**: Pendulum依赖于系统的时区数据库
-- **兼容性**: 虽然兼容datetime，但某些操作可能需要转换
+- **性能**: Pendulum 比标准 datetime 稍慢，但提供更多功能
+- **依赖**: Pendulum 依赖于系统的时区数据库
+- **兼容性**: 虽然兼容 datetime，但某些操作可能需要转换
 - **本地化**: 需要安装相应的语言包才能支持本地化
 - **时区数据**: 确保时区数据库是最新的
 - **内存使用**: 大量日期时间对象可能占用较多内存
 
 ## 🔗 相关内容
 
-- [datetime模块](datetime/) - Python标准日期时间模块
-- [time模块](time/) - 基础时间处理功能
-- [calendar模块](calendar/) - 日历相关功能
+- [datetime 模块](datetime/) - Python 标准日期时间模块
+- [time 模块](time/) - 基础时间处理功能
+- [calendar 模块](calendar/) - 日历相关功能
 
 ## 📚 扩展阅读
 
-- [Pendulum官方文档](https://pendulum.eustace.io/)
+- [Pendulum 官方文档](https://pendulum.eustace.io/)
 - [时区数据库](https://www.iana.org/time-zones)
-- [ISO 8601标准](https://en.wikipedia.org/wiki/ISO_8601)
-- [RFC 3339标准](https://tools.ietf.org/html/rfc3339)
-- [Python时间处理最佳实践](https://docs.python.org/3/library/datetime.html#datetime-objects)
+- [ISO 8601 标准](https://en.wikipedia.org/wiki/ISO_8601)
+- [RFC 3339 标准](https://tools.ietf.org/html/rfc3339)
+- [Python 时间处理最佳实践](https://docs.python.org/3/library/datetime.html#datetime-objects)
 
 ## 🏷️ 标签
 
@@ -786,5 +786,5 @@ manager.export_to_ical('events.ics')
 ---
 
 **最后更新**: 2024-01-01  
-**作者**: Python文档团队  
+**作者**: Python 文档团队  
 **版本**: 1.0

@@ -1,4 +1,4 @@
-# ord() - Unicode码点获取函数
+# ord() - Unicode 码点获取函数
 
 ## 概述
 
@@ -45,25 +45,25 @@ ord(c)
 #### 基本用法
 
 ```python
-# ASCII 字符的码点
+## ASCII 字符的码点
 print(ord('A'))    # 输出: 65
 print(ord('a'))    # 输出: 97
 print(ord('0'))    # 输出: 48
 print(ord(' '))    # 输出: 32 (空格)
 print(ord('\n'))   # 输出: 10 (换行符)
 
-# 特殊字符的码点
+## 特殊字符的码点
 print(ord('!'))    # 输出: 33
 print(ord('@'))    # 输出: 64
 print(ord('#'))    # 输出: 35
 
-# 中文字符的码点
+## 中文字符的码点
 print(ord('中'))   # 输出: 20013
 print(ord('文'))   # 输出: 25991
 print(ord('你'))   # 输出: 20320
 print(ord('好'))   # 输出: 22909
 
-# 其他语言字符
+## 其他语言字符
 print(ord('α'))    # 输出: 945 (希腊字母 alpha)
 print(ord('β'))    # 输出: 946 (希腊字母 beta)
 print(ord('π'))    # 输出: 960 (希腊字母 pi)
@@ -72,7 +72,7 @@ print(ord('π'))    # 输出: 960 (希腊字母 pi)
 #### 字符范围分析
 
 ```python
-# ASCII 字符范围分析
+## ASCII 字符范围分析
 def analyze_ascii_range():
     """分析 ASCII 字符范围"""
     ranges = {
@@ -87,7 +87,7 @@ def analyze_ascii_range():
     for name, (start, end) in ranges.items():
         print(f"\n{name} ({start}-{end}):")
         
-        # 显示范围内的一些字符
+#        # 显示范围内的一些字符
         sample_chars = []
         for code in range(start, min(end + 1, start + 10)):
             try:
@@ -103,7 +103,7 @@ def analyze_ascii_range():
         if end - start > 10:
             print(f"  ... 还有 {end - start - 9} 个字符")
 
-# 调用分析函数
+## 调用分析函数
 analyze_ascii_range()
 ```
 
@@ -196,14 +196,14 @@ class UnicodeAnalyzer:
         if code_points:
             analysis['code_point_range'] = (min(code_points), max(code_points))
         
-        # 统计字符类别
+#        # 统计字符类别
         for char in text:
             category = unicodedata.category(char)
             if category not in analysis['categories']:
                 analysis['categories'][category] = 0
             analysis['categories'][category] += 1
         
-        # 详细字符信息（限制数量避免输出过长）
+#        # 详细字符信息(限制数量避免输出过长)
         unique_chars = list(set(text))[:10]
         for char in unique_chars:
             try:
@@ -214,30 +214,30 @@ class UnicodeAnalyzer:
         
         return analysis
 
-# 使用示例
+## 使用示例
 analyzer = UnicodeAnalyzer()
 
-# 获取字符详细信息
+## 获取字符详细信息
 char_info = analyzer.char_info('中')
 print("字符 '中' 的详细信息:")
 for key, value in char_info.items():
     print(f"  {key}: {value}")
 
-# 比较多个字符
+## 比较多个字符
 test_chars = ['A', 'a', '1', '中', 'α', '🐍', '©']
-print("\n字符比较:")
+print("\n 字符比较:")
 analyzer.compare_characters(test_chars)
 
-# 查找范围内的字符
-print("\n希腊字母范围 (945-970):")
+## 查找范围内的字符
+print("\n 希腊字母范围 (945-970):")
 greek_chars = analyzer.find_chars_in_range(945, 970, 10)
 for char_data in greek_chars:
     print(f"  {char_data['char']} ({char_data['code']}) - {char_data['name']}")
 
-# 分析字符串
+## 分析字符串
 test_string = "Hello 世界! 🌍"
 string_analysis = analyzer.analyze_string(test_string)
-print(f"\n字符串 '{test_string}' 分析:")
+print(f"\n 字符串 '{test_string}' 分析:")
 print(f"  总字符数: {string_analysis['total_chars']}")
 print(f"  唯一字符数: {string_analysis['unique_chars']}")
 print(f"  码点范围: {string_analysis['code_point_range']}")
@@ -298,10 +298,10 @@ class TextValidator:
     def check_character_ranges(text):
         """检查字符所属的范围"""
         ranges = {
-            'ASCII控制字符': (0, 31),
-            'ASCII可打印': (32, 126),
-            'Latin-1补充': (128, 255),
-            'CJK统一汉字': (0x4E00, 0x9FFF),
+            'ASCII 控制字符': (0, 31),
+            'ASCII 可打印': (32, 126),
+            'Latin-1 补充': (128, 255),
+            'CJK 统一汉字': (0x4E00, 0x9FFF),
             'emoji': (0x1F600, 0x1F64F),
             '数学符号': (0x2200, 0x22FF),
             '希腊字母': (0x0370, 0x03FF)
@@ -329,7 +329,7 @@ class TextValidator:
                     'code_point': code_point
                 })
         
-        # 移除空的分类
+#        # 移除空的分类
         return {k: v for k, v in char_distribution.items() if v}
     
     @staticmethod
@@ -342,28 +342,28 @@ class TextValidator:
         if max_code_point <= 127:
             suggestions.append({
                 'encoding': 'ASCII',
-                'reason': '所有字符都在ASCII范围内',
+                'reason': '所有字符都在 ASCII 范围内',
                 'efficiency': '最高'
             })
         
         if max_code_point <= 255:
             suggestions.append({
                 'encoding': 'Latin-1 (ISO-8859-1)',
-                'reason': '所有字符都在Latin-1范围内',
+                'reason': '所有字符都在 Latin-1 范围内',
                 'efficiency': '高'
             })
         
         suggestions.append({
             'encoding': 'UTF-8',
-            'reason': '通用Unicode编码，兼容性最好',
-            'efficiency': '中等到高（取决于字符类型）'
+            'reason': '通用 Unicode 编码,兼容性最好',
+            'efficiency': '中等到高(取决于字符类型)'
         })
         
         if max_code_point > 0xFFFF:
             suggestions.append({
                 'encoding': 'UTF-32',
-                'reason': '包含需要4字节表示的字符',
-                'efficiency': '低（固定4字节每字符）'
+                'reason': '包含需要 4 字节表示的字符',
+                'efficiency': '低(固定 4 字节每字符)'
             })
         
         return {
@@ -372,33 +372,33 @@ class TextValidator:
             'suggestions': suggestions
         }
 
-# 使用示例
+## 使用示例
 validator = TextValidator()
 
-# ASCII 验证
+## ASCII 验证
 test_text1 = "Hello World!"
 test_text2 = "Hello 世界!"
 
 ascii_result1 = validator.validate_ascii_only(test_text1)
-print(f"'{test_text1}' ASCII验证: {ascii_result1['is_ascii_only']}")
+print(f"'{test_text1}' ASCII 验证: {ascii_result1['is_ascii_only']}")
 
 ascii_result2 = validator.validate_ascii_only(test_text2)
-print(f"'{test_text2}' ASCII验证: {ascii_result2['is_ascii_only']}")
+print(f"'{test_text2}' ASCII 验证: {ascii_result2['is_ascii_only']}")
 if not ascii_result2['is_ascii_only']:
-    print("  非ASCII字符:")
+    print("  非 ASCII 字符:")
     for char_info in ascii_result2['non_ascii_chars']:
         print(f"    位置{char_info['position']}: '{char_info['char']}' (码点: {char_info['code_point']})")
 
-# 可打印字符验证
+## 可打印字符验证
 test_text3 = "Hello\x00World\x1F"
 printable_result = validator.validate_printable_only(test_text3)
-print(f"\n包含控制字符的文本可打印验证: {printable_result['is_printable_only']}")
+print(f"\n 包含控制字符的文本可打印验证: {printable_result['is_printable_only']}")
 if not printable_result['is_printable_only']:
     print("  非可打印字符:")
     for char_info in printable_result['non_printable_chars']:
         print(f"    位置{char_info['position']}: {char_info['char']} (码点: {char_info['code_point']})")
 
-# 字符范围检查
+## 字符范围检查
 test_text4 = "Hello 世界! αβγ 🐍 ∑∏∆"
 range_result = validator.check_character_ranges(test_text4)
 print(f"\n'{test_text4}' 字符范围分布:")
@@ -408,9 +408,9 @@ for range_name, chars in range_result.items():
         char_list.append(f"...还有{len(chars)-3}个")
     print(f"  {range_name}: {', '.join(char_list)}")
 
-# 编码建议
+## 编码建议
 encoding_suggestion = validator.suggest_encoding(test_text4)
-print(f"\n编码建议 (最大码点: {encoding_suggestion['max_code_hex']}):")
+print(f"\n 编码建议 (最大码点: {encoding_suggestion['max_code_hex']}):")
 for suggestion in encoding_suggestion['suggestions']:
     print(f"  {suggestion['encoding']}: {suggestion['reason']} (效率: {suggestion['efficiency']})")
 ```
@@ -425,18 +425,18 @@ class CharacterCrypto:
     
     @staticmethod
     def simple_caesar_cipher(text, shift):
-        """简单的凯撒密码（支持Unicode）"""
+        """简单的凯撒密码(支持 Unicode)"""
         encrypted = []
         
         for char in text:
-            # 获取原始码点
+#            # 获取原始码点
             original_code = ord(char)
             
-            # 应用偏移
+#            # 应用偏移
             new_code = original_code + shift
             
-            # 确保在有效的Unicode范围内
-            if new_code > 0x10FFFF:  # Unicode最大码点
+#            # 确保在有效的 Unicode 范围内
+            if new_code > 0x10FFFF:  # Unicode 最大码点
                 new_code = new_code % 0x10FFFF
             elif new_code < 0:
                 new_code = 0x10FFFF + new_code
@@ -445,7 +445,7 @@ class CharacterCrypto:
                 encrypted_char = chr(new_code)
                 encrypted.append(encrypted_char)
             except ValueError:
-                # 如果码点无效，保持原字符
+#                # 如果码点无效,保持原字符
                 encrypted.append(char)
         
         return ''.join(encrypted)
@@ -455,15 +455,15 @@ class CharacterCrypto:
         """基于字符码点的校验和"""
         checksum = 0
         for i, char in enumerate(text):
-            # 使用位置权重计算校验和
+#            # 使用位置权重计算校验和
             checksum += ord(char) * (i + 1)
         
-        return checksum % 0xFFFF  # 16位校验和
+        return checksum % 0xFFFF  # 16 位校验和
     
     @staticmethod
     def text_fingerprint(text):
         """生成文本指纹"""
-        # 收集所有字符的码点
+#        # 收集所有字符的码点
         code_points = [ord(char) for char in text]
         
         fingerprint = {
@@ -485,18 +485,18 @@ class CharacterCrypto:
         if not seed_text:
             raise ValueError("种子文本不能为空")
         
-        # 使用字符码点作为随机种子
+#        # 使用字符码点作为随机种子
         seed_value = sum(ord(char) * (i + 1) for i, char in enumerate(seed_text))
         
-        # 生成密钥字符
+#        # 生成密钥字符
         key_chars = []
         current_seed = seed_value
         
         for i in range(key_length):
-            # 简单的线性同余生成器
+#            # 简单的线性同余生成器
             current_seed = (current_seed * 1103515245 + 12345) % (2**31)
             
-            # 将种子值映射到可打印ASCII字符范围 (33-126)
+#            # 将种子值映射到可打印 ASCII 字符范围 (33-126)
             char_code = 33 + (current_seed % 94)
             key_chars.append(chr(char_code))
         
@@ -508,7 +508,7 @@ class CharacterCrypto:
         if not text:
             return {'entropy': 0, 'analysis': '空文本'}
         
-        # 计算字符频率
+#        # 计算字符频率
         char_freq = {}
         for char in text:
             code_point = ord(char)
@@ -516,7 +516,7 @@ class CharacterCrypto:
                 char_freq[code_point] = 0
             char_freq[code_point] += 1
         
-        # 计算熵值
+#        # 计算熵值
         text_length = len(text)
         entropy = 0
         
@@ -536,10 +536,10 @@ class CharacterCrypto:
         
         return analysis
 
-# 使用示例
+## 使用示例
 crypto = CharacterCrypto()
 
-# 凯撒密码
+## 凯撒密码
 original_text = "Hello 世界!"
 shift = 3
 encrypted = crypto.simple_caesar_cipher(original_text, shift)
@@ -549,23 +549,23 @@ print(f"原文: {original_text}")
 print(f"加密 (偏移{shift}): {encrypted}")
 print(f"解密: {decrypted}")
 
-# 字符校验和
+## 字符校验和
 checksum = crypto.character_checksum(original_text)
 print(f"\n'{original_text}' 的校验和: {checksum} (0x{checksum:04x})")
 
-# 文本指纹
+## 文本指纹
 fingerprint = crypto.text_fingerprint(original_text)
-print(f"\n文本指纹:")
+print(f"\n 文本指纹:")
 for key, value in fingerprint.items():
     print(f"  {key}: {value}")
 
-# 生成密钥
+## 生成密钥
 key = crypto.generate_char_based_key(original_text, 16)
-print(f"\n基于 '{original_text}' 生成的密钥: {key}")
+print(f"\n 基于 '{original_text}' 生成的密钥: {key}")
 
-# 熵值分析
+## 熵值分析
 entropy_analysis = crypto.analyze_text_entropy(original_text)
-print(f"\n熵值分析:")
+print(f"\n 熵值分析:")
 for key, value in entropy_analysis.items():
     if key == 'most_frequent_char' and value:
         char_code, freq = value
@@ -629,7 +629,7 @@ class CharacterEncoder:
             code_point = ord(char)
             
             if code_point < 32 or code_point > 126:
-                # 非可打印字符使用Unicode转义
+#                # 非可打印字符使用 Unicode 转义
                 if code_point <= 0xFF:
                     encoded.append(f'\\x{code_point:02x}')
                 elif code_point <= 0xFFFF:
@@ -637,7 +637,7 @@ class CharacterEncoder:
                 else:
                     encoded.append(f'\\U{code_point:08x}')
             else:
-                # 可打印ASCII字符直接使用
+#                # 可打印 ASCII 字符直接使用
                 if char in '\\"\'':
                     encoded.append('\\' + char)
                 else:
@@ -666,7 +666,7 @@ class CharacterEncoder:
     
     @staticmethod
     def compress_repeated_chars(text):
-        """压缩重复字符（简单的行程编码）"""
+        """压缩重复字符(简单的行程编码)"""
         if not text:
             return []
         
@@ -686,7 +686,7 @@ class CharacterEncoder:
                 current_char = char
                 count = 1
         
-        # 添加最后一个字符组
+#        # 添加最后一个字符组
         compressed.append({
             'char': current_char,
             'code_point': ord(current_char),
@@ -707,39 +707,39 @@ class CharacterEncoder:
         
         return ''.join(decompressed)
 
-# 使用示例
+## 使用示例
 encoder = CharacterEncoder()
 
-# 数字码点转换
+## 数字码点转换
 test_text = "Hello 世界!"
 print(f"原文: {test_text}")
 
-# 转换为不同进制的码点
+## 转换为不同进制的码点
 decimal_codes = encoder.to_numeric_codes(test_text, 10)
 hex_codes = encoder.to_numeric_codes(test_text, 16)
 print(f"十进制码点: {decimal_codes}")
 print(f"十六进制码点: {hex_codes}")
 
-# 从码点恢复文本
+## 从码点恢复文本
 restored_text = encoder.from_numeric_codes(decimal_codes, 10)
 print(f"恢复的文本: {restored_text}")
 
-# 转义序列编码
+## 转义序列编码
 escaped = encoder.encode_as_escape_sequence(test_text)
-print(f"\n转义序列: {escaped}")
+print(f"\n 转义序列: {escaped}")
 
-# 字符映射表
+## 字符映射表
 char_mapping = encoder.create_character_map(test_text)
-print(f"\n字符映射表:")
+print(f"\n 字符映射表:")
 for char, code_point, index in char_mapping['mapping_table']:
     print(f"  '{char}' (码点{code_point}) -> 索引{index}")
 
-# 重复字符压缩
+## 重复字符压缩
 repeat_text = "aaabbbcccdddeee"
 compressed = encoder.compress_repeated_chars(repeat_text)
 decompressed = encoder.decompress_repeated_chars(compressed)
 
-print(f"\n原文: {repeat_text}")
+print(f"\n 原文: {repeat_text}")
 print(f"压缩结果:")
 for item in compressed:
     print(f"  '{item['char']}' x {item['count']}")
@@ -759,23 +759,23 @@ class SafeOrdProcessor:
     def safe_ord(value):
         """安全的 ord() 调用"""
         try:
-            # 检查输入类型
+#            # 检查输入类型
             if not isinstance(value, str):
                 return {
                     'success': False,
-                    'error': f"输入必须是字符串，实际类型: {type(value).__name__}",
+                    'error': f"输入必须是字符串,实际类型: {type(value).__name__}",
                     'code_point': None
                 }
             
-            # 检查长度
+#            # 检查长度
             if len(value) != 1:
                 return {
                     'success': False,
-                    'error': f"输入必须是单个字符，实际长度: {len(value)}",
+                    'error': f"输入必须是单个字符,实际长度: {len(value)}",
                     'code_point': None
                 }
             
-            # 执行转换
+#            # 执行转换
             code_point = ord(value)
             
             return {
@@ -829,7 +829,7 @@ class SafeOrdProcessor:
     
     @staticmethod
     def validate_unicode_range(char, min_code=0, max_code=0x10FFFF):
-        """验证字符是否在指定的Unicode范围内"""
+        """验证字符是否在指定的 Unicode 范围内"""
         try:
             code_point = ord(char)
             
@@ -860,20 +860,20 @@ class SafeOrdProcessor:
         
         for i, char in enumerate(text):
             try:
-                # 尝试编码
+#                # 尝试编码
                 char.encode(encoding)
                 
-                # 检查是否为代理对（在UTF-16中使用）
+#                # 检查是否为代理对(在 UTF-16 中使用)
                 code_point = ord(char)
                 if 0xD800 <= code_point <= 0xDFFF:
                     problematic.append({
                         'position': i,
                         'character': char,
                         'code_point': code_point,
-                        'issue': '代理对字符，在某些上下文中可能有问题'
+                        'issue': '代理对字符,在某些上下文中可能有问题'
                     })
                 
-                # 检查是否为私用区字符
+#                # 检查是否为私用区字符
                 elif (0xE000 <= code_point <= 0xF8FF or
                       0xF0000 <= code_point <= 0xFFFFD or
                       0x100000 <= code_point <= 0x10FFFD):
@@ -881,7 +881,7 @@ class SafeOrdProcessor:
                         'position': i,
                         'character': char,
                         'code_point': code_point,
-                        'issue': '私用区字符，显示可能因系统而异'
+                        'issue': '私用区字符,显示可能因系统而异'
                     })
                 
             except UnicodeEncodeError as e:
@@ -894,10 +894,10 @@ class SafeOrdProcessor:
         
         return problematic
 
-# 使用示例
+## 使用示例
 safe_processor = SafeOrdProcessor()
 
-# 安全的 ord() 调用
+## 安全的 ord() 调用
 test_cases = ['A', 'Hello', '', 123, None, '中']
 print("安全 ord() 测试:")
 for test_case in test_cases:
@@ -907,29 +907,29 @@ for test_case in test_cases:
     else:
         print(f"  {test_case} -> 错误: {result['error']}")
 
-# 批量处理
+## 批量处理
 test_string = "Hello 世界! 🌍"
 batch_result = safe_processor.batch_ord_safe(test_string)
-print(f"\n批量处理 '{test_string}':")
+print(f"\n 批量处理 '{test_string}':")
 print(f"  成功: {batch_result['summary']['success_count']} 个字符")
 print(f"  失败: {batch_result['summary']['error_count']} 个字符")
 
-# 显示前几个成功的结果
+## 显示前几个成功的结果
 for item in batch_result['successful'][:5]:
     print(f"    位置{item['position']}: '{item['character']}' -> {item['code_point']}")
 
-# Unicode范围验证
-print("\nUnicode范围验证:")
+## Unicode 范围验证
+print("\nUnicode 范围验证:")
 test_chars = ['A', '中', '🌍', '\uD800']  # 最后一个是代理对
 for char in test_chars:
-    # 验证是否在基本多语言平面 (BMP) 内
+#    # 验证是否在基本多语言平面 (BMP) 内
     result = safe_processor.validate_unicode_range(char, 0, 0xFFFF)
     print(f"  {result['message']}")
 
-# 查找问题字符
+## 查找问题字符
 problematic_text = "Hello\uD800\uDC00World"  # 包含代理对
 problems = safe_processor.find_problematic_chars(problematic_text)
-print(f"\n在 '{repr(problematic_text)}' 中发现的问题:")
+print(f"\n 在 '{repr(problematic_text)}' 中发现的问题:")
 for problem in problems:
     print(f"  位置{problem['position']}: {problem['issue']}")
 ```
@@ -952,7 +952,7 @@ class OrdPerformance:
     @staticmethod
     def batch_ord_optimized(text):
         """优化的批量 ord() 处理"""
-        # 使用列表推导式，比循环更快
+#        # 使用列表推导式,比循环更快
         return [ord(char) for char in text]
     
     @staticmethod
@@ -967,8 +967,8 @@ class OrdPerformance:
     def performance_comparison(test_text, iterations=1000):
         """性能比较测试"""
         methods = {
-            '普通ord()': lambda text: [ord(char) for char in text],
-            '缓存ord()': lambda text: [OrdPerformance.cached_ord(char) for char in text],
+            '普通 ord()': lambda text: [ord(char) for char in text],
+            '缓存 ord()': lambda text: [OrdPerformance.cached_ord(char) for char in text],
             '批量优化': OrdPerformance.batch_ord_optimized
         }
         
@@ -992,11 +992,11 @@ class OrdPerformance:
     def memory_efficient_ord_processing(large_text):
         """内存高效的大文本处理"""
         def ord_generator(text):
-            """ord() 生成器，节省内存"""
+            """ord() 生成器,节省内存"""
             for char in text:
                 yield ord(char)
         
-        # 分块处理大文本
+#        # 分块处理大文本
         chunk_size = 10000
         processed_count = 0
         code_point_stats = {
@@ -1023,34 +1023,34 @@ class OrdPerformance:
         code_point_stats['avg'] = code_point_stats['sum'] / code_point_stats['count']
         return code_point_stats
 
-# 性能测试
+## 性能测试
 perf = OrdPerformance()
 
-# 生成测试文本
+## 生成测试文本
 test_text = "Hello World! 你好世界! αβγδε 🌍🚀🎉" * 100
 
 print(f"测试文本长度: {len(test_text)} 字符")
-print("性能比较测试 (1000次迭代):")
+print("性能比较测试 (1000 次迭代):")
 
-# 性能比较
+## 性能比较
 perf_results = perf.performance_comparison(test_text, 1000)
 
 sorted_results = sorted(perf_results.items(), key=lambda x: x[1]['time'])
 for method, stats in sorted_results:
     print(f"  {method:<12}: {stats['time']:.6f}秒 (平均: {stats['avg_time']:.8f}秒)")
 
-# 计算性能提升
+## 计算性能提升
 fastest_time = sorted_results[0][1]['time']
-print("\n性能提升比较:")
+print("\n 性能提升比较:")
 for method, stats in sorted_results:
     speedup = fastest_time / stats['time']
     print(f"  {method:<12}: {speedup:.2f}x")
 
-# 大文本内存效率测试
-print("\n大文本内存效率测试:")
-large_text = test_text * 1000  # 约100万字符
+## 大文本内存效率测试
+print("\n 大文本内存效率测试:")
+large_text = test_text * 1000  # 约 100 万字符
 stats = perf.memory_efficient_ord_processing(large_text)
-print(f"处理完成，统计结果:")
+print(f"处理完成,统计结果:")
 print(f"  字符数: {stats['count']}")
 print(f"  最小码点: {stats['min']} ('{chr(stats['min'])}')") 
 print(f"  最大码点: {stats['max']} ('{chr(stats['max']) if stats['max'] <= 0x10FFFF else '无效'}')")
@@ -1060,21 +1060,21 @@ print(f"  平均码点: {stats['avg']:.2f}")
 ## 相关函数和模块
 
 ### 内置函数
-- `chr()` - Unicode码点转字符（ord的逆操作）
+- `chr()` - Unicode 码点转字符（ord 的逆操作）
 - `hex()` - 整数转十六进制字符串
 - `bin()` - 整数转二进制字符串
 - `int()` - 字符串转整数
 
 ### 标准库
-- `unicodedata` - Unicode字符数据库
+- `unicodedata` - Unicode 字符数据库
 - `codecs` - 编解码器注册和基类
 - `string` - 字符串常量和类
 - `re` - 正则表达式操作
 
 ### 第三方库
-- `unidecode` - Unicode文本转ASCII
+- `unidecode` - Unicode 文本转 ASCII
 - `chardet` - 字符编码检测
-- `ftfy` - 修复Unicode文本
+- `ftfy` - 修复 Unicode 文本
 
 ## 扩展阅读
 

@@ -6,9 +6,9 @@ category: basics
 navigation_weight: 1
 ---
 
-# Python基础语法
+# Python 基础语法
 
-Python基础语法是学习Python编程的起点，本模块涵盖了Python语言的核心概念和基本语法结构。
+Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 语言的核心概念和基本语法结构。
 
 ## 📋 本模块内容
 
@@ -17,8 +17,8 @@ Python基础语法是学习Python编程的起点，本模块涵盖了Python语�
 
 ### 控制流程
 - [判断语句与循环语句](control-flow/)
-- [match-case语句 - 结构化模式匹配](match-case/)
-- [with语句 - 上下文管理器](with/)
+- [match-case 语句 - 结构化模式匹配](match-case/)
+- [with 语句 - 上下文管理器](with/)
 - [raise/assert - 异常抛出和断言](raise-assert/)
 - [yield - 生成器和协程](yield/)
 
@@ -27,7 +27,7 @@ Python基础语法是学习Python编程的起点，本模块涵盖了Python语�
 - [函数作用域与闭包](function-scope/)
 
 ### 模块与包
-- [Python包和__init__.py文件](packages/)
+- [Python 包和__init__.py 文件](packages/)
 
 
 ### 类与对象
@@ -47,8 +47,8 @@ Python基础语法是学习Python编程的起点，本模块涵盖了Python语�
 
 完成本模块学习后，你将能够：
 
-- 熟练使用Python基本语法编写程序
-- 理解Python的数据类型和变量机制
+- 熟练使用 Python 基本语法编写程序
+- 理解 Python 的数据类型和变量机制
 - 掌握控制流程的使用方法
 - 能够定义和使用函数
 - 理解面向对象编程的基本概念
@@ -63,6 +63,6 @@ Python基础语法是学习Python编程的起点，本模块涵盖了Python语�
 
 ## 🔗 相关资源
 
-- [Python官方教程](https://docs.python.org/3/tutorial/)
-- [Python语言参考](https://docs.python.org/3/reference/)
+- [Python 官方教程](https://docs.python.org/3/tutorial/)
+- [Python 语言参考](https://docs.python.org/3/reference/)
 - [PEP 8 代码风格指南](https://www.python.org/dev/peps/pep-0008/)

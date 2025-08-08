@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢您对Python知识体系文档项目的关注！我们欢迎所有形式的贡献，包括但不限于内容补充、错误修正、结构优化和功能改进。
+感谢您对 Python 知识体系文档项目的关注！我们欢迎所有形式的贡献，包括但不限于内容补充、错误修正、结构优化和功能改进。
 
 ## 🤝 如何贡献
 
@@ -8,7 +8,7 @@
 
 如果您发现了错误或有改进建议，请：
 
-- 在GitHub上创建Issue
+- 在 GitHub 上创建 Issue
 - 详细描述问题或建议
 - 如果是错误，请提供重现步骤
 - 如果是新功能建议，请说明使用场景
@@ -17,8 +17,8 @@
 
 #### 准备工作
 
-1. Fork本仓库到您的GitHub账户
-2. 克隆Fork的仓库到本地
+1. Fork 本仓库到您的 GitHub 账户
+2. 克隆 Fork 的仓库到本地
 3. 创建新的分支进行修改
 
 ```bash
@@ -41,7 +41,7 @@ git checkout -b feature/your-feature-name
    - 提供实际应用场景
 
 3. **格式规范**
-   - 使用Markdown格式
+   - 使用 Markdown 格式
    - 遵循中文技术文档写作规范
    - 代码块指定语言类型
    - 表格格式整齐
@@ -50,12 +50,12 @@ git checkout -b feature/your-feature-name
 
 1. 在本地进行修改和测试
 2. 提交更改到您的分支
-3. 推送到您的GitHub仓库
-4. 创建Pull Request
+3. 推送到您的 GitHub 仓库
+4. 创建 Pull Request
 
 ```bash
 git add .
-git commit -m "feat: 添加XXX功能的文档"
+git commit -m "feat: 添加 XXX 功能的文档"
 git push origin feature/your-feature-name
 ```
 
@@ -63,10 +63,10 @@ git push origin feature/your-feature-name
 
 如果您想贡献网站功能代码：
 
-- 遵循Jekyll项目结构
+- 遵循 Jekyll 项目结构
 - 确保代码在本地正常运行
 - 添加必要的注释
-- 测试在GitHub Pages上的兼容性
+- 测试在 GitHub Pages 上的兼容性
 
 ## 📝 文档写作指南
 
@@ -85,7 +85,7 @@ git push origin feature/your-feature-name
 ### 代码示例规范
 
 ```python
-# 好的代码示例
+## 好的代码示例
 def calculate_average(numbers):
     """计算数字列表的平均值
     
@@ -103,7 +103,7 @@ def calculate_average(numbers):
     
     return sum(numbers) / len(numbers)
 
-# 使用示例
+## 使用示例
 numbers = [1, 2, 3, 4, 5]
 average = calculate_average(numbers)
 print(f"平均值: {average}")  # 输出: 平均值: 3.0
@@ -118,9 +118,9 @@ print(f"平均值: {average}")  # 输出: 平均值: 3.0
 
 ### 难度标记
 
-- **初级**: 适合Python初学者
-- **中级**: 需要一定Python基础
-- **高级**: 需要深入的Python知识
+- **初级**: 适合 Python 初学者
+- **中级**: 需要一定 Python 基础
+- **高级**: 需要深入的 Python 知识
 
 ## 🔍 审核标准
 
@@ -134,7 +134,7 @@ print(f"平均值: {average}")  # 输出: 平均值: 3.0
 
 ### 技术审核
 
-- [ ] 符合Python最佳实践
+- [ ] 符合 Python 最佳实践
 - [ ] 代码风格一致
 - [ ] 性能考虑合理
 - [ ] 安全性检查
@@ -143,7 +143,7 @@ print(f"平均值: {average}")  # 输出: 平均值: 3.0
 
 使用约定式提交格式：
 
-```
+```python
 <类型>(<范围>): <描述>
 
 [可选的正文]
@@ -163,7 +163,7 @@ print(f"平均值: {average}")  # 输出: 平均值: 3.0
 
 ### 示例
 
-```
+```python
 feat(basics): 添加变量与数据类型文档
 
 - 添加基本数据类型介绍
@@ -210,4 +210,4 @@ Closes #123
 
 ---
 
-再次感谢您的贡献！让我们一起构建更好的Python学习资源。
+再次感谢您的贡献！让我们一起构建更好的 Python 学习资源。

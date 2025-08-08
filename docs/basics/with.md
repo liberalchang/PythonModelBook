@@ -1,10 +1,10 @@
 ---
 layout: doc
-title: with关键字
+title: with 关键字
 permalink: /docs/basics/with/
 ---
 
-# with关键字
+# with 关键字
 
 ## 概述
 
@@ -52,7 +52,7 @@ with EXPRESSION [as TARGET]:
 #### 文件操作
 
 ```python
-# 传统方式
+## 传统方式
 file = open('example.txt', 'r')
 try:
     content = file.read()
@@ -60,21 +60,21 @@ try:
 finally:
     file.close()
 
-# 使用 with 语句
+## 使用 with 语句
 with open('example.txt', 'r') as file:
     content = file.read()
     print(content)
-# 文件会自动关闭，即使发生异常
+## 文件会自动关闭,即使发生异常
 ```
 
 #### 多个资源管理
 
 ```python
-# 同时管理多个文件
+## 同时管理多个文件
 with open('input.txt', 'r') as infile, open('output.txt', 'w') as outfile:
     data = infile.read()
     outfile.write(data.upper())
-# 两个文件都会自动关闭
+## 两个文件都会自动关闭
 ```
 
 ### 自定义上下文管理器
@@ -98,16 +98,16 @@ class FileManager:
         if self.file:
             self.file.close()
         
-        # 返回 False 表示不抑制异常
-        # 返回 True 表示抑制异常
+#        # 返回 False 表示不抑制异常
+#        # 返回 True 表示抑制异常
         if exc_type is not None:
             print(f"发生异常: {exc_type.__name__}: {exc_val}")
         return False
 
-# 使用自定义上下文管理器
+## 使用自定义上下文管理器
 with FileManager('test.txt', 'w') as f:
     f.write('Hello, World!')
-    # 如果这里发生异常，文件仍会被正确关闭
+#    # 如果这里发生异常,文件仍会被正确关闭
 ```
 
 #### 数据库连接管理器
@@ -122,29 +122,29 @@ class DatabaseConnection:
     
     def __enter__(self):
         print(f"连接到数据库: {self.host}:{self.port}/{self.database}")
-        # 这里应该是实际的数据库连接代码
+#        # 这里应该是实际的数据库连接代码
         self.connection = f"connection_to_{self.database}"
         return self.connection
     
     def __exit__(self, exc_type, exc_val, exc_tb):
         print("关闭数据库连接")
         if self.connection:
-            # 这里应该是实际的连接关闭代码
+#            # 这里应该是实际的连接关闭代码
             self.connection = None
         
         if exc_type is not None:
             print(f"数据库操作异常: {exc_type.__name__}")
-            # 可以在这里进行事务回滚
+#            # 可以在这里进行事务回滚
             return False  # 不抑制异常
         else:
-            # 可以在这里进行事务提交
+#            # 可以在这里进行事务提交
             print("数据库操作成功")
             return False
 
-# 使用数据库连接管理器
+## 使用数据库连接管理器
 with DatabaseConnection('localhost', 5432, 'mydb') as conn:
     print(f"使用连接: {conn}")
-    # 执行数据库操作
+#    # 执行数据库操作
 ```
 
 ### 使用 contextlib 模块
@@ -165,7 +165,7 @@ def timer():
         end_time = time.time()
         print(f"执行时间: {end_time - start_time:.2f} 秒")
 
-# 使用计时器
+## 使用计时器
 with timer() as start:
     time.sleep(1)
     print("执行一些耗时操作")
@@ -189,14 +189,14 @@ def temporary_directory():
         print(f"删除临时目录: {temp_dir}")
         shutil.rmtree(temp_dir)
 
-# 使用临时目录
+## 使用临时目录
 with temporary_directory() as temp_dir:
-    # 在临时目录中创建文件
+#    # 在临时目录中创建文件
     file_path = os.path.join(temp_dir, 'temp_file.txt')
     with open(file_path, 'w') as f:
         f.write('临时文件内容')
     print(f"临时文件创建在: {file_path}")
-# 临时目录和文件会自动删除
+## 临时目录和文件会自动删除
 ```
 
 ### 异常处理
@@ -215,11 +215,11 @@ class ExceptionHandler:
             print(f"异常类型: {exc_type}")
             print(f"异常值: {exc_val}")
             print(f"异常回溯: {exc_tb}")
-            # 返回 True 抑制异常，返回 False 或 None 不抑制
+#            # 返回 True 抑制异常,返回 False 或 None 不抑制
             return False
         return False
 
-# 测试异常处理
+## 测试异常处理
 with ExceptionHandler():
     print("正常执行")
     raise ValueError("这是一个测试异常")
@@ -243,7 +243,7 @@ class IgnoreException:
                 return True  # 抑制异常
         return False
 
-# 使用异常抑制
+## 使用异常抑制
 with IgnoreException(ValueError, TypeError):
     print("开始执行")
     raise ValueError("这个异常会被忽略")
@@ -274,20 +274,20 @@ class ThreadSafeLock:
         self._lock.release()
         return False
 
-# 使用线程锁
+## 使用线程锁
 lock = ThreadSafeLock()
 shared_resource = 0
 
 def worker():
     global shared_resource
     with lock:
-        # 临界区代码
+#        # 临界区代码
         temp = shared_resource
         temp += 1
         shared_resource = temp
         print(f"Worker updated resource to: {shared_resource}")
 
-# 创建多个线程
+## 创建多个线程
 threads = []
 for i in range(3):
     t = threading.Thread(target=worker)
@@ -309,27 +309,27 @@ class ConfigManager:
     
     @contextmanager
     def temporary_config(self, **kwargs):
-        # 保存原始配置
+#        # 保存原始配置
         original_config = self.config.copy()
         
-        # 应用临时配置
+#        # 应用临时配置
         self.config.update(kwargs)
         print(f"应用临时配置: {kwargs}")
         
         try:
             yield self.config
         finally:
-            # 恢复原始配置
+#            # 恢复原始配置
             self.config = original_config
             print("恢复原始配置")
 
-# 使用配置管理器
+## 使用配置管理器
 config_manager = ConfigManager()
 print(f"原始配置: {config_manager.config}")
 
 with config_manager.temporary_config(debug=True, log_level='DEBUG'):
     print(f"临时配置: {config_manager.config}")
-    # 在这个块中使用调试配置
+#    # 在这个块中使用调试配置
 
 print(f"恢复后配置: {config_manager.config}")
 ```
@@ -344,7 +344,7 @@ import os
 
 @contextmanager
 def performance_monitor(operation_name):
-    # 记录开始状态
+#    # 记录开始状态
     start_time = time.time()
     process = psutil.Process(os.getpid())
     start_memory = process.memory_info().rss / 1024 / 1024  # MB
@@ -355,7 +355,7 @@ def performance_monitor(operation_name):
     try:
         yield
     finally:
-        # 记录结束状态
+#        # 记录结束状态
         end_time = time.time()
         end_memory = process.memory_info().rss / 1024 / 1024  # MB
         
@@ -367,9 +367,9 @@ def performance_monitor(operation_name):
         print(f"内存变化: {memory_diff:+.2f} MB")
         print(f"最终内存使用: {end_memory:.2f} MB")
 
-# 使用性能监控
+## 使用性能监控
 with performance_monitor("大数据处理"):
-    # 模拟一些耗时和内存密集的操作
+#    # 模拟一些耗时和内存密集的操作
     data = [i ** 2 for i in range(1000000)]
     time.sleep(0.5)
     result = sum(data)
@@ -389,7 +389,7 @@ def http_session(base_url, headers=None, timeout=30):
     if headers:
         session.headers.update(headers)
     
-    # 设置基础 URL
+#    # 设置基础 URL
     session.base_url = base_url
     
     print(f"创建 HTTP 会话: {base_url}")
@@ -400,16 +400,16 @@ def http_session(base_url, headers=None, timeout=30):
         session.close()
         print("关闭 HTTP 会话")
 
-# 使用 HTTP 会话管理
+## 使用 HTTP 会话管理
 headers = {
     'User-Agent': 'MyApp/1.0',
     'Accept': 'application/json'
 }
 
 with http_session('https://api.example.com', headers=headers) as session:
-    # 在这个块中使用会话进行多个请求
-    # response1 = session.get('/users')
-    # response2 = session.post('/data', json={'key': 'value'})
+#    # 在这个块中使用会话进行多个请求
+#    # response1 = session.get('/users')
+#    # response2 = session.post('/data', json={'key': 'value'})
     print("执行 HTTP 请求...")
 ```
 
@@ -425,12 +425,12 @@ class ExampleContext:
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is not None:
             print(f"捕获到异常: {exc_val}")
-            # 返回 True 会抑制异常
-            # 返回 False 或 None 会传播异常
+#            # 返回 True 会抑制异常
+#            # 返回 False 或 None 会传播异常
             return True  # 抑制异常
         return False
 
-# 异常被抑制，程序继续执行
+## 异常被抑制,程序继续执行
 with ExampleContext():
     raise ValueError("测试异常")
     
@@ -440,18 +440,18 @@ print("程序继续执行")  # 这行会被执行
 ### 2. 嵌套上下文管理器
 
 ```python
-# 方法1：嵌套 with 语句
+## 方法 1:嵌套 with 语句
 with open('file1.txt', 'r') as f1:
     with open('file2.txt', 'w') as f2:
         data = f1.read()
         f2.write(data.upper())
 
-# 方法2：使用逗号分隔（推荐）
+## 方法 2:使用逗号分隔(推荐)
 with open('file1.txt', 'r') as f1, open('file2.txt', 'w') as f2:
     data = f1.read()
     f2.write(data.upper())
 
-# 方法3：使用 ExitStack（复杂场景）
+## 方法 3:使用 ExitStack(复杂场景)
 from contextlib import ExitStack
 
 with ExitStack() as stack:
@@ -465,7 +465,7 @@ with ExitStack() as stack:
 ### 3. 资源清理的重要性
 
 ```python
-# 错误示例：没有正确清理资源
+## 错误示例:没有正确清理资源
 class BadResource:
     def __init__(self, name):
         self.name = name
@@ -476,10 +476,10 @@ class BadResource:
         return self.resource
     
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # 忘记清理资源
+#        # 忘记清理资源
         pass
 
-# 正确示例：确保资源清理
+## 正确示例:确保资源清理
 class GoodResource:
     def __init__(self, name):
         self.name = name
@@ -526,4 +526,4 @@ class GoodResource:
 
 ## 相关标签
 
-`Python` `上下文管理器` `资源管理` `异常处理` `with语句` `contextlib` `文件操作` `内存管理`
+`Python` `上下文管理器` `资源管理` `异常处理` `with 语句` `contextlib` `文件操作` `内存管理`

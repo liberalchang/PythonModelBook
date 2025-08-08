@@ -24,7 +24,7 @@
 
 ### 基本概念
 
-`hex()` 函数将整数转换为十六进制字符串，返回的字符串以 '0x' 开头，后跟十六进制数字（0-9, a-f）。十六进制是以16为基数的数制系统，在计算机科学中广泛使用，特别是在内存地址、颜色代码、哈希值等场景中。
+`hex()` 函数将整数转换为十六进制字符串，返回的字符串以 '0x' 开头，后跟十六进制数字（0-9, a-f）。十六进制是以 16 为基数的数制系统，在计算机科学中广泛使用，特别是在内存地址、颜色代码、哈希值等场景中。
 
 ### 语法
 
@@ -45,18 +45,18 @@ hex(x)
 #### 基本用法
 
 ```python
-# 基本的十六进制转换
+## 基本的十六进制转换
 print(hex(16))    # 输出: 0x10
 print(hex(255))   # 输出: 0xff
 print(hex(256))   # 输出: 0x100
 print(hex(0))     # 输出: 0x0
 print(hex(1))     # 输出: 0x1
 
-# 负数的十六进制表示
+## 负数的十六进制表示
 print(hex(-16))   # 输出: -0x10
 print(hex(-255))  # 输出: -0xff
 
-# 大数的十六进制转换
+## 大数的十六进制转换
 print(hex(4096))  # 输出: 0x1000
 print(hex(65535)) # 输出: 0xffff
 print(hex(2**32)) # 输出: 0x100000000
@@ -65,7 +65,7 @@ print(hex(2**32)) # 输出: 0x100000000
 #### 去除前缀和格式化
 
 ```python
-# 去除 '0x' 前缀
+## 去除 '0x' 前缀
 def pure_hex(num):
     """返回不带前缀的十六进制字符串"""
     return hex(num)[2:] if num >= 0 else hex(num)[3:]
@@ -73,17 +73,17 @@ def pure_hex(num):
 print(pure_hex(255))   # 输出: ff
 print(pure_hex(-255))  # 输出: ff
 
-# 使用字符串方法去除前缀
+## 使用字符串方法去除前缀
 num = 255
 hex_str = hex(num).replace('0x', '')
 print(f"{num} 的十六进制: {hex_str}")  # 输出: 255 的十六进制: ff
 
-# 使用 format 函数
+## 使用 format 函数
 print(f"{255:x}")    # 输出: ff (小写)
 print(f"{255:X}")    # 输出: FF (大写)
-print(f"{255:08x}")  # 输出: 000000ff (8位，前面补零)
+print(f"{255:08x}")  # 输出: 000000ff (8 位,前面补零)
 print(f"{255:#x}")   # 输出: 0xff (带前缀)
-print(f"{255:#X}")   # 输出: 0XFF (带前缀，大写)
+print(f"{255:#X}")   # 输出: 0XFF (带前缀,大写)
 ```
 
 #### 十六进制工具类
@@ -139,7 +139,7 @@ class HexConverter:
         print(f"  十六进制: {hex(num)}")
         print(f"  十六进制(大写): {hex(num).upper()}")
         
-        # 计算各进制的位数
+#        # 计算各进制的位数
         binary_digits = len(bin(num)) - 2 if num >= 0 else len(bin(num)) - 3
         octal_digits = len(oct(num)) - 2 if num >= 0 else len(oct(num)) - 3
         hex_digits = len(hex(num)) - 2 if num >= 0 else len(hex(num)) - 3
@@ -147,21 +147,21 @@ class HexConverter:
         print(f"  位数: 二进制({binary_digits}) > 八进制({octal_digits}) > 十六进制({hex_digits})")
         print(f"  存储效率: 十六进制最紧凑")
 
-# 使用示例
+## 使用示例
 converter = HexConverter()
 
-# 基本转换
+## 基本转换
 print(converter.to_hex(255))                    # 输出: 0xff
 print(converter.to_hex(255, width=4))           # 输出: 0x00ff
 print(converter.to_hex(255, uppercase=True))    # 输出: 0xFF
 print(converter.to_hex(255, prefix=False))      # 输出: ff
 
-# 获取详细信息
+## 获取详细信息
 info = converter.hex_info(255)
 print(info)
-# 输出: {'number': 255, 'hex': '0xff', 'hex_upper': '0XFF', 'pure_hex': 'ff', 'pure_hex_upper': 'FF', 'digit_count': 2, 'is_power_of_16': False, 'byte_count': 1}
+## 输出: {'number': 255, 'hex': '0xff', 'hex_upper': '0XFF', 'pure_hex': 'ff', 'pure_hex_upper': 'FF', 'digit_count': 2, 'is_power_of_16': False, 'byte_count': 1}
 
-# 比较所有进制
+## 比较所有进制
 converter.compare_all_bases(255)
 ```
 
@@ -171,7 +171,7 @@ converter.compare_all_bases(255)
 
 ```python
 class ColorProcessor:
-    """颜色处理器（基于十六进制）"""
+    """颜色处理器(基于十六进制)"""
     
     def __init__(self):
         self.color_names = {
@@ -187,28 +187,28 @@ class ColorProcessor:
     
     @staticmethod
     def rgb_to_hex(r, g, b):
-        """RGB值转十六进制颜色"""
-        # 确保RGB值在0-255范围内
+        """RGB 值转十六进制颜色"""
+#        # 确保 RGB 值在 0-255 范围内
         r = max(0, min(255, r))
         g = max(0, min(255, g))
         b = max(0, min(255, b))
         
-        # 组合成24位颜色值
+#        # 组合成 24 位颜色值
         color_value = (r << 16) | (g << 8) | b
         return hex(color_value)
     
     @staticmethod
     def hex_to_rgb(hex_color):
-        """十六进制颜色转RGB值"""
-        # 处理不同格式的输入
+        """十六进制颜色转 RGB 值"""
+#        # 处理不同格式的输入
         if isinstance(hex_color, str):
-            # 去除可能的前缀和#号
+#            # 去除可能的前缀和#号
             hex_color = hex_color.replace('0x', '').replace('#', '')
             color_value = int(hex_color, 16)
         else:
             color_value = hex_color
         
-        # 提取RGB分量
+#        # 提取 RGB 分量
         r = (color_value >> 16) & 0xFF
         g = (color_value >> 8) & 0xFF
         b = color_value & 0xFF
@@ -250,7 +250,7 @@ class ColorProcessor:
         palette = []
         
         for i in range(count):
-            # 生成不同亮度的变体
+#            # 生成不同亮度的变体
             factor = 0.3 + (0.7 * i / (count - 1)) if count > 1 else 1.0
             new_r = int(r * factor)
             new_g = int(g * factor)
@@ -271,37 +271,37 @@ class ColorProcessor:
         r1, g1, b1 = ColorProcessor.hex_to_rgb(color1)
         r2, g2, b2 = ColorProcessor.hex_to_rgb(color2)
         
-        # 按比例混合
+#        # 按比例混合
         r = int(r1 * (1 - ratio) + r2 * ratio)
         g = int(g1 * (1 - ratio) + g2 * ratio)
         b = int(b1 * (1 - ratio) + b2 * ratio)
         
         return ColorProcessor.rgb_to_hex(r, g, b)
 
-# 使用示例
+## 使用示例
 color_proc = ColorProcessor()
 
-# RGB转十六进制
+## RGB 转十六进制
 hex_color = color_proc.rgb_to_hex(255, 128, 64)
 print(f"RGB(255, 128, 64) -> {hex_color}")  # 输出: 0xff8040
 
-# 十六进制转RGB
+## 十六进制转 RGB
 r, g, b = color_proc.hex_to_rgb("0xff8040")
 print(f"0xff8040 -> RGB({r}, {g}, {b})")  # 输出: RGB(255, 128, 64)
 
-# 分析颜色
+## 分析颜色
 analysis = color_proc.analyze_color(0xFF0000)
 print("红色分析结果:", analysis)
 
-# 生成调色板
+## 生成调色板
 palette = color_proc.generate_color_palette(0xFF8040, 5)
-print("\n调色板:")
+print("\n 调色板:")
 for i, color in enumerate(palette):
     print(f"  {i+1}: {color['css']} RGB{color['rgb']}")
 
-# 混合颜色
+## 混合颜色
 blended = color_proc.blend_colors(0xFF0000, 0x0000FF, 0.5)
-print(f"\n红色和蓝色混合: {blended}")
+print(f"\n 红色和蓝色混合: {blended}")
 ```
 
 #### 内存和地址处理
@@ -343,7 +343,7 @@ class MemoryAddressAnalyzer:
                 'hex_address': hex(addr)
             })
         
-        # 按地址排序
+#        # 按地址排序
         addresses.sort(key=lambda x: x['address'])
         
         print("对象地址比较 (按地址排序):")
@@ -354,9 +354,9 @@ class MemoryAddressAnalyzer:
             print(f"{addr_info['index']:<4} {addr_info['object']:<25} "
                   f"{addr_info['address']:<15} {addr_info['hex_address']:<15}")
         
-        # 计算地址间距
+#        # 计算地址间距
         if len(addresses) > 1:
-            print("\n地址间距分析:")
+            print("\n 地址间距分析:")
             for i in range(1, len(addresses)):
                 diff = addresses[i]['address'] - addresses[i-1]['address']
                 print(f"  对象{addresses[i-1]['index']} -> 对象{addresses[i]['index']}: "
@@ -365,7 +365,7 @@ class MemoryAddressAnalyzer:
     @staticmethod
     def memory_layout_analysis():
         """内存布局分析"""
-        # 创建不同类型的对象
+#        # 创建不同类型的对象
         objects = {
             'small_int': 42,
             'large_int': 2**100,
@@ -386,33 +386,33 @@ class MemoryAddressAnalyzer:
             obj_str = str(obj)[:18] + '...' if len(str(obj)) > 18 else str(obj)
             print(f"{name:<15} {obj_str:<20} {addr:<15} {hex(addr):<15}")
         
-        # 分析地址范围
+#        # 分析地址范围
         addresses = [id(obj) for obj in objects.values()]
         min_addr = min(addresses)
         max_addr = max(addresses)
         
-        print(f"\n地址范围分析:")
+        print(f"\n 地址范围分析:")
         print(f"  最小地址: {hex(min_addr)}")
         print(f"  最大地址: {hex(max_addr)}")
         print(f"  地址跨度: {hex(max_addr - min_addr)} ({max_addr - min_addr} bytes)")
-        print(f"  系统位数: {'64位' if max_addr > 0xFFFFFFFF else '32位'}")
+        print(f"  系统位数: {'64 位' if max_addr > 0xFFFFFFFF else '32 位'}")
 
-# 使用示例
+## 使用示例
 analyzer = MemoryAddressAnalyzer()
 
-# 分析单个对象地址
+## 分析单个对象地址
 test_obj = [1, 2, 3, 4, 5]
 analysis = analyzer.analyze_object_address(test_obj)
 print("对象地址分析:")
 for key, value in analysis.items():
     print(f"  {key}: {value}")
 
-# 比较多个对象地址
+## 比较多个对象地址
 test_objects = [42, "hello", [1, 2, 3], {'a': 1}, lambda x: x]
 print("\n")
 analyzer.compare_addresses(test_objects)
 
-# 内存布局分析
+## 内存布局分析
 print("\n")
 analyzer.memory_layout_analysis()
 ```
@@ -424,7 +424,7 @@ import hashlib
 import zlib
 
 class HashHexProcessor:
-    """哈希和校验和处理器（十六进制输出）"""
+    """哈希和校验和处理器(十六进制输出)"""
     
     @staticmethod
     def calculate_hashes(data, encoding='utf-8'):
@@ -460,7 +460,7 @@ class HashHexProcessor:
         if isinstance(data, str):
             data = data.encode('utf-8')
         
-        checksum = sum(data) & 0xFFFF  # 16位校验和
+        checksum = sum(data) & 0xFFFF  # 16 位校验和
         return hex(checksum)
     
     @staticmethod
@@ -478,7 +478,7 @@ class HashHexProcessor:
             for hash_type in hash_analysis:
                 hash_value = hashes[hash_type]
                 
-                # 分析哈希值的十六进制特征
+#                # 分析哈希值的十六进制特征
                 first_char = hash_value[0]
                 last_char = hash_value[-1]
                 char_count = len(set(hash_value))
@@ -508,22 +508,22 @@ class HashHexProcessor:
         }
         
         for hex_str in hex_strings:
-            # 去除可能的前缀
+#            # 去除可能的前缀
             clean_hex = hex_str.replace('0x', '').lower()
             
-            # 开头字符统计
+#            # 开头字符统计
             first_char = clean_hex[0]
             if first_char not in patterns['starts_with']:
                 patterns['starts_with'][first_char] = 0
             patterns['starts_with'][first_char] += 1
             
-            # 结尾字符统计
+#            # 结尾字符统计
             last_char = clean_hex[-1]
             if last_char not in patterns['ends_with']:
                 patterns['ends_with'][last_char] = 0
             patterns['ends_with'][last_char] += 1
             
-            # 字符类型分析
+#            # 字符类型分析
             if clean_hex.isdigit():
                 patterns['contains_only_digits'] += 1
             elif clean_hex.isalpha():
@@ -531,37 +531,37 @@ class HashHexProcessor:
             else:
                 patterns['mixed'] += 1
             
-            # 回文检查
+#            # 回文检查
             if clean_hex == clean_hex[::-1] and len(clean_hex) > 1:
                 patterns['palindromes'].append(hex_str)
             
-            # 重复字符检查
+#            # 重复字符检查
             if len(set(clean_hex)) == 1 and len(clean_hex) > 1:
                 patterns['repeated_chars'].append(hex_str)
         
         return patterns
 
-# 使用示例
+## 使用示例
 hash_proc = HashHexProcessor()
 
-# 计算哈希值
+## 计算哈希值
 test_data = "Hello, World!"
 hashes = hash_proc.calculate_hashes(test_data)
 print("哈希值计算结果:")
 for hash_type, hash_value in hashes.items():
     print(f"  {hash_type.upper()}: {hash_value}")
 
-# 计算校验和
+## 计算校验和
 checksums = hash_proc.calculate_checksums(test_data)
-print("\n校验和计算结果:")
+print("\n 校验和计算结果:")
 for checksum_type, checksum_value in checksums.items():
     print(f"  {checksum_type.upper()}: {checksum_value}")
 
-# 简单校验和
+## 简单校验和
 simple_check = hash_proc.simple_checksum(test_data)
-print(f"\n简单校验和: {simple_check}")
+print(f"\n 简单校验和: {simple_check}")
 
-# 分析多个文本的哈希分布
+## 分析多个文本的哈希分布
 test_texts = ["hello", "world", "python", "programming", "hexadecimal"]
 hash_dist = hash_proc.analyze_hash_distribution(test_texts)
 print("\nMD5 哈希分布分析:")
@@ -569,10 +569,10 @@ for hash_val, info in list(hash_dist['md5'].items())[:3]:
     print(f"  文本: '{info['text']}' -> {hash_val[:16]}...")
     print(f"    首字符: {info['first_char']}, 尾字符: {info['last_char']}, 唯一字符数: {info['unique_chars']}")
 
-# 十六进制模式分析
+## 十六进制模式分析
 hex_samples = ['0xff00ff', '0x123456', '0xaaaaaa', '0x121212', '0xabccba']
 patterns = hash_proc.hex_pattern_analysis(hex_samples)
-print("\n十六进制模式分析:")
+print("\n 十六进制模式分析:")
 print(f"  开头字符分布: {patterns['starts_with']}")
 print(f"  回文数: {patterns['palindromes']}")
 print(f"  重复字符: {patterns['repeated_chars']}")
@@ -590,9 +590,9 @@ class SafeHexConverter:
     def safe_hex(value):
         """安全的十六进制转换"""
         try:
-            # 检查是否为整数类型
+#            # 检查是否为整数类型
             if not isinstance(value, int):
-                # 尝试转换为整数
+#                # 尝试转换为整数
                 if isinstance(value, (float, str)):
                     value = int(value)
                 else:
@@ -611,18 +611,18 @@ class SafeHexConverter:
         if not isinstance(hex_str, str):
             return False, "输入必须是字符串"
         
-        # 去除可能的前缀
+#        # 去除可能的前缀
         original = hex_str
         if hex_str.startswith('0x') or hex_str.startswith('0X'):
             hex_str = hex_str[2:]
         elif hex_str.startswith('#'):
             hex_str = hex_str[1:]
         
-        # 检查是否为空
+#        # 检查是否为空
         if not hex_str:
             return False, "去除前缀后为空字符串"
         
-        # 检查是否只包含十六进制字符
+#        # 检查是否只包含十六进制字符
         valid_chars = set('0123456789abcdefABCDEF')
         if not all(c in valid_chars for c in hex_str):
             invalid_chars = set(hex_str) - valid_chars
@@ -640,14 +640,14 @@ class SafeHexConverter:
             hex_val = hex(value)
             digit_count = len(hex_val) - 2 if value >= 0 else len(hex_val) - 3
             
-            # 检查位数限制
+#            # 检查位数限制
             if max_digits and digit_count > max_digits:
                 return {
                     'success': False,
-                    'error': f"超过最大位数限制 {max_digits}，实际 {digit_count} 位"
+                    'error': f"超过最大位数限制 {max_digits},实际 {digit_count} 位"
                 }
             
-            # 处理大小写要求
+#            # 处理大小写要求
             if require_uppercase:
                 hex_val = hex_val.upper()
             
@@ -701,31 +701,31 @@ class SafeHexConverter:
         
         return results
 
-# 使用示例
+## 使用示例
 converter = SafeHexConverter()
 
-# 安全转换
+## 安全转换
 print(converter.safe_hex(255))      # 0xff
 print(converter.safe_hex("255"))    # 0xff
 print(converter.safe_hex(3.14))     # 0x3
 print(converter.safe_hex([1, 2]))   # 类型错误: 无法将 list 转换为十六进制
 
-# 验证十六进制字符串
+## 验证十六进制字符串
 valid, msg = converter.validate_hex_string("0xff")
 print(f"0xff 验证结果: {valid}, {msg}")
 
 valid, msg = converter.validate_hex_string("xyz")
 print(f"xyz 验证结果: {valid}, {msg}")
 
-# 带验证的转换
+## 带验证的转换
 result = converter.convert_with_validation(255, max_digits=2, require_uppercase=True)
 print(result)
-# {'success': True, 'hex': '0XFF', 'digit_count': 2, 'value': 255, 'byte_size': 1}
+## {'success': True, 'hex': '0XFF', 'digit_count': 2, 'value': 255, 'byte_size': 1}
 
-# 批量转换
+## 批量转换
 test_values = [255, "128", 3.14, [1, 2], None, 1024]
 batch_result = converter.batch_convert_safe(test_values)
-print("\n批量转换结果:")
+print("\n 批量转换结果:")
 print(f"成功: {batch_result['summary']['success_count']} 个")
 print(f"失败: {batch_result['summary']['error_count']} 个")
 for item in batch_result['successful']:
@@ -776,9 +776,9 @@ class HexPerformance:
         for method, duration in sorted_results:
             print(f"  {method:<12}: {duration:.6f} 秒")
         
-        # 计算相对性能
+#        # 计算相对性能
         fastest_time = sorted_results[0][1]
-        print("\n相对性能 (以最快为基准):")
+        print("\n 相对性能 (以最快为基准):")
         for method, duration in sorted_results:
             ratio = duration / fastest_time
             print(f"  {method:<12}: {ratio:.2f}x")
@@ -793,7 +793,7 @@ class HexPerformance:
             for num in nums:
                 yield hex(num)
         
-        # 分批处理避免内存溢出
+#        # 分批处理避免内存溢出
         batch_size = 5000
         processed_count = 0
         hex_lengths = {}
@@ -802,11 +802,11 @@ class HexPerformance:
             batch = large_numbers[i:i + batch_size]
             hex_gen = hex_generator(batch)
             
-            # 处理当前批次
+#            # 处理当前批次
             for hex_val in hex_gen:
                 processed_count += 1
                 
-                # 统计十六进制长度分布
+#                # 统计十六进制长度分布
                 length = len(hex_val) - 2  # 去除 '0x'
                 if length not in hex_lengths:
                     hex_lengths[length] = 0
@@ -823,12 +823,12 @@ class HexPerformance:
     @staticmethod
     def optimize_hex_formatting(numbers, target_width=8):
         """优化的十六进制格式化"""
-        # 预计算格式字符串
+#        # 预计算格式字符串
         format_str = f'0{target_width}x'
         
         start_time = time.time()
         
-        # 使用列表推导式批量处理
+#        # 使用列表推导式批量处理
         formatted = [f'0x{num:{format_str}}' for num in numbers]
         
         end_time = time.time()
@@ -837,27 +837,27 @@ class HexPerformance:
         
         return formatted
 
-# 性能测试
+## 性能测试
 perf = HexPerformance()
 
-# 生成测试数据
+## 生成测试数据
 test_numbers = list(range(1, 10001))
 
-# 性能基准测试
+## 性能基准测试
 print("性能基准测试:")
 perf_results = perf.performance_benchmark(test_numbers[:1000])
 
-# 内存效率测试
-print("\n内存效率测试:")
+## 内存效率测试
+print("\n 内存效率测试:")
 large_data = list(range(1, 100001))
 mem_result = perf.memory_efficient_hex_processing(large_data)
 print(f"处理结果: {mem_result['processed_count']} 个数字")
 print("长度分布:", dict(list(mem_result['length_distribution'].items())[:5]))
 
-# 格式化优化测试
-print("\n格式化优化测试:")
+## 格式化优化测试
+print("\n 格式化优化测试:")
 formatted_hex = perf.optimize_hex_formatting(test_numbers[:5000])
-print(f"前5个结果: {formatted_hex[:5]}")
+print(f"前 5 个结果: {formatted_hex[:5]}")
 ```
 
 ## 相关函数和模块
@@ -872,7 +872,7 @@ print(f"前5个结果: {formatted_hex[:5]}")
 - `hashlib` - 哈希算法
 - `zlib` - 压缩和校验和
 - `struct` - 二进制数据处理
-- `binascii` - 二进制和ASCII转换
+- `binascii` - 二进制和 ASCII 转换
 
 ### 第三方库
 - `numpy` - 数值计算（支持十六进制操作）

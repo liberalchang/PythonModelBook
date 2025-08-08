@@ -4,13 +4,13 @@ title: 魔术方法
 permalink: /docs/basics/magic-methods/
 category: basics
 tags: [Python, 面向对象, 魔术方法, 特殊方法]
-author: Python学习指南
+author: Python 学习指南
 date: 2024-01-01
 ---
 
-# Python魔术方法详解
+# Python 魔术方法详解
 
-魔术方法（Magic Methods），也称为特殊方法（Special Methods）或双下划线方法（Dunder Methods），是Python中以双下划线开头和结尾的特殊方法。这些方法定义了对象在特定操作下的行为，是Python面向对象编程的核心机制之一。
+魔术方法（Magic Methods），也称为特殊方法（Special Methods）或双下划线方法（Dunder Methods），是 Python 中以双下划线开头和结尾的特殊方法。这些方法定义了对象在特定操作下的行为，是 Python 面向对象编程的核心机制之一。
 
 ## 📚 学习目标
 
@@ -26,7 +26,7 @@ date: 2024-01-01
 
 ### 什么是魔术方法
 
-魔术方法是Python中以双下划线`__`包裹的特殊方法，它们定义了对象在特定操作下的行为。当我们对对象执行某些操作时，Python会自动调用相应的魔术方法。
+魔术方法是 Python 中以双下划线`__`包裹的特殊方法，它们定义了对象在特定操作下的行为。当我们对对象执行某些操作时，Python 会自动调用相应的魔术方法。
 
 ```python
 class Point:
@@ -40,13 +40,13 @@ class Point:
     def __add__(self, other):
         return Point(self.x + other.x, self.y + other.y)
 
-# 创建对象时自动调用 __init__
+## 创建对象时自动调用 __init__
 p1 = Point(1, 2)
 
-# 打印对象时自动调用 __str__
+## 打印对象时自动调用 __str__
 print(p1)  # 输出: Point(1, 2)
 
-# 对象相加时自动调用 __add__
+## 对象相加时自动调用 __add__
 p2 = Point(3, 4)
 p3 = p1 + p2  # 自动调用 p1.__add__(p2)
 print(p3)  # 输出: Point(4, 6)
@@ -62,18 +62,18 @@ print(p3)  # 输出: Point(4, 6)
 class Person:
     def __new__(cls, name):
         print(f"创建 {name} 的实例")
-        # 必须返回实例对象
+#        # 必须返回实例对象
         return super().__new__(cls)
     
     def __init__(self, name):
         print(f"初始化 {name}")
         self.name = name
 
-# 创建对象
+## 创建对象
 p = Person("张三")
-# 输出:
-# 创建 张三 的实例
-# 初始化 张三
+## 输出:
+## 创建 张三 的实例
+## 初始化 张三
 ```
 
 ### `__init__` - 对象初始化
@@ -89,7 +89,7 @@ class Student:
         self.grade = grade
         print(f"学生 {name} 初始化完成")
 
-# 创建学生对象
+## 创建学生对象
 student = Student("李四", 18, "高三")
 ```
 
@@ -109,9 +109,9 @@ class FileManager:
             self.file.close()
             print(f"关闭文件: {self.filename}")
 
-# 使用示例
+## 使用示例
 fm = FileManager("test.txt")
-del fm  # 手动删除，触发 __del__
+del fm  # 手动删除,触发 __del__
 ```
 
 ## 🎭 对象表示
@@ -130,8 +130,8 @@ class Book:
     def __str__(self):
         return f"《{self.title}》 - {self.author} (¥{self.price})"
 
-book = Book("Python编程", "张三", 89.9)
-print(book)  # 输出: 《Python编程》 - 张三 (¥89.9)
+book = Book("Python 编程", "张三", 89.9)
+print(book)  # 输出: 《Python 编程》 - 张三 (¥89.9)
 ```
 
 ### `__repr__` - 开发者友好的字符串表示
@@ -184,7 +184,7 @@ class Vector:
         """标量除法"""
         return Vector(self.x / scalar, self.y / scalar)
 
-# 使用示例
+## 使用示例
 v1 = Vector(3, 4)
 v2 = Vector(1, 2)
 
@@ -227,7 +227,7 @@ class Student:
         """大于等于比较"""
         return self.score >= other.score
 
-# 使用示例
+## 使用示例
 s1 = Student("张三", 85)
 s2 = Student("李四", 92)
 
@@ -235,7 +235,7 @@ print(s1 < s2)   # True
 print(s1 == s2)  # False
 print(s2 > s1)   # True
 
-# 可以直接排序
+## 可以直接排序
 students = [s1, s2, Student("王五", 78)]
 students.sort()
 for student in students:
@@ -261,11 +261,11 @@ class Playlist:
         return f"播放列表({len(self)}首歌曲)"
 
 playlist = Playlist()
-playlist.add_song("歌曲1")
-playlist.add_song("歌曲2")
+playlist.add_song("歌曲 1")
+playlist.add_song("歌曲 2")
 
 print(len(playlist))  # 输出: 2
-print(playlist)       # 输出: 播放列表(2首歌曲)
+print(playlist)       # 输出: 播放列表(2 首歌曲)
 ```
 
 ### `__getitem__` 和 `__setitem__` - 索引访问
@@ -290,7 +290,7 @@ class Matrix:
     def __str__(self):
         return '\n'.join([' '.join(map(str, row)) for row in self.data])
 
-# 使用示例
+## 使用示例
 matrix = Matrix(3, 3)
 matrix[0, 0] = 1
 matrix[1, 1] = 2
@@ -298,10 +298,10 @@ matrix[2, 2] = 3
 
 print(matrix[0, 0])  # 输出: 1
 print(matrix)
-# 输出:
-# 1 0 0
-# 0 2 0
-# 0 0 3
+## 输出:
+## 1 0 0
+## 0 2 0
+## 0 0 3
 ```
 
 ## 🎯 其他重要魔术方法
@@ -316,11 +316,11 @@ class Multiplier:
     def __call__(self, value):
         return value * self.factor
 
-# 创建乘法器
+## 创建乘法器
 double = Multiplier(2)
 triple = Multiplier(3)
 
-# 像函数一样调用对象
+## 像函数一样调用对象
 print(double(5))  # 输出: 10
 print(triple(4))  # 输出: 12
 ```
@@ -333,21 +333,21 @@ class BankAccount:
         self.balance = balance
     
     def __bool__(self):
-        """账户有余额时返回True"""
+        """账户有余额时返回 True"""
         return self.balance > 0
     
     def __str__(self):
         return f"账户余额: ¥{self.balance}"
 
-# 使用示例
+## 使用示例
 account1 = BankAccount(100)
 account2 = BankAccount(0)
 
 if account1:
-    print("账户1有余额")
+    print("账户 1 有余额")
 
 if not account2:
-    print("账户2没有余额")
+    print("账户 2 没有余额")
 ```
 
 ### `__hash__` - 哈希值计算
@@ -369,23 +369,23 @@ class Person:
     def __str__(self):
         return f"{self.name}({self.age}岁)"
 
-# 使用示例
+## 使用示例
 p1 = Person("张三", 25)
 p2 = Person("张三", 25)
 p3 = Person("李四", 30)
 
-# 可以作为字典键或集合元素
-people_set = {p1, p2, p3}  # p1和p2被认为是同一个人
+## 可以作为字典键或集合元素
+people_set = {p1, p2, p3}  # p1 和 p2 被认为是同一个人
 print(f"集合中有 {len(people_set)} 个不同的人")  # 输出: 2
 ```
 
 ## 🎨 实际应用案例
 
-### 案例1：自定义数字类
+### 案例 1：自定义数字类
 
 ```python
 class Money:
-    """货币类，支持各种运算"""
+    """货币类,支持各种运算"""
     
     def __init__(self, amount, currency="CNY"):
         self.amount = amount
@@ -432,22 +432,22 @@ class Money:
     def __bool__(self):
         return self.amount > 0
 
-# 使用示例
+## 使用示例
 price1 = Money(99.99)
 price2 = Money(50.00)
 
-print(f"商品1: {price1}")  # 输出: 商品1: ¥99.99
-print(f"商品2: {price2}")  # 输出: 商品2: ¥50.00
+print(f"商品 1: {price1}")  # 输出: 商品 1: ¥99.99
+print(f"商品 2: {price2}")  # 输出: 商品 2: ¥50.00
 print(f"总价: {price1 + price2}")  # 输出: 总价: ¥149.99
 print(f"差价: {price1 - price2}")  # 输出: 差价: ¥49.99
-print(f"打8折: {price1 * 0.8}")  # 输出: 打8折: ¥79.99
+print(f"打 8 折: {price1 * 0.8}")  # 输出: 打 8 折: ¥79.99
 ```
 
-### 案例2：智能列表类
+### 案例 2：智能列表类
 
 ```python
 class SmartList:
-    """智能列表，提供额外功能"""
+    """智能列表,提供额外功能"""
     
     def __init__(self, items=None):
         self.items = list(items) if items else []
@@ -497,15 +497,15 @@ class SmartList:
         """获取反转后的列表"""
         return SmartList(self.items[::-1])
 
-# 使用示例
+## 使用示例
 smart_list = SmartList([1, 2, 3, 2, 4, 3])
 print(f"原列表: {smart_list}")
 print(f"长度: {len(smart_list)}")
-print(f"包含2: {2 in smart_list}")
+print(f"包含 2: {2 in smart_list}")
 print(f"去重: {smart_list.unique}")
 print(f"反转: {smart_list.reversed}")
 
-# 列表操作
+## 列表操作
 smart_list += [5, 6]
 print(f"添加后: {smart_list}")
 ```
@@ -526,14 +526,14 @@ class Point:
         return False
     
     def __hash__(self):
-        # 如果实现了__eq__，通常也要实现__hash__
+#        # 如果实现了__eq__,通常也要实现__hash__
         return hash((self.x, self.y))
     
     def __str__(self):
         return f"Point({self.x}, {self.y})"
     
     def __repr__(self):
-        # __repr__应该返回可以重新创建对象的字符串
+#        # __repr__应该返回可以重新创建对象的字符串
         return f"Point({self.x}, {self.y})"
 ```
 
@@ -548,10 +548,10 @@ class SafeList:
         try:
             return self.items[index]
         except IndexError:
-            return None  # 返回None而不是抛出异常
+            return None  # 返回 None 而不是抛出异常
     
     def __setitem__(self, index, value):
-        # 自动扩展列表
+#        # 自动扩展列表
         while len(self.items) <= index:
             self.items.append(None)
         self.items[index] = value
@@ -579,11 +579,11 @@ class EfficientContainer:
 
 ## 🔗 扩展阅读
 
-- [Python官方文档 - 特殊方法](https://docs.python.org/3/reference/datamodel.html#special-method-names)
-- [Python魔术方法完整列表](https://docs.python.org/3/reference/datamodel.html)
+- [Python 官方文档 - 特殊方法](https://docs.python.org/3/reference/datamodel.html#special-method-names)
+- [Python 魔术方法完整列表](https://docs.python.org/3/reference/datamodel.html)
 - [运算符重载最佳实践](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types)
 - [容器类型的实现](https://docs.python.org/3/reference/datamodel.html#emulating-container-types)
 
 ---
 
-魔术方法是Python面向对象编程的强大工具，通过合理使用这些方法，可以让自定义类的行为更加自然和直观。记住要保持方法之间的一致性，并考虑性能和错误处理。
+魔术方法是 Python 面向对象编程的强大工具，通过合理使用这些方法，可以让自定义类的行为更加自然和直观。记住要保持方法之间的一致性，并考虑性能和错误处理。

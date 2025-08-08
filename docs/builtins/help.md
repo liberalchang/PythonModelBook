@@ -5,30 +5,30 @@ permalink: /docs/builtins/help/
 category: builtins
 tags: [帮助系统, 文档, 内省, 交互式帮助]
 description: 显示对象的帮助信息和文档
-author: Python文档工程师
+author: Python 文档工程师
 date: 2024-01-15
 updated: 2024-01-15
 version: 1.0
-difficulty: 初级
+difficulty: "初级"
 ---
 
 # help() - 帮助信息函数
 
 ## 📝 概述
 
-`help()` 是Python中的内置函数，用于显示对象的帮助信息和文档。它是Python交互式帮助系统的入口点，可以显示模块、函数、类、方法等的文档字符串和使用说明。当不带参数调用时，`help()` 会启动交互式帮助系统。这个函数对于学习Python和探索未知的模块、函数非常有用。
+`help()` 是 Python 中的内置函数，用于显示对象的帮助信息和文档。它是 Python 交互式帮助系统的入口点，可以显示模块、函数、类、方法等的文档字符串和使用说明。当不带参数调用时，`help()` 会启动交互式帮助系统。这个函数对于学习 Python 和探索未知的模块、函数非常有用。
 
 ## 🎯 学习目标
 
-- 掌握help()函数的基本用法和特性
+- 掌握 help()函数的基本用法和特性
 - 学会查看不同类型对象的帮助信息
-- 理解Python文档字符串的重要性
+- 理解 Python 文档字符串的重要性
 - 掌握交互式帮助系统的使用
 - 学会编写良好的文档字符串
 
 ## 📋 前置知识
 
-- Python基本语法
+- Python 基本语法
 - 函数和类的基本概念
 - 模块和包的使用
 - 文档字符串（docstring）的概念
@@ -37,12 +37,12 @@ difficulty: 初级
 
 ### 基本概念
 
-`help()` 函数是Python内置的帮助系统，它可以：
+`help()` 函数是 Python 内置的帮助系统，它可以：
 
 1. **显示对象文档**: 显示函数、类、模块的文档字符串
 2. **交互式帮助**: 启动交互式帮助浏览器
 3. **内省功能**: 提供对象的详细信息
-4. **学习工具**: 帮助开发者了解未知的API
+4. **学习工具**: 帮助开发者了解未知的 API
 
 ### 语法格式
 
@@ -66,10 +66,10 @@ help([object])
 ### 基本用法
 
 ```python
-# 基本用法示例
+## 基本用法示例
 print("help()函数基本用法:")
 
-# 1. 查看内置函数的帮助
+## 1. 查看内置函数的帮助
 print("\n1. 查看内置函数帮助:")
 print("help(len) 的输出:")
 help(len)
@@ -82,7 +82,7 @@ print("\n" + "="*50)
 print("help(range) 的输出:")
 help(range)
 
-# 2. 查看内置类型的帮助
+## 2. 查看内置类型的帮助
 print("\n2. 查看内置类型帮助:")
 print("help(str) 的输出:")
 help(str)
@@ -95,7 +95,7 @@ print("\n" + "="*50)
 print("help(dict) 的输出:")
 help(dict)
 
-# 3. 查看模块的帮助
+## 3. 查看模块的帮助
 print("\n3. 查看模块帮助:")
 import math
 print("help(math) 的输出:")
@@ -104,9 +104,9 @@ help(math)
 print("\n" + "="*50)
 import os
 print("help(os) 的输出 (部分):")
-help(os.path)  # 查看os.path子模块
+help(os.path)  # 查看 os.path 子模块
 
-# 4. 查看特定方法的帮助
+## 4. 查看特定方法的帮助
 print("\n4. 查看特定方法帮助:")
 print("help(str.split) 的输出:")
 help(str.split)
@@ -123,19 +123,19 @@ help(dict.get)
 ### 自定义函数和类的帮助
 
 ```python
-# 自定义函数和类的帮助示例
-print("\n自定义函数和类的帮助示例:")
+## 自定义函数和类的帮助示例
+print("\n 自定义函数和类的帮助示例:")
 
-# 1. 带文档字符串的函数
+## 1. 带文档字符串的函数
 def calculate_area(length, width):
     """
     计算矩形面积的函数。
     
-    这个函数接受长度和宽度两个参数，返回矩形的面积。
+    这个函数接受长度和宽度两个参数,返回矩形的面积。
     
     参数:
-        length (float): 矩形的长度，必须为正数
-        width (float): 矩形的宽度，必须为正数
+        length (float): 矩形的长度,必须为正数
+        width (float): 矩形的宽度,必须为正数
     
     返回:
         float: 矩形的面积
@@ -160,7 +160,7 @@ def calculate_area(length, width):
 print("\n1. 带文档字符串的函数帮助:")
 help(calculate_area)
 
-# 2. 没有文档字符串的函数
+## 2. 没有文档字符串的函数
 def simple_add(a, b):
     return a + b
 
@@ -168,17 +168,17 @@ print("\n" + "="*50)
 print("2. 没有文档字符串的函数帮助:")
 help(simple_add)
 
-# 3. 带文档字符串的类
+## 3. 带文档字符串的类
 class Calculator:
     """
     一个简单的计算器类。
     
-    这个类提供基本的数学运算功能，包括加法、减法、乘法和除法。
+    这个类提供基本的数学运算功能,包括加法、减法、乘法和除法。
     所有的运算都会记录在历史记录中。
     
     属性:
         history (list): 存储运算历史的列表
-        precision (int): 计算结果的精度，默认为2位小数
+        precision (int): 计算结果的精度,默认为 2 位小数
     
     示例:
         >>> calc = Calculator()
@@ -194,7 +194,7 @@ class Calculator:
         初始化计算器。
         
         参数:
-            precision (int): 结果精度，默认为2位小数
+            precision (int): 结果精度,默认为 2 位小数
         """
         self.history = []
         self.precision = precision
@@ -256,7 +256,7 @@ class Calculator:
             float: 除法结果
         
         异常:
-            ZeroDivisionError: 当除数为0时抛出
+            ZeroDivisionError: 当除数为 0 时抛出
         """
         if b == 0:
             raise ZeroDivisionError("除数不能为零")
@@ -293,13 +293,13 @@ print("5. 实例方法的帮助:")
 calc = Calculator()
 help(calc.multiply)
 
-# 4. 复杂类的示例
+## 4. 复杂类的示例
 class DataProcessor:
     """
     数据处理器类。
     
-    这个类提供了多种数据处理功能，包括数据清洗、转换和分析。
-    支持多种数据格式，并提供灵活的配置选项。
+    这个类提供了多种数据处理功能,包括数据清洗、转换和分析。
+    支持多种数据格式,并提供灵活的配置选项。
     
     类属性:
         SUPPORTED_FORMATS (list): 支持的数据格式列表
@@ -319,7 +319,7 @@ class DataProcessor:
         初始化数据处理器。
         
         参数:
-            config (dict, optional): 配置字典，包含处理选项
+            config (dict, optional): 配置字典,包含处理选项
         """
         self.data = []
         self.config = config or {}
@@ -332,7 +332,7 @@ class DataProcessor:
         
         参数:
             filename (str): 文件路径
-            file_format (str): 文件格式，默认为'auto'自动检测
+            file_format (str): 文件格式,默认为'auto'自动检测
         
         返回:
             DataProcessor: 新的数据处理器实例
@@ -341,7 +341,7 @@ class DataProcessor:
             FileNotFoundError: 文件不存在时抛出
             ValueError: 不支持的文件格式时抛出
         """
-        # 这里只是示例，实际实现会读取文件
+#        # 这里只是示例,实际实现会读取文件
         instance = cls()
         instance.data = [f"从{filename}加载的数据"]
         return instance
@@ -355,7 +355,7 @@ class DataProcessor:
             file_format (str): 要验证的文件格式
         
         返回:
-            bool: 如果格式支持返回True，否则返回False
+            bool: 如果格式支持返回 True,否则返回 False
         """
         return file_format.lower() in DataProcessor.SUPPORTED_FORMATS
     
@@ -372,14 +372,14 @@ class DataProcessor:
     @data_count.setter
     def data_count(self, value):
         """
-        设置数据项数量（仅用于演示，实际中不建议这样做）。
+        设置数据项数量(仅用于演示,实际中不建议这样做)。
         
         参数:
             value (int): 新的数据项数量
         """
         if value < 0:
             raise ValueError("数据项数量不能为负数")
-        # 这里只是示例实现
+#        # 这里只是示例实现
         pass
 
 print("\n" + "="*50)
@@ -402,50 +402,50 @@ help(DataProcessor.data_count)
 ### 模块和包的帮助
 
 ```python
-# 模块和包的帮助示例
-print("\n模块和包的帮助示例:")
+## 模块和包的帮助示例
+print("\n 模块和包的帮助示例:")
 
-# 1. 标准库模块
+## 1. 标准库模块
 print("1. 标准库模块帮助:")
 
-# datetime模块
+## datetime 模块
 import datetime
-print("datetime模块帮助:")
+print("datetime 模块帮助:")
 help(datetime)
 
 print("\n" + "="*50)
-# json模块
+## json 模块
 import json
-print("json模块帮助:")
+print("json 模块帮助:")
 help(json)
 
 print("\n" + "="*50)
-# collections模块
+## collections 模块
 import collections
-print("collections模块帮助:")
+print("collections 模块帮助:")
 help(collections)
 
-# 2. 模块中的特定类和函数
+## 2. 模块中的特定类和函数
 print("\n2. 模块中的特定类和函数:")
 
-# datetime.datetime类
-print("datetime.datetime类帮助:")
+## datetime.datetime 类
+print("datetime.datetime 类帮助:")
 help(datetime.datetime)
 
 print("\n" + "="*50)
-# json.dumps函数
-print("json.dumps函数帮助:")
+## json.dumps 函数
+print("json.dumps 函数帮助:")
 help(json.dumps)
 
 print("\n" + "="*50)
-# collections.Counter类
-print("collections.Counter类帮助:")
+## collections.Counter 类
+print("collections.Counter 类帮助:")
 help(collections.Counter)
 
-# 3. 创建自定义模块示例
+## 3. 创建自定义模块示例
 print("\n3. 自定义模块示例:")
 
-# 模拟一个自定义模块
+## 模拟一个自定义模块
 class CustomModule:
     """
     自定义模块示例。
@@ -459,11 +459,11 @@ class CustomModule:
         - 数据验证工具
     
     版本: 1.0.0
-    作者: Python文档工程师
+    作者: Python 文档工程师
     """
     
     VERSION = "1.0.0"
-    AUTHOR = "Python文档工程师"
+    AUTHOR = "Python 文档工程师"
     
     @staticmethod
     def reverse_string(text):
@@ -491,7 +491,7 @@ class CustomModule:
             text (str): 要检查的字符串
         
         返回:
-            bool: 如果是回文返回True，否则返回False
+            bool: 如果是回文返回 True,否则返回 False
         
         示例:
             >>> CustomModule.is_palindrome("level")
@@ -511,11 +511,11 @@ class CustomModule:
             n (int): 要计算阶乘的非负整数
         
         返回:
-            int: n的阶乘
+            int: n 的阶乘
         
         异常:
-            ValueError: 当n为负数时抛出
-            TypeError: 当n不是整数时抛出
+            ValueError: 当 n 为负数时抛出
+            TypeError: 当 n 不是整数时抛出
         
         示例:
             >>> CustomModule.factorial(5)
@@ -539,15 +539,15 @@ print("\n" + "="*50)
 print("自定义模块方法帮助:")
 help(CustomModule.reverse_string)
 
-# 4. 包的帮助（模拟）
+## 4. 包的帮助(模拟)
 print("\n4. 包的帮助示例:")
 
-# 模拟包结构
+## 模拟包结构
 class PackageExample:
     """
     包示例。
     
-    这是一个模拟的包结构，展示了如何为包编写文档。
+    这是一个模拟的包结构,展示了如何为包编写文档。
     
     子模块:
         - utils: 实用工具模块
@@ -574,7 +574,7 @@ class PackageExample:
             
             参数:
                 num (float): 要格式化的数字
-                precision (int): 精度，默认为2
+                precision (int): 精度,默认为 2
             
             返回:
                 str: 格式化后的数字字符串
@@ -631,43 +631,43 @@ help(PackageExample.core.MainClass)
 ### 交互式帮助系统
 
 ```python
-# 交互式帮助系统示例
-print("\n交互式帮助系统示例:")
+## 交互式帮助系统示例
+print("\n 交互式帮助系统示例:")
 
-# 注意：在实际的交互式环境中，help()会启动交互式帮助
-# 这里我们演示如何模拟和理解交互式帮助的概念
+## 注意:在实际的交互式环境中,help()会启动交互式帮助
+## 这里我们演示如何模拟和理解交互式帮助的概念
 
 print("1. 交互式帮助系统概述:")
 print("""
-当你在Python交互式环境中输入 help() 时，会启动交互式帮助系统。
+当你在 Python 交互式环境中输入 help() 时,会启动交互式帮助系统。
 
-交互式帮助系统的特点：
+交互式帮助系统的特点:
 - 提供搜索功能
 - 支持主题浏览
 - 可以查看关键字帮助
 - 提供模块列表
 - 支持退出命令
 
-常用命令：
+常用命令:
 - help> modules        # 列出所有可用模块
-- help> keywords       # 列出Python关键字
+- help> keywords       # 列出 Python 关键字
 - help> symbols        # 列出符号
 - help> topics         # 列出帮助主题
 - help> quit           # 退出帮助系统
 """)
 
-# 2. 模拟交互式帮助功能
+## 2. 模拟交互式帮助功能
 class InteractiveHelpSimulator:
     """
     交互式帮助系统模拟器。
     
-    这个类模拟了Python交互式帮助系统的一些功能。
+    这个类模拟了 Python 交互式帮助系统的一些功能。
     """
     
     def __init__(self):
         self.topics = {
             'MODULES': '显示所有可用模块',
-            'KEYWORDS': '显示Python关键字',
+            'KEYWORDS': '显示 Python 关键字',
             'SYMBOLS': '显示特殊符号',
             'TOPICS': '显示帮助主题',
             'FUNCTIONS': '显示内置函数',
@@ -703,15 +703,15 @@ class InteractiveHelpSimulator:
         """
         显示可用的帮助主题。
         """
-        print("\n可用的帮助主题:")
+        print("\n 可用的帮助主题:")
         for topic, description in self.topics.items():
             print(f"  {topic:<12} - {description}")
     
     def show_keywords(self):
         """
-        显示Python关键字。
+        显示 Python 关键字。
         """
-        print("\nPython关键字:")
+        print("\nPython 关键字:")
         for i, keyword in enumerate(self.keywords):
             if i % 6 == 0:
                 print()
@@ -722,7 +722,7 @@ class InteractiveHelpSimulator:
         """
         显示特殊符号。
         """
-        print("\n特殊符号:")
+        print("\n 特殊符号:")
         for symbol, description in self.symbols.items():
             print(f"  {symbol:<4} - {description}")
     
@@ -730,10 +730,10 @@ class InteractiveHelpSimulator:
         """
         显示模块信息。
         """
-        print("\n常用模块信息:")
+        print("\n 常用模块信息:")
         import sys
         
-        # 显示一些常用模块
+#        # 显示一些常用模块
         common_modules = [
             'os', 'sys', 'math', 'random', 'datetime', 'json',
             'collections', 'itertools', 'functools', 're'
@@ -744,7 +744,7 @@ class InteractiveHelpSimulator:
                 module = __import__(module_name)
                 doc = getattr(module, '__doc__', '无文档')
                 if doc:
-                    # 只显示文档的第一行
+#                    # 只显示文档的第一行
                     first_line = doc.split('\n')[0].strip()
                     print(f"  {module_name:<12} - {first_line}")
                 else:
@@ -759,19 +759,19 @@ class InteractiveHelpSimulator:
         参数:
             query (str): 搜索查询
         """
-        print(f"\n搜索 '{query}' 的帮助信息:")
+        print(f"\n 搜索 '{query}' 的帮助信息:")
         
-        # 在关键字中搜索
+#        # 在关键字中搜索
         if query.lower() in [kw.lower() for kw in self.keywords]:
-            print(f"  '{query}' 是Python关键字")
+            print(f"  '{query}' 是 Python 关键字")
         
-        # 在符号中搜索
+#        # 在符号中搜索
         if query in self.symbols:
             print(f"  '{query}' - {self.symbols[query]}")
         
-        # 尝试获取对象的帮助
+#        # 尝试获取对象的帮助
         try:
-            # 这里简化处理，实际中会更复杂
+#            # 这里简化处理,实际中会更复杂
             if hasattr(__builtins__, query):
                 obj = getattr(__builtins__, query)
                 print(f"  '{query}' 是内置对象: {type(obj).__name__}")
@@ -783,72 +783,72 @@ class InteractiveHelpSimulator:
         
         print(f"  提示: 使用 help({query}) 获取详细信息")
 
-# 测试交互式帮助模拟器
+## 测试交互式帮助模拟器
 print("\n2. 交互式帮助模拟器演示:")
 help_sim = InteractiveHelpSimulator()
 
 print("显示帮助主题:")
 help_sim.show_topics()
 
-print("\n显示关键字:")
+print("\n 显示关键字:")
 help_sim.show_keywords()
 
-print("\n显示符号:")
+print("\n 显示符号:")
 help_sim.show_symbols()
 
-print("\n显示模块信息:")
+print("\n 显示模块信息:")
 help_sim.show_modules_info()
 
-print("\n搜索帮助:")
+print("\n 搜索帮助:")
 help_sim.search_help('print')
 help_sim.search_help('for')
 help_sim.search_help('+')
 
-# 3. 实际的help()使用技巧
+## 3. 实际的 help()使用技巧
 print("\n3. help()使用技巧:")
 
 print("""
-help()函数的高级使用技巧：
+help()函数的高级使用技巧:
 
-1. 查看对象类型：
+1. 查看对象类型:
    help(type(obj))  # 查看对象类型的帮助
 
-2. 查看模块的特定部分：
+2. 查看模块的特定部分:
    help(module.function)  # 查看模块中特定函数的帮助
 
-3. 在字符串上使用：
+3. 在字符串上使用:
    help('MODULES')  # 列出所有模块
    help('KEYWORDS') # 列出所有关键字
 
-4. 查看运算符：
+4. 查看运算符:
    help('OPERATORS')  # 查看运算符帮助
 
-5. 查看特殊方法：
+5. 查看特殊方法:
    help(obj.__method__)  # 查看特殊方法的帮助
 
-6. 使用pydoc模块：
+6. 使用 pydoc 模块:
    import pydoc
-   pydoc.help(obj)  # 等同于help(obj)
+   pydoc.help(obj)  # 等同于 help(obj)
 """)
 
-# 演示一些技巧
-print("\n实际演示:")
+## 演示一些技巧
+print("\n 实际演示:")
 
-# 查看字符串类型的帮助（简化输出）
-print("\n查看字符串类型:")
+## 查看字符串类型的帮助(简化输出)
+print("\n 查看字符串类型:")
 test_string = "hello"
 print(f"type(test_string): {type(test_string)}")
-print("help(type(test_string)) 会显示str类的完整帮助")
+print("help(type(test_string)) 会显示 str 类的完整帮助")
 
-# 查看列表的特定方法
-print("\n查看列表的append方法:")
+## 查看列表的特定方法
+print("\n 查看列表的 append 方法:")
 test_list = []
-print("help(test_list.append) 会显示append方法的帮助")
+print("help(test_list.append) 会显示 append 方法的帮助")
 
-# 使用字符串参数
-print("\n使用字符串参数:")
+## 使用字符串参数
+print("\n 使用字符串参数:")
 print("help('MODULES') 会列出所有可用模块")
-print("help('KEYWORDS') 会列出所有Python关键字")
+print("help('KEYWORDS') 会列出所有 Python 关键字")
 ```
 
 ### 高级应用：自定义帮助系统
@@ -858,12 +858,12 @@ import inspect
 import textwrap
 from typing import Any, Dict, List, Optional
 
-# 自定义帮助系统
+## 自定义帮助系统
 class CustomHelpSystem:
     """
     自定义帮助系统。
     
-    这个类扩展了Python内置的help()功能，提供更丰富的帮助信息。
+    这个类扩展了 Python 内置的 help()功能,提供更丰富的帮助信息。
     """
     
     def __init__(self):
@@ -891,25 +891,25 @@ class CustomHelpSystem:
         print(f"增强帮助信息: {self._get_object_name(obj)}")
         print(f"{'='*60}")
         
-        # 基本信息
+#        # 基本信息
         self._show_basic_info(obj)
         
-        # 文档字符串
+#        # 文档字符串
         self._show_documentation(obj)
         
-        # 签名信息
+#        # 签名信息
         self._show_signature(obj)
         
-        # 属性和方法
+#        # 属性和方法
         self._show_attributes_and_methods(obj)
         
-        # 继承信息
+#        # 继承信息
         self._show_inheritance_info(obj)
         
-        # 使用示例
+#        # 使用示例
         self._show_usage_examples(obj)
         
-        # 相关信息
+#        # 相关信息
         self._show_related_info(obj)
     
     def _get_object_name(self, obj):
@@ -946,17 +946,17 @@ class CustomHelpSystem:
         """
         print(f"\n📖 文档:")
         
-        # 检查自定义文档
+#        # 检查自定义文档
         custom_doc = self.custom_docs.get(id(obj))
         if custom_doc:
             print(f"  自定义文档:")
             print(textwrap.indent(custom_doc, "    "))
         
-        # 显示原始文档
+#        # 显示原始文档
         doc = getattr(obj, '__doc__', None)
         if doc:
             print(f"  原始文档:")
-            # 格式化文档字符串
+#            # 格式化文档字符串
             formatted_doc = textwrap.dedent(doc).strip()
             print(textwrap.indent(formatted_doc, "    "))
         else:
@@ -972,7 +972,7 @@ class CustomHelpSystem:
                 sig = inspect.signature(obj)
                 print(f"  {self._get_object_name(obj)}{sig}")
                 
-                # 显示参数详情
+#                # 显示参数详情
                 if sig.parameters:
                     print(f"\n  参数详情:")
                     for name, param in sig.parameters.items():
@@ -991,7 +991,7 @@ class CustomHelpSystem:
                         
                         print(param_info)
                 
-                # 显示返回类型
+#                # 显示返回类型
                 if sig.return_annotation != sig.empty:
                     print(f"\n  返回类型: {sig.return_annotation}")
                     
@@ -1004,10 +1004,10 @@ class CustomHelpSystem:
         """
         print(f"\n🔧 属性和方法:")
         
-        # 获取所有属性
+#        # 获取所有属性
         all_attrs = dir(obj)
         
-        # 分类属性
+#        # 分类属性
         public_attrs = []
         private_attrs = []
         special_attrs = []
@@ -1031,7 +1031,7 @@ class CustomHelpSystem:
             except:
                 continue
         
-        # 显示分类结果
+#        # 显示分类结果
         if public_attrs:
             print(f"  公共属性 ({len(public_attrs)}): {', '.join(public_attrs[:10])}{'...' if len(public_attrs) > 10 else ''}")
         
@@ -1054,18 +1054,18 @@ class CustomHelpSystem:
         if inspect.isclass(obj):
             print(f"\n🏗️ 继承信息:")
             
-            # 基类
+#            # 基类
             bases = obj.__bases__
             if bases:
                 print(f"  直接基类: {', '.join(base.__name__ for base in bases)}")
             
-            # MRO
+#            # MRO
             mro = obj.__mro__
             if len(mro) > 1:
                 mro_names = [cls.__name__ for cls in mro]
                 print(f"  方法解析顺序: {' -> '.join(mro_names)}")
             
-            # 子类（如果是内置类型，可能无法获取）
+#            # 子类(如果是内置类型,可能无法获取)
             try:
                 subclasses = obj.__subclasses__()
                 if subclasses:
@@ -1107,7 +1107,7 @@ class CustomHelpSystem:
         """
         print(f"\n🔗 相关信息:")
         
-        # 相关的内置函数
+#        # 相关的内置函数
         related_builtins = []
         if inspect.isclass(obj):
             related_builtins.extend(['isinstance', 'issubclass', 'type'])
@@ -1117,11 +1117,11 @@ class CustomHelpSystem:
         if related_builtins:
             print(f"  相关内置函数: {', '.join(related_builtins)}")
         
-        # 相关模块
+#        # 相关模块
         if hasattr(obj, '__module__') and obj.__module__:
             print(f"  所属模块: {obj.__module__}")
         
-        # 文档链接（示例）
+#        # 文档链接(示例)
         print(f"  在线文档: https://docs.python.org/3/library/")
         print(f"  更多帮助: help({self._get_object_name(obj)})")
     
@@ -1141,17 +1141,17 @@ class CustomHelpSystem:
         
         print(f"比较 {name1} 和 {name2}:")
         
-        # 类型比较
+#        # 类型比较
         type1 = type(obj1)
         type2 = type(obj2)
-        print(f"\n类型: {type1.__name__} vs {type2.__name__}")
+        print(f"\n 类型: {type1.__name__} vs {type2.__name__}")
         
         if type1 == type2:
             print("  ✅ 类型相同")
         else:
             print("  ❌ 类型不同")
         
-        # 属性比较
+#        # 属性比较
         attrs1 = set(dir(obj1))
         attrs2 = set(dir(obj2))
         
@@ -1159,7 +1159,7 @@ class CustomHelpSystem:
         unique_to_1 = attrs1 - attrs2
         unique_to_2 = attrs2 - attrs1
         
-        print(f"\n属性比较:")
+        print(f"\n 属性比较:")
         print(f"  共同属性: {len(common_attrs)}")
         print(f"  {name1}独有: {len(unique_to_1)}")
         print(f"  {name2}独有: {len(unique_to_2)}")
@@ -1170,9 +1170,9 @@ class CustomHelpSystem:
         if unique_to_2:
             print(f"  {name2}独有属性: {', '.join(list(unique_to_2)[:5])}{'...' if len(unique_to_2) > 5 else ''}")
         
-        # 继承关系
+#        # 继承关系
         if inspect.isclass(obj1) and inspect.isclass(obj2):
-            print(f"\n继承关系:")
+            print(f"\n 继承关系:")
             if issubclass(obj1, obj2):
                 print(f"  {name1} 是 {name2} 的子类")
             elif issubclass(obj2, obj1):
@@ -1180,12 +1180,12 @@ class CustomHelpSystem:
             else:
                 print(f"  无直接继承关系")
 
-# 测试自定义帮助系统
-print("\n高级应用：自定义帮助系统")
+## 测试自定义帮助系统
+print("\n 高级应用:自定义帮助系统")
 
 custom_help = CustomHelpSystem()
 
-# 创建测试对象
+## 创建测试对象
 class TestClass:
     """
     测试类。
@@ -1221,10 +1221,10 @@ class TestClass:
         """
         return f"[{self.name}]"
 
-# 注册自定义文档
+## 注册自定义文档
 custom_help.register_custom_doc(
     TestClass,
-    "这是为TestClass添加的自定义文档，提供了额外的使用说明和注意事项。"
+    "这是为 TestClass 添加的自定义文档,提供了额外的使用说明和注意事项。"
 )
 
 print("\n1. 增强帮助信息演示:")
@@ -1246,10 +1246,10 @@ custom_help.enhanced_help(test_instance)
 ### 文档字符串编写最佳实践
 
 ```python
-# 文档字符串编写最佳实践
-print("\n文档字符串编写最佳实践:")
+## 文档字符串编写最佳实践
+print("\n 文档字符串编写最佳实践:")
 
-# 1. 良好的文档字符串示例
+## 1. 良好的文档字符串示例
 print("1. 良好的文档字符串示例:")
 
 def good_docstring_example(data: list, threshold: float = 0.5, 
@@ -1257,20 +1257,20 @@ def good_docstring_example(data: list, threshold: float = 0.5,
     """
     处理数据并返回统计信息。
     
-    这个函数对输入的数值列表进行处理，计算各种统计指标，
+    这个函数对输入的数值列表进行处理,计算各种统计指标,
     并根据阈值进行分类。支持数据标准化选项。
     
     参数:
-        data (list): 包含数值的列表，不能为空
-        threshold (float, optional): 分类阈值，默认为0.5
-            - 必须在0.0到1.0之间
+        data (list): 包含数值的列表,不能为空
+        threshold (float, optional): 分类阈值,默认为 0.5
+            - 必须在 0.0 到 1.0 之间
             - 用于区分高值和低值
-        normalize (bool, optional): 是否标准化数据，默认为True
+        normalize (bool, optional): 是否标准化数据,默认为 True
             - True: 将数据标准化到[0,1]范围
             - False: 使用原始数据
     
     返回:
-        dict: 包含统计信息的字典，包含以下键:
+        dict: 包含统计信息的字典,包含以下键:
             - 'mean': 平均值 (float)
             - 'median': 中位数 (float)
             - 'std': 标准差 (float)
@@ -1279,8 +1279,8 @@ def good_docstring_example(data: list, threshold: float = 0.5,
             - 'normalized': 是否进行了标准化 (bool)
     
     异常:
-        ValueError: 当data为空或threshold不在有效范围时抛出
-        TypeError: 当data不是列表或包含非数值元素时抛出
+        ValueError: 当 data 为空或 threshold 不在有效范围时抛出
+        TypeError: 当 data 不是列表或包含非数值元素时抛出
     
     示例:
         >>> data = [1, 2, 3, 4, 5]
@@ -1293,12 +1293,12 @@ def good_docstring_example(data: list, threshold: float = 0.5,
         2
     
     注意:
-        - 输入数据会被复制，不会修改原始列表
-        - 标准化使用min-max方法
+        - 输入数据会被复制,不会修改原始列表
+        - 标准化使用 min-max 方法
         - 空值会被自动过滤
     
     另请参阅:
-        - numpy.mean(): NumPy的平均值计算
+        - numpy.mean(): NumPy 的平均值计算
         - statistics.median(): 标准库的中位数计算
         - sklearn.preprocessing.MinMaxScaler: 专业的数据标准化工具
     
@@ -1307,14 +1307,14 @@ def good_docstring_example(data: list, threshold: float = 0.5,
         - 1.1: 添加标准化功能
         - 1.2: 改进错误处理
     """
-    # 实现代码（简化）
+#    # 实现代码(简化)
     if not data:
         raise ValueError("数据列表不能为空")
     
     if not (0.0 <= threshold <= 1.0):
-        raise ValueError("阈值必须在0.0到1.0之间")
+        raise ValueError("阈值必须在 0.0 到 1.0 之间")
     
-    # 简化的实现
+#    # 简化的实现
     mean_val = sum(data) / len(data)
     sorted_data = sorted(data)
     median_val = sorted_data[len(data) // 2]
@@ -1331,37 +1331,37 @@ def good_docstring_example(data: list, threshold: float = 0.5,
 print("查看良好文档字符串的帮助:")
 help(good_docstring_example)
 
-# 2. 不良的文档字符串示例
+## 2. 不良的文档字符串示例
 print("\n" + "="*50)
 print("2. 不良的文档字符串示例:")
 
 def bad_docstring_example(d, t=0.5, n=True):
     """处理数据"""
-    # 没有详细说明参数、返回值、异常等
+#    # 没有详细说明参数、返回值、异常等
     return {'result': 'done'}
 
 def no_docstring_example(data, threshold, normalize):
-    # 完全没有文档字符串
+#    # 完全没有文档字符串
     return {}
 
 def confusing_docstring_example(x, y, z):
     """
     这个函数做一些事情
-    x是输入
-    y也是输入
-    z可能是可选的
+    x 是输入
+    y 也是输入
+    z 可能是可选的
     返回一些东西
     """
     return x + y + (z or 0)
 
 print("查看不良文档字符串的帮助:")
 help(bad_docstring_example)
-print("\n查看无文档字符串的帮助:")
+print("\n 查看无文档字符串的帮助:")
 help(no_docstring_example)
-print("\n查看混乱文档字符串的帮助:")
+print("\n 查看混乱文档字符串的帮助:")
 help(confusing_docstring_example)
 
-# 3. 类的文档字符串最佳实践
+## 3. 类的文档字符串最佳实践
 print("\n" + "="*50)
 print("3. 类的文档字符串最佳实践:")
 
@@ -1370,10 +1370,10 @@ class WellDocumentedClass:
     一个文档完善的示例类。
     
     这个类演示了如何编写高质量的类文档字符串。它提供了
-    数据管理和处理功能，支持多种操作模式。
+    数据管理和处理功能,支持多种操作模式。
     
     类属性:
-        DEFAULT_SIZE (int): 默认大小，值为100
+        DEFAULT_SIZE (int): 默认大小,值为 100
         SUPPORTED_TYPES (tuple): 支持的数据类型元组
     
     实例属性:
@@ -1395,7 +1395,7 @@ class WellDocumentedClass:
         RuntimeError: 只读模式下不能添加数据
     
     注意:
-        - 在只读模式下，所有修改操作都会失败
+        - 在只读模式下,所有修改操作都会失败
         - 数据会自动去重
         - 支持上下文管理器协议
     """
@@ -1408,11 +1408,11 @@ class WellDocumentedClass:
         初始化类实例。
         
         参数:
-            name (str): 实例名称，不能为空
-            readonly (bool, optional): 是否为只读模式，默认False
+            name (str): 实例名称,不能为空
+            readonly (bool, optional): 是否为只读模式,默认 False
         
         异常:
-            ValueError: 当name为空字符串时抛出
+            ValueError: 当 name 为空字符串时抛出
         """
         if not name:
             raise ValueError("名称不能为空")
@@ -1433,11 +1433,11 @@ class WellDocumentedClass:
         
         异常:
             RuntimeError: 在只读模式下调用时抛出
-            TypeError: 当items包含不支持的类型时抛出
+            TypeError: 当 items 包含不支持的类型时抛出
         
         示例:
             >>> obj = WellDocumentedClass("test")
-            >>> count = obj.add_data([1, 2, 3, 2])  # 2会被去重
+            >>> count = obj.add_data([1, 2, 3, 2])  # 2 会被去重
             >>> print(count)
             3
         """
@@ -1495,7 +1495,7 @@ class WellDocumentedClass:
             data (list): 要验证的数据列表
         
         返回:
-            bool: 如果数据有效返回True，否则返回False
+            bool: 如果数据有效返回 True,否则返回 False
         
         示例:
             >>> WellDocumentedClass.validate_data([1, 2, 3])
@@ -1524,9 +1524,9 @@ class WellDocumentedClass:
             exc_tb: 异常回溯
         
         返回:
-            bool: 是否抑制异常，这里返回False
+            bool: 是否抑制异常,这里返回 False
         """
-        # 清理资源
+#        # 清理资源
         if not self.readonly:
             self.data.clear()
         return False
@@ -1552,15 +1552,15 @@ class WellDocumentedClass:
 print("查看完善类文档的帮助:")
 help(WellDocumentedClass)
 
-# 4. 模块文档字符串最佳实践
+## 4. 模块文档字符串最佳实践
 print("\n" + "="*50)
 print("4. 模块文档字符串最佳实践:")
 
-# 模拟模块文档字符串
+## 模拟模块文档字符串
 module_docstring_example = """
 数据处理工具模块。
 
-这个模块提供了一套完整的数据处理工具，包括数据清洗、
+这个模块提供了一套完整的数据处理工具,包括数据清洗、
 转换、分析和可视化功能。适用于科学计算和数据分析场景。
 
 主要功能:
@@ -1573,16 +1573,16 @@ module_docstring_example = """
 典型用法:
     import data_tools
     
-    # 加载数据
+#    # 加载数据
     data = data_tools.load_csv('data.csv')
     
-    # 清洗数据
+#    # 清洗数据
     clean_data = data_tools.clean_data(data)
     
-    # 分析数据
+#    # 分析数据
     stats = data_tools.analyze(clean_data)
     
-    # 可视化
+#    # 可视化
     data_tools.plot(clean_data)
 
 依赖:
@@ -1603,20 +1603,20 @@ module_docstring_example = """
         - 修复内存泄漏问题
     
     2.0.0 (2023-12-01):
-        - 重构核心API
+        - 重构核心 API
         - 添加并行处理支持
         - 提升性能
 
 注意事项:
     - 大数据集处理可能需要大量内存
-    - 某些功能需要GPU支持
+    - 某些功能需要 GPU 支持
     - 建议在虚拟环境中使用
 """
 
 print("模块文档字符串示例:")
 print(module_docstring_example)
 
-# 5. 文档字符串格式规范
+## 5. 文档字符串格式规范
 print("\n" + "="*50)
 print("5. 文档字符串格式规范:")
 
@@ -1629,20 +1629,20 @@ class DocstringFormats:
     
     def google_style_docstring(self, param1, param2=None):
         """
-        Google风格的文档字符串。
+        Google 风格的文档字符串。
         
-        这个方法演示了Google风格的文档字符串格式。
+        这个方法演示了 Google 风格的文档字符串格式。
         
         Args:
             param1 (str): 第一个参数的描述。
-            param2 (int, optional): 第二个参数的描述。默认为None。
+            param2 (int, optional): 第二个参数的描述。默认为 None。
         
         Returns:
             bool: 返回值的描述。
         
         Raises:
-            ValueError: 当param1为空时抛出。
-            TypeError: 当param2不是整数时抛出。
+            ValueError: 当 param1 为空时抛出。
+            TypeError: 当 param2 不是整数时抛出。
         
         Example:
             >>> obj = DocstringFormats()
@@ -1657,16 +1657,16 @@ class DocstringFormats:
     
     def numpy_style_docstring(self, param1, param2=None):
         """
-        NumPy风格的文档字符串。
+        NumPy 风格的文档字符串。
         
-        这个方法演示了NumPy风格的文档字符串格式。
+        这个方法演示了 NumPy 风格的文档字符串格式。
         
         Parameters
         ----------
         param1 : str
             第一个参数的描述。
         param2 : int, optional
-            第二个参数的描述，默认为None。
+            第二个参数的描述,默认为 None。
         
         Returns
         -------
@@ -1676,9 +1676,9 @@ class DocstringFormats:
         Raises
         ------
         ValueError
-            当param1为空时抛出。
+            当 param1 为空时抛出。
         TypeError
-            当param2不是整数时抛出。
+            当 param2 不是整数时抛出。
         
         Examples
         --------
@@ -1693,15 +1693,15 @@ class DocstringFormats:
         
         See Also
         --------
-        google_style_docstring : Google风格的文档字符串
+        google_style_docstring : Google 风格的文档字符串
         """
         return True
     
     def sphinx_style_docstring(self, param1, param2=None):
         """
-        Sphinx风格的文档字符串。
+        Sphinx 风格的文档字符串。
         
-        这个方法演示了Sphinx风格的文档字符串格式。
+        这个方法演示了 Sphinx 风格的文档字符串格式。
         
         :param param1: 第一个参数的描述
         :type param1: str
@@ -1709,8 +1709,8 @@ class DocstringFormats:
         :type param2: int or None
         :returns: 返回值的描述
         :rtype: bool
-        :raises ValueError: 当param1为空时抛出
-        :raises TypeError: 当param2不是整数时抛出
+        :raises ValueError: 当 param1 为空时抛出
+        :raises TypeError: 当 param2 不是整数时抛出
         
         .. note::
            这是一个注意事项。
@@ -1730,7 +1730,7 @@ help(DocstringFormats.numpy_style_docstring)
 print("\n" + "-"*30)
 help(DocstringFormats.sphinx_style_docstring)
 
-# 6. 文档字符串检查工具
+## 6. 文档字符串检查工具
 print("\n" + "="*50)
 print("6. 文档字符串检查工具:")
 
@@ -1769,23 +1769,23 @@ class DocstringChecker:
             
             doc_lower = doc.lower()
             
-            # 检查是否包含参数说明
+#            # 检查是否包含参数说明
             if any(keyword in doc_lower for keyword in ['参数', 'parameters', 'args', 'param']):
                 result['has_parameters'] = True
             
-            # 检查是否包含返回值说明
+#            # 检查是否包含返回值说明
             if any(keyword in doc_lower for keyword in ['返回', 'returns', 'return']):
                 result['has_returns'] = True
             
-            # 检查是否包含示例
+#            # 检查是否包含示例
             if any(keyword in doc_lower for keyword in ['示例', 'example', '>>>', 'examples']):
                 result['has_examples'] = True
             
-            # 检查是否包含异常说明
+#            # 检查是否包含异常说明
             if any(keyword in doc_lower for keyword in ['异常', 'raises', 'raise', 'exception']):
                 result['has_raises'] = True
             
-            # 计算质量分数
+#            # 计算质量分数
             score = 0
             if result['docstring_length'] > 50:
                 score += 2
@@ -1801,7 +1801,7 @@ class DocstringChecker:
             if result['has_raises']:
                 score += 1
             
-            result['quality_score'] = min(score, 10)  # 最高10分
+            result['quality_score'] = min(score, 10)  # 最高 10 分
         
         return result
     
@@ -1840,7 +1840,7 @@ class DocstringChecker:
                 suggestions.append("添加使用示例")
             
             if not quality['has_raises'] and callable(obj):
-                suggestions.append("添加异常说明（如果适用）")
+                suggestions.append("添加异常说明(如果适用)")
         
         return suggestions
     
@@ -1856,41 +1856,41 @@ class DocstringChecker:
             str: 文档字符串模板
         """
         if not callable(obj):
-            return '"""\n对象描述。\n\n详细说明。\n"""'
+            return '"""\n 对象描述。\n\n 详细说明。\n"""'
         
         try:
             sig = inspect.signature(obj)
             obj_name = getattr(obj, '__name__', 'function')
             
-            template = f'"""\n{obj_name}的简短描述。\n\n详细描述{obj_name}的功能和用途。\n'
+            template = f'"""\n{obj_name}的简短描述。\n\n 详细描述{obj_name}的功能和用途。\n'
             
             if sig.parameters:
-                template += '\n参数:\n'
+                template += '\n 参数:\n'
                 for name, param in sig.parameters.items():
                     param_type = 'type' if param.annotation == param.empty else str(param.annotation)
                     if param.default != param.empty:
-                        template += f'    {name} ({param_type}, optional): {name}的描述，默认为{param.default}\n'
+                        template += f'    {name} ({param_type}, optional): {name}的描述,默认为{param.default}\n'
                     else:
                         template += f'    {name} ({param_type}): {name}的描述\n'
             
             if sig.return_annotation != sig.empty:
-                template += f'\n返回:\n    {sig.return_annotation}: 返回值的描述\n'
+                template += f'\n 返回:\n    {sig.return_annotation}: 返回值的描述\n'
             else:
-                template += '\n返回:\n    type: 返回值的描述\n'
+                template += '\n 返回:\n    type: 返回值的描述\n'
             
-            template += '\n异常:\n    ExceptionType: 异常条件的描述\n'
-            template += '\n示例:\n    >>> result = {}()\n    >>> print(result)\n'.format(obj_name)
+            template += '\n 异常:\n    ExceptionType: 异常条件的描述\n'
+            template += '\n 示例:\n    >>> result = {}()\n    >>> print(result)\n'.format(obj_name)
             template += '"""'
             
             return template
             
         except:
-            return '"""\n函数描述。\n\n详细说明。\n\n参数:\n    param: 参数描述\n\n返回:\n    type: 返回值描述\n"""'
+            return '"""\n 函数描述。\n\n 详细说明。\n\n 参数:\n    param: 参数描述\n\n 返回:\n    type: 返回值描述\n"""'
 
-# 测试文档字符串检查工具
+## 测试文档字符串检查工具
 print("测试文档字符串检查工具:")
 
-# 检查不同质量的文档字符串
+## 检查不同质量的文档字符串
 test_objects = [
     good_docstring_example,
     bad_docstring_example,
@@ -1903,7 +1903,7 @@ for obj in test_objects:
     quality = DocstringChecker.check_docstring_quality(obj)
     suggestions = DocstringChecker.suggest_improvements(obj)
     
-    print(f"\n对象: {name}")
+    print(f"\n 对象: {name}")
     print(f"  质量分数: {quality['quality_score']}/10")
     print(f"  有文档字符串: {quality['has_docstring']}")
     print(f"  文档长度: {quality['docstring_length']}")
@@ -1916,7 +1916,7 @@ for obj in test_objects:
     else:
         print(f"  改进建议: 文档质量良好")
 
-# 生成模板示例
+## 生成模板示例
 print("\n" + "-"*30)
 print("文档字符串模板生成示例:")
 
@@ -1924,7 +1924,7 @@ def template_example_function(name, age=25, active=True):
     pass
 
 template = DocstringChecker.generate_docstring_template(template_example_function)
-print(f"\n为 template_example_function 生成的模板:")
+print(f"\n 为 template_example_function 生成的模板:")
 print(template)
 ```
 
@@ -1933,10 +1933,10 @@ print(template)
 ### help()使用注意事项
 
 ```python
-# help()使用注意事项
+## help()使用注意事项
 print("\nhelp()使用注意事项:")
 
-# 1. 输出重定向问题
+## 1. 输出重定向问题
 print("1. 输出重定向问题:")
 
 import io
@@ -1945,7 +1945,7 @@ from contextlib import redirect_stdout
 
 def capture_help_output(obj):
     """
-    捕获help()的输出。
+    捕获 help()的输出。
     
     参数:
         obj: 要获取帮助的对象
@@ -1958,44 +1958,44 @@ def capture_help_output(obj):
         help(obj)
     return output.getvalue()
 
-# 演示捕获help输出
-print("捕获help(len)的输出:")
+## 演示捕获 help 输出
+print("捕获 help(len)的输出:")
 help_output = capture_help_output(len)
 print(f"输出长度: {len(help_output)} 字符")
-print(f"前100个字符: {help_output[:100]}...")
+print(f"前 100 个字符: {help_output[:100]}...")
 
-# 2. 交互式环境vs脚本环境
-print("\n2. 交互式环境vs脚本环境:")
+## 2. 交互式环境 vs 脚本环境
+print("\n2. 交互式环境 vs 脚本环境:")
 
 print("""
-在不同环境中help()的行为差异:
+在不同环境中 help()的行为差异:
 
-交互式环境（REPL）:
+交互式环境(REPL):
 - help()启动交互式帮助系统
 - 输出会分页显示
 - 支持搜索和导航
 
 脚本环境:
-- help()直接输出到stdout
+- help()直接输出到 stdout
 - 没有分页功能
 - 输出可能很长
 
 建议:
-- 在脚本中使用help()时考虑输出重定向
-- 对于长输出，考虑使用pydoc模块
-- 在自动化脚本中避免使用交互式help()
+- 在脚本中使用 help()时考虑输出重定向
+- 对于长输出,考虑使用 pydoc 模块
+- 在自动化脚本中避免使用交互式 help()
 """)
 
-# 3. 性能考虑
+## 3. 性能考虑
 print("\n3. 性能考虑:")
 
 import time
 
 def performance_test():
     """
-    测试help()的性能影响。
+    测试 help()的性能影响。
     """
-    # 测试对象
+#    # 测试对象
     test_objects = [len, str, list, dict, int]
     
     print("  help()性能测试:")
@@ -2003,7 +2003,7 @@ def performance_test():
     for obj in test_objects:
         start_time = time.time()
         
-        # 捕获输出以避免打印
+#        # 捕获输出以避免打印
         output = io.StringIO()
         with redirect_stdout(output):
             help(obj)
@@ -2015,24 +2015,24 @@ def performance_test():
 
 performance_test()
 
-# 4. 内存使用
+## 4. 内存使用
 print("\n4. 内存使用注意事项:")
 
 print("""
 help()的内存使用特点:
 
 - help()会加载对象的完整文档
-- 对于大型模块，可能消耗较多内存
+- 对于大型模块,可能消耗较多内存
 - 文档字符串会被缓存
 - 在内存受限环境中需要注意
 
 建议:
-- 避免在循环中频繁调用help()
-- 对于大型对象，考虑查看特定部分
-- 使用inspect模块获取特定信息
+- 避免在循环中频繁调用 help()
+- 对于大型对象,考虑查看特定部分
+- 使用 inspect 模块获取特定信息
 """)
 
-# 5. 最佳实践总结
+## 5. 最佳实践总结
 print("\n5. help()使用最佳实践:")
 
 class HelpBestPractices:
@@ -2051,7 +2051,7 @@ class HelpBestPractices:
             max_lines (int): 最大显示行数
         
         返回:
-            str or None: 如果capture_output为True，返回帮助文本
+            str or None: 如果 capture_output 为 True,返回帮助文本
         """
         if capture_output:
             output = io.StringIO()
@@ -2060,7 +2060,7 @@ class HelpBestPractices:
             
             help_text = output.getvalue()
             
-            # 限制输出行数
+#            # 限制输出行数
             if max_lines > 0:
                 lines = help_text.split('\n')
                 if len(lines) > max_lines:
@@ -2157,20 +2157,20 @@ class HelpBestPractices:
             count2 = info2.get('parameter_count', 0)
             print(f"  参数数量: {count1} vs {count2}")
 
-# 测试最佳实践
-print("\n测试help()最佳实践:")
+## 测试最佳实践
+print("\n 测试 help()最佳实践:")
 
-# 智能帮助
+## 智能帮助
 print("1. 智能帮助示例:")
 help_text = HelpBestPractices.smart_help(len, capture_output=True, max_lines=10)
-print(f"捕获的帮助文本（前200字符）: {help_text[:200]}...")
+print(f"捕获的帮助文本(前 200 字符): {help_text[:200]}...")
 
-# 快速信息
+## 快速信息
 print("\n2. 快速信息示例:")
 HelpBestPractices.help_summary(len)
 HelpBestPractices.help_summary(WellDocumentedClass)
 
-# 对象比较
+## 对象比较
 print("\n3. 对象比较示例:")
 HelpBestPractices.compare_help(list, tuple)
 HelpBestPractices.compare_help(len, max)
@@ -2197,16 +2197,16 @@ HelpBestPractices.compare_help(len, max)
 ### 第三方库
 - `sphinx` - 文档生成工具
 - `pdoc` - 自动文档生成
-- `mkdocs` - Markdown文档生成
+- `mkdocs` - Markdown 文档生成
 - `jupyter` - 交互式文档环境
 
 ## 📚 扩展阅读
 
-- [Python文档字符串约定](https://www.python.org/dev/peps/pep-0257/)
+- [Python 文档字符串约定](https://www.python.org/dev/peps/pep-0257/)
 - [内置函数文档](https://docs.python.org/3/library/functions.html#help)
-- [pydoc模块文档](https://docs.python.org/3/library/pydoc.html)
-- [Sphinx文档工具](https://www.sphinx-doc.org/)
+- [pydoc 模块文档](https://docs.python.org/3/library/pydoc.html)
+- [Sphinx 文档工具](https://www.sphinx-doc.org/)
 
 ## 🏷️ 标签
 
-`帮助系统` `文档` `内省` `交互式帮助` `文档字符串` `API文档` `代码文档` `开发工具`
+`帮助系统` `文档` `内省` `交互式帮助` `文档字符串` `API 文档` `代码文档` `开发工具`

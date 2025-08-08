@@ -4,34 +4,34 @@ title: 内置函数
 permalink: /docs/builtins/
 category: builtins
 tags: [Python, 内置函数, builtins, 基础]
-description: Python内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例
-author: Python模型书
+description: Python 内置函数完整参考文档，包含所有常用内置函数的详细说明和使用示例
+author: Python 模型书
 date: 2024-01-15
 updated: 2024-01-15
 version: 2.0
-difficulty: 初级
+difficulty: "初级"
 ---
 
-# Python内置函数完整参考
+# Python 内置函数完整参考
 
 ## 📝 概述
 
-Python内置函数是解释器自带的函数，无需导入任何模块即可直接使用。这些函数涵盖了数据类型转换、数学运算、序列操作、输入输出、对象检查等各个方面，是Python编程的基础工具。
+Python 内置函数是解释器自带的函数，无需导入任何模块即可直接使用。这些函数涵盖了数据类型转换、数学运算、序列操作、输入输出、对象检查等各个方面，是 Python 编程的基础工具。
 
 ## 🎯 学习目标
 
 完成本模块学习后，你将能够：
 
-- 熟练使用Python所有常用内置函数
+- 熟练使用 Python 所有常用内置函数
 - 理解不同数据类型的操作方法
 - 掌握输入输出的各种方式
 - 能够进行高效的数据处理和类型转换
-- 编写更简洁优雅的Python代码
+- 编写更简洁优雅的 Python 代码
 - 理解函数式编程的基本概念
 
 ## 📋 前置知识
 
-- Python基本语法
+- Python 基本语法
 - 数据类型（字符串、列表、元组、字典等）
 - 基本的编程概念（变量、函数、循环等）
 
@@ -103,28 +103,28 @@ Python内置函数是解释器自带的函数，无需导入任何模块即可�
 - [format() - 格式化函数](format/)
 - [f-string - 格式化字符串字面量](f-string/)
 - [repr() - 对象字符串表示函数](repr/)
-- [ascii() - ASCII字符串表示函数](ascii/)
+- [ascii() - ASCII 字符串表示函数](ascii/)
 
 ### 🔢 进制转换
 - [bin() - 二进制转换函数](bin/)
 - [oct() - 八进制转换函数](oct/)
 - [hex() - 十六进制转换函数](hex/)
-- [ord() - Unicode码点获取函数](ord/)
-- [chr() - Unicode字符生成函数](chr/)
+- [ord() - Unicode 码点获取函数](ord/)
+- [chr() - Unicode 字符生成函数](chr/)
 
 
 
 ## ⚠️ 注意事项
 
 ### 性能考虑
-- **内置函数优先**：内置函数通常比自定义函数更高效，因为它们是用C语言实现的
+- **内置函数优先**：内置函数通常比自定义函数更高效，因为它们是用 C 语言实现的
 - **避免重复转换**：不要在循环中重复进行类型转换
 - **合理使用生成器**：对于大数据集，考虑使用生成器表达式而不是列表推导式
 
 ### 常见错误
 - **类型错误**：确保传递给函数的参数类型正确
-- **空序列处理**：使用min()、max()等函数时要注意空序列会引发异常
-- **浮点数精度**：使用round()函数时要注意浮点数精度问题
+- **空序列处理**：使用 min()、max()等函数时要注意空序列会引发异常
+- **浮点数精度**：使用 round()函数时要注意浮点数精度问题
 
 ### 最佳实践
 1. **函数组合**：学会将多个内置函数组合使用以实现复杂功能
@@ -144,17 +144,17 @@ Python内置函数是解释器自带的函数，无需导入任何模块即可�
 
 
 ## 相关模块
-- [Python基础语法](../basics/) - Python编程基础
-- [Python标准库](../stdlib/) - 标准库函数和模块
+- [Python 基础语法](../basics/) - Python 编程基础
+- [Python 标准库](../stdlib/) - 标准库函数和模块
 - [第三方库](../thirdparty/) - 常用第三方库
 
 ## 📚 扩展阅读
 
-- [Python内置函数官方文档](https://docs.python.org/3/library/functions.html)
-- [Python数据模型官方文档](https://docs.python.org/3/reference/datamodel.html)
-- [Python标准库概览](https://docs.python.org/3/library/index.html)
-- [Python函数式编程指南](https://docs.python.org/3/howto/functional.html)
-- [Python性能优化技巧](https://wiki.python.org/moin/PythonSpeed/PerformanceTips)
+- [Python 内置函数官方文档](https://docs.python.org/3/library/functions.html)
+- [Python 数据模型官方文档](https://docs.python.org/3/reference/datamodel.html)
+- [Python 标准库概览](https://docs.python.org/3/library/index.html)
+- [Python 函数式编程指南](https://docs.python.org/3/howto/functional.html)
+- [Python 性能优化技巧](https://wiki.python.org/moin/PythonSpeed/PerformanceTips)
 
 ## 🏷️ 标签
 
@@ -163,5 +163,5 @@ Python内置函数是解释器自带的函数，无需导入任何模块即可�
 ---
 
 **最后更新**: 2024-01-15  
-**作者**: Python模型书  
+**作者**: Python 模型书  
 **版本**: 2.0

@@ -2,7 +2,7 @@
 
 ## 📖 概述
 
-`format()` 是Python的内置函数，用于格式化值并返回格式化后的字符串。它提供了灵活的字符串格式化功能，支持多种格式规范和自定义格式化行为。
+`format()` 是 Python 的内置函数，用于格式化值并返回格式化后的字符串。它提供了灵活的字符串格式化功能，支持多种格式规范和自定义格式化行为。
 
 ## 🎯 学习目标
 
@@ -15,7 +15,7 @@
 
 ## 📋 前置知识
 
-- Python基础语法
+- Python 基础语法
 - 字符串操作
 - 基本的面向对象概念
 - 魔术方法的理解
@@ -46,32 +46,32 @@ format(value, format_spec='')
 ### 基本用法
 
 ```python
-# 基本格式化示例
-print("基本format()用法:")
+## 基本格式化示例
+print("基本 format()用法:")
 
-# 1. 无格式规范
+## 1. 无格式规范
 print("1. 无格式规范:")
 print(f"format(42): '{format(42)}'")
 print(f"format(3.14159): '{format(3.14159)}'")
 print(f"format('hello'): '{format('hello')}'")
 print(f"format(True): '{format(True)}'")
 
-# 2. 基本数字格式化
+## 2. 基本数字格式化
 print("\n2. 基本数字格式化:")
 number = 1234.5678
 
-# 小数位数控制
+## 小数位数控制
 print(f"format({number}, '.2f'): '{format(number, '.2f')}'")
 print(f"format({number}, '.4f'): '{format(number, '.4f')}'")
 print(f"format({number}, '.0f'): '{format(number, '.0f')}'")
 
-# 整数格式化
+## 整数格式化
 integer = 42
 print(f"format({integer}, 'd'): '{format(integer, 'd')}'")
 print(f"format({integer}, '05d'): '{format(integer, '05d')}'")
 print(f"format({integer}, '+d'): '{format(integer, '+d')}'")
 
-# 3. 字符串格式化
+## 3. 字符串格式化
 print("\n3. 字符串格式化:")
 text = "Python"
 print(f"format('{text}', '10s'): '{format(text, '10s')}'")
@@ -79,7 +79,7 @@ print(f"format('{text}', '<10s'): '{format(text, '<10s')}'")
 print(f"format('{text}', '>10s'): '{format(text, '>10s')}'")
 print(f"format('{text}', '^10s'): '{format(text, '^10s')}'")
 
-# 4. 进制转换
+## 4. 进制转换
 print("\n4. 进制转换:")
 num = 255
 print(f"format({num}, 'b'): '{format(num, 'b')}'")  # 二进制
@@ -87,14 +87,14 @@ print(f"format({num}, 'o'): '{format(num, 'o')}'")  # 八进制
 print(f"format({num}, 'x'): '{format(num, 'x')}'")  # 十六进制(小写)
 print(f"format({num}, 'X'): '{format(num, 'X')}'")  # 十六进制(大写)
 
-# 5. 科学计数法
+## 5. 科学计数法
 print("\n5. 科学计数法:")
 large_num = 1234567.89
 print(f"format({large_num}, 'e'): '{format(large_num, 'e')}'")
 print(f"format({large_num}, 'E'): '{format(large_num, 'E')}'")
 print(f"format({large_num}, '.2e'): '{format(large_num, '.2e')}'")
 
-# 6. 百分比格式
+## 6. 百分比格式
 print("\n6. 百分比格式:")
 ratio = 0.1234
 print(f"format({ratio}, '%'): '{format(ratio, '%')}'")
@@ -105,18 +105,18 @@ print(f"format({ratio}, '.1%'): '{format(ratio, '.1%')}'")
 ### 高级格式化
 
 ```python
-# 高级格式化示例
+## 高级格式化示例
 print("\n" + "="*50)
-print("高级format()用法:")
+print("高级 format()用法:")
 
-# 1. 千位分隔符
+## 1. 千位分隔符
 print("\n1. 千位分隔符:")
 big_number = 1234567890
 print(f"format({big_number}, ','): '{format(big_number, ',')}'")
 print(f"format({big_number}, '_'): '{format(big_number, '_')}'")
 print(f"format({big_number}, ',.2f'): '{format(big_number, ',.2f')}'")
 
-# 2. 符号控制
+## 2. 符号控制
 print("\n2. 符号控制:")
 positive = 42
 negative = -42
@@ -128,7 +128,7 @@ print(f"format({zero}, '+d'): '{format(zero, '+d')}'")
 print(f"format({positive}, ' d'): '{format(positive, ' d')}'")
 print(f"format({negative}, ' d'): '{format(negative, ' d')}'")
 
-# 3. 填充和对齐
+## 3. 填充和对齐
 print("\n3. 填充和对齐:")
 value = "test"
 print(f"format('{value}', '*<10'): '{format(value, '*<10')}'")
@@ -136,18 +136,18 @@ print(f"format('{value}', '*>10'): '{format(value, '*>10')}'")
 print(f"format('{value}', '*^10'): '{format(value, '*^10')}'")
 print(f"format('{value}', '=^10'): '{format(value, '=^10')}'")
 
-# 数字的填充
+## 数字的填充
 num = 42
 print(f"format({num}, '0>8d'): '{format(num, '0>8d')}'")
 print(f"format({num}, '*^8d'): '{format(num, '*^8d')}'")
 
-# 4. 复杂格式组合
+## 4. 复杂格式组合
 print("\n4. 复杂格式组合:")
 value = 1234.5678
 print(f"format({value}, '+020,.2f'): '{format(value, '+020,.2f')}'")
 print(f"format({value}, ' =+20,.3f'): '{format(value, ' =+20,.3f')}'")
 
-# 5. 动态格式规范
+## 5. 动态格式规范
 print("\n5. 动态格式规范:")
 
 def dynamic_format(value, width=10, precision=2, align='>'):
@@ -170,13 +170,13 @@ def dynamic_format(value, width=10, precision=2, align='>'):
     
     return format(value, format_spec)
 
-# 测试动态格式化
+## 测试动态格式化
 test_values = [123.456, 9876.54321, "Hello", 42]
 for val in test_values:
     result = dynamic_format(val)
     print(f"dynamic_format({val}): '{result}'")
 
-# 6. 格式化表格
+## 6. 格式化表格
 print("\n6. 格式化表格:")
 
 class TableFormatter:
@@ -247,17 +247,17 @@ class TableFormatter:
         """
         lines = []
         
-        # 表头
+#        # 表头
         lines.append(self.format_row(self.headers))
         lines.append(self.format_separator())
         
-        # 数据行
+#        # 数据行
         for row in data:
             lines.append(self.format_row(row))
         
         return '\n'.join(lines)
 
-# 测试表格格式化
+## 测试表格格式化
 headers = ['姓名', '年龄', '薪资', '部门']
 widths = [8, 6, 12, 10]
 aligns = ['<', '>', '>', '<']
@@ -271,23 +271,23 @@ data = [
     ['赵六', 35, 15000.00, '管理部']
 ]
 
-print("\n格式化表格:")
+print("\n 格式化表格:")
 print(formatter.format_table(data))
 ```
 
 ### 自定义格式化
 
 ```python
-# 自定义格式化示例
+## 自定义格式化示例
 print("\n" + "="*50)
-print("自定义format()行为:")
+print("自定义 format()行为:")
 
-# 1. 实现__format__方法
+## 1. 实现__format__方法
 print("\n1. 自定义类的格式化:")
 
 class Person:
     """
-    人员类，演示自定义格式化。
+    人员类,演示自定义格式化。
     """
     
     def __init__(self, name, age, salary):
@@ -324,11 +324,11 @@ class Person:
         elif format_spec == 'salary':
             return f"{self.salary:,.2f}"
         elif format_spec.startswith('salary:'):
-            # 自定义薪资格式
+#            # 自定义薪资格式
             precision = format_spec.split(':')[1] if ':' in format_spec else '2'
             return f"{self.salary:,.{precision}f}元"
         else:
-            # 默认格式
+#            # 默认格式
             return f"{self.name}({self.age}, {self.salary:,.0f})"
     
     def __str__(self):
@@ -337,7 +337,7 @@ class Person:
     def __repr__(self):
         return f"Person('{self.name}', {self.age}, {self.salary})"
 
-# 测试自定义格式化
+## 测试自定义格式化
 person = Person("张三", 25, 8500.50)
 
 print(f"format(person): '{format(person)}'")
@@ -349,12 +349,12 @@ print(f"format(person, 'salary'): '{format(person, 'salary')}'")
 print(f"format(person, 'salary:0'): '{format(person, 'salary:0')}'")
 print(f"format(person, 'salary:3'): '{format(person, 'salary:3')}'")
 
-# 2. 复杂的自定义格式化
+## 2. 复杂的自定义格式化
 print("\n2. 复杂的自定义格式化:")
 
 class Money:
     """
-    货币类，演示复杂的格式化规则。
+    货币类,演示复杂的格式化规则。
     """
     
     def __init__(self, amount, currency='CNY'):
@@ -385,7 +385,7 @@ class Money:
         返回:
             str: 格式化后的字符串
         """
-        # 货币符号映射
+#        # 货币符号映射
         symbols = {
             'CNY': '¥',
             'USD': '$',
@@ -403,7 +403,7 @@ class Money:
             symbol = symbols.get(self.currency, self.currency)
             return f"{symbol}{self.amount:,.2f} {self.currency}"
         elif format_spec == 'compact':
-            # 紧凑格式，大数字使用K、M等单位
+#            # 紧凑格式,大数字使用 K、M 等单位
             if abs(self.amount) >= 1_000_000:
                 value = self.amount / 1_000_000
                 unit = 'M'
@@ -417,15 +417,15 @@ class Money:
             symbol = symbols.get(self.currency, self.currency)
             return f"{symbol}{value:.1f}{unit}"
         elif format_spec.replace('.', '').replace('f', '').replace(',', '').replace('+', '').replace('-', '').replace(' ', '').isdigit() or format_spec in ['f', '.f', ',f']:
-            # 数字格式规范
+#            # 数字格式规范
             formatted_amount = format(self.amount, format_spec)
             symbol = symbols.get(self.currency, self.currency)
             return f"{symbol}{formatted_amount}"
         else:
-            # 默认格式
+#            # 默认格式
             return f"{self.amount:.2f} {self.currency}"
 
-# 测试货币格式化
+## 测试货币格式化
 money_cny = Money(12345.67, 'CNY')
 money_usd = Money(9876.54, 'USD')
 money_large = Money(1234567.89, 'USD')
@@ -438,14 +438,14 @@ print(f"format(money_cny, 'compact'): '{format(money_cny, 'compact')}'")
 print(f"format(money_cny, ',.0f'): '{format(money_cny, ',.0f')}'")
 print(f"format(money_large, 'compact'): '{format(money_large, 'compact')}'")
 
-# 3. 日期时间格式化
+## 3. 日期时间格式化
 print("\n3. 日期时间格式化:")
 
 from datetime import datetime, date, time
 
 class SmartDateTime:
     """
-    智能日期时间类，支持多种格式化选项。
+    智能日期时间类,支持多种格式化选项。
     """
     
     def __init__(self, dt=None):
@@ -453,7 +453,7 @@ class SmartDateTime:
         初始化日期时间对象。
         
         参数:
-            dt (datetime, optional): 日期时间对象，默认为当前时间
+            dt (datetime, optional): 日期时间对象,默认为当前时间
         """
         self.dt = dt or datetime.now()
     
@@ -476,9 +476,9 @@ class SmartDateTime:
         elif format_spec == 'iso':
             return self.dt.isoformat()
         elif format_spec == 'chinese':
-            return self.dt.strftime('%Y年%m月%d日 %H时%M分%S秒')
+            return self.dt.strftime('%Y 年%m 月%d 日 %H 时%M 分%S 秒')
         elif format_spec == 'relative':
-            # 相对时间（简化版）
+#            # 相对时间(简化版)
             now = datetime.now()
             diff = now - self.dt
             
@@ -493,13 +493,13 @@ class SmartDateTime:
             else:
                 return "刚刚"
         elif format_spec.startswith('%'):
-            # 标准strftime格式
+#            # 标准 strftime 格式
             return self.dt.strftime(format_spec)
         else:
-            # 默认格式
+#            # 默认格式
             return str(self.dt)
 
-# 测试日期时间格式化
+## 测试日期时间格式化
 from datetime import timedelta
 
 smart_dt = SmartDateTime()
@@ -517,7 +517,7 @@ print(f"format(smart_dt, '%A, %B %d, %Y'): '{format(smart_dt, '%A, %B %d, %Y')}'
 ### 格式化工具类
 
 ```python
-# 格式化工具类
+## 格式化工具类
 print("\n" + "="*50)
 print("格式化工具类:")
 
@@ -569,7 +569,7 @@ class FormatHelper:
         
         参数:
             bytes_value (int): 字节数
-            binary (bool): 是否使用二进制单位(1024)，否则使用十进制单位(1000)
+            binary (bool): 是否使用二进制单位(1024),否则使用十进制单位(1000)
         
         返回:
             str: 格式化后的字符串
@@ -681,7 +681,7 @@ class FormatHelper:
         else:
             return str(data)
 
-# 测试格式化工具类
+## 测试格式化工具类
 print("\n1. 数字格式化:")
 test_number = 1234567.89
 print(f"默认: {FormatHelper.format_number(test_number)}")
@@ -706,7 +706,7 @@ print(f"逗号分隔: {FormatHelper.format_list(test_list, 'comma')}")
 print(f"和连接: {FormatHelper.format_list(test_list, 'and')}")
 print(f"项目符号:\n{FormatHelper.format_list(test_list, 'bullet')}")
 print(f"编号列表:\n{FormatHelper.format_list(test_list, 'numbered')}")
-print(f"限制3项: {FormatHelper.format_list(test_list, 'comma', 3)}")
+print(f"限制 3 项: {FormatHelper.format_list(test_list, 'comma', 3)}")
 
 print("\n5. 字典格式化:")
 test_dict = {'姓名': '张三', '年龄': 25, '城市': '北京', '职业': '程序员'}
@@ -719,25 +719,25 @@ print(f"紧凑格式: {FormatHelper.format_dict(test_dict, 'compact')}")
 ### format()使用注意事项
 
 ```python
-# format()使用注意事项
+## format()使用注意事项
 print("\nformat()使用注意事项:")
 
-# 1. 格式规范错误
+## 1. 格式规范错误
 print("1. 格式规范错误:")
 
 try:
-    # 错误的格式规范
+#    # 错误的格式规范
     result = format(123, 'invalid_format')
 except ValueError as e:
     print(f"格式规范错误: {e}")
 
 try:
-    # 类型不匹配的格式规范
+#    # 类型不匹配的格式规范
     result = format("hello", '.2f')
 except ValueError as e:
     print(f"类型不匹配: {e}")
 
-# 2. 精度和性能考虑
+## 2. 精度和性能考虑
 print("\n2. 精度和性能考虑:")
 
 import time
@@ -749,25 +749,25 @@ def performance_comparison():
     value = 1234.5678
     iterations = 100000
     
-    # format()函数
+#    # format()函数
     start = time.time()
     for _ in range(iterations):
         result = format(value, '.2f')
     format_time = time.time() - start
     
-    # f-string
+#    # f-string
     start = time.time()
     for _ in range(iterations):
         result = f"{value:.2f}"
     fstring_time = time.time() - start
     
-    # str.format()
+#    # str.format()
     start = time.time()
     for _ in range(iterations):
         result = "{:.2f}".format(value)
     str_format_time = time.time() - start
     
-    # % 格式化
+#    # % 格式化
     start = time.time()
     for _ in range(iterations):
         result = "%.2f" % value
@@ -778,7 +778,7 @@ def performance_comparison():
     print(f"  str.format(): {str_format_time:.4f}秒")
     print(f"  % 格式化: {percent_time:.4f}秒")
     
-    # 性能排序
+#    # 性能排序
     methods = [
         ('format()函数', format_time),
         ('f-string', fstring_time),
@@ -787,13 +787,13 @@ def performance_comparison():
     ]
     methods.sort(key=lambda x: x[1])
     
-    print(f"\n  性能排序（从快到慢）:")
+    print(f"\n  性能排序(从快到慢):")
     for i, (method, time_taken) in enumerate(methods, 1):
         print(f"    {i}. {method}: {time_taken:.4f}秒")
 
 performance_comparison()
 
-# 3. 浮点数精度问题
+## 3. 浮点数精度问题
 print("\n3. 浮点数精度问题:")
 
 value = 0.1 + 0.2
@@ -801,7 +801,7 @@ print(f"0.1 + 0.2 = {value}")
 print(f"format(0.1 + 0.2, '.1f') = {format(value, '.1f')}")
 print(f"format(0.1 + 0.2, '.17f') = {format(value, '.17f')}")
 
-# 使用Decimal避免精度问题
+## 使用 Decimal 避免精度问题
 from decimal import Decimal, getcontext
 
 getcontext().prec = 28  # 设置精度
@@ -809,34 +809,34 @@ decimal_value = Decimal('0.1') + Decimal('0.2')
 print(f"Decimal('0.1') + Decimal('0.2') = {decimal_value}")
 print(f"format(decimal_value, '.1f') = {format(decimal_value, '.1f')}")
 
-# 4. 国际化和本地化
+## 4. 国际化和本地化
 print("\n4. 国际化和本地化:")
 
 import locale
 
-# 注意：在某些系统上可能需要安装相应的locale
+## 注意:在某些系统上可能需要安装相应的 locale
 try:
-    # 设置中文locale
+#    # 设置中文 locale
     locale.setlocale(locale.LC_ALL, 'zh_CN.UTF-8')
 except locale.Error:
     try:
-        # Windows中文locale
+#        # Windows 中文 locale
         locale.setlocale(locale.LC_ALL, 'Chinese_China.936')
     except locale.Error:
-        print("  无法设置中文locale，使用默认设置")
+        print("  无法设置中文 locale,使用默认设置")
 
-# 使用locale格式化数字
+## 使用 locale 格式化数字
 value = 1234567.89
 print(f"  默认格式: {format(value, ',.2f')}")
 
 try:
-    # 使用locale格式化（如果支持）
+#    # 使用 locale 格式化(如果支持)
     formatted = locale.format_string('%.2f', value, grouping=True)
-    print(f"  locale格式: {formatted}")
+    print(f"  locale 格式: {formatted}")
 except:
-    print("  locale格式化不可用")
+    print("  locale 格式化不可用")
 
-# 5. 最佳实践总结
+## 5. 最佳实践总结
 print("\n5. format()最佳实践:")
 
 class FormatBestPractices:
@@ -860,7 +860,7 @@ class FormatBestPractices:
         try:
             return format(value, format_spec)
         except (ValueError, TypeError) as e:
-            print(f"    格式化错误: {e}，使用默认值: {default}")
+            print(f"    格式化错误: {e},使用默认值: {default}")
             return default
     
     @staticmethod
@@ -878,11 +878,11 @@ class FormatBestPractices:
         if not isinstance(value, (int, float)):
             return str(value)
         
-        # 整数不显示小数点
+#        # 整数不显示小数点
         if isinstance(value, int) or value.is_integer():
             return format(int(value), ',')
         
-        # 自动调整精度
+#        # 自动调整精度
         if auto_precision:
             if abs(value) >= 1000:
                 precision = 0
@@ -902,7 +902,7 @@ class FormatBestPractices:
         
         参数:
             value: 要格式化的值
-            conditions (list): 条件列表，每个条件是(condition_func, format_spec)元组
+            conditions (list): 条件列表,每个条件是(condition_func, format_spec)元组
         
         返回:
             str: 格式化后的字符串
@@ -911,7 +911,7 @@ class FormatBestPractices:
             if condition_func(value):
                 return format(value, format_spec)
         
-        # 默认格式
+#        # 默认格式
         return str(value)
     
     @staticmethod
@@ -930,24 +930,24 @@ class FormatBestPractices:
         formatted_value = format(value, format_spec)
         return f"{formatted_value} {unit}"
 
-# 测试最佳实践
-print("\n测试format()最佳实践:")
+## 测试最佳实践
+print("\n 测试 format()最佳实践:")
 
-# 安全格式化
+## 安全格式化
 print("\n1. 安全格式化:")
 test_values = [123.456, "hello", None, [1, 2, 3]]
 for val in test_values:
     result = FormatBestPractices.safe_format(val, '.2f')
     print(f"  safe_format({val}, '.2f'): {result}")
 
-# 智能数字格式化
+## 智能数字格式化
 print("\n2. 智能数字格式化:")
 numbers = [1234567, 123.456, 1.23456, 0.001234]
 for num in numbers:
     result = FormatBestPractices.smart_number_format(num)
     print(f"  smart_number_format({num}): {result}")
 
-# 条件格式化
+## 条件格式化
 print("\n3. 条件格式化:")
 conditions = [
     (lambda x: x < 0, '+.2f'),  # 负数显示符号
@@ -960,7 +960,7 @@ for num in test_numbers:
     result = FormatBestPractices.conditional_format(num, conditions)
     print(f"  conditional_format({num}): {result}")
 
-# 带单位格式化
+## 带单位格式化
 print("\n4. 带单位格式化:")
 measurements = [
     (25.6, '°C'),
@@ -988,7 +988,7 @@ for value, unit in measurements:
 - `locale` - 国际化服务
 - `decimal` - 十进制浮点运算
 - `datetime` - 日期和时间处理
-- `json` - JSON编码和解码
+- `json` - JSON 编码和解码
 
 ### 第三方库
 - `babel` - 国际化工具
@@ -998,11 +998,11 @@ for value, unit in measurements:
 
 ## 📚 扩展阅读
 
-- [Python字符串格式化](https://docs.python.org/3/library/string.html#format-string-syntax)
+- [Python 字符串格式化](https://docs.python.org/3/library/string.html#format-string-syntax)
 - [内置函数文档](https://docs.python.org/3/library/functions.html#format)
 - [格式规范迷你语言](https://docs.python.org/3/library/string.html#format-specification-mini-language)
 - [PEP 3101 - 高级字符串格式化](https://www.python.org/dev/peps/pep-3101/)
 
 ## 🏷️ 标签
 
-`字符串格式化` `format函数` `格式规范` `数字格式化` `自定义格式化` `文本处理` `数据展示` `国际化`
+`字符串格式化` `format 函数` `格式规范` `数字格式化` `自定义格式化` `文本处理` `数据展示` `国际化`

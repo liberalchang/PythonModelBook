@@ -252,3 +252,8 @@ update_index.py
 fix_links.py
 search_index.json
 *.log
+*.backup
+scripts/
+backups/
+_test_site/
+.bundle/

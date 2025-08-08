@@ -5,9 +5,9 @@ permalink: /docs/stdlib/
 category: stdlib
 ---
 
-# Python标准库
+# Python 标准库
 
-Python标准库是Python安装包自带的模块集合，提供了丰富的功能，从文件操作到网络编程，从数据处理到系统管理。
+Python 标准库是 Python 安装包自带的模块集合，提供了丰富的功能，从文件操作到网络编程，从数据处理到系统管理。
 
 ## 📋 本模块内容
 
@@ -15,29 +15,29 @@ Python标准库是Python安装包自带的模块集合，提供了丰富的功�
 
 
 ### 日期时间
-- [time模块 - 基础时间处理功能](time/)
-- [calendar模块 - 日历相关功能](calendar/)
-- [datetime模块 - 高级日期时间处理](datetime/)
+- [time 模块 - 基础时间处理功能](time/)
+- [calendar 模块 - 日历相关功能](calendar/)
+- [datetime 模块 - 高级日期时间处理](datetime/)
 
 
 ### 函数式编程
-- [operator模块 - 运算符函数映射](operator/)
-- [copy模块 - 对象拷贝功能](copy/)
-- [inspect模块 - 对象检查和反射功能](inspect/)
-- [enum模块 - 枚举类型和常量定义](enum/)
-- [typing模块 - 类型提示和静态类型检查](typing/)
+- [operator 模块 - 运算符函数映射](operator/)
+- [copy 模块 - 对象拷贝功能](copy/)
+- [inspect 模块 - 对象检查和反射功能](inspect/)
+- [enum 模块 - 枚举类型和常量定义](enum/)
+- [typing 模块 - 类型提示和静态类型检查](typing/)
 
 
 ## 🎯 学习目标
 
 完成本模块学习后，你将能够：
 
-- 熟练使用Python标准库进行开发
+- 熟练使用 Python 标准库进行开发
 - 掌握文件和目录操作技巧
 - 能够处理日期时间相关任务
 - 使用正则表达式进行文本处理
 - 进行基本的网络编程
-- 操作SQLite数据库
+- 操作 SQLite 数据库
 
 ## 📊 标准库分类
 
@@ -58,7 +58,7 @@ Python标准库是Python安装包自带的模块集合，提供了丰富的功�
 1. **优先使用标准库**：避免重复造轮子
 2. **了解模块结构**：理解每个模块的主要功能和类
 3. **查阅文档**：标准库文档详细且权威
-4. **注意版本差异**：不同Python版本的标准库可能有差异
+4. **注意版本差异**：不同 Python 版本的标准库可能有差异
 5. **性能考虑**：了解不同模块的性能特点
 
 ## 🔍 常用模块速查
@@ -67,7 +67,7 @@ Python标准库是Python安装包自带的模块集合，提供了丰富的功�
 - **os**: 操作系统接口
 - **sys**: 系统特定参数和函数
 - **datetime**: 日期和时间
-- **json**: JSON编码器和解码器
+- **json**: JSON 编码器和解码器
 - **re**: 正则表达式
 
 ### 实用模块
@@ -76,10 +76,10 @@ Python标准库是Python安装包自带的模块集合，提供了丰富的功�
 - **functools**: 高阶函数和可调用对象操作
 - **operator**: 运算符函数和函数式编程工具
 - **pathlib**: 面向对象的文件系统路径
-- **urllib**: URL处理模块
+- **urllib**: URL 处理模块
 
 ## 🔗 相关资源
 
-- [Python标准库官方文档](https://docs.python.org/3/library/)
-- [Python模块索引](https://docs.python.org/3/py-modindex.html)
+- [Python 标准库官方文档](https://docs.python.org/3/library/)
+- [Python 模块索引](https://docs.python.org/3/py-modindex.html)
 - [Python HOWTOs](https://docs.python.org/3/howto/index.html)

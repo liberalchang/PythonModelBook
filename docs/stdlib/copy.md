@@ -1,22 +1,22 @@
 ---
 layout: doc
-title: copy模块
+title: copy 模块
 permalink: /docs/stdlib/copy/
 category: stdlib
 tags: [copy, 拷贝, 深拷贝, 浅拷贝, 对象复制]
-description: Python copy模块提供浅拷贝和深拷贝功能，用于复制对象
-author: Python文档团队
+description: Python copy 模块提供浅拷贝和深拷贝功能，用于复制对象
+author: Python 文档团队
 date: 2024-01-15
 updated: 2024-01-15
 version: 1.0
-difficulty: 中级
+difficulty: "中级"
 ---
 
-# copy模块
+# copy 模块
 
 ## 📝 概述
 
-`copy` 模块提供了浅拷贝（shallow copy）和深拷贝（deep copy）功能，用于复制Python对象。浅拷贝创建新对象但只复制引用，而深拷贝递归复制所有嵌套对象，确保完全独立的副本。
+`copy` 模块提供了浅拷贝（shallow copy）和深拷贝（deep copy）功能，用于复制 Python 对象。浅拷贝创建新对象但只复制引用，而深拷贝递归复制所有嵌套对象，确保完全独立的副本。
 
 ## 🎯 学习目标
 
@@ -37,7 +37,7 @@ difficulty: 中级
 
 ### 基本概念
 
-在Python中，对象复制有三种方式：
+在 Python 中，对象复制有三种方式：
 1. **赋值操作（`=`）**：创建对象引用，不复制对象
 2. **浅拷贝（shallow copy）**：复制对象本身，但嵌套对象仍为引用
 3. **深拷贝（deep copy）**：递归复制对象及其所有嵌套对象
@@ -47,10 +47,10 @@ difficulty: 中级
 ```python
 import copy
 
-# 浅拷贝
+## 浅拷贝
 shallow_copy = copy.copy(original_object)
 
-# 深拷贝
+## 深拷贝
 deep_copy = copy.deepcopy(original_object)
 ```
 
@@ -68,28 +68,28 @@ deep_copy = copy.deepcopy(original_object)
 ```python
 import copy
 
-# 原始数据
+## 原始数据
 original = [1, 2, [3, 4]]
 
-# 赋值操作 - 创建引用
+## 赋值操作 - 创建引用
 assignment = original
 assignment[0] = 99
 print(f"赋值后原始数据: {original}")  # 输出: [99, 2, [3, 4]]
 
-# 重置数据
+## 重置数据
 original = [1, 2, [3, 4]]
 
-# 浅拷贝 - 复制顶层对象
+## 浅拷贝 - 复制顶层对象
 shallow = copy.copy(original)
 shallow[0] = 99
 print(f"浅拷贝后原始数据: {original}")  # 输出: [1, 2, [3, 4]]
 shallow[2][0] = 88
 print(f"修改嵌套对象后: {original}")  # 输出: [1, 2, [88, 4]]
 
-# 重置数据
+## 重置数据
 original = [1, 2, [3, 4]]
 
-# 深拷贝 - 完全独立的副本
+## 深拷贝 - 完全独立的副本
 deep = copy.deepcopy(original)
 deep[0] = 99
 deep[2][0] = 88
@@ -101,7 +101,7 @@ print(f"深拷贝后原始数据: {original}")  # 输出: [1, 2, [3, 4]]
 ```python
 import copy
 
-# 场景1: 简单数据结构
+## 场景 1: 简单数据结构
 def shallow_copy_simple():
     """简单数据结构的浅拷贝"""
     numbers = [1, 2, 3, 4, 5]
@@ -111,18 +111,18 @@ def shallow_copy_simple():
     print(f"原始列表: {numbers}")        # [1, 2, 3, 4, 5]
     print(f"拷贝列表: {numbers_copy}")    # [99, 2, 3, 4, 5]
 
-# 场景2: 嵌套不可变对象
+## 场景 2: 嵌套不可变对象
 def shallow_copy_immutable():
     """嵌套不可变对象的浅拷贝"""
     data = (1, 2, (3, 4), "hello")
     data_copy = copy.copy(data)
     
-    # 由于元组是不可变的，浅拷贝足够安全
+#    # 由于元组是不可变的,浅拷贝足够安全
     print(f"原始元组: {data}")
     print(f"拷贝元组: {data_copy}")
     print(f"是否为同一对象: {data is data_copy}")  # False
 
-# 场景3: 字典的浅拷贝
+## 场景 3: 字典的浅拷贝
 def shallow_copy_dict():
     """字典的浅拷贝示例"""
     config = {
@@ -137,7 +137,7 @@ def shallow_copy_dict():
     
     print(f"原始配置: {config}")
     print(f"拷贝配置: {config_copy}")
-    # 注意: settings 字典被共享，修改会影响原始对象
+#    # 注意: settings 字典被共享,修改会影响原始对象
 
 shallow_copy_simple()
 shallow_copy_immutable()
@@ -149,7 +149,7 @@ shallow_copy_dict()
 ```python
 import copy
 
-# 场景1: 复杂嵌套结构
+## 场景 1: 复杂嵌套结构
 def deep_copy_nested():
     """复杂嵌套结构的深拷贝"""
     company = {
@@ -166,19 +166,19 @@ def deep_copy_nested():
         }
     }
     
-    # 深拷贝确保完全独立
+#    # 深拷贝确保完全独立
     company_copy = copy.deepcopy(company)
     
-    # 修改拷贝不会影响原始数据
+#    # 修改拷贝不会影响原始数据
     company_copy['departments']['engineering']['employees'].append('Eve')
     company_copy['departments']['marketing']['campaigns'][0] = 'New Campaign'
     
     print("原始公司数据:")
     print(company)
-    print("\n拷贝公司数据:")
+    print("\n 拷贝公司数据:")
     print(company_copy)
 
-# 场景2: 树形数据结构
+## 场景 2: 树形数据结构
 class TreeNode:
     """树节点类"""
     def __init__(self, value):
@@ -193,7 +193,7 @@ class TreeNode:
 
 def deep_copy_tree():
     """树形结构的深拷贝"""
-    # 创建树结构
+#    # 创建树结构
     root = TreeNode('root')
     child1 = TreeNode('child1')
     child2 = TreeNode('child2')
@@ -203,10 +203,10 @@ def deep_copy_tree():
     root.add_child(child2)
     child1.add_child(grandchild)
     
-    # 深拷贝树结构
+#    # 深拷贝树结构
     root_copy = copy.deepcopy(root)
     
-    # 修改拷贝的树
+#    # 修改拷贝的树
     root_copy.value = 'root_copy'
     root_copy.children[0].value = 'child1_copy'
     
@@ -215,13 +215,13 @@ def deep_copy_tree():
     print(f"拷贝根节点: {root_copy.value}")
     print(f"拷贝子节点: {root_copy.children[0].value}")
 
-# 场景3: 避免副作用的函数设计
+## 场景 3: 避免副作用的函数设计
 def process_data_safe(data):
-    """安全的数据处理函数，不修改原始数据"""
-    # 深拷贝确保不修改原始数据
+    """安全的数据处理函数,不修改原始数据"""
+#    # 深拷贝确保不修改原始数据
     data_copy = copy.deepcopy(data)
     
-    # 对拷贝进行处理
+#    # 对拷贝进行处理
     for item in data_copy:
         if isinstance(item, list):
             item.sort()
@@ -242,7 +242,7 @@ def demonstrate_safe_processing():
     
     print("原始数据:")
     print(original_data)
-    print("\n处理后数据:")
+    print("\n 处理后数据:")
     print(processed_data)
 
 deep_copy_nested()
@@ -258,24 +258,24 @@ import time
 
 def performance_comparison():
     """性能比较示例"""
-    # 创建测试数据
+#    # 创建测试数据
     large_data = {
         'numbers': list(range(10000)),
         'nested': [list(range(100)) for _ in range(100)],
         'strings': [f'string_{i}' for i in range(1000)]
     }
     
-    # 测试赋值操作
+#    # 测试赋值操作
     start_time = time.time()
     assignment = large_data
     assignment_time = time.time() - start_time
     
-    # 测试浅拷贝
+#    # 测试浅拷贝
     start_time = time.time()
     shallow = copy.copy(large_data)
     shallow_time = time.time() - start_time
     
-    # 测试深拷贝
+#    # 测试深拷贝
     start_time = time.time()
     deep = copy.deepcopy(large_data)
     deep_time = time.time() - start_time
@@ -293,12 +293,12 @@ def performance_comparison():
 def copy_selection_guide():
     """拷贝方式选择指南"""
     scenarios = {
-        '简单数据，无嵌套': 'copy.copy() 或切片操作',
+        '简单数据,无嵌套': 'copy.copy() 或切片操作',
         '嵌套不可变对象': 'copy.copy() 足够',
-        '嵌套可变对象，需要独立性': 'copy.deepcopy()',
-        '大数据量，性能敏感': '考虑是否真的需要拷贝',
-        '函数参数，避免副作用': 'copy.deepcopy()',
-        '配置对象，部分修改': 'copy.copy() + 手动处理嵌套'
+        '嵌套可变对象,需要独立性': 'copy.deepcopy()',
+        '大数据量,性能敏感': '考虑是否真的需要拷贝',
+        '函数参数,避免副作用': 'copy.deepcopy()',
+        '配置对象,部分修改': 'copy.copy() + 手动处理嵌套'
     }
     
     print("拷贝方式选择指南:")
@@ -326,13 +326,13 @@ class CustomCopyClass:
     def __copy__(self):
         """自定义浅拷贝行为"""
         print(f"执行 {self.name} 的浅拷贝")
-        # 创建新实例，但共享 data
+#        # 创建新实例,但共享 data
         return CustomCopyClass(f"{self.name}_copy", self.data)
     
     def __deepcopy__(self, memo):
         """自定义深拷贝行为"""
         print(f"执行 {self.name} 的深拷贝")
-        # 创建完全独立的副本
+#        # 创建完全独立的副本
         new_data = copy.deepcopy(self.data, memo)
         return CustomCopyClass(f"{self.name}_deepcopy", new_data)
     
@@ -345,17 +345,17 @@ def demonstrate_custom_copy():
     
     print("原始对象:", original)
     
-    # 浅拷贝
+#    # 浅拷贝
     shallow = copy.copy(original)
     print("浅拷贝:", shallow)
     
-    # 深拷贝
+#    # 深拷贝
     deep = copy.deepcopy(original)
     print("深拷贝:", deep)
     
-    # 测试独立性
+#    # 测试独立性
     original.data[2][0] = 99
-    print("\n修改原始对象后:")
+    print("\n 修改原始对象后:")
     print("原始对象:", original)
     print("浅拷贝:", shallow)  # 受影响
     print("深拷贝:", deep)    # 不受影响
@@ -368,33 +368,33 @@ demonstrate_custom_copy()
 ### 常见陷阱
 
 1. **混淆赋值和拷贝**
-   ```python
-   # 错误：以为这是拷贝
+```python
+#   # 错误:以为这是拷贝
    list2 = list1  # 这只是创建引用
    
-   # 正确：真正的拷贝
+#   # 正确:真正的拷贝
    list2 = copy.copy(list1)  # 浅拷贝
    list2 = copy.deepcopy(list1)  # 深拷贝
-   ```
+```
 
 2. **浅拷贝的嵌套对象陷阱**
-   ```python
+```python
    original = [[1, 2], [3, 4]]
    shallow = copy.copy(original)
    shallow[0][0] = 99  # 会影响原始对象！
-   ```
+```
 
 3. **循环引用问题**
-   ```python
-   # deepcopy 可以处理循环引用
+```python
+#   # deepcopy 可以处理循环引用
    a = [1, 2]
    b = [3, 4]
    a.append(b)
    b.append(a)  # 循环引用
    
-   # copy.deepcopy() 可以正确处理
+#   # copy.deepcopy() 可以正确处理
    c = copy.deepcopy(a)
-   ```
+```
 
 ### 性能考虑
 
@@ -427,5 +427,5 @@ demonstrate_custom_copy()
 ---
 
 **最后更新**: 2024-01-15  
-**作者**: Python文档团队  
+**作者**: Python 文档团队  
 **版本**: 1.0
