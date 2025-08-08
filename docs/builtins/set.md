@@ -744,7 +744,7 @@ print("空集合创建陷阱:")
 
 # 错误方式
 empty_dict = {}  # 这是字典，不是集合
-{% raw %}print(f"{{}} 的类型: {type(empty_dict)}"){% endraw %}
+print(f"{{}} 的类型: {type(empty_dict)}")
 
 # 正确方式
 empty_set = set()
@@ -884,25 +884,25 @@ print(f"深拷贝: {deep_copy}")
 ## 🔗 相关内容
 
 ### 相关函数
-- [list() - 列表构造函数](list.md) - 创建列表
-- [tuple() - 元组构造函数](tuple.md) - 创建元组
-- [dict() - 字典构造函数](dict.md) - 创建字典
-- [frozenset() - 不可变集合](frozenset.md) - 创建不可变集合
-- [len() - 长度函数](len.md) - 获取长度
-- [any() - 任意为真](any.md) - 检查任意元素
-- [all() - 全部为真](all.md) - 检查所有元素
+- [list() - 列表构造函数](list/) - 创建列表
+- [tuple() - 元组构造函数](tuple/) - 创建元组
+- [dict() - 字典构造函数](dict/) - 创建字典
+- [frozenset() - 不可变集合](frozenset/) - 创建不可变集合
+- [len() - 长度函数](len/) - 获取长度
+- [any() - 任意为真](any/) - 检查任意元素
+- [all() - 全部为真](all/) - 检查所有元素
 
 ### 相关模块
-- [collections模块](../stdlib/collections.md) - 容器数据类型
-- [itertools模块](../stdlib/itertools.md) - 迭代工具
-- [copy模块](../stdlib/copy.md) - 拷贝操作
-- [operator模块](../stdlib/operator.md) - 操作符函数
+- [collections模块](../stdlib/collections/) - 容器数据类型
+- [itertools模块](../stdlib/itertools/) - 迭代工具
+- [copy模块](../stdlib/copy/) - 拷贝操作
+- [operator模块](../stdlib/operator/) - 操作符函数
 
 ### 相关概念
-- [集合推导式](../basics/set-comprehensions.md) - 集合生成
-- [哈希表](../advanced/hash-tables.md) - 底层实现
-- [集合论](../math/set-theory.md) - 数学基础
-- [数据结构](../basics/data-structures.md) - 数据组织
+- [集合推导式](../basics/set-comprehensions/) - 集合生成
+- [哈希表](../advanced/hash-tables/) - 底层实现
+- [集合论](../math/set-theory/) - 数学基础
+- [数据结构](../basics/data-structures/) - 数据组织
 
 ## 📚 扩展阅读
 

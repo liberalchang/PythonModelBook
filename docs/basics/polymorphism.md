@@ -668,10 +668,10 @@ for processor in processors:
 
 ## 相关内容
 
-- [类的继承](./class-inheritance.md) - 多态的基础
-- [抽象类](./abstract-classes.md) - 定义多态接口
-- [设计模式](../advanced/design-patterns.md) - 多态在设计模式中的应用
-- [接口设计](../advanced/interface-design.md) - 设计支持多态的接口
+- [类的继承](./class-inheritance/) - 多态的基础
+- [抽象类](./abstract-classes/) - 定义多态接口
+- [设计模式](../advanced/design-patterns/) - 多态在设计模式中的应用
+- [接口设计](../advanced/interface-design/) - 设计支持多态的接口
 
 ## 扩展阅读
 

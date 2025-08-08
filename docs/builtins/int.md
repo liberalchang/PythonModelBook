@@ -261,17 +261,17 @@ print(f"map函数耗时: {time2:.4f}秒")
 ## 🔗 相关内容
 
 ### 相关函数
-- [float() - 浮点数转换函数](float.md) - 转换为浮点数
-- [str() - 字符串转换函数](str.md) - 转换为字符串
-- [bool() - 布尔转换函数](bool.md) - 转换为布尔值
-- [bin() - 二进制转换函数](bin.md) - 转换为二进制字符串
-- [hex() - 十六进制转换函数](hex.md) - 转换为十六进制字符串
-- [oct() - 八进制转换函数](oct.md) - 转换为八进制字符串
+- [float() - 浮点数转换函数](float/) - 转换为浮点数
+- [str() - 字符串转换函数](str/) - 转换为字符串
+- [bool() - 布尔转换函数](bool/) - 转换为布尔值
+- [bin() - 二进制转换函数](bin/) - 转换为二进制字符串
+- [hex() - 十六进制转换函数](hex/) - 转换为十六进制字符串
+- [oct() - 八进制转换函数](oct/) - 转换为八进制字符串
 
 ### 相关概念
-- [Python数据类型](../basics/data-types.md) - 基本数据类型
-- [异常处理](../basics/exceptions.md) - 异常处理机制
-- [数值系统](../advanced/number-systems.md) - 进制转换详解
+- [Python数据类型](../basics/data-types/) - 基本数据类型
+- [异常处理](../basics/exceptions/) - 异常处理机制
+- [数值系统](../advanced/number-systems/) - 进制转换详解
 
 ## 📚 扩展阅读
 

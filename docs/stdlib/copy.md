@@ -410,9 +410,9 @@ demonstrate_custom_copy()
 
 ## 🔗 相关内容
 
-- [Python 对象模型](../basics/objects.md)
-- [内存管理](../advanced/memory-management.md)
-- [可变与不可变对象](../basics/mutability.md)
+- [Python 对象模型](../basics/objects/)
+- [内存管理](../advanced/memory-management/)
+- [可变与不可变对象](../basics/mutability/)
 
 ## 📚 扩展阅读
 

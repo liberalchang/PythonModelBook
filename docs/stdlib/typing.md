@@ -730,9 +730,9 @@ print(handle_api_response(api_response))
 
 ## 🔗 相关内容
 
-- [dataclasses模块](../dataclasses.md) - 数据类与类型提示
-- [abc模块](../abc.md) - 抽象基类
-- [functools模块](../functools.md) - 函数工具
+- [dataclasses模块](../dataclasses/) - 数据类与类型提示
+- [abc模块](../abc/) - 抽象基类
+- [functools模块](../functools/) - 函数工具
 
 ## 📚 扩展阅读
 

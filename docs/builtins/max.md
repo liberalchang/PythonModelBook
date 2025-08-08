@@ -522,24 +522,24 @@ print(f"直接生成器结果: {result3}")
 ## 🔗 相关内容
 
 ### 相关函数
-- [min() - 最小值函数](min.md) - 找最小值
-- [sorted() - 排序函数](sorted.md) - 排序操作
-- [sum() - 求和函数](sum.md) - 数值求和
-- [len() - 长度函数](len.md) - 获取长度
-- [any() - 逻辑或函数](any.md) - 任一为真
-- [all() - 逻辑与函数](all.md) - 全部为真
+- [min() - 最小值函数](min/) - 找最小值
+- [sorted() - 排序函数](sorted/) - 排序操作
+- [sum() - 求和函数](sum/) - 数值求和
+- [len() - 长度函数](len/) - 获取长度
+- [any() - 逻辑或函数](any/) - 任一为真
+- [all() - 逻辑与函数](all/) - 全部为真
 
 ### 相关模块
-- [heapq模块](../stdlib/heapq.md) - 堆队列算法
-- [operator模块](../stdlib/operator.md) - 操作符函数
-- [functools模块](../stdlib/functools.md) - 函数工具
-- [statistics模块](../stdlib/statistics.md) - 统计函数
+- [heapq模块](../stdlib/heapq/) - 堆队列算法
+- [operator模块](../stdlib/operator/) - 操作符函数
+- [functools模块](../stdlib/functools/) - 函数工具
+- [statistics模块](../stdlib/statistics/) - 统计函数
 
 ### 相关概念
-- [比较运算](../basics/comparison-operators.md) - 比较运算符
-- [排序算法](../algorithms/sorting.md) - 排序算法详解
-- [lambda函数](../basics/lambda-functions.md) - 匿名函数
-- [生成器表达式](../advanced/generator-expressions.md) - 内存优化
+- [比较运算](../basics/comparison-operators/) - 比较运算符
+- [排序算法](../algorithms/sorting/) - 排序算法详解
+- [lambda函数](../basics/lambda-functions/) - 匿名函数
+- [生成器表达式](../advanced/generator-expressions/) - 内存优化
 
 ## 📚 扩展阅读
 

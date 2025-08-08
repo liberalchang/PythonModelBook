@@ -356,9 +356,9 @@ __all__ = [
 
 ## 🔗 相关内容
 
-- [模块导入机制](../functions.md)
-- [命名空间和作用域](../function-scope.md)
-- [面向对象编程](../class-definition.md)
+- [模块导入机制](../functions/)
+- [命名空间和作用域](../function-scope/)
+- [面向对象编程](../class-definition/)
 
 ## 📚 扩展阅读
 

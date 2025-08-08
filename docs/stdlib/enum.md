@@ -348,9 +348,9 @@ for planet in Planet:
 
 ## 🔗 相关内容
 
-- [dataclasses模块](../dataclasses.md) - 数据类与枚举的结合使用
-- [typing模块](../typing.md) - 类型提示与枚举
-- [collections模块](../collections.md) - 其他数据结构
+- [dataclasses模块](../dataclasses/) - 数据类与枚举的结合使用
+- [typing模块](../typing/) - 类型提示与枚举
+- [collections模块](../collections/) - 其他数据结构
 
 ## 📚 扩展阅读
 

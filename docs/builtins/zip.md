@@ -282,9 +282,9 @@ print("第二次:", list(zip_obj))  # []
 
 ## 🔗 相关内容
 
-- [enumerate() - 枚举函数](../enumerate.md)
-- [map() - 映射函数](../map.md)
-- [itertools模块 - 迭代工具](../../stdlib/itertools.md)
+- [enumerate() - 枚举函数](../enumerate/)
+- [map() - 映射函数](../map/)
+- [itertools模块 - 迭代工具](../../stdlib/itertools/)
 
 ## 📚 扩展阅读
 

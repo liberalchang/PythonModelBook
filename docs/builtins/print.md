@@ -137,9 +137,9 @@ print_student_info(students)
 
 ## 🔗 相关内容
 
-- [input() - 输入函数](../input.md)
-- [format() - 格式化函数](../format.md)
-- [f-string - 格式化字符串](../f-string.md)
+- [input() - 输入函数](../input/)
+- [format() - 格式化函数](../format/)
+- [f-string - 格式化字符串](../f-string/)
 
 ## 📚 扩展阅读
 

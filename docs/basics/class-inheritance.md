@@ -440,10 +440,10 @@ for shape in shapes:
 
 ## 相关内容
 
-- [类的定义](./class-definition.md) - 了解类的基本定义
-- [多态性](./polymorphism.md) - 继承实现多态的基础
-- [抽象类](./abstract-classes.md) - 使用抽象类定义接口
-- [设计模式](../advanced/design-patterns.md) - 继承在设计模式中的应用
+- [类的定义](./class-definition/) - 了解类的基本定义
+- [多态性](./polymorphism/) - 继承实现多态的基础
+- [抽象类](./abstract-classes/) - 使用抽象类定义接口
+- [设计模式](../advanced/design-patterns/) - 继承在设计模式中的应用
 
 ## 扩展阅读
 

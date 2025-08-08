@@ -660,24 +660,24 @@ tracemalloc.stop()
 ## 🔗 相关内容
 
 ### 相关函数
-- [tuple() - 元组构造函数](tuple.md) - 创建元组
-- [set() - 集合构造函数](set.md) - 创建集合
-- [dict() - 字典构造函数](dict.md) - 创建字典
-- [str() - 字符串构造函数](str.md) - 创建字符串
-- [range() - 范围函数](range.md) - 生成数字序列
-- [enumerate() - 枚举函数](enumerate.md) - 枚举索引
+- [tuple() - 元组构造函数](tuple/) - 创建元组
+- [set() - 集合构造函数](set/) - 创建集合
+- [dict() - 字典构造函数](dict/) - 创建字典
+- [str() - 字符串构造函数](str/) - 创建字符串
+- [range() - 范围函数](range/) - 生成数字序列
+- [enumerate() - 枚举函数](enumerate/) - 枚举索引
 
 ### 相关模块
-- [copy模块](../stdlib/copy.md) - 拷贝操作
-- [itertools模块](../stdlib/itertools.md) - 迭代工具
-- [collections模块](../stdlib/collections.md) - 容器数据类型
-- [array模块](../stdlib/array.md) - 数组类型
+- [copy模块](../stdlib/copy/) - 拷贝操作
+- [itertools模块](../stdlib/itertools/) - 迭代工具
+- [collections模块](../stdlib/collections/) - 容器数据类型
+- [array模块](../stdlib/array/) - 数组类型
 
 ### 相关概念
-- [列表推导式](../basics/list-comprehensions.md) - 列表生成
-- [序列类型](../basics/sequence-types.md) - 序列操作
-- [迭代器和生成器](../advanced/iterators-generators.md) - 迭代协议
-- [内存管理](../advanced/memory-management.md) - 内存优化
+- [列表推导式](../basics/list-comprehensions/) - 列表生成
+- [序列类型](../basics/sequence-types/) - 序列操作
+- [迭代器和生成器](../advanced/iterators-generators/) - 迭代协议
+- [内存管理](../advanced/memory-management/) - 内存优化
 
 ## 📚 扩展阅读
 

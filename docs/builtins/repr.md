@@ -627,7 +627,7 @@ class CodeGenerator:
         lines.append("")
         
         # 生成__repr__方法
-        {% raw %}attr_reprs = [f"{name}={{self.{name}!r}}" for name in attributes.keys()]{% endraw %}
+        attr_reprs = [f"{name}={{self.{name}!r}}" for name in attributes.keys()]
         repr_format = f"{class_name}(" + ", ".join(attr_reprs) + ")"
         lines.append("    def __repr__(self):")
         lines.append(f'        return f"{repr_format}"')

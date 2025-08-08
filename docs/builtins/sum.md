@@ -541,25 +541,25 @@ print(f"包含NaN的求和: {nan_sum}")
 ## 🔗 相关内容
 
 ### 相关函数
-- [min() - 最小值函数](min.md) - 找最小值
-- [max() - 最大值函数](max.md) - 找最大值
-- [len() - 长度函数](len.md) - 获取长度
-- [abs() - 绝对值函数](abs.md) - 绝对值计算
-- [round() - 四舍五入函数](round.md) - 数值舍入
-- [pow() - 幂运算函数](pow.md) - 幂运算
+- [min() - 最小值函数](min/) - 找最小值
+- [max() - 最大值函数](max/) - 找最大值
+- [len() - 长度函数](len/) - 获取长度
+- [abs() - 绝对值函数](abs/) - 绝对值计算
+- [round() - 四舍五入函数](round/) - 数值舍入
+- [pow() - 幂运算函数](pow/) - 幂运算
 
 ### 相关模块
-- [math模块](../stdlib/math.md) - 数学函数
-- [statistics模块](../stdlib/statistics.md) - 统计函数
-- [decimal模块](../stdlib/decimal.md) - 精确小数
-- [fractions模块](../stdlib/fractions.md) - 分数运算
-- [numpy模块](../third-party/numpy.md) - 数值计算
+- [math模块](../stdlib/math/) - 数学函数
+- [statistics模块](../stdlib/statistics/) - 统计函数
+- [decimal模块](../stdlib/decimal/) - 精确小数
+- [fractions模块](../stdlib/fractions/) - 分数运算
+- [numpy模块](../third-party/numpy/) - 数值计算
 
 ### 相关概念
-- [算术运算符](../basics/arithmetic-operators.md) - 数学运算
-- [生成器表达式](../advanced/generator-expressions.md) - 内存优化
-- [列表推导式](../basics/list-comprehensions.md) - 数据处理
-- [浮点数精度](../advanced/floating-point-precision.md) - 精度问题
+- [算术运算符](../basics/arithmetic-operators/) - 数学运算
+- [生成器表达式](../advanced/generator-expressions/) - 内存优化
+- [列表推导式](../basics/list-comprehensions/) - 数据处理
+- [浮点数精度](../advanced/floating-point-precision/) - 精度问题
 
 ## 📚 扩展阅读
 

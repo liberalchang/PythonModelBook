@@ -388,9 +388,9 @@ print(make_it_quack(dog))   # Woof! (pretending to quack)
 
 ## 🔗 相关内容
 
-- [type() - 类型函数](../type.md)
-- [issubclass() - 子类检查函数](../issubclass.md)
-- [hasattr() - 属性检查函数](../hasattr.md)
+- [type() - 类型函数](../type/)
+- [issubclass() - 子类检查函数](../issubclass/)
+- [hasattr() - 属性检查函数](../hasattr/)
 
 ## 📚 扩展阅读
 

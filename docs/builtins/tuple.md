@@ -817,24 +817,24 @@ print(f"日志记录（列表包含元组）: {log_entries}")
 ## 🔗 相关内容
 
 ### 相关函数
-- [list() - 列表构造函数](list.md) - 创建列表
-- [set() - 集合构造函数](set.md) - 创建集合
-- [dict() - 字典构造函数](dict.md) - 创建字典
-- [str() - 字符串构造函数](str.md) - 创建字符串
-- [len() - 长度函数](len.md) - 获取长度
-- [enumerate() - 枚举函数](enumerate.md) - 枚举索引
+- [list() - 列表构造函数](list/) - 创建列表
+- [set() - 集合构造函数](set/) - 创建集合
+- [dict() - 字典构造函数](dict/) - 创建字典
+- [str() - 字符串构造函数](str/) - 创建字符串
+- [len() - 长度函数](len/) - 获取长度
+- [enumerate() - 枚举函数](enumerate/) - 枚举索引
 
 ### 相关模块
-- [collections模块](../stdlib/collections.md) - 容器数据类型
-- [itertools模块](../stdlib/itertools.md) - 迭代工具
-- [operator模块](../stdlib/operator.md) - 操作符函数
-- [copy模块](../stdlib/copy.md) - 拷贝操作
+- [collections模块](../stdlib/collections/) - 容器数据类型
+- [itertools模块](../stdlib/itertools/) - 迭代工具
+- [operator模块](../stdlib/operator/) - 操作符函数
+- [copy模块](../stdlib/copy/) - 拷贝操作
 
 ### 相关概念
-- [序列类型](../basics/sequence-types.md) - 序列操作
-- [不可变对象](../basics/immutable-objects.md) - 不可变性
-- [元组解包](../basics/tuple-unpacking.md) - 解包操作
-- [命名元组](../advanced/named-tuples.md) - 结构化数据
+- [序列类型](../basics/sequence-types/) - 序列操作
+- [不可变对象](../basics/immutable-objects/) - 不可变性
+- [元组解包](../basics/tuple-unpacking/) - 解包操作
+- [命名元组](../advanced/named-tuples/) - 结构化数据
 
 ## 📚 扩展阅读
 

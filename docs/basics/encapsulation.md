@@ -836,10 +836,10 @@ except Exception as e:
 
 ## 相关内容
 
-- [类的定义](./class-definition.md) - 封装的基础
-- [继承](./class-inheritance.md) - 封装在继承中的表现
-- [多态](./polymorphism.md) - 封装与多态的结合
-- [装饰器](../advanced/decorators.md) - property装饰器的原理
+- [类的定义](./class-definition/) - 封装的基础
+- [继承](./class-inheritance/) - 封装在继承中的表现
+- [多态](./polymorphism/) - 封装与多态的结合
+- [装饰器](../advanced/decorators/) - property装饰器的原理
 
 ## 扩展阅读
 

@@ -230,9 +230,9 @@ print(str(type(child)))      # "<class '__main__.Child'>"
 
 ## 🔗 相关内容
 
-- [isinstance() - 实例检查函数](../isinstance.md)
-- [issubclass() - 子类检查函数](../issubclass.md)
-- [hasattr() - 属性检查函数](../hasattr.md)
+- [isinstance() - 实例检查函数](../isinstance/)
+- [issubclass() - 子类检查函数](../issubclass/)
+- [hasattr() - 属性检查函数](../hasattr/)
 
 ## 📚 扩展阅读
 
