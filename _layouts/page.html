@@ -8,9 +8,9 @@ layout: default
     <div class="page-header-content">
       <h1 class="page-title">{{ page.title }}</h1>
       {% if page.description %}
-        <p class="page-description">{{ page.description }}</p>
+      <p class="page-description">{{ page.description }}</p>
       {% endif %}
-      
+
       <!-- 面包屑导航 -->
       <nav class="breadcrumb">
         <a href="{{ '/' | relative_url }}" class="breadcrumb-item">
@@ -22,13 +22,13 @@ layout: default
       </nav>
     </div>
   </header>
-  
+
   <!-- 页面内容 -->
   <main class="page-content">
     <article class="page-article">
       {{ content }}
     </article>
-    
+
     <!-- 页面侧边栏 -->
     {% if page.show_sidebar != false %}
     <aside class="page-sidebar">
@@ -42,7 +42,7 @@ layout: default
           <!-- 目录将通过JavaScript自动生成 -->
         </div>
       </div>
-      
+
       <!-- 相关链接 -->
       {% if page.related_links %}
       <div class="sidebar-section">
@@ -53,7 +53,7 @@ layout: default
         <ul class="related-links">
           {% for link in page.related_links %}
           <li>
-            <a href="{{ link.url }}" {% if link.external %}target="_blank"{% endif %}>
+            <a href="{{ link.url }}" {% if link.external %}target="_blank" {% endif %}>
               {{ link.title }}
               {% if link.external %}<i class="fas fa-external-link-alt"></i>{% endif %}
             </a>
@@ -62,7 +62,7 @@ layout: default
         </ul>
       </div>
       {% endif %}
-      
+
       <!-- 快速导航 -->
       <div class="sidebar-section">
         <h3 class="sidebar-title">
@@ -79,7 +79,7 @@ layout: default
     </aside>
     {% endif %}
   </main>
-  
+
   <!-- 页面底部操作 -->
   <footer class="page-footer">
     <div class="page-actions">
@@ -89,18 +89,18 @@ layout: default
         编辑此页
       </a>
       {% endif %}
-      
-      <a href="https://github.com/username/PythonModelBook/issues/new" class="btn btn-outline" target="_blank">
+
+      <a href="https://github.com/liberalchang/PythonModelBook/issues/new" class="btn btn-outline" target="_blank">
         <i class="fas fa-bug"></i>
         报告问题
       </a>
-      
+
       <button id="share-page" class="btn btn-outline">
         <i class="fas fa-share"></i>
         分享页面
       </button>
     </div>
-    
+
     <!-- 页面信息 -->
     <div class="page-meta">
       {% if page.date %}
@@ -109,14 +109,14 @@ layout: default
         发布时间：{{ page.date | date: "%Y年%m月%d日" }}
       </span>
       {% endif %}
-      
+
       {% if page.updated %}
       <span class="meta-item">
         <i class="fas fa-clock"></i>
         更新时间：{{ page.updated | date: "%Y年%m月%d日" }}
       </span>
       {% endif %}
-      
+
       {% if page.author %}
       <span class="meta-item">
         <i class="fas fa-user"></i>
@@ -129,195 +129,195 @@ layout: default
 
 <!-- 页面特定的样式 -->
 <style>
-.page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.page-header {
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.page-description {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.breadcrumb-item {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.breadcrumb-item:hover {
-  color: var(--primary-color);
-}
-
-.breadcrumb-item.current {
-  color: var(--primary-color);
-  font-weight: 500;
-}
-
-.page-content {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 3rem;
-  align-items: start;
-}
-
-.page-article {
-  min-width: 0;
-}
-
-.page-sidebar {
-  position: sticky;
-  top: 2rem;
-}
-
-.sidebar-section {
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.sidebar-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.page-footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.page-actions {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.page-meta {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  flex-wrap: wrap;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
   .page-container {
-    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
   }
-  
-  .page-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .page-sidebar {
-    position: static;
-    order: -1;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-  }
-  
-  .page-actions {
-    justify-content: center;
-  }
-  
-  .page-meta {
-    justify-content: center;
+
+  .page-header {
+    margin-bottom: 3rem;
     text-align: center;
   }
-}
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .breadcrumb-item {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-item:hover {
+    color: var(--primary-color);
+  }
+
+  .breadcrumb-item.current {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+
+  .page-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .page-article {
+    min-width: 0;
+  }
+
+  .page-sidebar {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .sidebar-section {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .page-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .page-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .page-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .page-container {
+      padding: 1rem;
+    }
+
+    .page-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .page-sidebar {
+      position: static;
+      order: -1;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .page-actions {
+      justify-content: center;
+    }
+
+    .page-meta {
+      justify-content: center;
+      text-align: center;
+    }
+  }
 </style>
 
 <!-- 页面特定的JavaScript -->
 <script>
-// 自动生成页面目录
-document.addEventListener('DOMContentLoaded', function() {
-  const tocContainer = document.getElementById('page-toc');
-  if (!tocContainer) return;
-  
-  const headings = document.querySelectorAll('.page-article h2, .page-article h3, .page-article h4');
-  if (headings.length === 0) {
-    tocContainer.innerHTML = '<p class="no-toc">此页面没有标题</p>';
-    return;
-  }
-  
-  const tocList = document.createElement('ul');
-  tocList.className = 'toc-list';
-  
-  headings.forEach((heading, index) => {
-    const id = heading.id || `heading-${index}`;
-    heading.id = id;
-    
-    const li = document.createElement('li');
-    li.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
-    
-    const link = document.createElement('a');
-    link.href = `#${id}`;
-    link.textContent = heading.textContent;
-    link.className = 'toc-link';
-    
-    li.appendChild(link);
-    tocList.appendChild(li);
-  });
-  
-  tocContainer.appendChild(tocList);
-});
+  // 自动生成页面目录
+  document.addEventListener('DOMContentLoaded', function () {
+    const tocContainer = document.getElementById('page-toc');
+    if (!tocContainer) return;
 
-// 分享功能
-document.getElementById('share-page')?.addEventListener('click', function() {
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: window.location.href
+    const headings = document.querySelectorAll('.page-article h2, .page-article h3, .page-article h4');
+    if (headings.length === 0) {
+      tocContainer.innerHTML = '<p class="no-toc">此页面没有标题</p>';
+      return;
+    }
+
+    const tocList = document.createElement('ul');
+    tocList.className = 'toc-list';
+
+    headings.forEach((heading, index) => {
+      const id = heading.id || `heading-${index}`;
+      heading.id = id;
+
+      const li = document.createElement('li');
+      li.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
+
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = heading.textContent;
+      link.className = 'toc-link';
+
+      li.appendChild(link);
+      tocList.appendChild(li);
     });
-  } else {
-    // 复制链接到剪贴板
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert('页面链接已复制到剪贴板');
-    });
-  }
-});
+
+    tocContainer.appendChild(tocList);
+  });
+
+  // 分享功能
+  document.getElementById('share-page')?.addEventListener('click', function () {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: window.location.href
+      });
+    } else {
+      // 复制链接到剪贴板
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('页面链接已复制到剪贴板');
+      });
+    }
+  });
 </script>

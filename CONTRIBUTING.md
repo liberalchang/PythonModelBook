@@ -22,7 +22,7 @@
 3. 创建新的分支进行修改
 
 ```bash
-git clone https://github.com/your-username/PythonModelBook.git
+git clone https://github.com/liberalchang/PythonModelBook.git
 cd PythonModelBook
 git checkout -b feature/your-feature-name
 ```

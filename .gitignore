@@ -207,8 +207,47 @@ marimo/_lsp/
 __marimo__/
 
 
+# Jekyll 相关文件
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+
+# 网站构建相关
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 临时文件和备份
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# 操作系统相关
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# 编辑器相关
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# 项目特定文件
 # user
 .trae
 image/
 tmp/
 update_index.py
+search_index.json
+*.log

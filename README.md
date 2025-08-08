@@ -106,7 +106,7 @@ Python标准库中的重要模块
 
 1. **克隆仓库**
 ```bash
-git clone https://github.com/username/PythonModelBook.git
+git clone https://github.com/liberalchang/PythonModelBook.git
 cd PythonModelBook
 ```
 
@@ -134,7 +134,7 @@ bundle exec jekyll serve --host 0.0.0.0 --port 4000
 1. Fork本仓库到您的GitHub账户
 2. 在仓库设置中启用GitHub Pages
 3. 选择源分支（通常是main或gh-pages）
-4. 访问 `https://your-username.github.io/PythonModelBook`
+4. 访问 `https://liberalchang.github.io/PythonModelBook`
 
 ## 🤝 贡献指南
 
@@ -158,9 +158,9 @@ bundle exec jekyll serve --host 0.0.0.0 --port 4000
 
 ## 📞 联系我们
 
-- **GitHub Issues**: [项目问题反馈](https://github.com/username/PythonModelBook/issues)
-- **GitHub Discussions**: [项目讨论](https://github.com/username/PythonModelBook/discussions)
-- **Email**: project@example.com
+- **GitHub Issues**: [项目问题反馈](https://github.com/liberalchang/PythonModelBook/issues)
+- **GitHub Discussions**: [项目讨论](https://github.com/liberalchang/PythonModelBook/discussions)
+- **Email**: liberalcxl@gmail.com
 
 ## 🔗 相关链接
 

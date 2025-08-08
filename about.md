@@ -170,10 +170,9 @@ Python作为当今最受欢迎的编程语言之一，在数据科学、Web开�
 
 如果您有任何问题、建议或合作意向，欢迎通过以下方式联系我们：
 
-- **GitHub Issues**: [项目问题反馈](https://github.com/username/PythonModelBook/issues)
-- **GitHub Discussions**: [项目讨论](https://github.com/username/PythonModelBook/discussions)
-- **Email**: project@example.com
-- **社交媒体**: @PythonModelBook
+- **GitHub Issues**: [项目问题反馈](https://github.com/liberalchang/PythonModelBook/issues)
+- **GitHub Discussions**: [项目讨论](https://github.com/liberalchang/PythonModelBook/discussions)
+- **Email**: liberalcxl@gmail.com
 
 ---
 
