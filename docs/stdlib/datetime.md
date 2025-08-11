@@ -677,8 +677,8 @@ scheduler.export_events('events.json')
 
 ## 🔗 相关内容
 
-- [time 模块](time/) - 基础时间处理功能
-- [calendar 模块](calendar/) - 日历相关功能
+- [time 模块](../time/) - 基础时间处理功能
+- [calendar 模块](../calendar/) - 日历相关功能
 - [内置函数](../builtins/) - 了解相关的内置函数
 
 ## 📚 扩展阅读

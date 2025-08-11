@@ -15,17 +15,17 @@ Python 标准库是 Python 安装包自带的模块集合，提供了丰富的�
 
 
 ### 日期时间
-- [time 模块 - 基础时间处理功能](time/)
-- [calendar 模块 - 日历相关功能](calendar/)
-- [datetime 模块 - 高级日期时间处理](datetime/)
+- [time 模块 - 基础时间处理功能](./time/)
+- [calendar 模块 - 日历相关功能](./calendar/)
+- [datetime 模块 - 高级日期时间处理](./datetime/)
 
 
 ### 函数式编程
-- [operator 模块 - 运算符函数映射](operator/)
-- [copy 模块 - 对象拷贝功能](copy/)
-- [inspect 模块 - 对象检查和反射功能](inspect/)
-- [enum 模块 - 枚举类型和常量定义](enum/)
-- [typing 模块 - 类型提示和静态类型检查](typing/)
+- [operator 模块 - 运算符函数映射](./operator/)
+- [copy 模块 - 对象拷贝功能](./copy/)
+- [inspect 模块 - 对象检查和反射功能](./inspect/)
+- [enum 模块 - 枚举类型和常量定义](./enum/)
+- [typing 模块 - 类型提示和静态类型检查](./typing/)
 
 
 ## 🎯 学习目标

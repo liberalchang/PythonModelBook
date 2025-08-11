@@ -13,32 +13,32 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 ## 📋 本模块内容
 
 ### 变量与数据类型
-- [变量与数据类型](variables/)
+- [变量与数据类型](./variables/)
 
 ### 控制流程
-- [判断语句与循环语句](control-flow/)
-- [match-case 语句 - 结构化模式匹配](match-case/)
-- [with 语句 - 上下文管理器](with/)
-- [raise/assert - 异常抛出和断言](raise-assert/)
-- [yield - 生成器和协程](yield/)
+- [判断语句与循环语句](./control-flow/)
+- [match-case 语句 - 结构化模式匹配](./match-case/)
+- [with 语句 - 上下文管理器](./with/)
+- [raise/assert - 异常抛出和断言](./raise-assert/)
+- [yield - 生成器和协程](./yield/)
 
 ### 函数
-- [函数定义与调用](functions/)
-- [函数作用域与闭包](function-scope/)
+- [函数定义与调用](./functions/)
+- [函数作用域与闭包](./function-scope/)
 
 ### 模块与包
-- [Python 包和__init__.py 文件](packages/)
+- [Python 包和__init__.py 文件](./packages/)
 
 
 ### 类与对象
 
-- [类的定义与使用](class-definition/)
-- [类的继承](class-inheritance/)
-- [多态性](polymorphism/)
-- [封装](encapsulation/)
-- [魔术方法](magic-methods/)
-- [抽象基类](abstract-classes/)
-- [数据类 (dataclass)](dataclasses/)
+- [类的定义与使用](./class-definition/)
+- [类的继承](./class-inheritance/)
+- [多态性](./polymorphism/)
+- [封装](./encapsulation/)
+- [魔术方法](./magic-methods/)
+- [抽象基类](./abstract-classes/)
+- [数据类 (dataclass)](./dataclasses/)
 
 
 

@@ -413,9 +413,9 @@ print(f"性能提升: {lambda_time/itemgetter_time:.2f}倍")
 
 ## 🔗 相关内容
 
-- [functools 模块](functools/) - 函数式编程工具
-- [itertools 模块](itertools/) - 迭代器工具
-- [collections 模块](collections/) - 专用容器数据类型
+- [functools 模块](../functools/) - 函数式编程工具
+- [itertools 模块](../itertools/) - 迭代器工具
+- [collections 模块](../collections/) - 专用容器数据类型
 - [排序算法](../basics/sorting/) - 排序的基础知识
 
 ## 📚 扩展阅读

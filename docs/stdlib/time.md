@@ -386,8 +386,8 @@ for key, value in stats.items():
 
 ## 🔗 相关内容
 
-- [datetime 模块](datetime/) - 更高级的日期时间处理
-- [calendar 模块](calendar/) - 日历相关功能
+- [datetime 模块](../datetime/) - 更高级的日期时间处理
+- [calendar 模块](../calendar/) - 日历相关功能
 - [内置函数](../builtins/) - 了解相关的内置函数
 
 ## 📚 扩展阅读

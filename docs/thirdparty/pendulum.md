@@ -767,9 +767,9 @@ manager.export_to_ical('events.ics')
 
 ## 🔗 相关内容
 
-- [datetime 模块](datetime/) - Python 标准日期时间模块
-- [time 模块](time/) - 基础时间处理功能
-- [calendar 模块](calendar/) - 日历相关功能
+- [datetime 模块](../../stdlib/datetime/) - Python 标准日期时间模块
+- [time 模块](../../stdlib/time/) - 基础时间处理功能
+- [calendar 模块](../../stdlib/calendar/) - 日历相关功能
 
 ## 📚 扩展阅读
 
