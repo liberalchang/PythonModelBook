@@ -177,10 +177,11 @@ permalink: /docs/
 .docs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 固定2列布局 */
-    max-width: 100%; /* 自动适配容器宽度 */
+    width: 100%; /* 使用全部可用宽度 */
+    max-width: 1200px; /* 设置合理的最大宽度 */
     gap: 2rem;
-    margin: 2rem 0;
-    justify-content: center;
+    margin: 2rem auto; /* 居中显示 */
+    justify-content: stretch; /* 拉伸填充 */
     align-content: start;
 }
 
@@ -191,7 +192,8 @@ permalink: /docs/
     padding: 1.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-left: auto;
+    width: 100%; /* 充分利用网格空间 */
+    min-width: 320px; /* 设置最小宽度 */
 }
 
 .category-card:hover {
@@ -263,10 +265,7 @@ permalink: /docs/
 /* 响应式布局优化 */
 @media (min-width: 1400px) {
     .docs-grid {
-        grid-template-columns: repeat(2, 1fr); /* 保持2列布局 */
-        max-width: 1200px; /* 适当增加最大宽度 */
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 1400px; /* 大屏幕增加最大宽度 */
     }
     
     .doc-links {
@@ -281,21 +280,19 @@ permalink: /docs/
 
 @media (min-width: 1920px) {
     .docs-grid {
-        max-width: 1400px; /* 大屏幕适当增加宽度 */
+        max-width: 1600px; /* 大屏幕进一步增加宽度 */
     }
 }
 
 @media (min-width: 2560px) {
     .docs-grid {
-        max-width: 1600px; /* 超大屏幕进一步增加宽度 */
+        max-width: 1800px; /* 超大屏幕最大宽度 */
     }
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
     .docs-grid {
-        grid-template-columns: repeat(2, 1fr); /* 保持2列布局 */
-        max-width: 1000px;
-        justify-content: center;
+        max-width: 1200px; /* 与基础样式保持一致 */
     }
     
     .doc-links {
@@ -310,9 +307,7 @@ permalink: /docs/
 
 @media (min-width: 900px) and (max-width: 1199px) {
     .docs-grid {
-        grid-template-columns: repeat(2, 1fr); /* 中等屏幕也保持2列 */
-        max-width: 800px;
-        justify-content: center;
+        max-width: 1000px; /* 中等屏幕适当增加宽度 */
     }
 }
 
