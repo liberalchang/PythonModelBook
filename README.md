@@ -42,6 +42,10 @@ gem install bundler
 
 ## 安装项目依赖
 bundle install
+
+## 清理bundle缓存
+bundle clean --force
+
 ```
 
 3. **启动服务**
@@ -63,7 +67,7 @@ bundle exec jekyll serve --host 0.0.0.0 --port 4000
 
 ## 🤝 贡献指南
 
-我们欢迎所有形式的贡献！请查看 [贡献指南](CONTRIBUTING/) 了解详细信息。
+我们欢迎所有形式的贡献！请查看 [贡献指南](./CONTRIBUTING/) 了解详细信息。
 
 ### 贡献方式
 - 📝 **内容贡献**: 添加新文档、完善现有内容

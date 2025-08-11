@@ -886,13 +886,13 @@ print(f"深拷贝: {deep_copy}")
 ## 🔗 相关内容
 
 ### 相关函数
-- [list() - 列表构造函数](list/) - 创建列表
-- [tuple() - 元组构造函数](tuple/) - 创建元组
-- [dict() - 字典构造函数](dict/) - 创建字典
-- [frozenset() - 不可变集合](frozenset/) - 创建不可变集合
-- [len() - 长度函数](len/) - 获取长度
-- [any() - 任意为真](any/) - 检查任意元素
-- [all() - 全部为真](all/) - 检查所有元素
+- [list() - 列表构造函数](../list/) - 创建列表
+- [tuple() - 元组构造函数](../tuple/) - 创建元组
+- [dict() - 字典构造函数](../dict/) - 创建字典
+- [frozenset() - 不可变集合](../frozenset/) - 创建不可变集合
+- [len() - 长度函数](../len/) - 获取长度
+- [any() - 任意为真](../any/) - 检查任意元素
+- [all() - 全部为真](../all/) - 检查所有元素
 
 ### 相关模块
 - [collections 模块](../stdlib/collections/) - 容器数据类型
