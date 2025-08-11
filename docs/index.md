@@ -176,11 +176,11 @@ permalink: /docs/
 <style>
 .docs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    max-width: 800px; /* 限制最大宽度以确保最多2列 */
+    grid-template-columns: repeat(2, 1fr); /* 固定2列布局 */
+    max-width: 100%; /* 自动适配容器宽度 */
     gap: 2rem;
     margin: 2rem 0;
-    justify-content: end;
+    justify-content: center;
     align-content: start;
 }
 
@@ -263,10 +263,10 @@ permalink: /docs/
 /* 响应式布局优化 */
 @media (min-width: 1400px) {
     .docs-grid {
-        grid-template-columns: repeat(2, 1fr); /* 强制最多2列 */
-        max-width: 800px;
+        grid-template-columns: repeat(2, 1fr); /* 保持2列布局 */
+        max-width: 1200px; /* 适当增加最大宽度 */
         margin-left: auto;
-        margin-right: 0;
+        margin-right: auto;
     }
     
     .doc-links {
@@ -281,21 +281,21 @@ permalink: /docs/
 
 @media (min-width: 1920px) {
     .docs-grid {
-        max-width: 800px; /* 保持最多2列 */
+        max-width: 1400px; /* 大屏幕适当增加宽度 */
     }
 }
 
 @media (min-width: 2560px) {
     .docs-grid {
-        max-width: 800px; /* 保持最多2列 */
+        max-width: 1600px; /* 超大屏幕进一步增加宽度 */
     }
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
     .docs-grid {
-        grid-template-columns: repeat(2, 1fr); /* 强制最多2列 */
-        max-width: 800px;
-        justify-content: end;
+        grid-template-columns: repeat(2, 1fr); /* 保持2列布局 */
+        max-width: 1000px;
+        justify-content: center;
     }
     
     .doc-links {
@@ -310,7 +310,8 @@ permalink: /docs/
 
 @media (min-width: 900px) and (max-width: 1199px) {
     .docs-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(2, 1fr); /* 中等屏幕也保持2列 */
+        max-width: 800px;
         justify-content: center;
     }
 }
