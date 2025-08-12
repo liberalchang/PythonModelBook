@@ -1,12 +1,12 @@
 ---
 layout: page
-title: Python 知识体系文档
+title: Python知识体系文档
 permalink: /docs/
 ---
 
-# Python 知识体系文档
+# Python知识体系文档
 
-欢迎来到 Python 知识体系文档！这里包含了从基础语法到高级应用的完整 Python 学习资源。
+欢迎来到Python知识体系文档！这里包含了从基础语法到高级应用的完整Python学习资源。
 
 <div class="docs-grid">
         <div class="category-card">
@@ -14,7 +14,7 @@ permalink: /docs/
                 <span class="category-icon">📚</span>
                 <h3>基础语法</h3>
             </div>
-            <p class="category-description">Python 基础语法和核心概念</p>
+            <p class="category-description">Python基础语法和核心概念</p>
             <div class="doc-links">
                     <div class="section-title">变量与数据类型</div>
                     <a href="basics/variables/" class="doc-link section-link">变量与数据类型</a>
@@ -45,7 +45,7 @@ permalink: /docs/
                 <span class="category-icon">🔧</span>
                 <h3>内置函数</h3>
             </div>
-            <p class="category-description">Python 内置函数详解</p>
+            <p class="category-description">Python内置函数详解</p>
             <div class="doc-links">
                     <div class="section-title">🔤 类型转换</div>
                     <a href="builtins/int/" class="doc-link section-link">int() - 整数转换函数</a>
@@ -125,7 +125,7 @@ permalink: /docs/
                 <span class="category-icon">📦</span>
                 <h3>标准库</h3>
             </div>
-            <p class="category-description">Python 标准库模块</p>
+            <p class="category-description">Python标准库模块</p>
             <div class="doc-links">
                     <div class="section-title">日期时间</div>
                     <a href="stdlib/time/" class="doc-link section-link">time 模块 - 基础时间处理功能</a>
@@ -156,9 +156,9 @@ permalink: /docs/
 
 ## 使用指南
 
-- **基础语法**: 适合 Python 初学者，涵盖变量、控制流、函数等核心概念
-- **内置函数**: 详细介绍 Python 内置函数的用法和示例
-- **标准库**: 深入了解 Python 标准库的各个模块
+- **基础语法**: 适合Python初学者，涵盖变量、控制流、函数等核心概念
+- **内置函数**: 详细介绍Python内置函数的用法和示例
+- **标准库**: 深入了解Python标准库的各个模块
 - **第三方库**: 探索流行的第三方库和框架
 
 ## 学习建议
@@ -169,17 +169,19 @@ permalink: /docs/
 
 ## 参考资源
 
-- [Python 官方文档](https://docs.python.org/3/)
+- [Python官方文档](https://docs.python.org/3/)
 - [PEP 8 代码风格指南](https://pep8.org/)
-- [Python 增强提案(PEPs)](https://www.python.org/dev/peps/)
+- [Python增强提案(PEPs)](https://www.python.org/dev/peps/)
 
 <style>
 .docs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 固定2列布局 */
+    width: 100%; /* 使用全部可用宽度 */
+    max-width: 1200px; /* 设置合理的最大宽度 */
     gap: 2rem;
-    margin: 2rem 0;
-    justify-content: end;
+    margin: 2rem auto; /* 居中显示 */
+    justify-content: stretch; /* 拉伸填充 */
     align-content: start;
 }
 
@@ -190,7 +192,8 @@ permalink: /docs/
     padding: 1.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-left: auto;
+    width: 100%; /* 充分利用网格空间 */
+    min-width: 320px; /* 设置最小宽度 */
 }
 
 .category-card:hover {
@@ -262,10 +265,7 @@ permalink: /docs/
 /* 响应式布局优化 */
 @media (min-width: 1400px) {
     .docs-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: 0;
+        max-width: 1400px; /* 大屏幕增加最大宽度 */
     }
     
     .doc-links {
@@ -280,20 +280,19 @@ permalink: /docs/
 
 @media (min-width: 1920px) {
     .docs-grid {
-        max-width: 1600px;
+        max-width: 1600px; /* 大屏幕进一步增加宽度 */
     }
 }
 
 @media (min-width: 2560px) {
     .docs-grid {
-        max-width: 1800px;
+        max-width: 1800px; /* 超大屏幕最大宽度 */
     }
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
     .docs-grid {
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-        justify-content: end;
+        max-width: 1200px; /* 与基础样式保持一致 */
     }
     
     .doc-links {
@@ -308,8 +307,7 @@ permalink: /docs/
 
 @media (min-width: 900px) and (max-width: 1199px) {
     .docs-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        justify-content: center;
+        max-width: 1000px; /* 中等屏幕适当增加宽度 */
     }
 }
 
