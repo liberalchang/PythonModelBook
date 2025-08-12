@@ -35,7 +35,7 @@ NumPy（Numerical Python）是Python科学计算的基础库，提供了高性�
 
 ### 核心文档
 
-#### 1. [NumPy 基础操作](./numpy-basics/)
+#### 1. [NumPy 基础操作](../numpy-basics/)
 **难度**: 入门 | **时间**: 60分钟
 
 - 数组创建和基本属性
@@ -46,7 +46,7 @@ NumPy（Numerical Python）是Python科学计算的基础库，提供了高性�
 
 **适合人群**: NumPy初学者，需要掌握基础操作的开发者
 
-#### 2. [NumPy 数学函数与统计](./numpy-math/)
+#### 2. [NumPy 数学函数与统计](../numpy-math/)
 **难度**: 中级 | **时间**: 50分钟
 
 - 通用函数（ufunc）
@@ -57,7 +57,7 @@ NumPy（Numerical Python）是Python科学计算的基础库，提供了高性�
 
 **适合人群**: 需要进行数值计算和统计分析的开发者
 
-#### 3. [NumPy 高级功能与技巧](./numpy-advanced/)
+#### 3. [NumPy 高级功能与技巧](../numpy-advanced/)
 **难度**: 高级 | **时间**: 50分钟
 
 - 网格生成（mgrid、meshgrid）
@@ -68,7 +68,7 @@ NumPy（Numerical Python）是Python科学计算的基础库，提供了高性�
 
 **适合人群**: 有一定NumPy基础，需要掌握高级特性的开发者
 
-#### 4. [cuPyNumeric - GPU加速的NumPy](./cupynumeric/)
+#### 4. [cuPyNumeric - GPU加速的NumPy](../cupynumeric/)
 **难度**: 高级 | **时间**: 40分钟
 
 - GPU加速计算原理

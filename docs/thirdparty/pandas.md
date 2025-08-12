@@ -37,7 +37,7 @@ Pandas是Python中最重要的数据分析库，提供了高性能、易用的�
 
 ### 🔰 基础入门
 
-#### [Pandas 基础操作](pandas-basics.md)
+#### [Pandas 基础操作](../pandas-basics.md)
 **难度**: 初级 | **时间**: 45分钟
 
 学习Pandas的核心概念和基本操作：
@@ -51,7 +51,7 @@ Pandas是Python中最重要的数据分析库，提供了高性能、易用的�
 
 ### 🔄 数据操作
 
-#### [Pandas 数据读写与合并](pandas-io.md)
+#### [Pandas 数据读写与合并](../pandas-io.md)
 **难度**: 中级 | **时间**: 35分钟
 
 掌握数据输入输出和合并技术：
@@ -65,7 +65,7 @@ Pandas是Python中最重要的数据分析库，提供了高性能、易用的�
 
 ### 🚀 高级功能
 
-#### [Pandas 高级功能与数据处理](pandas-advanced.md)
+#### [Pandas 高级功能与数据处理](../pandas-advanced.md)
 **难度**: 高级 | **时间**: 50分钟
 
 深入学习高级特性和优化技巧：
@@ -79,7 +79,7 @@ Pandas是Python中最重要的数据分析库，提供了高性能、易用的�
 
 ### ⚡ 性能优化
 
-#### [FireDucks - Pandas性能加速库](fireducks.md)
+#### [FireDucks - Pandas性能加速库](../fireducks.md)
 **难度**: 中级 | **时间**: 25分钟
 
 了解Pandas性能优化解决方案：
