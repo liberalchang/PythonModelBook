@@ -20,6 +20,9 @@ Python 标准库是 Python 安装包自带的模块集合，提供了丰富的�
 - [datetime 模块 - 高级日期时间处理](./datetime/)
 
 
+### 数据结构
+- [collections 模块 - 高级容器数据类型](./collections/)
+
 ### 函数式编程
 - [operator 模块 - 运算符函数映射](./operator/)
 - [copy 模块 - 对象拷贝功能](./copy/)

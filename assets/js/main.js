@@ -67,9 +67,9 @@ class MobileMenu {
           </button>
         </div>
         <nav class="mobile-nav">
-          <a href="/" class="mobile-nav-link">首页</a>
-          <a href="/docs/" class="mobile-nav-link">文档</a>
-          <a href="/about/" class="mobile-nav-link">关于</a>
+          <a href="/PythonModelBook/" class="mobile-nav-link">首页</a>
+          <a href="/PythonModelBook/docs/" class="mobile-nav-link">文档</a>
+          <a href="/PythonModelBook/about/" class="mobile-nav-link">关于</a>
         </nav>
         <div class="mobile-menu-footer">
           <button id="mobile-theme-toggle" class="mobile-theme-toggle">

@@ -131,6 +131,8 @@ permalink: /docs/
                     <a href="stdlib/./time/" class="doc-link section-link">time 模块 - 基础时间处理功能</a>
                     <a href="stdlib/./calendar/" class="doc-link section-link">calendar 模块 - 日历相关功能</a>
                     <a href="stdlib/./datetime/" class="doc-link section-link">datetime 模块 - 高级日期时间处理</a>
+                    <div class="section-title">数据结构</div>
+                    <a href="stdlib/./collections/" class="doc-link section-link">collections 模块 - 高级容器数据类型</a>
                     <div class="section-title">函数式编程</div>
                     <a href="stdlib/./operator/" class="doc-link section-link">operator 模块 - 运算符函数映射</a>
                     <a href="stdlib/./copy/" class="doc-link section-link">copy 模块 - 对象拷贝功能</a>
