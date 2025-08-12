@@ -198,19 +198,19 @@ plt.rcParams['axes.unicode_minus'] = False    # 负号显示
 ## 🔗 相关内容
 
 ### 核心依赖
-- [NumPy - 数值计算基础](../stdlib/numpy)
-- [Matplotlib - 数据可视化](../thirdparty/matplotlib)
-- [Seaborn - 统计可视化](../thirdparty/seaborn)
+- [NumPy - 数值计算基础](../numpy)
+- [Matplotlib - 数据可视化](../matplotlib)
+- [Seaborn - 统计可视化](../seaborn)
 
 ### 扩展库
-- [Dask - 并行计算](../thirdparty/dask)
-- [Polars - 高性能DataFrame](../thirdparty/polars)
-- [Modin - 分布式Pandas](../thirdparty/modin)
+- [Dask - 并行计算](../dask)
+- [Polars - 高性能DataFrame](../polars)
+- [Modin - 分布式Pandas](../modin)
 
 ### 应用领域
-- [机器学习 - Scikit-learn](../thirdparty/sklearn)
-- [深度学习 - TensorFlow/PyTorch](../thirdparty/tensorflow)
-- [时间序列分析](../advanced/time-series)
+- [机器学习 - Scikit-learn](../sklearn)
+- [深度学习 - TensorFlow/PyTorch](../tensorflow)
+- [时间序列分析](../time-series)
 
 ## 📚 扩展阅读
 
