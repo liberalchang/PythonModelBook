@@ -292,7 +292,6 @@ pyinstaller --upx-dir /path/to/upx app.py
 ## 🔗 相关内容
 
 - [Nuitka - 另一种Python打包工具](../nuitka/)
-- [Python虚拟环境管理](../../basics/packages/)
 - [Python模块和包](../../basics/packages/)
 
 ## 📚 扩展阅读

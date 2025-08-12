@@ -9,25 +9,25 @@ layout: default
       <!-- 文档头部信息 -->
       <header class="doc-header">
         <h1 class="doc-title">{{ page.title }}</h1>
-        
+
         {% if page.description %}
         <p class="doc-description">{{ page.description }}</p>
         {% endif %}
-        
+
         <div class="doc-meta">
           {% if page.category %}
           <span class="doc-category">分类: {{ page.category }}</span>
           {% endif %}
-          
+
           {% if page.difficulty %}
           <span class="doc-difficulty">难度: {{ page.difficulty }}</span>
           {% endif %}
-          
+
           {% if page.updated %}
           <span class="doc-updated">更新: {{ page.updated }}</span>
           {% endif %}
         </div>
-        
+
         {% if page.tags %}
         <div class="doc-tags">
           {% for tag in page.tags %}
@@ -36,41 +36,41 @@ layout: default
         </div>
         {% endif %}
       </header>
-      
+
       <!-- 文档正文 -->
       <div class="doc-body">
         {{ content }}
       </div>
-      
+
       <!-- 文档底部 -->
       <footer class="doc-footer">
         {% if page.author %}
         <p class="doc-author">作者: {{ page.author }}</p>
         {% endif %}
-        
+
         {% if page.version %}
         <p class="doc-version">版本: {{ page.version }}</p>
         {% endif %}
       </footer>
     </article>
   </main>
-  
+
   <!-- 右侧导航栏 -->
   <aside class="doc-sidebar">
     <div class="toc-container">
       <h3>目录</h3>
       <div id="toc"></div>
     </div>
-    
+
     <!-- 相关链接 -->
     <div class="related-links">
       <h3>相关内容</h3>
       <ul>
         {% assign related_docs = site.docs | where: "category", page.category | limit: 5 %}
         {% for doc in related_docs %}
-          {% unless doc.url == page.url %}
-          <li><a href="{{ doc.url | relative_url }}">{{ doc.title }}</a></li>
-          {% endunless %}
+        {% unless doc.url == page.url %}
+        <li><a href="{{ doc.url | relative_url }}">{{ doc.title }}</a></li>
+        {% endunless %}
         {% endfor %}
       </ul>
     </div>
@@ -87,275 +87,270 @@ layout: default
     <p>欢迎在下方留言讨论，分享你的学习心得或提出问题。评论基于GitHub Issues，需要GitHub账号。</p>
   </div>
   <div id="utterances-container">
-    <script src="https://utteranc.es/client.js"
-            repo="liberalchang/PythonModelBook"
-            issue-term="pathname"
-            theme="preferred-color-scheme"
-            crossorigin="anonymous"
-            async>
+    <script src="https://utteranc.es/client.js" repo="liberalchang/PythonModelBook" issue-term="pathname" theme="preferred-color-scheme" crossorigin="anonymous" async>
     </script>
   </div>
-  
+
 
 </div>
 
 <style>
-.doc-container {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 2rem;
-}
-
-.doc-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.doc-header {
-  border-bottom: 1px solid #e1e4e8;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.doc-title {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #24292e;
-}
-
-.doc-description {
-  font-size: 1.2rem;
-  color: #586069;
-  margin-bottom: 1rem;
-}
-
-.doc-meta {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: #586069;
-}
-
-.doc-tags {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.tag {
-  background: #f1f8ff;
-  color: #0366d6;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  font-size: 0.8rem;
-}
-
-.doc-body {
-  line-height: 1.6;
-}
-
-.doc-body h2 {
-  border-bottom: 1px solid #e1e4e8;
-  padding-bottom: 0.3rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.doc-body pre {
-  background: #f6f8fa;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-}
-
-.doc-body table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1rem 0;
-}
-
-.doc-body th,
-.doc-body td {
-  border: 1px solid #d0d7de;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-.doc-body th {
-  background: #f6f8fa;
-  font-weight: 600;
-}
-
-.doc-sidebar {
-  width: 300px;
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-}
-
-.toc-container,
-.related-links {
-  background: #f6f8fa;
-  padding: 1rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
-
-.toc-container h3,
-.related-links h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.related-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.related-links li {
-  margin-bottom: 0.5rem;
-}
-
-.related-links a {
-  color: #0366d6;
-  text-decoration: none;
-}
-
-.related-links a:hover {
-  text-decoration: underline;
-}
-
-.comments-section {
-  max-width: 1200px;
-  margin: 2rem auto;
-  margin-top: 3rem;
-  padding: 2rem;
-  background: var(--bg-secondary, #f6f8fa);
-  border-radius: var(--radius-xl, 12px);
-  border: 1px solid var(--border-color, #e1e4e8);
-}
-
-.comments-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary, #24292e);
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.comments-title i {
-  color: var(--primary-color, #0366d6);
-}
-
-.comments-description {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--bg-primary, #ffffff);
-  border-radius: var(--radius-lg, 8px);
-  border-left: 4px solid var(--primary-color, #0366d6);
-}
-
-.comments-description p {
-  margin: 0;
-  color: var(--text-secondary, #586069);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-#utterances-container,
-#giscus-container {
-  margin-top: 1rem;
-}
-
-/* 评论系统切换按钮 */
-.comment-system-toggle {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  background: var(--bg-primary, #ffffff);
-  border-radius: var(--radius-lg, 8px);
-  border: 1px solid var(--border-color, #e1e4e8);
-}
-
-.comment-toggle-btn {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-md, 6px);
-  color: var(--text-secondary, #586069);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all var(--transition-fast, 0.15s ease);
-}
-
-.comment-toggle-btn.active {
-  background: var(--primary-color, #0366d6);
-  color: var(--text-inverse, #ffffff);
-}
-
-.comment-toggle-btn:hover:not(.active) {
-  background: var(--bg-secondary, #f6f8fa);
-  color: var(--text-primary, #24292e);
-}
-
-@media (max-width: 768px) {
   .doc-container {
-    flex-direction: column;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
   }
-  
-  .doc-sidebar {
+
+  .doc-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-header {
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .doc-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #24292e;
+  }
+
+  .doc-description {
+    font-size: 1.2rem;
+    color: #586069;
+    margin-bottom: 1rem;
+  }
+
+  .doc-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #586069;
+  }
+
+  .doc-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: #f1f8ff;
+    color: #0366d6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
+
+  .doc-body {
+    line-height: 1.6;
+  }
+
+  .doc-body h2 {
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .doc-body pre {
+    background: #f6f8fa;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+
+  .doc-body table {
+    border-collapse: collapse;
     width: 100%;
-    position: static;
+    margin: 1rem 0;
   }
-}
+
+  .doc-body th,
+  .doc-body td {
+    border: 1px solid #d0d7de;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  .doc-body th {
+    background: #f6f8fa;
+    font-weight: 600;
+  }
+
+  .doc-sidebar {
+    width: 300px;
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+
+  .toc-container,
+  .related-links {
+    background: #f6f8fa;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .toc-container h3,
+  .related-links h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .related-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .related-links a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+
+  .related-links a:hover {
+    text-decoration: underline;
+  }
+
+  .comments-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--bg-secondary, #f6f8fa);
+    border-radius: var(--radius-xl, 12px);
+    border: 1px solid var(--border-color, #e1e4e8);
+  }
+
+  .comments-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #24292e);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .comments-title i {
+    color: var(--primary-color, #0366d6);
+  }
+
+  .comments-description {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-primary, #ffffff);
+    border-radius: var(--radius-lg, 8px);
+    border-left: 4px solid var(--primary-color, #0366d6);
+  }
+
+  .comments-description p {
+    margin: 0;
+    color: var(--text-secondary, #586069);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  #utterances-container,
+  #giscus-container {
+    margin-top: 1rem;
+  }
+
+  /* 评论系统切换按钮 */
+  .comment-system-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: var(--bg-primary, #ffffff);
+    border-radius: var(--radius-lg, 8px);
+    border: 1px solid var(--border-color, #e1e4e8);
+  }
+
+  .comment-toggle-btn {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md, 6px);
+    color: var(--text-secondary, #586069);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast, 0.15s ease);
+  }
+
+  .comment-toggle-btn.active {
+    background: var(--primary-color, #0366d6);
+    color: var(--text-inverse, #ffffff);
+  }
+
+  .comment-toggle-btn:hover:not(.active) {
+    background: var(--bg-secondary, #f6f8fa);
+    color: var(--text-primary, #24292e);
+  }
+
+  @media (max-width: 768px) {
+    .doc-container {
+      flex-direction: column;
+    }
+
+    .doc-sidebar {
+      width: 100%;
+      position: static;
+    }
+  }
 </style>
 
 <script>
-// 生成目录
-document.addEventListener('DOMContentLoaded', function() {
-  const toc = document.getElementById('toc');
-  const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
-  
-  if (headings.length > 0) {
-    const tocList = document.createElement('ul');
-    
-    headings.forEach(function(heading, index) {
-      const id = 'heading-' + index;
-      heading.id = id;
-      
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = '#' + id;
-      a.textContent = heading.textContent;
-      a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
-      
-      li.appendChild(a);
-      tocList.appendChild(li);
-    });
-    
-    toc.appendChild(tocList);
-  }
-});
+  // 生成目录
+  document.addEventListener('DOMContentLoaded', function () {
+    const toc = document.getElementById('toc');
+    const headings = document.querySelectorAll('.doc-body h2, .doc-body h3, .doc-body h4');
 
-// 评论系统切换功能
-function switchCommentSystem(system) {
-  const utterancesContainer = document.getElementById('utterances-container');
-  const giscusContainer = document.getElementById('giscus-container');
-  
-  if (system === 'giscus') {
-    utterancesContainer.style.display = 'none';
-    giscusContainer.style.display = 'block';
-  } else {
-    utterancesContainer.style.display = 'block';
-    giscusContainer.style.display = 'none';
+    if (headings.length > 0) {
+      const tocList = document.createElement('ul');
+
+      headings.forEach(function (heading, index) {
+        const id = 'heading-' + index;
+        heading.id = id;
+
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = heading.textContent;
+        a.className = 'toc-link toc-' + heading.tagName.toLowerCase();
+
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+
+      toc.appendChild(tocList);
+    }
+  });
+
+  // 评论系统切换功能
+  function switchCommentSystem(system) {
+    const utterancesContainer = document.getElementById('utterances-container');
+    const giscusContainer = document.getElementById('giscus-container');
+
+    if (system === 'giscus') {
+      utterancesContainer.style.display = 'none';
+      giscusContainer.style.display = 'block';
+    } else {
+      utterancesContainer.style.display = 'block';
+      giscusContainer.style.display = 'none';
+    }
   }
-}
 </script>

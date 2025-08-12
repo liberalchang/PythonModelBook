@@ -565,7 +565,6 @@ nuitka工具的出色程度超出了我的预料(同样也是支持win的)，哈
 ## 🔗 相关内容
 
 - [PyInstaller - Python打包工具](../pyinstaller/)
-- [Python性能优化](../../basics/)
 - [Python模块和包管理](../../basics/packages/)
 
 ## 📚 扩展阅读

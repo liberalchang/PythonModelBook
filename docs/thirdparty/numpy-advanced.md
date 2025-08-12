@@ -663,10 +663,10 @@ print(f"理论最优解: {np.array([-0.5, -0.5, -0.5])}")
 
 ## 🔗 相关内容
 
-- [NumPy 基础操作](./numpy-basics/)
-- [NumPy 数学函数与统计](./numpy-math/)
-- [NumPy 随机数生成](./numpy-random/)
-- [SciPy 科学计算](./scipy/)
+- [NumPy 基础操作](../numpy-basics/)
+- [NumPy 数学函数与统计](../numpy-math/)
+- [NumPy 随机数生成](../numpy-random/)
+- [SciPy 科学计算](../scipy/)
 
 ## 📚 扩展阅读
 

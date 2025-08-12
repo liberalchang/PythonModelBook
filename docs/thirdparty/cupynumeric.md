@@ -738,10 +738,10 @@ print(f"v分量: 均值={np.mean(v_final):.6f}, 最大值={np.max(np.abs(v_final
 
 ## 🔗 相关内容
 
-- [NumPy 基础操作](./numpy-basics/)
-- [NumPy 高级功能](./numpy-advanced/)
-- [CuPy GPU计算](./cupy/)
-- [JAX 高性能计算](./jax/)
+- [NumPy 基础操作](../numpy-basics/)
+- [NumPy 高级功能](../numpy-advanced/)
+- [CuPy GPU计算](../cupy/)
+- [JAX 高性能计算](../jax/)
 
 ## 📚 扩展阅读
 

@@ -344,10 +344,10 @@ print(pivot_table)
 
 ## 🔗 相关内容
 
-- [Pandas 数据读写](pandas-io.md)
-- [Pandas 数据清洗](pandas-cleaning.md)
-- [Pandas 分组聚合](pandas-groupby.md)
-- [NumPy 基础操作](../stdlib/numpy-basics.md)
+- [Pandas 数据读写](../pandas-io)
+- [Pandas 数据清洗](../pandas-cleaning)
+- [Pandas 分组聚合](../pandas-groupby)
+- [NumPy 基础操作](../numpy-basics)
 
 ## 📚 扩展阅读
 

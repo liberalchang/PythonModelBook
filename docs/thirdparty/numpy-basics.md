@@ -382,10 +382,10 @@ print(f"填充后数据: {data_filled}")
 
 ## 🔗 相关内容
 
-- [NumPy 数学函数和统计](./numpy-math/)
-- [NumPy 线性代数](./numpy-linalg/)
-- [NumPy 随机数生成](./numpy-random/)
-- [NumPy 文件输入输出](./numpy-io/)
+- [NumPy 数学函数和统计](../numpy-math/)
+- [NumPy 线性代数](../numpy-linalg/)
+- [NumPy 随机数生成](../numpy-random/)
+- [NumPy 文件输入输出](../numpy-io/)
 
 ## 📚 扩展阅读
 

@@ -432,10 +432,10 @@ print(f"滤波效果 (噪声减少): {np.std(noisy_signal - signal):.4f} -> {np.
 
 ## 🔗 相关内容
 
-- [NumPy 基础操作](./numpy-basics/)
-- [NumPy 随机数生成](./numpy-random/)
-- [NumPy 高级索引](./numpy-advanced/)
-- [SciPy 科学计算](./scipy/)
+- [NumPy 基础操作](../numpy-basics/)
+- [NumPy 随机数生成](../numpy-random/)
+- [NumPy 高级索引](../numpy-advanced/)
+- [SciPy 科学计算](../scipy/)
 
 ## 📚 扩展阅读
 
