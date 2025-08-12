@@ -8,6 +8,7 @@ library_version: "pandas>=1.3.0"
 tags: ["pandas", "高级功能", "数据处理", "索引", "切片", "数据验证"]
 difficulty: "高级"
 estimated_time: "50分钟"
+permalink: /docs/thirdparty/pandas-advanced/
 ---
 
 # Pandas 高级功能与数据处理

@@ -8,6 +8,7 @@ library_version: "pandas>=1.3.0"
 tags: ["pandas", "数据读写", "数据合并", "CSV", "Excel", "concat"]
 difficulty: "中级"
 estimated_time: "35分钟"
+permalink: /docs/thirdparty/pandas-io/
 ---
 
 # Pandas 数据读写与合并

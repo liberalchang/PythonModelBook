@@ -8,6 +8,7 @@ library_version: "cupynumeric>=0.21.0"
 tags: ["cupynumeric", "gpu", "nvidia", "分布式计算", "高性能计算"]
 difficulty: "高级"
 estimated_time: "40分钟"
+permalink: /docs/thirdparty/cupynumeric/
 ---
 
 # cuPyNumeric - GPU加速的NumPy

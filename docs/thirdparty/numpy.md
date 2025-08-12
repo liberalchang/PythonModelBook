@@ -8,6 +8,7 @@ library_version: "numpy>=1.20.0"
 tags: ["numpy", "数值计算", "科学计算", "数组操作", "线性代数"]
 difficulty: "入门到高级"
 estimated_time: "180分钟"
+permalink: /docs/thirdparty/numpy/
 ---
 
 # NumPy 数值计算库 - 完整学习指南

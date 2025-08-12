@@ -8,6 +8,7 @@ library_version: "numpy>=1.20.0"
 tags: ["numpy", "数学函数", "统计分析", "通用函数", "线性代数"]
 difficulty: "中级"
 estimated_time: "40分钟"
+permalink: /docs/thirdparty/numpy-math/
 ---
 
 # NumPy 数学函数与统计分析

@@ -8,6 +8,7 @@ library_version: "pandas>=1.3.0"
 tags: ["pandas", "数据分析", "DataFrame", "Series", "数据处理"]
 difficulty: "初级"
 estimated_time: "45分钟"
+permalink: /docs/thirdparty/pandas-basics/
 ---
 
 # Pandas 基础操作

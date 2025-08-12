@@ -8,6 +8,7 @@ library_version: "fireducks>=0.1.0, pandas>=1.3.0"
 tags: ["fireducks", "pandas", "性能优化", "加速", "数据处理"]
 difficulty: "中级"
 estimated_time: "25分钟"
+permalink: /docs/thirdparty/fireducks/
 ---
 
 # FireDucks - Pandas性能加速库

@@ -8,6 +8,7 @@ library_version: "numpy>=1.20.0"
 tags: ["numpy", "数组", "数值计算", "科学计算", "线性代数"]
 difficulty: "初级"
 estimated_time: "45分钟"
+permalink: /docs/thirdparty/numpy-basics/
 ---
 
 # NumPy 基础操作

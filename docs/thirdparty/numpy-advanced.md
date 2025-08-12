@@ -8,6 +8,7 @@ library_version: "numpy>=1.20.0"
 tags: ["numpy", "高级功能", "网格生成", "数组操作", "性能优化"]
 difficulty: "高级"
 estimated_time: "50分钟"
+permalink: /docs/thirdparty/numpy-advanced/
 ---
 
 # NumPy 高级功能与技巧

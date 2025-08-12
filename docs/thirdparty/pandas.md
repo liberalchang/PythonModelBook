@@ -8,6 +8,7 @@ library_version: "pandas>=1.3.0"
 tags: ["pandas", "数据分析", "数据科学", "DataFrame", "数据处理"]
 difficulty: "入门"
 estimated_time: "10分钟"
+permalink: /docs/thirdparty/pandas/
 ---
 
 # Pandas 数据分析库
