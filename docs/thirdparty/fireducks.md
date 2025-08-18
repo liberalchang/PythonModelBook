@@ -438,10 +438,10 @@ monitor.print_comparison(comparison)
 
 ## 🔗 相关内容
 
-- [Pandas 基础操作](pandas-basics.md)
-- [Pandas 数据读写](pandas-io.md)
-- [Pandas 高级功能](pandas-advanced.md)
-- [性能优化最佳实践](performance-optimization.md)
+- [Pandas 基础操作](../pandas-basics.md)
+- [Pandas 数据读写](../pandas-io.md)
+- [Pandas 高级功能](../pandas-advanced.md)
+- [性能优化最佳实践](../performance-optimization.md)
 
 ## 📚 扩展阅读
 

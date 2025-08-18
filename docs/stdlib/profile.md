@@ -205,9 +205,9 @@ pstats.Stats(prof).sort_stats('cumtime').print_stats(50)
 
 ## 🔗 相关内容
 
-- [line_profiler - 逐行时间分析](/docs/thirdparty/line-profiler/)
-- [memory_profiler - 逐行内存分析](/docs/thirdparty/memory-profiler/)
-- [Python 标准库](/docs/stdlib/)
+- [line_profiler - 逐行时间分析](../../thirdparty/line-profiler/)
+- [memory_profiler - 逐行内存分析](../../thirdparty/memory-profiler/)
+- [Python 标准库](../../stdlib/)
 
 ## 📚 参考资源
 

@@ -549,17 +549,17 @@ print(f"包含 NaN 的求和: {nan_sum}")
 - [pow() - 幂运算函数](../pow/) - 幂运算
 
 ### 相关模块
-- [math 模块](../stdlib/math/) - 数学函数
-- [statistics 模块](../stdlib/statistics/) - 统计函数
-- [decimal 模块](../stdlib/decimal/) - 精确小数
-- [fractions 模块](../stdlib/fractions/) - 分数运算
-- [numpy 模块](../third-party/numpy/) - 数值计算
+- [math 模块](../../stdlib/math/) - 数学函数
+- [statistics 模块](../../stdlib/statistics/) - 统计函数
+- [decimal 模块](../../stdlib/decimal/) - 精确小数
+- [fractions 模块](../../stdlib/fractions/) - 分数运算
+- [numpy 模块](../../third-party/numpy/) - 数值计算
 
 ### 相关概念
-- [算术运算符](../basics/arithmetic-operators/) - 数学运算
-- [生成器表达式](../advanced/generator-expressions/) - 内存优化
-- [列表推导式](../basics/list-comprehensions/) - 数据处理
-- [浮点数精度](../advanced/floating-point-precision/) - 精度问题
+- [算术运算符](../../basics/arithmetic-operators/) - 数学运算
+- [生成器表达式](../../advanced/generator-expressions/) - 内存优化
+- [列表推导式](../../basics/list-comprehensions/) - 数据处理
+- [浮点数精度](../../advanced/floating-point-precision/) - 精度问题
 
 ## 📚 扩展阅读
 

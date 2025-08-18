@@ -458,10 +458,10 @@ print(processed_df)
 
 ## 🔗 相关内容
 
-- [Pandas 基础操作](pandas-basics.md)
-- [Pandas 数据读写](pandas-io.md)
-- [Pandas 分组聚合](pandas-groupby.md)
-- [数据可视化](pandas-visualization.md)
+- [Pandas 基础操作](../pandas-basics)
+- [Pandas 数据读写](../pandas-io)
+- [Pandas 分组聚合](../pandas-groupby)
+- [数据可视化](../pandas-visualization)
 
 ## 📚 扩展阅读
 

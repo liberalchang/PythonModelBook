@@ -211,9 +211,9 @@ def apscheduler_limitations():
 
 ## 🔗 相关内容
 
-- [while+sleep 循环定时器](./sleep/)
-- [threading.Timer 定时器](./timer/)
-- [schedule 模块调度](./schedule/)
+- [while+sleep 循环定时器](../sleep/)
+- [threading.Timer 定时器](../timer/)
+- [schedule 模块调度](../schedule/)
 
 ## 📚 扩展阅读
 

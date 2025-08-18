@@ -582,9 +582,9 @@ def threading_timer_limitations():
 
 ## 🔗 相关内容
 
-- [while+sleep 循环定时器](./sleep/)
-- [schedule 模块调度](./schedule/)
-- [APScheduler 框架](./apscheduler/)
+- [while+sleep 循环定时器](../sleep/)
+- [schedule 模块调度](../schedule/)
+- [APScheduler 框架](../apscheduler/)
 - [线程模块 - threading](../../stdlib/threading/)
 - [线程池 - concurrent.futures](../../stdlib/concurrent.futures/)
 

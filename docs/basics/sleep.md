@@ -490,9 +490,9 @@ def limitations_demo():
 
 ## 🔗 相关内容
 
-- [threading.Timer 定时器](./timer/)
-- [schedule 模块调度](./schedule/)
-- [APScheduler 框架](./apscheduler/)
+- [threading.Timer 定时器](../timer/)
+- [schedule 模块调度](../schedule/)
+- [APScheduler 框架](../apscheduler/)
 - [时间处理模块 - time](../../stdlib/time/)
 - [日期时间处理 - datetime](../../stdlib/datetime/)
 

@@ -1125,7 +1125,7 @@ if __name__ == '__main__':
 
 ## 相关内容
 
-- [logging模块](/stdlib/logging/) - Python标准日志库
+- [logging模块](../../stdlib/logging/) - Python标准日志库
 - [loguru模块](../loguru/) - 简单易用的日志库
 - [structlog模块](../structlog/) - 结构化日志库
 

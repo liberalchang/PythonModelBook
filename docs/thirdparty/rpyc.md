@@ -181,8 +181,8 @@ remote_file_operations()
 
 ## 🔗 相关内容
 
-- [Paramiko - Python SSH远程控制模块](./paramiko/)
-- [aiohttp - 基于 asyncio 的异步 HTTP 客户端与服务端](./aiohttp/)
+- [Paramiko - Python SSH远程控制模块](../paramiko/)
+- [aiohttp - 基于 asyncio 的异步 HTTP 客户端与服务端](../aiohttp/)
 - [xmlrpc - XML-RPC远程过程调用](../../stdlib/xmlrpc/)
 
 ## 📚 扩展阅读

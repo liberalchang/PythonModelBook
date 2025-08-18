@@ -1342,10 +1342,10 @@ print(f"清空后: {demo_list}")
 - [enumerate() - 枚举函数](../enumerate/)
 
 ### 相关模块
-- [copy 模块](../stdlib/copy/)
-- [itertools 模块](../stdlib/itertools/)
-- [collections 模块](../stdlib/collections/)
-- [array 模块](../stdlib/array/)
+- [copy 模块](../../stdlib/copy/)
+- [itertools 模块](../../stdlib/itertools/)
+- [collections 模块](../../stdlib/collections/)
+- [array 模块](../../stdlib/array/)
 
 ### 相关概念
 - [列表推导式](../basics/list-comprehensions/)

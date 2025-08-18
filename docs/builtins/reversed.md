@@ -558,7 +558,7 @@ print(f"切片更快: {time1/time2:.2f}倍")
 ## 🔗 相关内容
 
 - [sorted() - 排序函数](../sorted/)
-- [list.reverse() - 列表反转方法](../list.md#reverse)
+- [list.reverse() - 列表反转方法](../list)
 - [slice - 切片操作](../slice/)
 - [iter() - 迭代器函数](../iter/)
 

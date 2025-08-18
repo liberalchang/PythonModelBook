@@ -200,8 +200,8 @@ b = m.get_spam('bar')
 
 ## 🔗 相关内容
 
-- [collections 模块](./collections/) - 高级容器数据类型
-- [functools 模块](./functools/) - 高阶函数与工具（与缓存策略常搭配）
+- [collections 模块](../collections/) - 高级容器数据类型
+- [functools 模块](../functools/) - 高阶函数与工具（与缓存策略常搭配）
 
 ## 📚 扩展阅读
 

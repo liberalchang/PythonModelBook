@@ -825,16 +825,16 @@ print(f"日志记录(列表包含元组): {log_entries}")
 - [enumerate() - 枚举函数](../enumerate/) - 枚举索引
 
 ### 相关模块
-- [collections 模块](../stdlib/collections/) - 容器数据类型
-- [itertools 模块](../stdlib/itertools/) - 迭代工具
-- [operator 模块](../stdlib/operator/) - 操作符函数
-- [copy 模块](../stdlib/copy/) - 拷贝操作
+- [collections 模块](../../stdlib/collections/) - 容器数据类型
+- [itertools 模块](../../stdlib/itertools/) - 迭代工具
+- [operator 模块](../../stdlib/operator/) - 操作符函数
+- [copy 模块](../../stdlib/copy/) - 拷贝操作
 
 ### 相关概念
-- [序列类型](../basics/sequence-types/) - 序列操作
-- [不可变对象](../basics/immutable-objects/) - 不可变性
-- [元组解包](../basics/tuple-unpacking/) - 解包操作
-- [命名元组](../advanced/named-tuples/) - 结构化数据
+- [序列类型](../../basics/sequence-types/) - 序列操作
+- [不可变对象](../../basics/immutable-objects/) - 不可变性
+- [元组解包](../../basics/tuple-unpacking/) - 解包操作
+- [命名元组](../../advanced/named-tuples/) - 结构化数据
 
 ## 📚 扩展阅读
 

@@ -314,7 +314,7 @@ def calculate_area(length: float, width: float) -> float:
 
 ## 🔗 相关内容
 
-- [控制流程](control-flow/) - 学习如何使用变量进行条件判断
+- [控制流程](../control-flow/) - 学习如何使用变量进行条件判断
 - [函数定义](../functions/) - 了解变量在函数中的作用域
 - [内置函数](../builtins/) - 学习操作不同数据类型的内置函数
 

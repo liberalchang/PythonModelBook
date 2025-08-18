@@ -541,11 +541,11 @@ if __name__ == '__main__':
 
 ## 🔗 相关内容
 
-- [line_profiler - 逐行性能分析工具](/docs/thirdparty/line-profiler/)
-- [cProfile - 标准库性能分析工具](/docs/stdlib/profile/)
-- [Python标准库文档](/docs/stdlib/)
-- [第三方库对比](/docs/thirdparty/)
-- [调试和开发工具](/docs/thirdparty/#调试和开发工具)
+- [line_profiler - 逐行性能分析工具](../../thirdparty/line-profiler/)
+- [cProfile - 标准库性能分析工具](../../stdlib/profile/)
+- [Python标准库文档](../../stdlib/)
+- [第三方库对比](../thirdparty/)
+- [调试和开发工具](../thirdparty/#调试和开发工具)
 
 ## 📚 参考资源
 

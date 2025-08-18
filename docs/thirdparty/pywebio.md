@@ -519,9 +519,9 @@ if __name__ == '__main__':
 
 ## 🔗 相关内容
 
-- [D-Tale - 强大的 Pandas 数据可视化分析工具](./dtale/)
-- [Plotly - Python 交互式可视化图形库](./plotly/)
-- [Typer - 现代化 Python CLI 框架](./typer/)
+- [D-Tale - 强大的 Pandas 数据可视化分析工具](../dtale/)
+- [Plotly - Python 交互式可视化图形库](../plotly/)
+- [Typer - 现代化 Python CLI 框架](../typer/)
 
 ## 📚 扩展阅读
 

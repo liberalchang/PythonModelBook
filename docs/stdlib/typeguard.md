@@ -202,9 +202,9 @@ def compute(value: Union[int, str]) -> int:
 - 尽量用精确的联合类型与容器元素类型，避免“广撒网”导致检查失真
 
 ## 🔗 相关内容
-- [typing 模块 - 类型提示和静态类型检查](./typing/)
-- [isinstance 内置函数 - 运行时类型判断](../builtins/isinstance/)
-- [Pydantic - Python数据验证与模型库完全指南](../thirdparty/pydantic/)
+- [typing 模块 - 类型提示和静态类型检查](../typing/)
+- [isinstance 内置函数 - 运行时类型判断](../../builtins/isinstance/)
+- [Pydantic - Python数据验证与模型库完全指南](../../thirdparty/pydantic/)
 
 ## 📚 扩展阅读
 - [Python 官方文档 - typing](https://docs.python.org/3/library/typing.html)

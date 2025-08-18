@@ -303,9 +303,9 @@ print(start.humanize(locale='zh-cn'))  # '5分钟前'
 
 ## 🔗 相关内容
 
-- [datetime 模块](/docs/stdlib/datetime/) - Python 标准日期时间模块
-- [time 模块](/docs/stdlib/time/) - 基础时间处理功能
-- [calendar 模块](/docs/stdlib/calendar/) - 日历相关功能
+- [datetime 模块](../../stdlib/datetime/) - Python 标准日期时间模块
+- [time 模块](../../stdlib/time/) - 基础时间处理功能
+- [calendar 模块](../../stdlib/calendar/) - 日历相关功能
 - [Pendulum - 更好的日期时间处理库](../pendulum/) - Arrow 的现代替代品
 
 ## 📚 扩展阅读

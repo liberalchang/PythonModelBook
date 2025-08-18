@@ -530,10 +530,10 @@ print(f"直接生成器结果: {result3}")
 - [all() - 逻辑与函数](../all/) - 全部为真
 
 ### 相关模块
-- [heapq 模块](../stdlib/heapq/) - 堆队列算法
-- [operator 模块](../stdlib/operator/) - 操作符函数
-- [functools 模块](../stdlib/functools/) - 函数工具
-- [statistics 模块](../stdlib/statistics/) - 统计函数
+- [heapq 模块](../../stdlib/heapq/) - 堆队列算法
+- [operator 模块](../../stdlib/operator/) - 操作符函数
+- [functools 模块](../../stdlib/functools/) - 函数工具
+- [statistics 模块](../../stdlib/statistics/) - 统计函数
 
 ### 相关概念
 - [比较运算](../basics/comparison-operators/) - 比较运算符

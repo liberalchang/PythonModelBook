@@ -327,9 +327,9 @@ analyze_function(example_func)
 
 ## 🔗 相关内容
 
-- [inspect 模块 - 对象检查和反射功能](./inspect/)
-- [compile() - 编译函数](../builtins/compile/)
-- [exec() - 执行代码对象](../builtins/exec/)
+- [inspect 模块 - 对象检查和反射功能](../inspect/)
+- [compile() - 编译函数](../../builtins/compile/)
+- [exec() - 执行代码对象](../../builtins/exec/)
 
 ## 📚 扩展阅读
 

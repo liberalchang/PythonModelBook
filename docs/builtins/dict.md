@@ -1014,10 +1014,10 @@ print(f"深拷贝: {deep_copy}")
 - [zip() - 打包函数](../zip/) - 并行迭代
 
 ### 相关模块
-- [collections 模块](../stdlib/collections/) - 容器数据类型
-- [copy 模块](../stdlib/copy/) - 拷贝操作
-- [json 模块](../stdlib/json/) - JSON 处理
-- [pickle 模块](../stdlib/pickle/) - 对象序列化
+- [collections 模块](../../stdlib/collections/) - 容器数据类型
+- [copy 模块](../../stdlib/copy/) - 拷贝操作
+- [json 模块](../../stdlib/json/) - JSON 处理
+- [pickle 模块](../../stdlib/pickle/) - 对象序列化
 
 ### 相关概念
 - [字典推导式](../basics/dict-comprehensions/) - 字典生成

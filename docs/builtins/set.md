@@ -895,10 +895,10 @@ print(f"深拷贝: {deep_copy}")
 - [all() - 全部为真](../all/) - 检查所有元素
 
 ### 相关模块
-- [collections 模块](../stdlib/collections/) - 容器数据类型
-- [itertools 模块](../stdlib/itertools/) - 迭代工具
-- [copy 模块](../stdlib/copy/) - 拷贝操作
-- [operator 模块](../stdlib/operator/) - 操作符函数
+- [collections 模块](../../stdlib/collections/) - 容器数据类型
+- [itertools 模块](../../stdlib/itertools/) - 迭代工具
+- [copy 模块](../../stdlib/copy/) - 拷贝操作
+- [operator 模块](../../stdlib/operator/) - 操作符函数
 
 ### 相关概念
 - [集合推导式](../basics/set-comprehensions/) - 集合生成
