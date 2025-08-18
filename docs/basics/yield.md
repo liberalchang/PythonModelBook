@@ -1,31 +1,43 @@
 ---
 layout: doc
-title: yield 关键字
+title: yield 关键字 - 生成器与协程
 permalink: /docs/basics/yield/
+category: basics
+tags: [Python, yield, 生成器, 协程, send, 迭代器, 内存优化]
+description: 深入学习 Python yield 关键字，掌握生成器函数、协程编程和 send() 方法的使用
+author: Python 编程指南
+date: 2024-01-15
+updated: 2024-01-15
+version: 2.0
+difficulty: "中级"
 ---
 
-# yield 关键字
+# yield 关键字 - 生成器与协程
 
-## 概述
+## 📝 概述
 
-`yield` 是 Python 中用于创建生成器（Generator）的关键字。与 `return` 不同，`yield` 会暂停函数的执行并返回一个值，当再次调用时会从暂停的地方继续执行。这种机制使得生成器能够按需产生数据，实现内存高效的迭代。
+`yield` 是 Python 中用于创建生成器（Generator）的关键字。与 `return` 不同，`yield` 会暂停函数的执行并返回一个值，当再次调用时会从暂停的地方继续执行。这种机制不仅能实现内存高效的迭代，还能通过 `send()` 方法实现强大的协程编程模式。
 
-## 学习目标
+## 🎯 学习目标
 
 通过本章学习，你将掌握：
 - yield 关键字的基本语法和工作原理
 - 生成器函数的创建和使用
 - 生成器表达式的语法
 - yield from 语句的使用
-- 协程的基本概念和应用
+- **协程的核心概念和 send() 方法**
+- **协程装饰器和管道模式的实现**
+- **yield 返回值与接收值的区别**
 - 生成器在实际项目中的应用场景
 
-## 前置知识
+## 📋 前置知识
 
 - Python 基础语法
 - 函数的定义和调用
 - 迭代器和可迭代对象的概念
 - 异常处理机制
+- **装饰器的基本使用**
+- **函数作用域和闭包概念**
 
 ## 详细内容
 
@@ -273,6 +285,95 @@ print(f"链接结果: {list(chained)}")
 
 ### 协程基础
 
+#### 什么是协程
+
+协程（Coroutine）是一种特殊的函数，它可以在执行过程中暂停和恢复。与普通函数不同，协程可以有多个入口点，并且能够保持状态。在 Python 中，使用 `yield` 关键字的生成器函数可以实现简单的协程。
+
+#### 协程的核心机制：send() 方法
+
+协程的强大之处在于它不仅能够产生值，还能够接收外部传入的值。这通过 `send()` 方法实现。
+
+```python
+def coroutine_example():
+    """协程示例：接收并处理外部传入的值"""
+    while True:
+        x = yield  # 等待接收值
+        print("收到值:", x)
+
+# 创建协程
+g = coroutine_example()
+next(g)  # 启动协程，程序运行到 yield 处停止
+
+# 使用 send() 传递值
+g.send(1)  # 将值 1 传递给 yield，赋值给 x，然后打印
+g.send(2)  # 将值 2 传递给 yield，赋值给 x，然后打印
+next(g)    # 不传递值，x 为 None，继续执行
+
+# 输出：
+# 收到值: 1
+# 收到值: 2
+# 收到值: None
+```
+
+#### send() 方法的双重功能
+
+`send()` 方法具有两个重要功能：
+1. **传值功能**：将值传递给 `yield` 表达式
+2. **推进功能**：类似 `next()`，推进协程执行到下一个 `yield`
+
+```python
+def value_receiver():
+    """演示 send() 的双重功能"""
+    print("协程启动")
+    while True:
+        value = yield "请发送一个值"  # yield 既能接收值，也能返回值
+        if value is None:
+            break
+        print(f"处理接收到的值: {value}")
+    print("协程结束")
+
+# 使用协程
+gen = value_receiver()
+result = next(gen)  # 启动协程，获取第一个返回值
+print(f"协程返回: {result}")
+
+result = gen.send("hello")  # 发送值并获取返回值
+print(f"协程返回: {result}")
+
+result = gen.send("world")
+print(f"协程返回: {result}")
+
+# 结束协程
+try:
+    gen.send(None)
+except StopIteration:
+    print("协程已结束")
+```
+
+#### 协程启动的限制
+
+新创建的协程必须先启动才能接收非 None 值：
+
+```python
+def demo_coroutine():
+    while True:
+        x = yield
+        print("值:", x)
+
+g = demo_coroutine()
+
+# 错误示例：直接发送非 None 值
+try:
+    g.send(1)  # 这会引发 TypeError
+except TypeError as e:
+    print(f"错误: {e}")
+
+# 正确做法：先启动协程
+g = demo_coroutine()
+next(g)  # 或者 g.send(None)
+g.send(1)  # 现在可以正常发送值
+```
+
 #### 简单协程
 
 ```python
@@ -317,6 +418,233 @@ coro.send("hello")  # 非数字值
 coro.send(30)
 coro.send(None)  # 结束协程
 ```
+
+#### 协程的实际应用：管道模式
+
+协程非常适合实现数据处理管道，每个协程负责处理的一个环节：
+
+```python
+def coroutine_starter(func):
+    """协程启动装饰器"""
+    def wrapper(*args, **kwargs):
+        gen = func(*args, **kwargs)
+        next(gen)  # 自动启动协程
+        return gen
+    return wrapper
+
+@coroutine_starter
+def data_processor_pipeline():
+    """数据处理协程"""
+    while True:
+        data = yield
+        if data is None:
+            break
+        
+        # 数据预处理
+        processed = data.strip().lower()
+        print(f"处理数据: {data} -> {processed}")
+
+@coroutine_starter
+def data_filter(target, condition):
+    """数据过滤协程"""
+    while True:
+        data = yield
+        if data is None:
+            target.send(None)
+            break
+        
+        if condition(data):
+            target.send(data)
+
+@coroutine_starter
+def data_collector():
+    """数据收集协程"""
+    results = []
+    while True:
+        data = yield results.copy()
+        if data is None:
+            break
+        results.append(data)
+
+# 构建处理管道
+collector = data_collector()
+filter_pipeline = data_filter(collector, lambda x: len(x) > 3)
+processor = data_processor_pipeline()
+
+# 处理数据
+test_data = ["Hello", "Hi", "Python", "AI", "World"]
+for item in test_data:
+    processor.send(item)
+    if len(item) > 3:  # 符合过滤条件
+        filter_pipeline.send(item)
+
+# 获取结果
+final_results = collector.send(None)
+print(f"最终结果: {final_results}")
+```
+
+#### 高级应用：文件搜索管道
+
+下面是一个复杂的协程应用示例，模拟 `grep -rl 'pattern' /path` 命令的功能：
+
+```python
+import os
+
+def coroutine_starter(func):
+    """协程启动装饰器"""
+    def wrapper(*args, **kwargs):
+        gen = func(*args, **kwargs)
+        next(gen)  # 自动启动协程
+        return gen
+    return wrapper
+
+@coroutine_starter
+def file_searcher(target):
+    """文件搜索协程：遍历目录，将文件路径发送给下一个协程"""
+    while True:
+        search_path = yield
+        if search_path is None:
+            target.send(None)
+            break
+            
+        # 遍历目录
+        for parent_dir, _, files in os.walk(search_path):
+            for file in files:
+                file_path = os.path.join(parent_dir, file)
+                target.send(file_path)
+
+@coroutine_starter
+def file_opener(target):
+    """文件打开协程：打开文件并发送文件对象"""
+    while True:
+        file_path = yield
+        if file_path is None:
+            target.send(None)
+            break
+            
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                target.send((file_path, f))
+        except (OSError, IOError):
+            continue  # 跳过无法打开的文件
+
+@coroutine_starter
+def file_reader(target):
+    """文件读取协程：逐行读取文件内容"""
+    while True:
+        file_data = yield
+        if file_data is None:
+            target.send(None)
+            break
+            
+        file_path, file_obj = file_data
+        for line_num, line in enumerate(file_obj, 1):
+            # 发送文件路径、行号和行内容
+            should_stop = target.send((file_path, line_num, line))
+            if should_stop:  # 如果找到匹配，停止读取此文件
+                break
+
+@coroutine_starter
+def pattern_matcher(target, pattern):
+    """模式匹配协程：检查行是否包含指定模式"""
+    matched_files = set()  # 记录已匹配的文件，避免重复
+    
+    while True:
+        line_data = yield False  # 默认返回 False（继续读取）
+        if line_data is None:
+            target.send(None)
+            break
+            
+        file_path, line_num, line = line_data
+        
+        if pattern in line:
+            if file_path not in matched_files:
+                matched_files.add(file_path)
+                target.send((file_path, line_num, line.strip()))
+                yield True  # 返回 True，通知停止读取此文件
+            else:
+                yield True  # 文件已匹配过，停止读取
+
+@coroutine_starter
+def result_printer():
+    """结果打印协程：打印匹配的文件信息"""
+    while True:
+        result = yield
+        if result is None:
+            break
+            
+        file_path, line_num, matched_line = result
+        print(f"文件: {file_path}")
+        print(f"行号: {line_num}")
+        print(f"内容: {matched_line}")
+        print("-" * 50)
+
+# 使用示例
+def search_files_with_pattern(search_path, pattern):
+    """在指定路径中搜索包含特定模式的文件"""
+    # 构建协程管道
+    printer = result_printer()
+    matcher = pattern_matcher(printer, pattern)
+    reader = file_reader(matcher)
+    opener = file_opener(reader)
+    searcher = file_searcher(opener)
+    
+    # 开始搜索
+    searcher.send(search_path)
+    
+    # 清理协程
+    searcher.send(None)
+
+# 实际使用
+# search_files_with_pattern(r'D:\CODE_FILE\python\test', 'root')
+```
+
+这个例子展示了协程的强大之处：
+- **模块化设计**：每个协程负责一个特定功能
+- **流式处理**：数据在协程间流动，内存效率高
+- **可组合性**：可以轻松添加新的处理步骤
+- **状态保持**：每个协程可以维护自己的状态
+
+#### 重要概念：yield 的返回值与接收值
+
+这是协程编程中的一个关键概念，需要明确区分：
+
+```python
+@coroutine_starter
+def value_demo():
+    """演示 yield 返回值与接收值的区别"""
+    result_list = []
+    
+    while True:
+        # yield 右边的值是返回给调用者的
+        # yield 接收的值（通过 send 传入）会赋值给左边的变量
+        received_value = yield result_list  # 返回 result_list，接收外部传入的值
+        
+        if received_value is None:
+            break
+            
+        result_list.append(received_value)
+        print(f"接收到的值: {received_value}")
+
+# 使用示例
+demo = value_demo()
+
+# 第一次调用，获取初始返回值
+initial_result = demo.send('apple')
+print(f"返回的列表: {initial_result}")  # ['apple']
+
+# 继续发送值并获取返回值
+result = demo.send('banana')
+print(f"返回的列表: {result}")  # ['apple', 'banana']
+
+result = demo.send('orange')
+print(f"返回的列表: {result}")  # ['apple', 'banana', 'orange']
+```
+
+**关键点**：
+- `yield` 右边的表达式是**返回值**，会传递给调用 `send()` 或 `next()` 的代码
+- `send()` 传递的值是**输入值**，会赋值给 `yield` 左边的变量
+- 这两个值是完全独立的，不要混淆
 
 #### 协程装饰器
 
@@ -638,6 +966,56 @@ for i, page_data in enumerate(web_crawler(base_urls, delay=0.1)):
         break
 ```
 
+## ⚠️ 注意事项
+
+### 协程使用注意事项
+
+1. **协程必须先启动**
+   ```python
+   # ❌ 错误：直接向未启动的协程发送值
+   def my_coroutine():
+       while True:
+           x = yield
+           print(x)
+   
+   gen = my_coroutine()
+   gen.send(1)  # TypeError: can't send non-None value to a just-started generator
+   
+   # ✅ 正确：先启动协程
+   gen = my_coroutine()
+   next(gen)  # 或 gen.send(None)
+   gen.send(1)  # 现在可以正常工作
+   ```
+
+2. **yield 返回值与接收值的区别**
+   ```python
+   # 要明确区分这两个概念：
+   def demo():
+       value = yield "返回值"  # "返回值"被返回，外部send的值赋给value
+   ```
+
+3. **协程的生命周期管理**
+   ```python
+   # ✅ 推荐使用装饰器自动启动协程
+   def coroutine_starter(func):
+       def wrapper(*args, **kwargs):
+           gen = func(*args, **kwargs)
+           next(gen)
+           return gen
+       return wrapper
+   ```
+
+4. **避免在 GeneratorExit 中使用 yield**
+   ```python
+   def problematic_coroutine():
+       try:
+           while True:
+               value = yield
+               print(value)
+       except GeneratorExit:
+           yield "cleanup"  # ❌ 这会引发 RuntimeError
+   ```
+
 ## 常见陷阱与最佳实践
 
 ### 1. 生成器的一次性使用
@@ -812,19 +1190,34 @@ print(f"惰性生成器前 10 个: {[next(lazy_gen) for _ in range(10)]}")
 - `collections.abc` - 抽象基类，定义生成器接口
 - `asyncio` - 异步编程，基于协程
 
+## 🔗 相关内容
+
+- [函数定义与调用](../functions/) - 理解函数基础
+- [函数作用域与闭包](../function-scope/) - 协程中的作用域概念
+- [装饰器 - lambda 表达式](../lambda/) - 协程启动装饰器的实现
+- [异常处理 - raise/assert](../raise-assert/) - 协程中的异常处理
+- [itertools 模块](../../stdlib/itertools/) - 生成器工具集
+
 ### 第三方库
 - `more-itertools` - 扩展的迭代器工具
 - `toolz` - 函数式编程工具
 - `asyncio` - 异步生成器支持
 
-## 扩展阅读
+## 📚 扩展阅读
 
 - [Python 官方文档 - 生成器](https://docs.python.org/3/tutorial/classes.html#generators)
 - [PEP 255 - Simple Generators](https://www.python.org/dev/peps/pep-0255/)
 - [PEP 342 - Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
 - [PEP 380 - Syntax for Delegating to a Subgenerator](https://www.python.org/dev/peps/pep-0380/)
 - [Python 官方文档 - itertools 模块](https://docs.python.org/3/library/itertools.html)
+- [Python 协程和异步编程](https://docs.python.org/3/library/asyncio.html)
 
-## 相关标签
+## 🏷️ 标签
 
-`Python` `生成器` `yield` `迭代器` `协程` `内存优化` `惰性求值` `函数式编程` `数据流处理`
+`Python` `生成器` `yield` `迭代器` `协程` `send` `内存优化` `惰性求值` `函数式编程` `数据流处理` `管道模式` `装饰器`
+
+---
+
+**最后更新**: 2024-01-15  
+**作者**: Python 编程指南  
+**版本**: 2.0

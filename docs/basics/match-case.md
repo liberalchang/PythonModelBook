@@ -384,7 +384,7 @@ def handle_complex_condition(data):
 - `typing` - 类型提示，增强匹配的可读性
 
 ### 第三方库
-- `pydantic` - 数据验证库，支持复杂的数据匹配
+- [Pydantic - 数据验证库，支持复杂的数据匹配](../../thirdparty/pydantic/)
 - `attrs` - 类定义库，简化自定义类的匹配
 
 ## 扩展阅读

@@ -204,7 +204,7 @@ plt.rcParams['axes.unicode_minus'] = False    # 负号显示
 
 ### 扩展库
 - [Dask - 并行计算](../dask)
-- [Polars - 高性能DataFrame](../polars)
+- [Polars - 高性能DataFrame](./polars/)
 - [Modin - 分布式Pandas](../modin)
 
 ### 应用领域

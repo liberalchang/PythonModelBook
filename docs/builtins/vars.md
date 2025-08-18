@@ -1308,7 +1308,7 @@ print(f"列表对象: {list_result}")
 ### 第三方库
 - `attrs` - 类装饰器和属性定义
 - `dataclasses` - 数据类支持
-- `pydantic` - 数据验证和设置管理
+- [Pydantic - 数据验证和设置管理](../../thirdparty/pydantic/)
 - `marshmallow` - 对象序列化/反序列化
 
 ## 扩展阅读

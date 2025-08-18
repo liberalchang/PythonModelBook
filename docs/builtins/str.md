@@ -245,6 +245,82 @@ report = format_data_report(test_data)
 print(report)
 ```
 
+### join() 字符串拼接方法
+
+join() 是字符串的重要方法，用于将可迭代对象中的字符串元素用指定分隔符连接起来。
+
+```python
+## 基本用法
+words = ['Python', 'is', 'awesome']
+sentence = ' '.join(words)
+print(sentence)  # 输出: Python is awesome
+
+## 不同分隔符示例
+data = ['apple', 'banana', 'cherry']
+print(', '.join(data))    # 输出: apple, banana, cherry
+print(' | '.join(data))   # 输出: apple | banana | cherry
+print(''.join(data))      # 输出: applebananacherry
+
+## 数字转换与拼接
+numbers = [1, 2, 3, 4, 5]
+# 需要先转换为字符串
+number_str = ', '.join(str(x) for x in numbers)
+print(number_str)  # 输出: 1, 2, 3, 4, 5
+
+## 路径拼接（推荐使用 os.path.join）
+import os
+path_parts = ['home', 'user', 'documents', 'file.txt']
+# Unix 风格
+unix_path = '/'.join(path_parts)
+print(unix_path)  # 输出: home/user/documents/file.txt
+
+# 跨平台推荐做法
+cross_platform_path = os.path.join(*path_parts)
+print(cross_platform_path)
+
+## join() 与 or 的区别示例
+# join() 用于字符串拼接
+fruits = ['apple', 'banana', 'orange']
+result = ' and '.join(fruits)
+print(f"水果列表: {result}")
+
+# or 用于逻辑判断
+value1 = None
+value2 = ""
+value3 = "default"
+result = value1 or value2 or value3  # 返回第一个真值
+print(f"默认值: {result}")
+
+## 实际应用：CSV 格式生成
+def generate_csv_line(data_row):
+    """生成 CSV 格式的行"""
+    # 处理包含逗号或引号的字段
+    processed_fields = []
+    for field in data_row:
+        field_str = str(field)
+        if ',' in field_str or '"' in field_str:
+            # 转义引号并用引号包围
+            escaped = field_str.replace('"', '""')
+            processed_fields.append(f'"{escaped}"')
+        else:
+            processed_fields.append(field_str)
+    
+    return ','.join(processed_fields)
+
+# 测试数据
+test_data = [
+    ['姓名', '年龄', '城市', '备注'],
+    ['张三', 25, '北京', '无'],
+    ['李四', 30, '上海', '有经验,熟练'],
+    ['王五', 28, '深圳', '说"很好"']
+]
+
+print("CSV 格式输出:")
+for row in test_data:
+    csv_line = generate_csv_line(row)
+    print(csv_line)
+```
+
 ### 性能优化技巧
 
 ```python

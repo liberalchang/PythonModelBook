@@ -1833,7 +1833,7 @@ except ValueError as e:
 - `attrs` - 第三方属性库
 
 ### 第三方库
-- `pydantic` - 数据验证和设置管理
+- [Pydantic - 数据验证和设置管理](../../thirdparty/pydantic/)
 - `marshmallow` - 对象序列化/反序列化
 - `cerberus` - 轻量级数据验证
 

@@ -440,10 +440,9 @@ for shape in shapes:
 
 ## 相关内容
 
-- [类的定义](./class-definition/) - 了解类的基本定义
-- [多态性](./polymorphism/) - 继承实现多态的基础
-- [抽象类](./abstract-classes/) - 使用抽象类定义接口
-- [设计模式](../advanced/design-patterns/) - 继承在设计模式中的应用
+- [类的定义](../class-definition/) - 了解类的基本定义
+- [多态性](../polymorphism/) - 继承实现多态的基础
+- [抽象类](../abstract-classes/) - 使用抽象类定义接口
 
 ## 扩展阅读
 
@@ -451,3 +450,49 @@ for shape in shapes:
 - 《Effective Python》中关于继承的最佳实践
 - 面向对象设计原则（SOLID 原则）
 - 组合 vs 继承的选择策略
+
+## 🧭 继承关系示例：Circle 继承 Point
+
+下面是一个简洁的继承示例，展示如何让 Circle 继承自 Point，并进行类型关系检查：
+
+```python
+# 基类：点
+class Point:
+    """二维坐标点"""
+    def __init__(self, x: float, y: float):
+        self.x = x
+        self.y = y
+
+    def move(self, dx: float, dy: float):
+        """移动点的位置"""
+        self.x += dx
+        self.y += dy
+
+# 子类：圆
+class Circle(Point):
+    """圆形，继承自Point"""
+    def __init__(self, x: float, y: float, radius: float):
+        super().__init__(x, y)  # 复用父类初始化
+        self.radius = radius
+
+    def area(self) -> float:
+        """计算圆面积"""
+        from math import pi
+        return pi * (self.radius ** 2)
+
+# 使用示例
+c = Circle(0, 0, 2)
+print(c.x, c.y, c.radius)       # 0 0 2
+print(round(c.area(), 2))       # 12.57
+
+# 类型关系检查
+print(isinstance(c, Circle))    # True
+print(isinstance(c, Point))     # True (子类实例也是父类实例)
+print(issubclass(Circle, Point))# True
+print(issubclass(Point, Circle))# False
+```
+
+要点：
+- 子类通过 super() 调用父类构造函数，避免重复代码
+- 子类拥有父类的属性/方法，并可新增专有能力（如 area）
+- isinstance 检查对象是否为类或其子类的实例；issubclass 检查类之间的继承关系

@@ -1083,7 +1083,7 @@ for plugin_cls in valid_plugins + invalid_plugins:
 ### 第三方库
 - **attrs** - 类定义简化
 - **dataclasses** - 数据类
-- **pydantic** - 数据验证
+- [Pydantic - 数据验证](../../thirdparty/pydantic/)
 - **mypy** - 静态类型检查
 
 ## 📚 扩展阅读

@@ -684,12 +684,80 @@ print(f"所有数据集都有有效值: {validation_result['all_have_valid']}")
 print(f"存在完全无效的数据集: {validation_result['any_completely_invalid']}")
 ```
 
+### any() 与 or 运算符的区别
+
+虽然 `any()` 和 `or` 都实现逻辑或运算，但它们的使用场景不同：
+
+```python
+## any() 用于可迭代对象
+values = [False, 0, '', 'hello']
+print(any(values))  # True，因为 'hello' 是真值
+
+## or 用于直接的逻辑运算
+result = False or 0 or '' or 'hello'
+print(result)  # 'hello'，返回第一个真值而不是布尔值
+
+## 关键区别
+print(type(any(values)))  # <class 'bool'>
+print(type(result))       # <class 'str'>
+
+## any() 始终返回布尔值
+print(any([1, 2, 3]))     # True
+print(any(['a', 'b']))    # True
+
+## or 返回第一个真值或最后一个假值
+print(1 or 2 or 3)        # 1
+print('a' or 'b')         # 'a'
+print(0 or False or None) # None
+
+## 实际应用场景对比
+# 场景1：检查列表中是否有真值 - 使用 any()
+numbers = [0, 0, 5, 0]
+has_positive = any(x > 0 for x in numbers)
+print(f"是否有正数: {has_positive}")
+
+# 场景2：提供默认值 - 使用 or
+user_input = ""
+default_name = "匿名用户"
+display_name = user_input or default_name
+print(f"显示名称: {display_name}")
+
+# 场景3：复杂条件判断
+def check_access(user):
+    """检查用户访问权限"""
+    # 使用 any() 检查是否有任一权限
+    has_permission = any([
+        user.get('is_admin', False),
+        user.get('is_moderator', False),
+        user.get('has_special_access', False)
+    ])
+    
+    # 使用 or 提供默认值
+    user_id = user.get('id') or user.get('username') or 'unknown'
+    
+    return has_permission, user_id
+
+# 测试用户
+test_users = [
+    {'id': '123', 'is_admin': True},
+    {'username': 'guest', 'is_moderator': False},
+    {'has_special_access': True},
+    {}  # 空用户
+]
+
+for i, user in enumerate(test_users):
+    permission, uid = check_access(user)
+    print(f"用户{i+1}: ID={uid}, 有权限={permission}")
+```
+
 ## 🔗 相关内容
 
-- [all() - 逻辑与函数](../all/)
-- [bool() - 布尔值函数](../bool/)
-- [filter() - 过滤函数](../filter/)
-- [map() - 映射函数](../map/)
+- [all() 函数 - 逻辑与运算](../all/)
+- [bool() 函数 - 布尔值转换](../bool/)
+- [str() 函数 - 字符串转换](../str/)
+- [列表推导式](../../syntax/comprehension/)
+- [生成器表达式](../../syntax/generator/)
+- [条件表达式](../../syntax/conditional/)
 
 ## 📚 扩展阅读
 

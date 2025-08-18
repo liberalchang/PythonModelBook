@@ -7,7 +7,7 @@ category: thirdparty
 
 # Python 第三方库
 
-Python 拥有丰富的第三方库生态系统，这些库极大地扩展了 Python 的功能，使其在各个领域都有出色的表现。
+Python 拥有丰富的第三方库生态系统，这些库极大扩展了 Python 的功能，使其在各个领域都有出色的表现。
 
 ## 📋 本模块内容
 
@@ -22,13 +22,90 @@ Python 拥有丰富的第三方库生态系统，这些库极大地扩展了 Pyt
 - [Pandas 数据读写与合并 - 文件操作和数据整合](./pandas-io/)
 - [Pandas 高级功能与数据处理 - 复杂操作和性能优化](./pandas-advanced/)
 - [FireDucks - Pandas性能加速库](./fireducks/)
+- [Vaex - 超大数据集的高性能处理与分析](./vaex/)
+- [Plotly - Python 交互式可视化图形库](./plotly/)
+- [Mayavi - Python 三维科学数据可视化图形库](./mayavi/)
+- [D-Tale - 强大的 Pandas 数据可视化分析工具](./dtale/)
+- [Tablib - 多格式数据处理与导出指南](./tablib/)
+- [Polars - 高性能DataFrame库](./polars/)
+- [Joblib - 轻量级流水线和并行计算库](./joblib/)
+- [TextDistance - 文本相似度计算库](./textdistance/)
 
 ### 日期时间处理
+- [Arrow - 人性化的日期时间处理库](./arrow/)
 - [Pendulum - 更好的日期时间处理库](./pendulum/)
 
+### 调试和开发工具
+- [beeprint 库 - 更强大的美观输出工具](./beeprint/)
+- [Python 进度条库完全指南 - tqdm/Progress/Alive Progress/PySimpleGUI](./progress-bars/)
+- [Typer - 现代化 Python CLI 框架](./typer/)
+- [Click - 现代化 Python CLI 框架](./click/)
+- [Python Prompt Toolkit - 强大的交互式命令行库](./prompt-toolkit/)
+- [cmd2 - 强大的命令行解释器框架](./cmd2/)
+- [line_profiler - Python逐行性能分析工具](./line-profiler/)
+- [memory_profiler - Python内存使用分析工具](./memory-profiler/)
+
+### 办公与报表
+- [XlsxWriter - 强大的Excel文件写入库](./xlsxwriter/)
+- [xlwt/xlrd - 经典Excel读写库（.xls格式）](./xlwt-xlrd/)
+- [Tableau - 强大的商业智能可视化分析平台](./tableau/)
+
+### 网络与远程控制
+- [aiohttp - 基于 asyncio 的异步 HTTP 客户端与服务端](./aiohttp/)
+- [DuckDuckGo Search - DuckDuckGo 搜索API库完全指南](./duckduckgo-search/)
+- [Paramiko - Python SSH远程控制模块](./paramiko/)
+- [RPyC - Python远程过程调用框架](./rpyc/)
+- [PyAutoGUI - 桌面自动化与GUI控制](./pyautogui/)
+- [Pywinauto Recorder - Windows GUI 操作记录与代码生成](./pywinauto-recorder/)
+
+### Web 开发与应用
+- [PyWebIO - Python交互式Web应用开发库](./pywebio/)
+
+### 配置与自动化
+- [Ansible 基础 - 安装、配置与常用模块](./ansible-basics/)
+- [Ansible Playbook - 剧本编写与任务编排](./ansible-playbook/)
+- [python-dotenv - 环境变量管理与配置加载](./python-dotenv/)
+- [Supervisor - Python进程管理与监控系统](./supervisor/)
+- [Superlance - Supervisor进程监控扩展工具包](./superlance/)
+- [Monit - Unix系统监控与管理工具](./monit/)
+
+### 系统监控与进程
+- [psutil - Python系统监控与进程管理库](./psutil/)
+- [watchdog - Python文件系统监控库](./watchdog/)
+
+### 编译器和解析器
+- [PLY - Python词法和语法分析器](./ply/)
+- [cysimdjson - 超高速 JSON 解析库](./cysimdjson/)
+
+### 日志记录
+- [Loguru - 简单易用的日志记录库](./loguru/)
+- [Structlog - 结构化日志记录库](./structlog/)
+- [Picologging - 高性能日志记录库](./picologging/)
+
+### 数据库
+- [MySQLdb - Python MySQL数据库接口](./mysqldb/)
+- [PyMySQL - 纯Python的MySQL客户端](./pymysql/)
+
+### 包管理与环境
+- [uv - 新一代 Python 项目与包管理器](./uv/)
+- [Conda（Anaconda）安装与使用](./anaconda/)
+
 ### 打包和部署工具
+- [Docker SDK for Python - 容器化应用管理](./docker/)
 - [PyInstaller - Python程序打包工具](./pyinstaller/)
 - [Nuitka - Python编译器和打包工具](./nuitka/)
+
+### 任务调度与队列
+- [Schedule - Python 任务调度完全指南](./schedule/)
+- [Huey - 轻量级任务队列库](./huey/)
+- [Celery - 分布式任务队列与定时任务](./celery/)
+
+### 稳定性与重试
+- [Tenacity - Python重试库完全指南](./tenacity/)
+
+### 数据验证
+- [Cerberus - Python数据验证库完全指南](./cerberus/)
+- [Pydantic - Python数据验证与模型库完全指南](./pydantic/)
 
 
 ## 🎯 学习目标
@@ -51,10 +128,11 @@ Python 拥有丰富的第三方库生态系统，这些库极大地扩展了 Pyt
 | 机器学习 | Scikit-learn, TensorFlow | AI 模型开发 |
 | 图像处理 | Pillow, OpenCV | 图像编辑、计算机视觉 |
 | 网络爬虫 | Requests, Scrapy | 数据采集 |
-| 数据库 | SQLAlchemy, PyMongo | 数据存储 |
+| 数据库 | SQLAlchemy, PyMongo, MySQLdb, PyMySQL | 数据存储 |
 | 测试 | pytest, unittest | 代码测试 |
 | 部署 | Docker, Kubernetes | 应用部署 |
 | 打包工具 | PyInstaller, Nuitka | 程序打包、编译 |
+| 调试工具 | beeprint, icecream | 调试和美观输出 |
 
 
 ## 🌟 热门库排行

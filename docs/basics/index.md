@@ -12,6 +12,9 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 
 ## 📋 本模块内容
 
+### 开发环境与安装
+- [Python 安装与环境配置](./python-installation/)
+
 ### 变量与数据类型
 - [变量与数据类型](./variables/)
 
@@ -20,15 +23,25 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 - [match-case 语句 - 结构化模式匹配](./match-case/)
 - [with 语句 - 上下文管理器](./with/)
 - [raise/assert - 异常抛出和断言](./raise-assert/)
-- [yield - 生成器和协程](./yield/)
+- [yield - 生成器与协程 (增强版)](./yield/)
+- [while+sleep 循环定时器](./sleep/)
+- [Threading.Timer 定时器](./timer/)  
+- [schedule 模块调度](./schedule/)
+- [APScheduler 企业级调度](./apscheduler/)
 
 ### 函数
 - [函数定义与调用](./functions/)
 - [函数作用域与闭包](./function-scope/)
+- [lambda 表达式 - 匿名函数](./lambda/)
+- [函数柯里化 - 高阶函数编程技术](./currying/)
+- [装饰器 - 函数增强与复用](./decorators/)
+- [API 测试装饰器 - 自动化测试实践](./api-testing-decorators/)
 
 ### 模块与包
 - [Python 包和__init__.py 文件](./packages/)
 
+### 算法基础
+- [Python 排序算法完全指南](./sorting-algorithms/)
 
 ### 类与对象
 
@@ -38,7 +51,9 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 - [封装](./encapsulation/)
 - [魔术方法](./magic-methods/)
 - [抽象基类](./abstract-classes/)
+- [接口设计](./interface-design/)
 - [数据类 (dataclass)](./dataclasses/)
+- [单例模式 - 设计模式实现](./singleton/)
 
 
 

@@ -672,7 +672,7 @@ except ValueError as e:
 
 ### 第三方库
 - `pytest` - 测试框架，提供强大的断言功能
-- `pydantic` - 数据验证库
+- [Pydantic - 数据验证库](../../thirdparty/pydantic/)
 - `marshmallow` - 序列化和验证库
 
 ## 扩展阅读
