@@ -98,6 +98,7 @@ Python 拥有丰富的第三方库生态系统，这些库极大扩展了 Python
 ### 任务调度与队列
 - [Schedule - Python 任务调度完全指南](./schedule/)
 - [Huey - 轻量级任务队列库](./huey/)
+- [RQ - Redis Queue 异步任务队列](./rq/)
 - [Celery - 分布式任务队列与定时任务](./celery/)
 
 ### 稳定性与重试

@@ -254,6 +254,7 @@ ssh-copy-id root@192.168.1.101
 
 2. 创建推送公钥的playbook文件 `push-ssh.yaml`：
 
+{% raw %}
 ```yaml
 - hosts: testservers
   user: root
@@ -265,6 +266,7 @@ ssh-copy-id root@192.168.1.101
      tags:
        - sshkey
 ```
+{% endraw %}
 
 3. 执行推送：
 

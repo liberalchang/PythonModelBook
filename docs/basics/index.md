@@ -58,6 +58,41 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 
 
 
+### 并发与并行
+- [并行编程概念基础](./concurrency-concepts/)
+- [多线程编程](./multithreading/)
+- [线程池与进程池 - concurrent.futures](./concurrent-futures/)
+- [多进程与进程池](./multiprocessing/)
+- [进程池 Pool 深入指南](./pool/)
+- [进程间通信（IPC）](./ipc/)
+- [子进程与并行 - subprocess](./subprocess/)
+- [在 asyncio 中引入多进程（CPU 密集型任务协作）](./multiprocessing-asyncio/)
+
+### 协程与异步
+- [初识 Python 协程的实现](./coroutine-impl/)
+- [什么是 asyncio？单线程并发与事件循环](./asyncio-intro/)
+- [协程常用方法与可等待对象](./coroutine-methods/)
+- [并发运行多个任务：gather、as_completed、wait](./concurrent-tasks/)
+- [asyncio 并发原语：锁、信号量、事件、条件变量](./sync-primitives/)
+- [Asyncio 调度原理（EventLoop 工作机制）](./asyncio-scheduling/)
+- [可等待对象：协程、任务与 Future](./awaitables/)
+- [Python 3.11：TaskGroup 与 timeout](./asyncio-311-advanced/)
+- [asyncio.task 常用函数：sleep/shield/wait_for/wait/as_completed](./asyncio-task-functions/)
+- [网络流：StreamReader 与 StreamWriter（TCP 流编程）](./asyncio-streams/)
+- [异步队列：Queue、PriorityQueue、LifoQueue](./asyncio-queues/)
+- [异步生成器与异步迭代器](./async-generators/)
+- [在 asyncio 中调用外部进程（子进程）](./asyncio-subprocess/)
+- [异步上下文管理器：async with 与 asynccontextmanager](./async-context-managers/)
+- [限制并发数量：Semaphore、令牌与连接池实战](./concurrency-limiting/)
+- [在 asyncio 中使用多线程：run_in_executor、to_thread、run_coroutine_threadsafe](./asyncio-threads/)
+- [取消语义与安全退出：CancelledError、传播、shield 与清理](./cancellation/)
+- [在微服务架构中使用 asyncio：BFF、超时、重试、熔断与降级](./asyncio-microservices/)
+- [不同 Python 协程 API：从生成器到 async/await](./asyncio-different-apis/)
+- [asyncio 高阶常用方法与事件循环精要](./asyncio-advanced-methods/)
+- [asyncio 异步应用对象与网络编程](./asyncio-application-objects/)
+- [asyncio + SQLAlchemy 并发访问数据库](./asyncio-sqlalchemy/)
+- [Trio 入门：结构化并发的另一种选择](./trio-intro/)
+
 ## 🎯 学习目标
 
 完成本模块学习后，你将能够：

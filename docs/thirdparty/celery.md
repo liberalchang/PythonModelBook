@@ -7,7 +7,7 @@ tags: [celery, 分布式任务, 异步任务, 定时任务, 任务调度, Rabbit
 description: 学习使用Celery实现分布式异步任务处理与定时任务调度，包含安装、基本用法、周期性任务与结果存储等实战示例
 author: Python 技术文档工程师
 date: 2024-01-15
-updated: 2024-01-15
+updated: 2025-08-22
 version: 1.0
 python_version: "3.7+"
 library_version: "celery>=5.0.0"
@@ -171,6 +171,172 @@ print(result_obj.get())
 - 使用 Flower 等工具监控任务执行
 - 合理拆分任务粒度，避免长时间阻塞
 
+## 更多入门示例与实践补充（来自原始资料）
+
+### Celery 是什么？优势
+
+- 异步任务：将耗时操作（发送短信/邮件、消息推送、音视频处理等）交给 Celery 异步执行
+- 定时任务：例如每天定时运行爬虫
+- 分布式：可扩展为分布式爬虫系统等
+- 简单、高可用、快速、灵活：大部分组件可扩展或独立使用
+
+### 执行流程图
+
+![Celery 执行流程图](https://pic4.zhimg.com/80/v2-4211d9f0ddd4c971c26131b74274fa77_720w.webp)
+
+### 使用 Redis 作为 Broker/Backend 的完整示例
+
+```python
+# tasks.py
+import time
+from celery import Celery
+
+# 消息中间件与结果存储均使用 Redis
+app = Celery(
+    'celeryDemo',
+    broker='redis://localhost:6379/1',
+    backend='redis://localhost:6379/2',
+)
+
+@app.task
+def add(x, y):
+    print('task enter ....')
+    time.sleep(5)
+    return x + y
+```
+
+```python
+# app.py
+from tasks import add
+
+if __name__ == '__main__':
+    print('task start....')
+    result = add.delay(2, 3)
+    print('task end....')
+    print(result)
+```
+
+启动 worker：
+
+```bash
+celery worker -A tasks -l INFO
+```
+
+### 配置文件与多任务拆分
+
+```python
+# celery_demo/__init__.py
+from celery import Celery
+
+app = Celery(
+    'demo',
+    include=[
+        'celery_demo.task1',
+        'celery_demo.task2',
+    ]
+)
+app.config_from_object('celery_demo.celeryconfig')
+```
+
+```python
+# celery_demo/celeryconfig.py （节选）
+BROKER_URL = 'redis://localhost:6379/1'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/2'
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+```
+
+```python
+# celery_demo/task1.py
+import time
+from celery_demo import app
+
+@app.task
+def add(x, y):
+    time.sleep(5)
+    return x + y
+```
+
+```python
+# celery_demo/task2.py
+import time
+from celery_demo import app
+
+@app.task
+def mut(x, y):
+    time.sleep(5)
+    return x * y
+```
+
+### 定时任务（celery beat）
+
+```python
+# celery_demo/celeryconfig.py （定时任务节选）
+from datetime import timedelta
+from celery.schedules import crontab
+
+CELERYBEAT_SCHEDULE = {
+    'task1': {
+        'task': 'celery_demo.task1.add',
+        'schedule': timedelta(seconds=10),  # 每 10 秒
+        'args': (10, 20),
+    },
+    'task2': {
+        'task': 'celery_demo.task2.mut',
+        'schedule': crontab(hour=22, minute=24),  # 每天 22:24
+        'args': (10, 10),
+    },
+}
+```
+
+启动：
+
+```bash
+celery beat -A celery_demo -l INFO
+```
+
+### 队列与路由、限速与专门 worker
+
+```python
+# celeryconf.py （节选）
+from kombu import Exchange, Queue
+
+CELERY_QUEUES = (
+    Queue('default', exchange=Exchange('default'), routing_key='default'),
+    Queue('crawl_caipu_list', exchange='crawl_caipu_list', routing_key='crawl_caipu_list'),
+    Queue('crawl_caipu_detail', exchange='crawl_caipu_detail', routing_key='crawl_caipu_detail'),
+)
+
+CELERY_ROUTES = {
+    'celery_app.teskone.crawl_caipu_list': {
+        'queue': 'crawl_caipu_list',
+        'routing_key': 'crawl_caipu_list',
+    },
+    'celery_app.teskone.crawl_caipu_detail': {
+        'queue': 'crawl_caipu_detail',
+        'routing_key': 'crawl_caipu_detail',
+    },
+}
+
+# 限制所有任务的请求频率（示例）
+CELERY_ANNOTATIONS = {'*': {'rate_limit': '1/s'}}
+```
+
+运行只消费特定队列的 worker：
+
+```bash
+celery worker -A celery项目 -l INFO -Q queuename
+```
+
+### 分布式爬虫示例
+
+简单的使用 Celery 完成“下厨房”菜谱详情分布式爬虫示例项目：
+
+- https://github.com/ljhyigehaoren/celery_best.git
+
+---
+
 ## 🔗 相关内容
 
 - [Huey - 轻量级任务队列](../huey/)
@@ -188,6 +354,6 @@ print(result_obj.get())
 
 ---
 
-**最后更新**: 2024-01-15  
+**最后更新**: 2025-08-22  
 **作者**: Python 技术文档工程师  
 **版本**: 1.0

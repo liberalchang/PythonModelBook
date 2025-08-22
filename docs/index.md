@@ -51,6 +51,39 @@ permalink: /docs/
                     <a href="basics/./interface-design/" class="doc-link section-link">接口设计</a>
                     <a href="basics/./dataclasses/" class="doc-link section-link">数据类 (dataclass)</a>
                     <a href="basics/./singleton/" class="doc-link section-link">单例模式 - 设计模式实现</a>
+                    <div class="section-title">并发与并行</div>
+                    <a href="basics/./concurrency-concepts/" class="doc-link section-link">并行编程概念基础</a>
+                    <a href="basics/./multithreading/" class="doc-link section-link">多线程编程</a>
+                    <a href="basics/./concurrent-futures/" class="doc-link section-link">线程池与进程池 - concurrent.futures</a>
+                    <a href="basics/./multiprocessing/" class="doc-link section-link">多进程与进程池</a>
+                    <a href="basics/./pool/" class="doc-link section-link">进程池 Pool 深入指南</a>
+                    <a href="basics/./ipc/" class="doc-link section-link">进程间通信（IPC）</a>
+                    <a href="basics/./subprocess/" class="doc-link section-link">子进程与并行 - subprocess</a>
+                    <a href="basics/./multiprocessing-asyncio/" class="doc-link section-link">在 asyncio 中引入多进程（CPU 密集型任务协作）</a>
+                    <div class="section-title">协程与异步</div>
+                    <a href="basics/./coroutine-impl/" class="doc-link section-link">初识 Python 协程的实现</a>
+                    <a href="basics/./asyncio-intro/" class="doc-link section-link">什么是 asyncio？单线程并发与事件循环</a>
+                    <a href="basics/./coroutine-methods/" class="doc-link section-link">协程常用方法与可等待对象</a>
+                    <a href="basics/./concurrent-tasks/" class="doc-link section-link">并发运行多个任务：gather、as_completed、wait</a>
+                    <a href="basics/./sync-primitives/" class="doc-link section-link">asyncio 并发原语：锁、信号量、事件、条件变量</a>
+                    <a href="basics/./asyncio-scheduling/" class="doc-link section-link">Asyncio 调度原理（EventLoop 工作机制）</a>
+                    <a href="basics/./awaitables/" class="doc-link section-link">可等待对象：协程、任务与 Future</a>
+                    <a href="basics/./asyncio-311-advanced/" class="doc-link section-link">Python 3.11：TaskGroup 与 timeout</a>
+                    <a href="basics/./asyncio-task-functions/" class="doc-link section-link">asyncio.task 常用函数：sleep/shield/wait_for/wait/as_completed</a>
+                    <a href="basics/./asyncio-streams/" class="doc-link section-link">网络流：StreamReader 与 StreamWriter（TCP 流编程）</a>
+                    <a href="basics/./asyncio-queues/" class="doc-link section-link">异步队列：Queue、PriorityQueue、LifoQueue</a>
+                    <a href="basics/./async-generators/" class="doc-link section-link">异步生成器与异步迭代器</a>
+                    <a href="basics/./asyncio-subprocess/" class="doc-link section-link">在 asyncio 中调用外部进程（子进程）</a>
+                    <a href="basics/./async-context-managers/" class="doc-link section-link">异步上下文管理器：async with 与 asynccontextmanager</a>
+                    <a href="basics/./concurrency-limiting/" class="doc-link section-link">限制并发数量：Semaphore、令牌与连接池实战</a>
+                    <a href="basics/./asyncio-threads/" class="doc-link section-link">在 asyncio 中使用多线程：run_in_executor、to_thread、run_coroutine_threadsafe</a>
+                    <a href="basics/./cancellation/" class="doc-link section-link">取消语义与安全退出：CancelledError、传播、shield 与清理</a>
+                    <a href="basics/./asyncio-microservices/" class="doc-link section-link">在微服务架构中使用 asyncio：BFF、超时、重试、熔断与降级</a>
+                    <a href="basics/./asyncio-different-apis/" class="doc-link section-link">不同 Python 协程 API：从生成器到 async/await</a>
+                    <a href="basics/./asyncio-advanced-methods/" class="doc-link section-link">asyncio 高阶常用方法与事件循环精要</a>
+                    <a href="basics/./asyncio-application-objects/" class="doc-link section-link">asyncio 异步应用对象与网络编程</a>
+                    <a href="basics/./asyncio-sqlalchemy/" class="doc-link section-link">asyncio + SQLAlchemy 并发访问数据库</a>
+                    <a href="basics/./trio-intro/" class="doc-link section-link">Trio 入门：结构化并发的另一种选择</a>
             </div>
         </div>
 
@@ -289,6 +322,7 @@ permalink: /docs/
                     <div class="section-title">任务调度与队列</div>
                     <a href="thirdparty/./schedule/" class="doc-link section-link">Schedule - Python 任务调度完全指南</a>
                     <a href="thirdparty/./huey/" class="doc-link section-link">Huey - 轻量级任务队列库</a>
+                    <a href="thirdparty/./rq/" class="doc-link section-link">RQ - Redis Queue 异步任务队列</a>
                     <a href="thirdparty/./celery/" class="doc-link section-link">Celery - 分布式任务队列与定时任务</a>
                     <div class="section-title">稳定性与重试</div>
                     <a href="thirdparty/./tenacity/" class="doc-link section-link">Tenacity - Python重试库完全指南</a>
