@@ -54,6 +54,7 @@ Python 拥有丰富的第三方库生态系统，这些库极大扩展了 Python
 - [aiohttp - 基于 asyncio 的异步 HTTP 客户端与服务端](./aiohttp/)
 - [DuckDuckGo Search - DuckDuckGo 搜索API库完全指南](./duckduckgo-search/)
 - [Paramiko - Python SSH远程控制模块](./paramiko/)
+- [AsyncSSH - 异步 SSH 客户端与服务器](./asyncssh/)
 - [RPyC - Python远程过程调用框架](./rpyc/)
 - [PyAutoGUI - 桌面自动化与GUI控制](./pyautogui/)
 - [Pywinauto Recorder - Windows GUI 操作记录与代码生成](./pywinauto-recorder/)
