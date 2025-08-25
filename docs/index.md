@@ -24,6 +24,7 @@ permalink: /docs/
                     <a href="basics/./control-flow/" class="doc-link section-link">判断语句与循环语句</a>
                     <a href="basics/./match-case/" class="doc-link section-link">match-case 语句 - 结构化模式匹配</a>
                     <a href="basics/./with/" class="doc-link section-link">with 语句 - 上下文管理器</a>
+                    <a href="basics/./exceptions/" class="doc-link section-link">异常处理 - try/except/else/finally 全面指南</a>
                     <a href="basics/./raise-assert/" class="doc-link section-link">raise/assert - 异常抛出和断言</a>
                     <a href="basics/./yield/" class="doc-link section-link">yield - 生成器与协程 (增强版)</a>
                     <a href="basics/./sleep/" class="doc-link section-link">while+sleep 循环定时器</a>

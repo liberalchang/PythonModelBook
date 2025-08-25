@@ -399,7 +399,7 @@ export PYTHONDONTWRITEBYTECODE=1
 ## 🔗 相关内容
 
 - [Python 包和__init__.py 文件](../packages/)
-- [虚拟环境管理 - uv 工具](../uv/)
+- [虚拟环境管理 - uv 工具](../../thirdparty/uv/)
 - [变量与数据类型](../variables/)
 
 ## 📚 扩展阅读

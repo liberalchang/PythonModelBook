@@ -287,6 +287,7 @@ permalink: /docs/
                     <a href="thirdparty/./aiohttp/" class="doc-link section-link">aiohttp - 基于 asyncio 的异步 HTTP 客户端与服务端</a>
                     <a href="thirdparty/./duckduckgo-search/" class="doc-link section-link">DuckDuckGo Search - DuckDuckGo 搜索API库完全指南</a>
                     <a href="thirdparty/./paramiko/" class="doc-link section-link">Paramiko - Python SSH远程控制模块</a>
+                    <a href="thirdparty/./asyncssh/" class="doc-link section-link">AsyncSSH - 异步 SSH 客户端与服务器</a>
                     <a href="thirdparty/./rpyc/" class="doc-link section-link">RPyC - Python远程过程调用框架</a>
                     <a href="thirdparty/./pyautogui/" class="doc-link section-link">PyAutoGUI - 桌面自动化与GUI控制</a>
                     <a href="thirdparty/./pywinauto-recorder/" class="doc-link section-link">Pywinauto Recorder - Windows GUI 操作记录与代码生成</a>

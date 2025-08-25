@@ -22,6 +22,7 @@ Python 基础语法是学习 Python 编程的起点，本模块涵盖了 Python 
 - [判断语句与循环语句](./control-flow/)
 - [match-case 语句 - 结构化模式匹配](./match-case/)
 - [with 语句 - 上下文管理器](./with/)
+- [异常处理 - try/except/else/finally 全面指南](./exceptions/)
 - [raise/assert - 异常抛出和断言](./raise-assert/)
 - [yield - 生成器与协程 (增强版)](./yield/)
 - [while+sleep 循环定时器](./sleep/)
