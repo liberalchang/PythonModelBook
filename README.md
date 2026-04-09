@@ -63,7 +63,7 @@ bundle exec jekyll serve --host 0.0.0.0 --port 4000
 1. Fork 本仓库到您的 GitHub 账户
 2. 在仓库设置中启用 GitHub Pages
 3. 选择源分支（通常是 main 或 gh-pages）
-4. 访问 `https://liberalchang.github.io/PythonModelBook`
+4. 访问 `https://用户名.github.io/PythonModelBook`
 
 ## 🤝 贡献指南
 
